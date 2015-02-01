@@ -1,0 +1,139 @@
+" Vundle
+" ---------------------------------
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+" ctrlp
+Plugin 'https://github.com/kien/ctrlp.vim'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+
+" File Encoding
+" ---------------------------------
+set enc=utf-8
+
+
+" Misc Settings
+" ---------------------------------
+let g:ctrlp_working_path_mode = '0'
+let g:mustache_abbreviations = 1
+
+
+" GIT
+" ---------------------------------
+let g:git_branch_status_head_current=1 
+let g:git_branch_status_nogit=""
+let g:git_branch_status_text=" " 
+let g:git_branch_status_ignore_remotes=1
+
+
+" Status bar and Linenumbers
+" ---------------------------------
+"  Make the command line two lines heigh and change the statusline display to
+"  something that looks useful.
+set cmdheight=1
+set laststatus=2
+set number
+set statusline=%t       "tail of the filename
+set statusline+=%h      "help file flag
+set statusline+=%m      "modified flag
+set statusline+=%r      "read only flag
+set statusline+=%=      "left/right separator
+set statusline+=%c,     "cursor column
+set statusline+=%l/%L   "cursor line/total lines
+set statusline+=\ %P    "percent through file
+set statusline+=\ [%{strlen(&fenc)?&fenc:'none'}] "file encoding
+"set statusline+=%{&ff}] "file format
+"set statusline+=%y      "filetype
+
+
+" Set File Types
+" ---------------------------------
+autocmd BufNewFile,BufRead *.html,*.htm,*.hbs,*.master,*.aspx,*.ascx,*.ejs setlocal ft=html
+autocmd BufNewFile,BufRead *.json setlocal ft=javascript
+autocmd BufNewFile,BufRead *.less setlocal ft=less
+autocmd BufNewFile,BufRead *.txt setlocal ft=rst
+
+
+" Tab Settings
+" ---------------------------------
+set expandtab
+set shiftwidth=2 tabstop=2 softtabstop=2 smartindent!
+
+
+" Functions
+" ---------------------------------
+" Toggle mouse state
+fu! DoToggleMouse()
+    if !exists("s:old_mouse")
+        let s:old_mouse = "a"
+    endif
+
+    if &mouse == ""
+        let &mouse = s:old_mouse
+        echo "Mouse is for Vim (" . &mouse . ")"
+    else
+        let s:old_mouse = &mouse
+        let &mouse=""
+        echo "Mouse is for terminal"
+    endif
+endfunction
+
+
+" Set Commands
+" ---------------------------------
+command! ToggleMouse call DoToggleMouse()
+
+
+" Global Key Mappings
+" ---------------------------------
+let mapleader=";"
+map r :redo<CR>
+map <leader>r :%s:
+map <Leader>m :ToggleMouse<CR>
+nnoremap <silent> cf  :FufFileWithCurrentBufferDir<CR>
+nnoremap <silent> <space> :CtrlPBuffer<CR>
+nnoremap <silent> \ :CtrlP<CR>
+nnoremap <leader>p :set pastetoggle<CR>
+nnoremap <leader>c :nohl<CR>
+nnoremap <Leader>t :noautocmd vimgrep /TODO/j **/*.coffee<CR>:cw<CR>
+nnoremap <Leader>tr :ccl<CR>
+nnoremap <Leader>to :cope<CR>
+nnoremap n nzz
+nnoremap N Nzz
+
+" Normal State Key Mappings
+" ---------------------------------
+nmap <Tab> :tabnext<CR>
+nmap <S-Tab> :tabprevious<CR>
+
+" Visual State Key Mappings
+" ---------------------------------
+vmap <Tab> >gv
+vmap <S-Tab> <gv
+
+
+" Final Settings
+" ---------------------------------
+let html_no_rendering=1
+set scrolloff=10
+set hlsearch
+set incsearch
+set nobackup
+set noswapfile
+set ignorecase
+set smartcase
+set hidden
+set history=10000
+syntax on
+
+colorscheme Tomorrow-Night
