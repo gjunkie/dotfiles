@@ -1,0 +1,67 @@
+# constants
+readonly PROGNAME="$(basename "$0")"
+# @TODO: need to figure out how to get the programmatic way of doing this
+readonly PROGDIR="/usr/local/opt/dotfiles"
+readonly VERSION=$(cat "$PROGDIR/VERSION.md")
+readonly TODAY=$(date +"%m-%d-%y")
+readonly ARGS="$@"
+
+setup_vim() {
+  # Force remove the vim directory if it's already there.
+  exists "${HOME}/.vim" \
+  && rm -rf "${HOME}/.vim"
+
+  ln -fs "${PROGDIR}/vim"                "${HOME}/.vim"
+  ln -fs "${PROGDIR}/conf/runcom/gvim"   "${HOME}/.gvimrc"
+  ln -fs "${PROGDIR}/conf/runcom/vim"    "${HOME}/.vimrc"
+
+  [[ $? ]] \
+  && _print_success "Updated ViM settings"
+}
+
+update_vim_plugins() {
+  vim "${HOME}/.vim/settings/bundles.vim" +PluginInstall +PluginUpdate +qall
+  [[ $? ]] \
+  && _print_success "Updated ViM bundles"
+}
+
+symlink_config_files() {
+  # Set variable for list of symlinks
+  symlinks="${PROGDIR}/opt/symlinks"
+
+  _bulk_install "$symlinks"
+
+  # set up hash file for brew installation
+  md5 "${symlinks}" | cut -d ' ' -f 4 > "${PROGDIR}/var/symlinks"
+
+  [[ $? ]] \
+  && _print_success "All files have been symlinked"
+}
+
+source_bash() {
+  source "${HOME}/.bash_profile"
+}
+
+main() {
+  _is_empty "$PROGDIR" \
+  && error_out
+
+  cmdline "$ARGS"
+
+  _require_prog git "Git is required to use $PROGNAME" http://git-scm.com
+
+  setup_vim
+
+  setup_global_gitconfig
+
+  _is_file "$HOME/.vim/settings/bundles.vim" \
+  && update_vim_plugins
+
+  _is_file "$PROGDIR/opt/symlinks" \
+  && symlink_config_files
+
+  source_bash \
+  && _print_success "$PROGNAME updated"
+}
+
+main
