@@ -84,6 +84,8 @@ set ignorecase
 set smartcase
 set hidden
 set history=10000
+set visualbell
+set noerrorbells
 syntax on
 
 " Color Theme
