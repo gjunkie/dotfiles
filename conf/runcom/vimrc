@@ -15,6 +15,7 @@ source ${HOME}/.vim/settings/bundles.vim
 
 " All of your Plugins must be added before the following line
 call vundle#end()
+syntax enable
 filetype plugin indent on
 
 
@@ -23,8 +24,35 @@ set enc=utf-8
 
 
 " Misc Settings
+set wildignore+=*/tmp/*
+set wildignore+=*/test/*
+set wildignore+=*/vendor/assets/bower_components/*
+set wildignore+=*/public/*
+"let g:NERDTreeMapActivateNode="<S-Tab>"
+"let g:NERDTreeMapPreview="<Tab>"
+let NERDTreeWinSize = 60 
+let NERDTreeQuitOnOpen = 1
 let g:ctrlp_working_path_mode = '0'
+let g:ctrlp_max_files=0
 let g:mustache_abbreviations = 1
+" Ignore some folders and files for CtrlP indexing
+let g:ctrlp_custom_ignore = {
+	\ 'dir':  '\.git$\|\.yardoc\|public$|log\|tmp$',
+	\ 'file': '\.so$\|\.dat$|\.DS_Store$'
+	\ }
+
+let vimDir = '$HOME/.vim'
+let &runtimepath.=','.vimDir
+if has('persistent_undo')
+	let myUndoDir = expand(vimDir . '/undodir')
+	" Create directories
+	call system('mkdir ' . vimDir)
+	call system('mkdir ' . myUndoDir)
+	let &undodir = myUndoDir
+	set undofile
+endif
+
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 
 " GIT
@@ -54,15 +82,28 @@ set statusline+=\ [%{strlen(&fenc)?&fenc:'none'}] "file encoding
 
 
 " Set File Types
-autocmd BufNewFile,BufRead *.html,*.htm,*.hbs,*.master,*.aspx,*.ascx,*.ejs setlocal ft=html
+autocmd BufNewFile,BufRead *.html setfiletype html
+autocmd BufNewFile,BufRead *.hbs setfiletype html
+autocmd BufNewFile,BufRead *.haml setfiletype html
+autocmd BufNewFile,BufRead *.jst setfiletype html
+autocmd BufNewFile,BufRead *.master setfiletype html
+autocmd BufNewFile,BufRead *.aspx setfiletype html
+autocmd BufNewFile,BufRead *.ascx setfiletype html
+autocmd BufNewFile,BufRead *.ejs setfiletype html
 autocmd BufNewFile,BufRead *.json setlocal ft=javascript
 autocmd BufNewFile,BufRead *.less setlocal ft=less
 autocmd BufNewFile,BufRead *.txt setlocal ft=rst
 
+au FileType * IndentGuidesEnable
+
 
 " Tab Settings
-set expandtab
-set shiftwidth=2 tabstop=2 softtabstop=2 smartindent!
+" set shiftwidth=2 tabstop=2 softtabstop=2 expandtab smartindent!
+" autocmd BufNewFile,BufRead ~/Sites/opal/* set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set noexpandtab
 
 
 " Toggle Functions
@@ -84,9 +125,12 @@ set ignorecase
 set smartcase
 set hidden
 set history=10000
+set undoreload=10000
+set undolevels=1000
 set visualbell
 set noerrorbells
-syntax on
+set backspace=indent,eol,start
+let g:indent_guides_auto_colors = 0
 
 " Color Theme
 source ${HOME}/.vim/settings/color.vim

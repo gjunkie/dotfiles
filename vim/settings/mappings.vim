@@ -1,23 +1,33 @@
 " Global Key Mappings
 " ---------------------------------
-let mapleader=";"
+let mapleader="`"
 
 " Easy window navigation
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+map <Leader>h <C-w>h
+map <Leader>j <C-w>j
+map <Leader>k <C-w>k
+map <Leader>l <C-w>l
 map r :redo<CR>
-map <leader>r :%s:
+map <Leader>r :%s:
 map <Leader>m :ToggleMouse<CR>
+
 nnoremap <silent> cf  :FufFileWithCurrentBufferDir<CR>
 nnoremap <silent> <space> :CtrlPBuffer<CR>
 nnoremap <silent> \ :CtrlP<CR>
-nnoremap <leader>p :set pastetoggle<CR>
-nnoremap <leader>c :nohl<CR>
+nnoremap <silent> - :UndotreeToggle<cr>
+nnoremap <silent> = :GitGutterSignsToggle<cr>
+
+nmap <Tab> :NERDTreeToggle<CR>
+map <S-Tab> :NERDTreeFind<CR>
+
+nnoremap <Leader>p :set pastetoggle<CR>
 nnoremap <Leader>t :noautocmd vimgrep /TODO/j **/*.coffee<CR>:cw<CR>
 nnoremap <Leader>tr :ccl<CR>
 nnoremap <Leader>to :cope<CR>
+
+nmap <leader>t :set noet tabstop=4 shiftwidth=4 softtabstop=4<CR>
+nmap <leader>s :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
+
 nnoremap n nzz
 nnoremap N Nzz
 " Navigate to wrappinng lines
@@ -26,8 +36,8 @@ nnoremap k gk
 
 " Normal State Key Mappings
 " ---------------------------------
-nmap <Tab> :tabnext<CR>
-nmap <S-Tab> :tabprevious<CR>
+" nmap <Tab> :tabnext<CR>
+" nmap <S-Tab> :tabprevious<CR>
 
 " Visual State Key Mappings
 " ---------------------------------

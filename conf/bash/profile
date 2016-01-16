@@ -3,12 +3,18 @@ export PATH=~/bin:$PATH
 export PATH=/usr/local/:$PATH
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/share/npm/bin/:$PATH
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
 
 alias ls='ls -la'
-alias work='cd ~/Projects/make-it-real-web/'
+alias work='cd ~/Sites/opal/'
+alias hyper='cd ~/Sites/hypernova-ember/'
+alias ework='cd ~/Sites/opal-ember/'
 alias play='cd ~/Projects/'
 alias error='tail -f /var/log/apache2/error_log'
 alias route='sudo nginx'
+alias be='bundle exec'
+alias sidekiq='be sidekiq -C config/sidekiq.yml'
 
 # Shortcut to prettify grep, exclude dirs, grep current dir
 function gr(){
@@ -138,3 +144,5 @@ PS1='
 
 if [[ -s /Users/Admin/.rvm/scripts/rvm ]] ; then source /Users/Admin/.rvm/scripts/rvm ; fi
 source ~/.git-completion.bash
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
