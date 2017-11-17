@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/Users/gjunkie/Sites/opal/opal_apps/app_moments/app/assets/stylesheets/app_moments_m/modules'
+let g:netrw_dirhist_2='/Users/gjunkie/Sites/opal/opal_apps/app_moments/app/assets/stylesheets/app_moments_m/modules/asset_picker'
+let g:netrw_dirhist_3='/Users/gjunkie/Sites/opal/opal_apps/app_moments/app/assets/stylesheets/app_moments_m/modules'
+let g:netrw_dirhist_4='/Users/gjunkie/Sites/opal/opal_apps/app_moments/app/assets/stylesheets/app_moments_m'
+let g:netrw_dirhist_5='/Users/gjunkie/Sites/opal/opal_apps/app_moments/app/assets/stylesheets'
+let g:netrw_dirhist_6='/Users/gjunkie/Sites/opal/opal_apps/app_moments/app/assets/stylesheets/app_moments_m'
+let g:netrw_dirhist_7='/Users/gjunkie/Sites/opal/opal_apps/app_moments/app/assets/stylesheets/app_moments_m/modules'
+let g:netrw_dirhist_8='/Users/gjunkie/Sites/opal/opal_apps/app_moments/app/assets/stylesheets/app_moments_m/modules/asset_shroud'
+let g:netrw_dirhist_9='/Users/gjunkie/Sites/universe/packages/kuiper/src/PhaseList'
