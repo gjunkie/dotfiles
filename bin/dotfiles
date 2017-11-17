@@ -26,8 +26,10 @@ update_vim_plugins() {
 
 setup_bash_profile() {
   rm -rf "${HOME}/.bash_profile"
+  rm -rf "${HOME}/.bashrc"
   rm -rf "${HOME}/.profile"
 
+  ln -fs "${PROGDIR}/bash_files/bashrc"    "${HOME}/.bashrc"
   ln -fs "${PROGDIR}/bash_files/bash_profile"    "${HOME}/.bash_profile"
 
   [[ $? ]] \
@@ -48,6 +50,7 @@ symlink_config_files() {
 }
 
 source_bash() {
+  source "${HOME}/.bashrc"
   source "${HOME}/.bash_profile"
 }
 
