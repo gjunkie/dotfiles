@@ -2,135 +2,33 @@
 " Vundle
 set nocompatible
 filetype off
-
-" set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-
-" Load bundles
 source ${HOME}/.vim/settings/bundles.vim
-
-" All of your Plugins must be added before the following line
 call vundle#end()
-syntax enable
+
+" Plugin Settings
+source ${HOME}/.vim/settings/airline.vim
+source ${HOME}/.vim/settings/ale.vim
+source ${HOME}/.vim/settings/ctrlp.vim
+source ${HOME}/.vim/settings/fzf.vim
+source ${HOME}/.vim/settings/nerdtree.vim
+source ${HOME}/.vim/settings/toggle.vim
+source ${HOME}/.vim/settings/undotree.vim
+" Settings
+source ${HOME}/.vim/settings/color.vim
+source ${HOME}/.vim/settings/mappings.vim
+source ${HOME}/.vim/settings/settings.vim
+
 filetype plugin indent on
-
-
-" File Encoding
-set enc=utf-8
-
-
-" Misc Settings
-set wildignore+=*/tmp/*
-set wildignore+=*/test/*
-set wildignore+=*/vendor/assets/bower_components/*
-set wildignore+=*/public/*
-"let g:NERDTreeMapActivateNode="<S-Tab>"
-"let g:NERDTreeMapPreview="<Tab>"
-let NERDTreeWinSize = 60 
-let NERDTreeQuitOnOpen = 1
-let g:ctrlp_working_path_mode = '0'
-let g:ctrlp_max_files=0
-let g:mustache_abbreviations = 1
-" Ignore some folders and files for CtrlP indexing
-let g:ctrlp_custom_ignore = {
-	\ 'dir':  '\.git$\|\.yardoc\|public$|log\|tmp$',
-	\ 'file': '\.so$\|\.dat$|\.DS_Store$'
-	\ }
 
 let vimDir = '$HOME/.vim'
 let &runtimepath.=','.vimDir
-if has('persistent_undo')
-	let myUndoDir = expand(vimDir . '/undodir')
-	" Create directories
-	call system('mkdir ' . vimDir)
-	call system('mkdir ' . myUndoDir)
-	let &undodir = myUndoDir
-	set undofile
-endif
-
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-
 
 " GIT
-let g:git_branch_status_head_current=1 
-let g:git_branch_status_nogit=""
-let g:git_branch_status_text=" " 
-let g:git_branch_status_ignore_remotes=1
-
-
-" Status bar and Linenumbers
-"  Make the command line two lines heigh and change the statusline display to
-"  something that looks useful.
-set cmdheight=1
-set laststatus=2
-set number
-set statusline=%t       "tail of the filename
-set statusline+=%h      "help file flag
-set statusline+=%m      "modified flag
-set statusline+=%r      "read only flag
-set statusline+=%=      "left/right separator
-set statusline+=%c,     "cursor column
-set statusline+=%l/%L   "cursor line/total lines
-set statusline+=\ %P    "percent through file
-set statusline+=\ [%{strlen(&fenc)?&fenc:'none'}] "file encoding
-"set statusline+=%{&ff}] "file format
-"set statusline+=%y      "filetype
-
-
-" Set File Types
-autocmd BufNewFile,BufRead *.html setfiletype html
-autocmd BufNewFile,BufRead *.hbs setfiletype html
-autocmd BufNewFile,BufRead *.haml setfiletype html
-autocmd BufNewFile,BufRead *.jst setfiletype html
-autocmd BufNewFile,BufRead *.master setfiletype html
-autocmd BufNewFile,BufRead *.aspx setfiletype html
-autocmd BufNewFile,BufRead *.ascx setfiletype html
-autocmd BufNewFile,BufRead *.ejs setfiletype html
-autocmd BufNewFile,BufRead *.json setlocal ft=javascript
-autocmd BufNewFile,BufRead *.less setlocal ft=less
-autocmd BufNewFile,BufRead *.txt setlocal ft=rst
+"let g:git_branch_status_head_current=1 
+"let g:git_branch_status_nogit=""
+"let g:git_branch_status_text=" " 
+"let g:git_branch_status_ignore_remotes=1
 
 au FileType * IndentGuidesEnable
-
-
-" Tab Settings
-" set shiftwidth=2 tabstop=2 softtabstop=2 expandtab smartindent!
-" autocmd BufNewFile,BufRead ~/Sites/opal/* set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set noexpandtab
-
-
-" Toggle Functions
-source ${HOME}/.vim/settings/toggle.vim
-
-
-" Global Key Mappings
-source ${HOME}/.vim/settings/mappings.vim
-
-
-" Final Settings
-let html_no_rendering=1
-set scrolloff=10
-set hlsearch
-set incsearch
-set nobackup
-set noswapfile
-set ignorecase
-set smartcase
-set hidden
-set history=10000
-set undoreload=10000
-set undolevels=1000
-set visualbell
-set noerrorbells
-set backspace=indent,eol,start
-let g:indent_guides_auto_colors = 0
-
-" Color Theme
-source ${HOME}/.vim/settings/color.vim

@@ -1,44 +1,20 @@
 " Bundles
 " ---------------------------------
 
-" CtrlP - find stuff
-Plugin 'https://github.com/kien/ctrlp.vim'
-
-" CtrlP py Matcher
-Plugin 'FelikZ/ctrlp-py-matcher'
-
-" CtrlP matching extension
-" Plugin 'JazzCore/ctrlp-cmatcher'
-
-" DelimitMate - auto closing of quotes and such
-Plugin 'Raimondi/delimitMate'
-
-" Coffeescript Highlighting
-Plugin 'kchmck/vim-coffee-script'
-
-" Indent Guides
-Plugin 'nathanaelkane/vim-indent-guides'
-
-" Language Pack
-Plugin 'sheerun/vim-polyglot'
-
-" Vinegar
-" Plugin 'tpope/vim-vinegar'
-
-" NERDtree
-Plugin 'scrooloose/nerdtree'
-
-" NERDcommenter
-Plugin 'scrooloose/nerdcommenter'
-
-"EasyGrep
-Plugin 'dkprice/vim-easygrep'
-
-"YouCompleteMe
-Plugin 'valloric/YouCompleteMe'
-
-"Undo Tree
-Plugin 'mbbill/undotree'
-
-"CSS Comb
-Plugin 'csscomb/vim-csscomb'
+Plugin 'gmarik/Vundle.vim'			" let Vundle manage Vundle, required
+Plugin 'https://github.com/kien/ctrlp.vim'	" CtrlP - find stuff
+Plugin 'FelikZ/ctrlp-py-matcher'		" CtrlP py Matcher
+Plugin 'kchmck/vim-coffee-script'		" Coffeescript Highlighting
+Plugin 'mbbill/undotree'			" Undo tree
+Plugin 'nathanaelkane/vim-indent-guides'	" Indent Guides
+Plugin 'junegunn/fzf'				" fzf - fuzzy searcher
+Plugin 'junegunn/fzf.vim'			" fzf - fuzzy searcher for vim
+Plugin 'tpope/vim-fugitive'			" Git/Vim integration
+Plugin 'Raimondi/delimitMate'			" auto closing of quotes and such
+Plugin 'sheerun/vim-polyglot'			" Language Pack for syntax highlighting
+Plugin 'scrooloose/nerdtree'			" File tree viewer
+Plugin 'scrooloose/nerdcommenter'		" Easily comment code
+Plugin 'valloric/YouCompleteMe'			" Word completion recommendations
+Plugin 'vim-airline/vim-airline'		"Airline status lines
+Plugin 'vim-airline/vim-airline-themes'		"Airline status line themes
+Plugin 'w0rp/ale'				"Ale linter

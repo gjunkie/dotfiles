@@ -11,14 +11,25 @@ map r :redo<CR>
 map <Leader>r :%s:
 map <Leader>m :ToggleMouse<CR>
 
+" vim-fugitive
+map <Leader>b :Gblame<CR>
+map <Leader>d :Gdiff<CR>
+map <Leader>\ :Gbrowse<CR>
+map <Leader><Tab> :Gstatus<CR>
+
+" ctrl-p
 nnoremap <silent> cf  :FufFileWithCurrentBufferDir<CR>
 nnoremap <silent> <space> :CtrlPBuffer<CR>
 nnoremap <silent> \ :CtrlP<CR>
 nnoremap <silent> - :UndotreeToggle<cr>
-nnoremap <silent> = :GitGutterSignsToggle<cr>
 
+" nerdtree
 nmap <Tab> :NERDTreeToggle<CR>
 map <S-Tab> :NERDTreeFind<CR>
+
+" fzf
+nnoremap = :Find<SPACE>
+nnoremap <silent> <Leader>= :Find <C-R><C-W><CR>
 
 nnoremap <Leader>p :set pastetoggle<CR>
 nnoremap <Leader>t :noautocmd vimgrep /TODO/j **/*.coffee<CR>:cw<CR>
@@ -44,3 +55,5 @@ nnoremap k gk
 vmap <Tab> >gv
 vmap <S-Tab> <gv
 
+nnoremap <S-c> :call NERDComment(0,"toggle")<CR>
+vnoremap <S-c> :call NERDComment(0,"toggle")<CR>

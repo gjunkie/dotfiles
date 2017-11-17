@@ -6,25 +6,29 @@
 " Default GUI Colours
 let s:foreground = "c5c8c6"
 let s:background = "1d1f21"
-let s:selection = "373b41"
+let s:selection = "26292F"
 let s:line = "282a2e"
 let s:comment = "545554"
 let s:grey = "878887"
+let s:lightgray = "8D7F92"
 let s:red = "cc6666"
 let s:interest = "FF3300"
 let s:orange = "de935f"
-let s:yellow = "f0c674"
-let s:green = "b5bd68"
+let s:darkorange = "B95D1D"
+let s:yellow = "ECECAA"
+let s:green = "93AA6F"
+let s:offgreen = "93AA6F"
 let s:aqua = "8abeb7"
+let s:lightaqua = "93C0BA"
 let s:blue = "81a2be"
 let s:purple = "b294bb"
 let s:white = "ffffff"
 let s:black = "000000"
-let s:window = "4d5057"
+let s:window = "595E6A"
 
 " Console 256 Colours
 if !has("gui_running")
-	let s:background = "303030"
+	let s:background = "343434"
 	let s:window = "5e5e5e"
 	let s:line = "3a3a3a"
 	let s:selection = "585858"
@@ -252,7 +256,7 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
 	call <SID>X("LineNr", s:selection, "", "")
 	call <SID>X("NonText", s:selection, "", "")
 	call <SID>X("SpecialKey", s:selection, "", "")
-	call <SID>X("Search", s:background, s:yellow, "")
+	call <SID>X("Search", s:background, s:white, "")
 	call <SID>X("TabLine", s:foreground, s:background, "reverse")
 	call <SID>X("StatusLine", s:window, s:yellow, "reverse")
 	call <SID>X("StatusLineNC", s:window, s:foreground, "reverse")
@@ -285,13 +289,13 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
 	call <SID>X("Statement", s:foreground, "", "")
 	call <SID>X("Conditional", s:foreground, "", "")
 	call <SID>X("Repeat", s:foreground, "", "")
-	call <SID>X("Structure", s:purple, "", "")
+	call <SID>X("Structure", s:offgreen, "", "")
 	call <SID>X("Function", s:blue, "", "")
 	call <SID>X("Constant", s:orange, "", "")
-	call <SID>X("String", s:green, "", "")
+	call <SID>X("String", s:grey, "", "")
 	call <SID>X("Special", s:green, "", "")
 	call <SID>X("PreProc", s:purple, "", "")
-	call <SID>X("Operator", s:aqua, "", "none")
+	call <SID>X("Operator", s:lightgray, "", "none")
 	call <SID>X("Type", s:blue, "", "none")
 	call <SID>X("Define", s:purple, "", "none")
 	call <SID>X("Include", s:blue, "", "")
@@ -344,7 +348,7 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
 	call <SID>X("goBuiltins", s:orange, "", "")
 
 	" CoffeeScript Highlighting
-	call <SID>X("coffeeKeyword", s:purple, "", "")
+	call <SID>X("coffeeKeyword", s:lightaqua, "", "")
 	call <SID>X("coffeeConditional", s:purple, "", "")
 
 	" JavaScript Highlighting
