@@ -16,6 +16,7 @@ source ${HOME}/.vim/settings/nerdtree.vim
 source ${HOME}/.vim/settings/toggle.vim
 source ${HOME}/.vim/settings/undotree.vim
 source ${HOME}/.vim/settings/ycm.vim
+
 " Settings
 source ${HOME}/.vim/settings/color.vim
 source ${HOME}/.vim/settings/mappings.vim
@@ -25,13 +26,5 @@ filetype plugin indent on
 
 let vimDir = '$HOME/.vim'
 let &runtimepath.=','.vimDir
-
-set fillchars=diff:·
-
-" GIT
-"let g:git_branch_status_head_current=1 
-"let g:git_branch_status_nogit=""
-"let g:git_branch_status_text=" " 
-"let g:git_branch_status_ignore_remotes=1
 
 au FileType * IndentGuidesEnable
