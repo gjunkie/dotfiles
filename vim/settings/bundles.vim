@@ -15,6 +15,4 @@ Plugin 'sheerun/vim-polyglot'			" Language Pack for syntax highlighting
 Plugin 'scrooloose/nerdtree'			" File tree viewer
 Plugin 'scrooloose/nerdcommenter'		" Easily comment code
 Plugin 'valloric/YouCompleteMe'			" Word completion recommendations
-Plugin 'vim-airline/vim-airline'		"Airline status lines
-Plugin 'vim-airline/vim-airline-themes'		"Airline status line themes
 Plugin 'w0rp/ale'				"Ale linter

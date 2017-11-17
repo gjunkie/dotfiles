@@ -4,7 +4,7 @@
 readonly PROGNAME="$(basename "$0")"
 # @TODO: need to figure out how to get the programmatic way of doing this
 #readonly PROGDIR="/usr/local/opt/dotfiles"
-readonly PROGDIR="${HOME}/dotfiles"
+readonly PROGDIR="${HOME}/Projects/dotfiles"
 #readonly VERSION=$(cat "$PROGDIR/VERSION.md")
 readonly TODAY=$(date +"%m-%d-%y")
 readonly ARGS="$@"
@@ -148,19 +148,6 @@ setup_bash_files() {
   && _print_success "Updated bash settings"
 }
 
-#symlink_config_files() {
-  ## Set variable for list of symlinks
-  #symlinks="${PROGDIR}/opt/symlinks"
-
-  #_bulk_install "$symlinks"
-
-  ## set up hash file for brew installation
-  #md5 "${symlinks}" | cut -d ' ' -f 4 > "${PROGDIR}/var/symlinks"
-
-  #[[ $? ]] \
-  #&& _print_success "All files have been symlinked"
-#}
-
 source_bash() {
   source "${HOME}/.bashrc"
   source "${HOME}/.bash_profile"
@@ -181,9 +168,6 @@ main() {
 
   #_is_file "$HOME/.vim/settings/bundles.vim" \
   update_vim_plugins
-
-  #_is_file "$PROGDIR/opt/symlinks" \
-  #&& symlink_config_files
 
   source_bash \
   && _print_success "$PROGNAME updated"

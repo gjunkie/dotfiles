@@ -26,6 +26,8 @@ filetype plugin indent on
 let vimDir = '$HOME/.vim'
 let &runtimepath.=','.vimDir
 
+set fillchars=diff:·
+
 " GIT
 "let g:git_branch_status_head_current=1 
 "let g:git_branch_status_nogit=""
