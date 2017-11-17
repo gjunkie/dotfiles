@@ -1,18 +1,127 @@
+#!/usr/bin/env bash
+
 # constants
 readonly PROGNAME="$(basename "$0")"
 # @TODO: need to figure out how to get the programmatic way of doing this
-readonly PROGDIR="/usr/local/opt/dotfiles"
-readonly VERSION=$(cat "$PROGDIR/VERSION.md")
+#readonly PROGDIR="/usr/local/opt/dotfiles"
+readonly PROGDIR="${HOME}/dotfiles"
+#readonly VERSION=$(cat "$PROGDIR/VERSION.md")
 readonly TODAY=$(date +"%m-%d-%y")
 readonly ARGS="$@"
 
+# utility functions
+_is_empty() {
+  local var=$1
+  [[ -z $var ]]
+}
+_is_not_empty() {
+  local var=$1
+  [[ -n $var ]]
+}
+_exists() {
+  local var=$1
+  [[ -e $var ]]
+}
+_is_file() {
+  local file=$1
+  [[ -f $file ]]
+}
+_is_dir() {
+  local dir=$1
+  [[ -d $dir ]]
+}
+_print_error() {
+  local message=$1
+  printf "%s⊘ Error:%s %s. Aborting!\n\n" "$(tput setaf 1)" "$(tput sgr0)" "$message"
+}
+_print_success() {
+  local message=$1
+  printf "%s✓ Success:%s\n" "$(tput setaf 2)" "$(tput sgr0) $message"
+}
+
+# options
+cmdline() {
+    # got this idea from here:
+    # http://kirk.webfinish.com/2009/10/bash-shell-script-to-use-getopts-with-gnu-style-long-positional-parameters/
+    local arg=
+    for arg
+    do
+        local delim=""
+        case "$arg" in
+            #translate --gnu-long-options to -g (short options)
+            --edit)         args="${args}-e ";;
+            --help)         args="${args}-h ";;
+            --prefix)       args="${args}-p ";;
+            --test)         args="${args}-t ";;
+            --version)      args="${args}-v ";;
+            #pass through anything else
+            *) [[ "${arg:0:1}" == "-" ]] || delim="\""
+                args="${args}${delim}${arg}${delim} ";;
+        esac
+    done
+
+    #Reset the positional parameters to the short options
+    eval set -- "$args"
+
+    while getopts ":ehptv" OPTION
+    do
+        case $OPTION in
+            e)
+                _edit
+                exit 0
+                ;;
+            h)
+                _print_help
+                exit 0
+                ;;
+            p)
+                _print_directory
+                exit 0
+                ;;
+            t)
+                _run_tests
+                exit 0
+                ;;
+            v)
+                _version
+                exit 0
+                ;;
+            \?)
+                _is_not_valid_option "-$OPTARG"
+                usage
+                exit 1
+                ;;
+        esac
+    done
+
+    return 0
+}
+
+# program functions
+_error_out() {
+    _print_error "No $PROGDIR found!"
+    printf 'Run the installer <%shttps://github.com/chrisopedia/dotfiles#how-to-install%s>\n' "$(tput smul)" "$(tput rmul)"
+    exit 1
+}
+_require_prog() {
+  local prog=$1
+  local msg=$2
+  local url=$3
+  type -P "$prog" >/dev/null || {
+    print_error "$msg"
+    echo "Download it at $url"
+    exit 2
+  }
+}
+
+
 setup_vim() {
   # Force remove the vim directory if it's already there.
-  exists "${HOME}/.vim" \
+  _exists "${HOME}/.vim" \
   && rm -rf "${HOME}/.vim"
 
   ln -fs "${PROGDIR}/vim"                "${HOME}/.vim"
-  ln -fs "${PROGDIR}/conf/runcom/vim"    "${HOME}/.vimrc"
+  ln -fs "${PROGDIR}/conf/runcom/vimrc"    "${HOME}/.vimrc"
 
   [[ $? ]] \
   && _print_success "Updated ViM settings"
@@ -20,34 +129,37 @@ setup_vim() {
 
 update_vim_plugins() {
   vim "${HOME}/.vim/settings/bundles.vim" +PluginInstall +PluginUpdate +qall
+  #vim -c VundleUpdate -c quitall
   [[ $? ]] \
   && _print_success "Updated ViM bundles"
 }
 
-setup_bash_profile() {
+setup_bash_files() {
   rm -rf "${HOME}/.bash_profile"
+  rm -rf "${HOME}/.bash_files"
   rm -rf "${HOME}/.bashrc"
   rm -rf "${HOME}/.profile"
 
-  ln -fs "${PROGDIR}/bash_files/bashrc"    "${HOME}/.bashrc"
-  ln -fs "${PROGDIR}/bash_files/bash_profile"    "${HOME}/.bash_profile"
+  ln -fs "${PROGDIR}/conf/bash/bashrc"          "${HOME}/.bashrc"
+  ln -fs "${PROGDIR}/bash_files"                "${HOME}/.bash_files"
+  ln -fs "${PROGDIR}/conf/bash/bash_profile"    "${HOME}/.bash_profile"
 
   [[ $? ]] \
   && _print_success "Updated bash settings"
 }
 
-symlink_config_files() {
-  # Set variable for list of symlinks
-  symlinks="${PROGDIR}/opt/symlinks"
+#symlink_config_files() {
+  ## Set variable for list of symlinks
+  #symlinks="${PROGDIR}/opt/symlinks"
 
-  _bulk_install "$symlinks"
+  #_bulk_install "$symlinks"
 
-  # set up hash file for brew installation
-  md5 "${symlinks}" | cut -d ' ' -f 4 > "${PROGDIR}/var/symlinks"
+  ## set up hash file for brew installation
+  #md5 "${symlinks}" | cut -d ' ' -f 4 > "${PROGDIR}/var/symlinks"
 
-  [[ $? ]] \
-  && _print_success "All files have been symlinked"
-}
+  #[[ $? ]] \
+  #&& _print_success "All files have been symlinked"
+#}
 
 source_bash() {
   source "${HOME}/.bashrc"
@@ -63,13 +175,12 @@ main() {
   _require_prog git "Git is required to use $PROGNAME" http://git-scm.com
 
   setup_vim
-
-  setup_bash_profile
+  setup_bash_files
 
   #setup_global_gitconfig
 
-  _is_file "$HOME/.vim/settings/bundles.vim" \
-  && update_vim_plugins
+  #_is_file "$HOME/.vim/settings/bundles.vim" \
+  update_vim_plugins
 
   #_is_file "$PROGDIR/opt/symlinks" \
   #&& symlink_config_files

@@ -1,9 +1,9 @@
-source ~/.bash_files/.paths
+source ~/.bash_files/paths.bash
 
-source ~/.bash_files/.aliases.bash
-source ~/.bash_files/.colors.bash
-source ~/.bash_files/.git_functions.bash
-source ~/.bash_files/.git-completion.bash
+source ~/.bash_files/aliases.bash
+source ~/.bash_files/colors.bash
+source ~/.bash_files/git_functions.bash
+source ~/.bash_files/git-completion.bash
 
 source ~/.bash_work_env_vars.bash
 
