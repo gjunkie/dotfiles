@@ -17,10 +17,7 @@ map <Leader>d :Gdiff<CR>
 map <Leader>\ :Gbrowse<CR>
 map <Leader><Tab> :Gstatus<CR>
 
-" ctrl-p
-nnoremap <silent> cf  :FufFileWithCurrentBufferDir<CR>
-nnoremap <silent> <space> :CtrlPBuffer<CR>
-nnoremap <silent> \ :CtrlP<CR>
+" UndoTreeToggle
 nnoremap <silent> - :UndotreeToggle<cr>
 
 " nerdtree
@@ -30,6 +27,7 @@ map <S-Tab> :NERDTreeFind<CR>
 " fzf
 nnoremap = :Find<SPACE>
 nnoremap <silent> <Leader>= :Find <C-R><C-W><CR>
+nmap \ :call fzf#run(fzf#wrap({'source': 'git ls-files --exclude-standard --others --cached'}))<CR>
 
 nnoremap <Leader>p :set pastetoggle<CR>
 nnoremap <Leader>t :noautocmd vimgrep /TODO/j **/*.coffee<CR>:cw<CR>

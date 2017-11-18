@@ -2,27 +2,16 @@
 " ---------------------------------
 
 Plugin 'gmarik/Vundle.vim'			" let Vundle manage Vundle, required
-Plugin 'https://github.com/kien/ctrlp.vim'	" CtrlP - find stuff
-Plugin 'FelikZ/ctrlp-py-matcher'		" CtrlP py Matcher
-Plugin 'kchmck/vim-coffee-script'		" Coffeescript Highlighting
-Plugin 'mbbill/undotree'			" Undo tree
-Plugin 'nathanaelkane/vim-indent-guides'	" Indent Guides
+Plugin 'itchyny/lightline.vim'                  " Lightline status line
 Plugin 'junegunn/fzf'				" fzf - fuzzy searcher
 Plugin 'junegunn/fzf.vim'			" fzf - fuzzy searcher for vim
+Plugin 'kchmck/vim-coffee-script'		" Coffeescript Highlighting
+Plugin 'lifepillar/vim-mucomplete'              " mucomplete autocomplete
+Plugin 'mbbill/undotree'			" Undo tree
+Plugin 'nathanaelkane/vim-indent-guides'	" Indent Guides
 Plugin 'tpope/vim-fugitive'			" Git/Vim integration
 Plugin 'Raimondi/delimitMate'			" auto closing of quotes and such
 Plugin 'sheerun/vim-polyglot'			" Language Pack for syntax highlighting
 Plugin 'scrooloose/nerdtree'			" File tree viewer
 Plugin 'scrooloose/nerdcommenter'		" Easily comment code
-"Plugin 'valloric/YouCompleteMe'			" Word completion recommendations
 Plugin 'w0rp/ale'				"Ale linter
-"Plugin 'ervandew/supertab'
-"Plugin 'ajh17/VimCompletesMe'
-
-Plugin 'itchyny/lightline.vim'
-Plugin 'lifepillar/vim-mucomplete'
-"Plugin 'maralla/completor.vim'
-"Plugin 'Shougo/neocomplete.vim'
-"Plugin 'Shougo/deoplete.nvim'
-"Plugin 'roxma/nvim-yarp'
-"Plugin 'roxma/vim-hug-neovim-rpc'
