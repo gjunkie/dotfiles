@@ -27,15 +27,16 @@ map <S-Tab> :NERDTreeFind<CR>
 " fzf
 nnoremap = :Find<SPACE>
 nnoremap <silent> <Leader>= :Find <C-R><C-W><CR>
+nnoremap <Space> :Buffers<CR>
 nmap \ :call fzf#run(fzf#wrap({'source': 'git ls-files --exclude-standard --others --cached'}))<CR>
 
+
 nnoremap <Leader>p :set pastetoggle<CR>
-nnoremap <Leader>t :noautocmd vimgrep /TODO/j **/*.coffee<CR>:cw<CR>
 nnoremap <Leader>tr :ccl<CR>
 nnoremap <Leader>to :cope<CR>
 
-nmap <leader>t :set noet tabstop=4 shiftwidth=4 softtabstop=4<CR>
-nmap <leader>s :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
+nmap <leader>tt :set noet tabstop=4 shiftwidth=4 softtabstop=4<CR>
+nmap <leader>ss :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
 
 nnoremap n nzz
 nnoremap N Nzz
