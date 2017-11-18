@@ -14,5 +14,15 @@ Plugin 'Raimondi/delimitMate'			" auto closing of quotes and such
 Plugin 'sheerun/vim-polyglot'			" Language Pack for syntax highlighting
 Plugin 'scrooloose/nerdtree'			" File tree viewer
 Plugin 'scrooloose/nerdcommenter'		" Easily comment code
-Plugin 'valloric/YouCompleteMe'			" Word completion recommendations
+"Plugin 'valloric/YouCompleteMe'			" Word completion recommendations
 Plugin 'w0rp/ale'				"Ale linter
+"Plugin 'ervandew/supertab'
+"Plugin 'ajh17/VimCompletesMe'
+
+Plugin 'itchyny/lightline.vim'
+Plugin 'lifepillar/vim-mucomplete'
+"Plugin 'maralla/completor.vim'
+"Plugin 'Shougo/neocomplete.vim'
+"Plugin 'Shougo/deoplete.nvim'
+"Plugin 'roxma/nvim-yarp'
+"Plugin 'roxma/vim-hug-neovim-rpc'

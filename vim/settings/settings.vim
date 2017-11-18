@@ -55,6 +55,7 @@ set undolevels=1000
 set visualbell
 set noerrorbells
 set backspace=indent,eol,start
+set noshowmode
 
 " Set File Types
 autocmd BufNewFile,BufRead *.html setfiletype html

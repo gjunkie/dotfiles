@@ -12,4 +12,5 @@
 command! -bang -nargs=* Find call
   \ fzf#vim#grep('rg --line-number --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
+set rtp+=/usr/local/opt/fzf
 let g:fzf_layout = { 'down': '~50%' }
