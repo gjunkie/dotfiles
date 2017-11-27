@@ -4,6 +4,7 @@
 Plugin 'gmarik/Vundle.vim'			" let Vundle manage Vundle, required
 Plugin 'itchyny/lightline.vim'                  " Lightline status line
 Plugin 'junegunn/fzf'				" fzf - fuzzy searcher
+Plugin 'janko-m/vim-test'
 Plugin 'junegunn/fzf.vim'			" fzf - fuzzy searcher for vim
 Plugin 'kchmck/vim-coffee-script'		" Coffeescript Highlighting
 Plugin 'lifepillar/vim-mucomplete'              " mucomplete autocomplete
