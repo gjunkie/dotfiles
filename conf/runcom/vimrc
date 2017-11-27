@@ -24,5 +24,7 @@ filetype plugin indent on
 
 let vimDir = '$HOME/.vim'
 let &runtimepath.=','.vimDir
+let g:test#javascript#mocha#file_pattern = '.*\.tests\.js'
+let test#javascript#mocha#executable = 'npm test'
 
 au FileType * IndentGuidesEnable

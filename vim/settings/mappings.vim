@@ -28,10 +28,9 @@ vnoremap <S-c> :call NERDComment(0,"toggle")<CR>
 
 " fzf
 nnoremap F :Find<SPACE>
-nnoremap <silent> <Leader>= :Find <C-R><C-W><CR>
+nnoremap K :Find <C-R><C-W><CR>
 nnoremap <Space> :Buffers<CR>
 nnoremap \ :call fzf#run(fzf#wrap({'source': 'git ls-files --exclude-standard --others --cached'}))<CR>
-
 
 " Normal State Key Mappings
 " ---------------------------------
