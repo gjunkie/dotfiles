@@ -8,7 +8,6 @@ source ${HOME}/.vim/settings/bundles.vim
 call vundle#end()
 
 " Plugin Settings
-source ${HOME}/.vim/settings/airline.vim
 source ${HOME}/.vim/settings/ale.vim
 source ${HOME}/.vim/settings/fzf.vim
 source ${HOME}/.vim/settings/nerdtree.vim
