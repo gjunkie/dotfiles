@@ -1,4 +1,6 @@
 
+let g:netrw_list_hide= '.*\.swp$,.DS_Store,*/tmp/*,*.so,*.swp,*.zip,*.git,^\.\.\=/\=$'
+
 augroup ProjectDrawer
   autocmd!
   autocmd VimEnter * :call VexToggle("")
