@@ -1,5 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_cnt =7
 let g:netrw_dirhist_1='/Users/gjunkie/Sites/universe'
 let g:netrw_dirhist_2='/Users/gjunkie/Sites/universe/packages/kuiper/src/PhaseList'
 let g:netrw_dirhist_3='/Users/gjunkie/Sites/universe'
+let g:netrw_dirhist_4='/Users/gjunkie/Sites/universe/packages/kuiper/src/PhaseList'
+let g:netrw_dirhist_5='/Users/gjunkie/Sites/universe'
+let g:netrw_dirhist_6='/Users/gjunkie/Sites/universe/packages/kuiper/src/PhaseList'
+let g:netrw_dirhist_7='/Users/gjunkie/Sites/universe'
