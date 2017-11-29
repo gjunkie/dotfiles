@@ -20,9 +20,7 @@ map <Leader><Tab> :Gstatus<CR>
 " UndoTreeToggle
 nnoremap <silent> - :UndotreeToggle<cr>
 
-" nerdtree
-nmap <Tab> :NERDTreeToggle<CR>
-map <S-Tab> :NERDTreeFind<CR>
+" NERDComment
 nnoremap <S-c> :call NERDComment(0,"toggle")<CR>
 vnoremap <S-c> :call NERDComment(0,"toggle")<CR>
 
@@ -32,20 +30,26 @@ nnoremap K :Find <C-R><C-W><CR>
 nnoremap <Space> :Buffers<CR>
 nnoremap \ :call fzf#run(fzf#wrap({'source': 'git ls-files --exclude-standard --others --cached'}))<CR>
 
+
 " Normal State Key Mappings
 " ---------------------------------
 " Vim Tabs
 nmap <S-t> :tabnew<CR>
 nmap 1 :tabp<CR>
 nmap 2 :tabn<CR>
+
 " Tabs/Spaces
 nmap <leader>tt :set noet tabstop=4 shiftwidth=4 softtabstop=4<CR>
 nmap <leader>ss :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
+nmap ? /<C-R><C-W><CR>
 
-
+" Misc
+noremap <Tab> :call VexToggle(getcwd())<CR>
+noremap <S-Tab> :call VexToggle("")<CR>
 nnoremap <Leader>p :set pastetoggle<CR>
 nnoremap n nzz
 nnoremap N Nzz
+
 " Navigate to wrappinng lines
 nnoremap j gj
 nnoremap k gk
