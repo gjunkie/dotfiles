@@ -13,4 +13,5 @@ Plugin 'tpope/vim-fugitive'			" Git/Vim integration
 Plugin 'Raimondi/delimitMate'			" auto closing of quotes and such
 Plugin 'sheerun/vim-polyglot'			" Language Pack for syntax highlighting
 Plugin 'scrooloose/nerdcommenter'		" Easily comment code
-Plugin 'w0rp/ale'				"Ale linter
+Plugin 'scrooloose/nerdtree'                    " File tree
+Plugin 'w0rp/ale'				" Ale linter

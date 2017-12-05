@@ -10,7 +10,7 @@ call vundle#end()
 " Plugin Settings
 source ${HOME}/.vim/settings/ale.vim
 source ${HOME}/.vim/settings/fzf.vim
-source ${HOME}/.vim/settings/netrw.vim
+source ${HOME}/.vim/settings/nerdtree.vim
 source ${HOME}/.vim/settings/toggle.vim
 source ${HOME}/.vim/settings/undotree.vim
 source ${HOME}/.vim/settings/ycm.vim
