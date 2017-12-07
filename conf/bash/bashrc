@@ -5,3 +5,5 @@
 # --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 #export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export FZF_DEFAULT_COMMAND='fd --files f --hidden --follow --exclude .git'
+
+export PATH="$HOME/.yarn/bin:$PATH"
