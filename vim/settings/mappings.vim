@@ -24,6 +24,10 @@ nnoremap <silent> - :UndotreeToggle<cr>
 nnoremap <S-c> :call NERDComment(0,"toggle")<CR>
 vnoremap <S-c> :call NERDComment(0,"toggle")<CR>
 
+"NERDTree
+nmap <Tab> :NERDTreeToggle<CR>
+map <S-Tab> :NERDTreeFind<CR>
+
 " fzf
 nnoremap F :Find<SPACE>
 nnoremap K :Find <C-R><C-W><CR>
@@ -42,10 +46,12 @@ nmap 2 :tabn<CR>
 nmap <leader>tt :set noet tabstop=4 shiftwidth=4 softtabstop=4<CR>
 nmap <leader>ss :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
 nmap ? /<C-R><C-W><CR>
+imap qq <ESC>
+vmap qq <ESC>
 
 " Misc
-noremap <Tab> :call VexToggle(getcwd())<CR>
-noremap <S-Tab> :call VexToggle("")<CR>
+"noremap <Tab> :call VexToggle(getcwd())<CR>
+"noremap <S-Tab> :call VexToggle("")<CR>
 nnoremap <Leader>p :set pastetoggle<CR>
 nnoremap n nzz
 nnoremap N Nzz
