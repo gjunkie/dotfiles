@@ -14,3 +14,4 @@ Plugin 'Raimondi/delimitMate'			" auto closing of quotes and such
 Plugin 'sheerun/vim-polyglot'			" Language Pack for syntax highlighting
 Plugin 'scrooloose/nerdcommenter'		" Easily comment code
 Plugin 'w0rp/ale'				"Ale linter
+Plugin 'geekjuice/vim-mocha'
