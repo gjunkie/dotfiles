@@ -1,3 +1,5 @@
+" Main .vimrc
+" ---------------------------------
 
 " Vundle
 set nocompatible

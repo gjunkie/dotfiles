@@ -10,11 +10,12 @@ set wildignore+=*/vendor/assets/bower_components/*
 set wildignore+=*/public/*
 
 " Status bar and Linenumbers
-"  Make the command line two lines heigh and change the statusline display to
+"  Make the command line two lines high and change the statusline display to
 "  something that looks useful.
 set cmdheight=1
 set laststatus=2
 set number
+
 "set statusline=%t       "tail of the filename
 "set statusline+=%h      "help file flag
 "set statusline+=%m      "modified flag
@@ -26,7 +27,7 @@ set number
 "set statusline+=\ [%{strlen(&fenc)?&fenc:'none'}] "file encoding
 "set statusline+=%{&ff}] "file format
 "set statusline+=%y      "filetype
-"set statusline=%f       "path of file
+"set statusline+=%f       "path of file
 "set statusline=%{fugitive#statusline()}
 
 " Tab Settings
