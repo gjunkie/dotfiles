@@ -282,7 +282,7 @@ main() {
 
   cmdline "$ARGS"
 
-  echo "Is this a fresh setup?"
+  echo "Do you want to go through the software install options?"
   select yn in "Yes" "No"; do
     case $yn in
     Yes ) install_software; break;;
