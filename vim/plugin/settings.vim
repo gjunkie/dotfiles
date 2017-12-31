@@ -41,7 +41,6 @@ set expandtab
 " Final Settings
 let html_no_rendering=1
 let g:indent_guides_auto_colors = 0
-let g:mustache_abbreviations = 1
 set scrolloff=10
 set hlsearch
 set incsearch
@@ -70,3 +69,6 @@ autocmd BufNewFile,BufRead *.ejs setfiletype html
 autocmd BufNewFile,BufRead *.json setlocal ft=javascript
 autocmd BufNewFile,BufRead *.less setlocal ft=less
 autocmd BufNewFile,BufRead *.txt setlocal ft=rst
+
+let vimDir = '$HOME/.vim'
+let &runtimepath.=','.vimDir

@@ -10,11 +10,3 @@ source ${HOME}/.vim/settings/vim_plugins.vim
 call vundle#end()
 
 filetype plugin indent on
-
-" These need to be moved... they dont belong here.
-let vimDir = '$HOME/.vim'
-let &runtimepath.=','.vimDir
-let g:test#javascript#mocha#file_pattern = '.*\.tests\.js'
-let test#javascript#mocha#executable = 'npm test'
-
-au FileType * IndentGuidesEnable
