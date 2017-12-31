@@ -11,7 +11,7 @@ Most of the heavy lifting will be handled by the `bin/dotfiles` script.
 
 ### ViM
 Current `colorscheme` is `blame`. In order for this color to work, you must import the `vim/colors/blame.itermcolors` profile into your iTerm.
-![alt text](https://raw.githubusercontent.com/gjunkie/dotfiles/master/images/vim_theme.png)
+![alt text](https://raw.githubusercontent.com/gjunkie/dotfiles/master/images/vim_theme1.png)
 
 ### bash
 Nothing too fancy here, just some individual files for colors, aliases, and paths.
