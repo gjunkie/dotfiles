@@ -6,7 +6,7 @@ Streamlining my dotfiles... finally.
 Most of the heavy lifting will be handled by the `bin/dotfiles` script.
 - cd into the repo and run `sh bin/dotfiles`. It will prompt you with several questions to get set up. Initially it will ask you if you want to go through some software install options. These include things like `yarn`, `npm`, `xcode-select`, etc.
 - **Note**: After you've gone through the optional softare installations it will will remove your current `.vim` folder, `bashrc`, and `bash_profile` and symlink new ones from this project.
-- If you're using `iTerm2` make import the preferred color profile from the `/vim/colors` directory.
+- If you're using `iTerm2` make sure to import the preferred color profile from the `~/.vim/colors` directory.
 - In order for `fzf.vim` to be fully set up you will also need to install `fzf`; do so by running: `brew install fzf`.
 
 ### ViM
