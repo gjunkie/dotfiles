@@ -9,9 +9,6 @@ silent! call vundle#begin()
 source ${HOME}/.vim/settings/bundles.vim
 call vundle#end()
 
-" Settings
-source ${HOME}/.vim/settings/mappings.vim
-
 filetype plugin indent on
 
 " These need to be moved... they dont belong here.
