@@ -114,6 +114,129 @@ _require_prog() {
   }
 }
 
+install_software() {
+  echo "Do you wish to install xcode-select?"
+  select yn in "Yes" "No"; do
+    case $yn in
+    Yes ) install_xcode; break;;
+    No ) break;;
+    esac
+  done
+
+  echo "Do you wish to install Homebrew?"
+  select yn in "Yes" "No"; do
+    case $yn in
+    Yes ) install_homebrew; break;;
+    No ) break;;
+    esac
+  done
+
+  echo "Do you wish to install Homebrew Cask?"
+  select yn in "Yes" "No"; do
+    case $yn in
+    Yes ) install_homebrew_cask; break;;
+    No ) break;;
+    esac
+  done
+
+  echo "Do you wish to install yarn?"
+  select yn in "Yes" "No"; do
+    case $yn in
+    Yes ) install_yarn; break;;
+    No ) break;;
+    esac
+  done
+
+  echo "Do you wish to install npm?"
+  select yn in "Yes" "No"; do
+    case $yn in
+    Yes ) install_npm; break;;
+    No ) break;;
+    esac
+  done
+
+  echo "Do you wish to install git?"
+  select yn in "Yes" "No"; do
+    case $yn in
+    Yes ) install_git; break;;
+    No ) break;;
+    esac
+  done
+
+  echo "Do you wish to install iTerm2?"
+  select yn in "Yes" "No"; do
+    case $yn in
+    Yes ) install_iterm2; break;;
+    No ) break;;
+    esac
+  done
+
+  echo "Do you wish to install MacVim?"
+  select yn in "Yes" "No"; do
+    case $yn in
+    Yes ) install_macvim; break;;
+    No ) break;;
+    esac
+  done
+
+  [[ $? ]] \
+  && _print_success "Software installs complete"
+}
+
+install_git() {
+  brew install git
+  [[ $? ]] \
+  && _print_success "Installed git"
+}
+
+install_homebrew() {
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  brew doctor
+  [[ $? ]] \
+  && _print_success "Installed Homebrew"
+}
+
+install_homebrew_cask() {
+  brew tap caskroom/cask
+  [[ $? ]] \
+  && _print_success "Installed Homebrew Cask"
+}
+
+install_iterm2() {
+  brew cask install iterm2
+  [[ $? ]] \
+  && _print_success "Installed iTerm2"
+}
+
+install_macvim() {
+  brew cask install macvim
+  [[ $? ]] \
+  && _print_success "Installed and linked MacVim"
+}
+
+install_npm() {
+  curl https://www.npmjs.org/install.sh | sh
+  [[ $? ]] \
+  && _print_success "Installed npm"
+}
+
+install_sketch() {
+  brew cask install sketch
+  [[ $? ]] \
+  && _print_success "Installed Sketch"
+}
+
+install_xcode() {
+  xcode-select --install
+  [[ $? ]] \
+  && _print_success "Installed xcode-select"
+}
+
+install_yarn() {
+  brew install yarn
+  [[ $? ]] \
+  && _print_success "Installed yarn"
+}
 
 setup_vim() {
   # Force remove the vim directory if it's already there.
@@ -124,7 +247,7 @@ setup_vim() {
   ln -fs "${PROGDIR}/conf/runcom/vimrc"    "${HOME}/.vimrc"
 
   [[ $? ]] \
-  && _print_success "Updated ViM settings"
+  && _print_success "ViM files symlinked"
 }
 
 update_vim_plugins() {
@@ -145,7 +268,7 @@ setup_bash_files() {
   ln -fs "${PROGDIR}/conf/bash/bash_profile"    "${HOME}/.bash_profile"
 
   [[ $? ]] \
-  && _print_success "Updated bash settings"
+  && _print_success "bash files symlinked"
 }
 
 source_bash() {
@@ -159,6 +282,14 @@ main() {
 
   cmdline "$ARGS"
 
+  echo "Is this a fresh setup?"
+  select yn in "Yes" "No"; do
+    case $yn in
+    Yes ) install_software; break;;
+    No ) break;;
+    esac
+  done
+
   _require_prog git "Git is required to use $PROGNAME" http://git-scm.com
 
   setup_vim
@@ -167,7 +298,14 @@ main() {
   #setup_global_gitconfig
 
   #_is_file "$HOME/.vim/settings/bundles.vim" \
-  update_vim_plugins
+
+  echo "Do you wish to update ViM plugins?"
+  select yn in "Yes" "No"; do
+    case $yn in
+    Yes ) update_vim_plugins; break;;
+    No ) break;;
+    esac
+  done
 
   source_bash \
   && _print_success "$PROGNAME updated"
