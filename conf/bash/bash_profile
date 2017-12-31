@@ -5,5 +5,4 @@ source ~/.bash_files/colors.bash
 source ~/.bash_files/git_functions.bash
 source ~/.bash_files/git-completion.bash
 
-PS1='
-[\W] \[$(branch_color)\]$(parse_git_branch)\[${c_sgr0}\] → '
+PS1='\[\e[34m\][\w] \[$(branch_color)\]$(parse_git_branch)\[${c_sgr0}\]\n→ '
