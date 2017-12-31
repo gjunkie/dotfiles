@@ -6,7 +6,7 @@ set nocompatible
 filetype off
 silent! set rtp+=~/.vim/bundle/Vundle.vim
 silent! call vundle#begin()
-source ${HOME}/.vim/settings/bundles.vim
+source ${HOME}/.vim/settings/vim_plugins.vim
 call vundle#end()
 
 filetype plugin indent on

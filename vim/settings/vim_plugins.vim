@@ -4,8 +4,8 @@
 Plugin 'gmarik/Vundle.vim'			" let Vundle manage Vundle, required
 Plugin 'itchyny/lightline.vim'                  " Lightline status line
 Plugin 'junegunn/fzf'				" fzf - fuzzy searcher
-Plugin 'janko-m/vim-test'
 Plugin 'junegunn/fzf.vim'			" fzf - fuzzy searcher for vim
+Plugin 'janko-m/vim-test'
 Plugin 'lifepillar/vim-mucomplete'              " mucomplete autocomplete
 Plugin 'mbbill/undotree'			" Undo tree
 Plugin 'nathanaelkane/vim-indent-guides'	" Indent Guides

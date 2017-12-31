@@ -251,8 +251,7 @@ setup_vim() {
 }
 
 update_vim_plugins() {
-  vim "${HOME}/.vim/settings/bundles.vim" +PluginInstall +PluginUpdate +qall
-  #vim -c VundleUpdate -c quitall
+  vim +PluginInstall +PluginUpdate +qall
   [[ $? ]] \
   && _print_success "Updated ViM bundles"
 }
@@ -274,6 +273,8 @@ setup_bash_files() {
 source_bash() {
   source "${HOME}/.bashrc"
   source "${HOME}/.bash_profile"
+  [[ $? ]] \
+  && _print_success "bash files sourced"
 }
 
 main() {
@@ -294,12 +295,11 @@ main() {
 
   setup_vim
   setup_bash_files
+  source_bash
 
   #setup_global_gitconfig
 
-  #_is_file "$HOME/.vim/settings/bundles.vim" \
-
-  echo "Do you wish to update ViM plugins?"
+  echo "Do you wish to install and update ViM plugins?"
   select yn in "Yes" "No"; do
     case $yn in
     Yes ) update_vim_plugins; break;;
@@ -307,8 +307,7 @@ main() {
     esac
   done
 
-  source_bash \
-  && _print_success "$PROGNAME updated"
+  _print_success "All done!"
 }
 
 main
