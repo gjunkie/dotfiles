@@ -9,18 +9,8 @@ silent! call vundle#begin()
 source ${HOME}/.vim/settings/bundles.vim
 call vundle#end()
 
-" Plugin Settings
-source ${HOME}/.vim/settings/ale.vim
-source ${HOME}/.vim/settings/fzf.vim
-source ${HOME}/.vim/settings/nerdtree.vim
-source ${HOME}/.vim/settings/toggle.vim
-source ${HOME}/.vim/settings/undotree.vim
-source ${HOME}/.vim/settings/ycm.vim
-
 " Settings
-source ${HOME}/.vim/settings/color.vim
 source ${HOME}/.vim/settings/mappings.vim
-source ${HOME}/.vim/settings/settings.vim
 
 filetype plugin indent on
 
