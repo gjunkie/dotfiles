@@ -30,11 +30,6 @@ set number
 "set statusline+=%f       "path of file
 "set statusline=%{fugitive#statusline()}
 
-" Tab Settings
-" set shiftwidth=2 tabstop=2 softtabstop=2 expandtab smartindent!
-" autocmd BufNewFile,BufRead ~/Sites/opal/* set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
-"set tabstop=2
-"set softtabstop=2
 set shiftwidth=2
 set expandtab
 
