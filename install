@@ -258,12 +258,12 @@ update_vim_plugins() {
 
 setup_bash_files() {
   rm -rf "${HOME}/.bash_profile"
-  rm -rf "${HOME}/.bash_files"
+  rm -rf "${HOME}/.bash_helpers"
   rm -rf "${HOME}/.bashrc"
   rm -rf "${HOME}/.profile"
 
   ln -fs "${PROGDIR}/conf/bash/bashrc"          "${HOME}/.bashrc"
-  ln -fs "${PROGDIR}/bash_files"                "${HOME}/.bash_files"
+  ln -fs "${PROGDIR}/conf/bash/helpers"         "${HOME}/.bash_helpers"
   ln -fs "${PROGDIR}/conf/bash/bash_profile"    "${HOME}/.bash_profile"
 
   [[ $? ]] \
