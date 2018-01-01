@@ -72,3 +72,7 @@ autocmd BufNewFile,BufRead *.txt setlocal ft=rst
 
 let vimDir = '$HOME/.vim'
 let &runtimepath.=','.vimDir
+
+if !has('gui_running')
+  set t_Co=256
+endif
