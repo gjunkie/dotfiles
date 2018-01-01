@@ -1,16 +1,13 @@
 # dotfiles
 
-Streamlining my dotfiles... finally.
-
 ### Install
-Most of the heavy lifting will be handled by the `bin/dotfiles` script.
-- cd into the repo and run `sh bin/dotfiles`. It will prompt you with several questions to get set up. Initially it will ask you if you want to go through some software install options. These include things like `yarn`, `npm`, `xcode-select`, etc.
-- **Note**: After you've gone through the optional softare installations it will will remove your current `.vim` folder, `bashrc`, and `bash_profile` and symlink new ones from this project.
-- If you're using `iTerm2` make sure to import the preferred color profile from the `~/.vim/colors` directory.
-- In order for `fzf.vim` to be fully set up you will also need to install `fzf`; do so by running: `brew install fzf`.
+- **Note**: This will will remove your current `.vim` folder, `bashrc`, and `bash_profile` and symlink new ones from this project.
+- cd into the repo and run `sh install`.
+- You will be prompted with several questions to get set up. Initially it will ask you if you want to go through some software install options. These include things like `yarn`, `npm`, `xcode-select`, etc.
 
 ### ViM
-Current `colorscheme` is `blame`. In order for this color to work, you must import the `vim/colors/blame.itermcolors` profile into your iTerm.
+- Don't forget to check if your color scheme requires you to import its `.itermcolors` profile into iTerm.
+- In order for `fzf.vim` to be fully set up you will also need to install `fzf`; do so by running: `brew install fzf`.
 ![alt text](https://raw.githubusercontent.com/gjunkie/dotfiles/master/images/vim_theme1.png)
 
 ### bash
