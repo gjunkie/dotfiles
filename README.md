@@ -10,10 +10,6 @@
 - In order for `fzf.vim` to be fully set up you will also need to install `fzf`; do so by running: `brew install fzf`.
 ![vim theme](https://raw.githubusercontent.com/gjunkie/dotfiles/master/images/vim_theme2.png)
 
-### bash
-Nothing too fancy here, just some individual files for colors, aliases, and paths.
-![bash theme](https://raw.githubusercontent.com/gjunkie/dotfiles/master/images/bash.png)
-
 ### Acknowledgements 
 Inspiration and code was taken from many sources, including:
 - [@chrisopedia](https://github.com/chrisopedia/) (Chris Newton) [https://github.com/chrisopedia/dotfiles](https://github.com/chrisopedia/dotfiles)
