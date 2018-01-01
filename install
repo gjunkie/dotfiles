@@ -2,8 +2,6 @@
 
 # constants
 readonly PROGNAME="$(basename "$0")"
-# @TODO: need to figure out how to get the programmatic way of doing this
-#readonly PROGDIR="/usr/local/opt/dotfiles"
 readonly PROGDIR="${HOME}/Projects/dotfiles"
 #readonly VERSION=$(cat "$PROGDIR/VERSION.md")
 readonly TODAY=$(date +"%m-%d-%y")
