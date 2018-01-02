@@ -95,6 +95,78 @@ cmdline() {
     return 0
 }
 
+_install_formula() {
+    local formula=$1
+    # Test whether a Homebrew formula is already installed
+    if ! brew list "$formula" &> /dev/null; then
+        brew install "$formula"
+    fi
+}
+
+_bulk_install() {
+    local file=$1
+    local type=$2
+    local apps
+    local oifs=$IFS
+
+    # set the separator to a carriage return & a new line break
+    IFS=$'\r\n'
+    # read in passed-in file and store as an array
+    apps=($(cat "${file}"))
+    #while IFS= read -r line; do echo "$line"; done < $file
+    #mapfile -t myArray < $file
+    #echo $myArray
+    #echo $apps
+
+    shopt -s globstar nullglob
+    array=( **/*"$file"* )
+    echo $array
+
+    for index in ${apps[*]}
+    do
+	case $type in
+	    homebrew)
+		_install_formula "${apps[index]}"
+		;;
+	    #node)
+		#_install_package "${apps[index]}"
+		#;;
+	    #ruby)
+		#_install_gem "${apps[index]}"
+		#;;
+	    #*)
+		#_symlink_file "${apps[index]}"
+		#;;
+	esac
+    done
+
+    IFS=$oifs
+}
+
+install_formulae() {
+    # Updating Homebrew
+    #brew update
+
+    # Upgrade Homebrew formulaes
+    #brew upgrade
+
+    # Install Homebrew formulae
+    # here check the hash as well
+    brews="${PROGDIR}/opt/homebrew"
+    echo $brews
+
+    #old_brew="$(cat "${PROGDIR}"/var/homebrew)"
+    new_brew="$(md5 "${brews}" | cut -d ' ' -f 4)"
+    #if [[ $new_brew != "$old_brew" ]]; then
+    _bulk_install "$brews" 'homebrew'
+    #fi
+
+    brew cleanup
+
+    [[ $? ]] \
+    && _print_success "Homebrew updated, all formulae upgraded, new formulae installed"
+}
+
 # program functions
 _error_out() {
     _print_error "No $PROGDIR found!"
@@ -137,26 +209,10 @@ install_software() {
     esac
   done
 
-  echo "Do you wish to install yarn?"
-  select yn in "Yes" "No"; do
-    case $yn in
-    Yes ) install_yarn; break;;
-    No ) break;;
-    esac
-  done
-
   echo "Do you wish to install npm?"
   select yn in "Yes" "No"; do
     case $yn in
     Yes ) install_npm; break;;
-    No ) break;;
-    esac
-  done
-
-  echo "Do you wish to install git?"
-  select yn in "Yes" "No"; do
-    case $yn in
-    Yes ) install_git; break;;
     No ) break;;
     esac
   done
@@ -179,12 +235,6 @@ install_software() {
 
   [[ $? ]] \
   && _print_success "Software installs complete"
-}
-
-install_git() {
-  brew install git
-  [[ $? ]] \
-  && _print_success "Installed git"
 }
 
 install_homebrew() {
@@ -228,12 +278,6 @@ install_xcode() {
   xcode-select --install
   [[ $? ]] \
   && _print_success "Installed xcode-select"
-}
-
-install_yarn() {
-  brew install yarn
-  [[ $? ]] \
-  && _print_success "Installed yarn"
 }
 
 setup_vim() {
@@ -288,6 +332,9 @@ main() {
     No ) break;;
     esac
   done
+
+  _require_prog brew "Homebrew is required to install formulae" http://brew.sh \
+  && install_formulae
 
   _require_prog git "Git is required to use $PROGNAME" http://git-scm.com
 
