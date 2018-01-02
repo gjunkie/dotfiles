@@ -1,9 +1,8 @@
-source ~/.bash_files/paths.bash
+source ~/.bash_helpers/paths.bash
 
-source ~/.bash_files/aliases.bash
-source ~/.bash_files/colors.bash
-source ~/.bash_files/git_functions.bash
-source ~/.bash_files/git-completion.bash
+source ~/.bash_helpers/aliases.bash
+source ~/.bash_helpers/colors.bash
+source ~/.bash_helpers/git-functions.bash
+source ~/.bash_helpers/git-completion.bash
 
-PS1='
-[\W] \[$(branch_color)\]$(parse_git_branch)\[${c_sgr0}\] → '
+PS1='\[\e[34m\][\w] \[$(branch_color)\]$(parse_git_branch)\[${c_sgr0}\]\n→ '

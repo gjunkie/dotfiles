@@ -10,11 +10,12 @@ set wildignore+=*/vendor/assets/bower_components/*
 set wildignore+=*/public/*
 
 " Status bar and Linenumbers
-"  Make the command line two lines heigh and change the statusline display to
+"  Make the command line two lines high and change the statusline display to
 "  something that looks useful.
 set cmdheight=1
 set laststatus=2
 set number
+
 "set statusline=%t       "tail of the filename
 "set statusline+=%h      "help file flag
 "set statusline+=%m      "modified flag
@@ -26,21 +27,15 @@ set number
 "set statusline+=\ [%{strlen(&fenc)?&fenc:'none'}] "file encoding
 "set statusline+=%{&ff}] "file format
 "set statusline+=%y      "filetype
-"set statusline=%f       "path of file
+"set statusline+=%f       "path of file
 "set statusline=%{fugitive#statusline()}
 
-" Tab Settings
-" set shiftwidth=2 tabstop=2 softtabstop=2 expandtab smartindent!
-" autocmd BufNewFile,BufRead ~/Sites/opal/* set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
-"set tabstop=2
-"set softtabstop=2
 set shiftwidth=2
 set expandtab
 
 " Final Settings
 let html_no_rendering=1
 let g:indent_guides_auto_colors = 0
-let g:mustache_abbreviations = 1
 set scrolloff=10
 set hlsearch
 set incsearch
@@ -69,3 +64,10 @@ autocmd BufNewFile,BufRead *.ejs setfiletype html
 autocmd BufNewFile,BufRead *.json setlocal ft=javascript
 autocmd BufNewFile,BufRead *.less setlocal ft=less
 autocmd BufNewFile,BufRead *.txt setlocal ft=rst
+
+let vimDir = '$HOME/.vim'
+let &runtimepath.=','.vimDir
+
+if !has('gui_running')
+  set t_Co=256
+endif

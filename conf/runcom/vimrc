@@ -1,30 +1,23 @@
+" Main .vimrc
+" ---------------------------------
+" All settings and mappings located in vim/plugin
 
-" Vundle
-set nocompatible
-filetype off
+" Vundle setup
 silent! set rtp+=~/.vim/bundle/Vundle.vim
 silent! call vundle#begin()
-source ${HOME}/.vim/settings/bundles.vim
+Plugin 'gmarik/Vundle.vim'			" let Vundle manage Vundle, required
+Plugin 'itchyny/lightline.vim'                  " Lightline status line
+Plugin 'junegunn/fzf'				" fzf - fuzzy searcher
+Plugin 'junegunn/fzf.vim'			" fzf - fuzzy searcher for vim
+Plugin 'janko-m/vim-test'
+Plugin 'lifepillar/vim-mucomplete'              " mucomplete autocomplete
+Plugin 'mbbill/undotree'			" Undo tree
+Plugin 'nathanaelkane/vim-indent-guides'	" Indent Guides
+Plugin 'tpope/vim-fugitive'			" Git/Vim integration
+Plugin 'Raimondi/delimitMate'			" auto closing of quotes and such
+Plugin 'sheerun/vim-polyglot'			" Language Pack for syntax highlighting
+Plugin 'scrooloose/nerdcommenter'		" Easily comment code
+Plugin 'scrooloose/nerdtree'                    " File tree
+Plugin 'w0rp/ale'				" Ale linter
 call vundle#end()
-
-" Plugin Settings
-source ${HOME}/.vim/settings/ale.vim
-source ${HOME}/.vim/settings/fzf.vim
-source ${HOME}/.vim/settings/nerdtree.vim
-source ${HOME}/.vim/settings/toggle.vim
-source ${HOME}/.vim/settings/undotree.vim
-source ${HOME}/.vim/settings/ycm.vim
-
-" Settings
-source ${HOME}/.vim/settings/color.vim
-source ${HOME}/.vim/settings/mappings.vim
-source ${HOME}/.vim/settings/settings.vim
-
 filetype plugin indent on
-
-let vimDir = '$HOME/.vim'
-let &runtimepath.=','.vimDir
-let g:test#javascript#mocha#file_pattern = '.*\.tests\.js'
-let test#javascript#mocha#executable = 'npm test'
-
-au FileType * IndentGuidesEnable
