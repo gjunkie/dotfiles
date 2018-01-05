@@ -86,10 +86,9 @@ nnoremap N Nzz
 " -------------------------------------
 " Misc
 " -------------------------------------
-"nnoremap <Leader>p :set pastetoggle<CR>
 map r :redo<CR>
-map <Leader>rw :%s:<C-R><C-W>:
-map <Leader>rr :%s:
+map RW :%s:<C-R><C-W>:
+map RR :%s:
 map <Leader>m :ToggleMouse<CR>
 imap qq <ESC>
 vmap qq <ESC>
