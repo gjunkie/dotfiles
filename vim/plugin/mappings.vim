@@ -18,10 +18,16 @@ nnoremap ˙ <C-W><C-H>
 " -------------------------------------
 " Windown resizing
 " -------------------------------------
-nnoremap <C-K> :5wincmd +<CR> " Up
-nnoremap <C-J> :5wincmd -<CR> " Down
-nnoremap <C-H> :5wincmd <<CR> " Left
-nnoremap <C-L> :5wincmd ><CR> " Right
+"nnoremap <C-K> :5wincmd +<CR> " Up
+"nnoremap <C-J> :5wincmd -<CR> " Down
+"nnoremap <C-H> :5wincmd <<CR> " Left
+"nnoremap <C-L> :5wincmd ><CR> " Right
+
+" -------------------------------------
+" Window reordering
+" -------------------------------------
+nnoremap <C-H> <C-W>R " Rotate Windows Up/Left
+nnoremap <C-L> <C-W>x " Move Current Window Down/Right
 
 " -------------------------------------
 " vim-fugitive
