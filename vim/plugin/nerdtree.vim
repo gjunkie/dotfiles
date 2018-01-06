@@ -1,3 +1,6 @@
+" NERDTree settings
+" ---------------------------------
+
 "let g:NERDTreeMapActivateNode="<S-Tab>"
 
 "let g:NERDTreeMapPreview="<Tab>"

@@ -1,3 +1,6 @@
+" fzf settings
+" ---------------------------------
+
 " --column: Show column number
 " --line-number: Show line number
 " --no-heading: Do not show file headings in results
