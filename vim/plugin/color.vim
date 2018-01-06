@@ -1,2 +1,2 @@
 set termguicolors
-colorscheme blame
+colorscheme nord
