@@ -89,7 +89,7 @@ highlight! Error                  guifg=#bc284f  guibg=NONE     gui=reverse    c
 highlight! ErrorMsg               guifg=#bc284f  guibg=NONE     gui=reverse    ctermfg=1     ctermbg=NONE  cterm=reverse
 
 highlight! StatusLine             guifg=#c1c9d4  guibg=#4a5265  gui=NONE       ctermfg=15    ctermbg=8     cterm=NONE
-highlight! PmenuSel               guifg=#c1c9d4  guibg=#4a5265  gui=NONE       ctermfg=15    ctermbg=8     cterm=NONE
+highlight! PmenuSel               guifg=#4a5265  guibg=#c1c9d4  gui=NONE       ctermfg=15    ctermbg=8     cterm=NONE
 
 highlight! StatusLineNC           guifg=#2b3240  guibg=#4a5265  gui=NONE       ctermfg=0     ctermbg=8     cterm=NONE
 highlight! Pmenu                  guifg=#2b3240  guibg=#4a5265  gui=NONE       ctermfg=0     ctermbg=8     cterm=NONE
