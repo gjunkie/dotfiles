@@ -468,6 +468,11 @@ hi! link yamlDocumentStart Keyword
 call s:hi("ALEWarningSign", s:nord13_gui, "", s:nord13_term, "", "", "")
 call s:hi("ALEErrorSign" , s:nord11_gui, "", s:nord11_term, "", "", "")
 
+" vim-indent-guides
+" nathanaelkane/vim-indent-guides
+call s:hi("IndentGuidesOdd", "", s:nord0_gui, "", s:nord1_term, "", "")
+call s:hi("IndentGuidesEven", "", s:nord1_gui, "", s:nord1_term, "", "")
+
 " GitGutter
 " > airblade/vim-gitgutter
 call s:hi("GitGutterAdd", s:nord14_gui, "", s:nord14_term, "", "", "")
