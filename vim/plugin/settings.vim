@@ -62,6 +62,7 @@ autocmd BufNewFile,BufRead *.aspx setfiletype html
 autocmd BufNewFile,BufRead *.ascx setfiletype html
 autocmd BufNewFile,BufRead *.ejs setfiletype html
 autocmd BufNewFile,BufRead *.json setlocal ft=javascript
+autocmd BufNewFile,BufRead *.coffee setlocal ft=javascript
 autocmd BufNewFile,BufRead *.less setlocal ft=less
 autocmd BufNewFile,BufRead *.txt setlocal ft=rst
 

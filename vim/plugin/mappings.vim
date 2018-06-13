@@ -9,6 +9,11 @@ map <Leader>h <C-w>h
 map <Leader>j <C-w>j
 map <Leader>k <C-w>k
 map <Leader>l <C-w>l
+
+" ALT key + d, s
+map ∂ :sp<cr>
+map ß :vsp<cr>
+
 " ALT key + j, k, l, h
 nnoremap ª <C-W><C-J>
 nnoremap º <C-W><C-K>
@@ -37,6 +42,14 @@ map <Leader>d :Gdiff<CR>
 map <Leader>\ :Gbrowse<CR>
 map <Leader><Tab> :Gstatus<CR>
 nmap ç :Commits<CR> "<Option-c>
+
+" -------------------------------------
+" Ale Linter
+" -------------------------------------
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+"nmap <silent> <leader>aj :ALENext<cr>
+"nmap <silent> <leader>ak :ALEPrevious<cr>
 
 " -------------------------------------
 " UndoTreeToggle
