@@ -4,6 +4,7 @@ source ~/.bash_helpers/aliases.bash
 source ~/.bash_helpers/colors.bash
 source ~/.bash_helpers/git-functions.bash
 source ~/.bash_helpers/git-completion.bash
+source ~/.bash_helpers/fzf.bash
 
 if [ -f ~/.bash_profile.local.bash ]; then
   source ~/.bash_profile.local.bash

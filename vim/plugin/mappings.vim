@@ -57,6 +57,12 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 nnoremap <silent> - :UndotreeToggle<cr>
 
 " -------------------------------------
+" Lista
+" -------------------------------------
+nnoremap <C-l> :Lista<CR>
+nnoremap <C-c> :ListaCursorWord <CR>
+
+" -------------------------------------
 " NERDComment
 " -------------------------------------
 nnoremap <S-c> :call NERDComment(0,"toggle")<CR>

@@ -10,7 +10,11 @@ Plugin 'itchyny/lightline.vim'                  " Lightline status line
 Plugin 'junegunn/fzf'				" fzf - fuzzy searcher
 Plugin 'junegunn/fzf.vim'			" fzf - fuzzy searcher for vim
 Plugin 'janko-m/vim-test'
+Plugin 'lambdalisue/vim-rplugin'
+Plugin 'lambdalisue/lista.nvim'                 " lista - filtered file search
 Plugin 'lifepillar/vim-mucomplete'              " mucomplete autocomplete
+Plugin 'xolox/vim-misc'                         " notes dependency
+Plugin 'xolox/vim-notes'                        " notes for vim
 Plugin 'mbbill/undotree'			" Undo tree
 Plugin 'nathanaelkane/vim-indent-guides'	" Indent Guides
 Plugin 'tpope/vim-fugitive'			" Git/Vim integration
