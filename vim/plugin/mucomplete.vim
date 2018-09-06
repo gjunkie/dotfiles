@@ -2,3 +2,8 @@
 " ---------------------------------
 set completeopt+=menu,menuone,noinsert,noselect
 let g:mucomplete#enable_auto_at_startup = 1
+let g:mucomplete#popup_direction = { 'keyp' : 1, 'keyn' : 1 }
+
+let g:mucomplete#chains = {
+  \ 'default':  ['omni', 'keyp', 'keyn'],
+  \ }

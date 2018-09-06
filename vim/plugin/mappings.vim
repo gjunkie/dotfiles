@@ -124,3 +124,21 @@ nnoremap k gk
 vmap <Tab> >gv
 vmap <S-Tab> <gv
 
+fun! Cheat()
+  " Add handy bindings you tend to forget or want to learn.
+  echo "[a           close quickfix window"
+  echo "RR           Replace word"
+  echo "RW           Replace cursor word"
+  echo "RW           Replace cursor word"
+  echo "RW           Replace cursor word"
+  echo "RW           Replace cursor word"
+  echo "RW           Replace cursor word"
+  echo "RW           Replace cursor word"
+  echo "RW           Replace cursor word"
+  echo "RW           Replace cursor word"
+  echo "RW           Replace cursor word"
+  echo "RW           Replace cursor word"
+  echo "RW           Replace cursor word"
+endf
+
+noremap <F3> :call Cheat() <CR>

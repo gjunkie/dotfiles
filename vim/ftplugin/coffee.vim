@@ -1,5 +1,6 @@
+
 " Language:    CoffeeScript
-" Maintainer:  Mick Koch <kchmck@gmail.com>
+" Maintainer:  Mick Koch <mick@kochm.co>
 " URL:         http://github.com/kchmck/vim-coffee-script
 " License:     WTFPL
 
@@ -13,7 +14,7 @@ call coffee#CoffeeSetUpVariables()
 setlocal formatoptions-=t formatoptions+=croql
 setlocal comments=:# commentstring=#\ %s
 setlocal omnifunc=javascriptcomplete#CompleteJS
-setlocal suffixesadd+=coffee
+setlocal suffixesadd+=.coffee
 
 " Create custom augroups.
 augroup CoffeeBufUpdate | augroup END

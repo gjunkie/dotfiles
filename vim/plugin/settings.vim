@@ -1,8 +1,6 @@
 " File Encoding
 set enc=utf-8
 
-syntax enable
-
 " Misc Settings
 set wildignore+=*/tmp/*
 set wildignore+=*/test/*
@@ -30,12 +28,13 @@ set number
 "set statusline+=%f       "path of file
 "set statusline=%{fugitive#statusline()}
 
-set shiftwidth=2
 set expandtab
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 
 " Final Settings
 let html_no_rendering=1
-let g:indent_guides_auto_colors = 0
 set scrolloff=10
 set hlsearch
 set incsearch
@@ -62,7 +61,6 @@ autocmd BufNewFile,BufRead *.aspx setfiletype html
 autocmd BufNewFile,BufRead *.ascx setfiletype html
 autocmd BufNewFile,BufRead *.ejs setfiletype html
 autocmd BufNewFile,BufRead *.json setlocal ft=javascript
-autocmd BufNewFile,BufRead *.coffee setlocal ft=javascript
 autocmd BufNewFile,BufRead *.less setlocal ft=less
 autocmd BufNewFile,BufRead *.txt setlocal ft=rst
 

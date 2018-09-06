@@ -32,7 +32,7 @@ let g:lightline = {
   \            ]
   \ },
   \ 'component_function': {
-  \   'gitbranch': 'fugitive#head',
+  \   'gitbranch': 'LightLineBranchName',
   \   'relativepath': 'LightLineRelativePath'
   \ },
   \ 'component_expand': {
@@ -51,6 +51,11 @@ let g:lightline = {
 function! LightLineRelativePath()
   let path = (winwidth(0) > 100) ? expand('%') : expand('%:t')
   return path
+endfunction
+
+function! LightLineBranchName()
+  let branch = (winwidth(0) > 100) ? fugitive#head() : ''
+  return branch
 endfunction
 
 function! LightlineLinterOK() abort
@@ -74,4 +79,4 @@ function! LightlineLinterErrors() abort
   return l:counts.total == 0 ? '' : printf('%d ✗', all_errors)
 endfunction
 
-autocmd User ALELint call lightline#update()
+autocmd User ALELintPost call lightline#update()

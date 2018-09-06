@@ -2,6 +2,9 @@
 " ---------------------------------
 " All settings and mappings located in vim/plugin
 
+set nocompatible
+filetype off
+
 " Vundle setup
 silent! set rtp+=~/.vim/bundle/Vundle.vim
 silent! call vundle#begin()
@@ -10,9 +13,9 @@ Plugin 'itchyny/lightline.vim'                  " Lightline status line
 Plugin 'junegunn/fzf'				" fzf - fuzzy searcher
 Plugin 'junegunn/fzf.vim'			" fzf - fuzzy searcher for vim
 Plugin 'janko-m/vim-test'
+Plugin 'kchmck/vim-coffee-script'               " CoffeeScript support
 Plugin 'lambdalisue/vim-rplugin'
 Plugin 'lambdalisue/lista.nvim'                 " lista - filtered file search
-Plugin 'lifepillar/vim-mucomplete'              " mucomplete autocomplete
 Plugin 'xolox/vim-misc'                         " notes dependency
 Plugin 'xolox/vim-notes'                        " notes for vim
 Plugin 'mbbill/undotree'			" Undo tree
@@ -22,6 +25,11 @@ Plugin 'Raimondi/delimitMate'			" auto closing of quotes and such
 Plugin 'sheerun/vim-polyglot'			" Language Pack for syntax highlighting
 Plugin 'scrooloose/nerdcommenter'		" Easily comment code
 Plugin 'scrooloose/nerdtree'                    " File tree
+Plugin 'vimwiki/vimwiki'                        " VimWiki
+" Plugin 'ajh17/vimcompletesme'                   " VimCompletesMe
+Plugin 'lifepillar/vim-mucomplete'
 Plugin 'w0rp/ale'				" Ale linter
 call vundle#end()
+
+syntax enable
 filetype plugin indent on
