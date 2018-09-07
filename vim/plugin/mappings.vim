@@ -57,12 +57,6 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 nnoremap <silent> - :UndotreeToggle<cr>
 
 " -------------------------------------
-" Lista
-" -------------------------------------
-nnoremap <C-l> :Lista<CR>
-nnoremap <C-c> :ListaCursorWord <CR>
-
-" -------------------------------------
 " NERDComment
 " -------------------------------------
 nnoremap <S-c> :call NERDComment(0,"toggle")<CR>
@@ -126,19 +120,17 @@ vmap <S-Tab> <gv
 
 fun! Cheat()
   " Add handy bindings you tend to forget or want to learn.
-  echo "[a           close quickfix window"
+  echo "Vim__________________________________"
   echo "RR           Replace word"
-  echo "RW           Replace cursor word"
-  echo "RW           Replace cursor word"
-  echo "RW           Replace cursor word"
-  echo "RW           Replace cursor word"
-  echo "RW           Replace cursor word"
-  echo "RW           Replace cursor word"
-  echo "RW           Replace cursor word"
-  echo "RW           Replace cursor word"
-  echo "RW           Replace cursor word"
-  echo "RW           Replace cursor word"
-  echo "RW           Replace cursor word"
+  echo "RW           Replace word at cursor"
+  echo "<C-h>        Rotate Windows Up"
+  echo "<C-l>        Move Current Window Down"
+  echo "<leader>\    Browse to github file"
+  echo "<leader>d    Git diff"
+  echo " "
+  echo "tmux_________________________________"
+  echo "w            List windows"
+  echo "z            Toggle pane zoom"
 endf
 
-noremap <F3> :call Cheat() <CR>
+noremap H :call Cheat() <CR>

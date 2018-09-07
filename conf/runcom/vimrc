@@ -12,12 +12,7 @@ Plugin 'gmarik/Vundle.vim'			" let Vundle manage Vundle, required
 Plugin 'itchyny/lightline.vim'                  " Lightline status line
 Plugin 'junegunn/fzf'				" fzf - fuzzy searcher
 Plugin 'junegunn/fzf.vim'			" fzf - fuzzy searcher for vim
-Plugin 'janko-m/vim-test'
 Plugin 'kchmck/vim-coffee-script'               " CoffeeScript support
-Plugin 'lambdalisue/vim-rplugin'
-Plugin 'lambdalisue/lista.nvim'                 " lista - filtered file search
-Plugin 'xolox/vim-misc'                         " notes dependency
-Plugin 'xolox/vim-notes'                        " notes for vim
 Plugin 'mbbill/undotree'			" Undo tree
 Plugin 'nathanaelkane/vim-indent-guides'	" Indent Guides
 Plugin 'tpope/vim-fugitive'			" Git/Vim integration
@@ -26,8 +21,7 @@ Plugin 'sheerun/vim-polyglot'			" Language Pack for syntax highlighting
 Plugin 'scrooloose/nerdcommenter'		" Easily comment code
 Plugin 'scrooloose/nerdtree'                    " File tree
 Plugin 'vimwiki/vimwiki'                        " VimWiki
-" Plugin 'ajh17/vimcompletesme'                   " VimCompletesMe
-Plugin 'lifepillar/vim-mucomplete'
+Plugin 'lifepillar/vim-mucomplete'              " Complete suggestions
 Plugin 'w0rp/ale'				" Ale linter
 call vundle#end()
 
