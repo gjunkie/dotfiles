@@ -12,7 +12,7 @@ set wildignore+=*/public/*
 "  something that looks useful.
 set cmdheight=1
 set laststatus=2
-set number
+set nonumber
 
 "set statusline=%t       "tail of the filename
 "set statusline+=%h      "help file flag
@@ -35,21 +35,25 @@ set softtabstop=2
 
 " Final Settings
 let html_no_rendering=1
-set scrolloff=10
-set hlsearch
-set incsearch
-set nobackup
-set noswapfile
-set ignorecase
-set smartcase
+set backspace=indent,eol,start
+set foldmethod=indent
+set foldnestmax=10
+set foldlevel=2
 set hidden
 set history=10000
+set hlsearch
+set incsearch
+set ignorecase
+set nobackup
+set noerrorbells
+set nofoldenable
+set noshowmode
+set noswapfile
+set scrolloff=10
+set smartcase
 set undoreload=10000
 set undolevels=1000
 set visualbell
-set noerrorbells
-set backspace=indent,eol,start
-set noshowmode
 
 " Set File Types
 autocmd BufNewFile,BufRead *.html setfiletype html
@@ -63,6 +67,15 @@ autocmd BufNewFile,BufRead *.ejs setfiletype html
 autocmd BufNewFile,BufRead *.json setlocal ft=javascript
 autocmd BufNewFile,BufRead *.less setlocal ft=less
 autocmd BufNewFile,BufRead *.txt setlocal ft=rst
+
+" To Dos
+autocmd filetype taskpaper let g:auto_save = 1
+autocmd filetype taskpaper :WatchForChanges!
+
+augroup FiletypeGroup
+  autocmd!
+  au BufNewFile,BufRead *.jsx set filetype=javascript.jsx
+augroup END
 
 let vimDir = '$HOME/.vim'
 let &runtimepath.=','.vimDir

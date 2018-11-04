@@ -47,15 +47,29 @@ let g:lightline = {
   \    'gitbranch': 'warning'
   \ }
 \ }
+let g:lightline.separator = {
+	\   'left': '', 'right': ''
+  \}
+" let g:lightline.subseparator = {
+	" \   'left': '', 'right': ''
+  " \}
 
 function! LightLineRelativePath()
-  let path = (winwidth(0) > 100) ? expand('%') : expand('%:t')
+  let path = (winwidth(0) > 100) ? expand('%:p:h') : expand('%:t')
   return path
 endfunction
 
 function! LightLineBranchName()
-  let branch = (winwidth(0) > 100) ? fugitive#head() : ''
-  return branch
+  try
+    if exists('*fugitive#head')
+      let branch = fugitive#head()
+      return branch !=# '' ? '⭠ '.branch : ''
+    endif
+  catch
+  endtry
+  return ''
+  " let branch = (winwidth(0) > 100) ? fugitive#head() u'\uE0A0' : ''
+  " return branch
 endfunction
 
 function! LightlineLinterOK() abort

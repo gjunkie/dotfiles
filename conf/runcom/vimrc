@@ -23,6 +23,11 @@ Plugin 'scrooloose/nerdtree'                    " File tree
 Plugin 'vimwiki/vimwiki'                        " VimWiki
 Plugin 'lifepillar/vim-mucomplete'              " Complete suggestions
 Plugin 'w0rp/ale'				" Ale linter
+" Plugin 'vim-syntastic/syntastic'
+" Autosave taskpaper files
+Plugin 'davidoc/taskpaper.vim'
+Plugin 'vim-scripts/vim-auto-save'
+Plugin 'djoshea/vim-autoread'
 call vundle#end()
 
 syntax enable

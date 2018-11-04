@@ -161,6 +161,14 @@ install_software() {
     esac
   done
 
+  echo "Do you wish to install tmux?"
+  select yn in "Yes" "No"; do
+    case $yn in
+    Yes ) install_tmux; break;;
+    No ) break;;
+    esac
+  done
+
   echo "Do you wish to install iTerm2?"
   select yn in "Yes" "No"; do
     case $yn in
@@ -185,6 +193,12 @@ install_git() {
   brew install git
   [[ $? ]] \
   && _print_success "Installed git"
+}
+
+install_tmux() {
+  brew install tmux
+  [[ $? ]] \
+  && _print_success "Installed tmux"
 }
 
 install_homebrew() {

@@ -14,6 +14,7 @@ let g:ale_fix_on_save = 1
 
 " Enable ESLint only for JavaScript.
 let b:ale_linters = {'javascript': ['eslint']}
+let g:ale_linters = {'jsx': ['eslint']}
 
 " Only run linters named in ale_linters settings.
 " let g:ale_linters_explicit = 1

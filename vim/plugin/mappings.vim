@@ -80,8 +80,8 @@ nnoremap \ :call fzf#run(fzf#wrap({'source': 'git ls-files --exclude-standard --
 " Vim Tabs
 " -------------------------------------
 nmap <S-t> :tabnew<CR>
-nmap 1 :tabp<CR>
-nmap 2 :tabn<CR>
+nmap <leader>[ :tabp<CR>
+nmap <leader>] :tabn<CR>
 
 " -------------------------------------
 " Tabs/Spaces
@@ -103,8 +103,6 @@ map r :redo<CR>
 map RW :%s:<C-R><C-W>:
 map RR :%s:
 map <Leader>m :ToggleMouse<CR>
-imap qq <ESC>
-vmap qq <ESC>
 
 " -------------------------------------
 " Navigate to wrappinng lines
@@ -129,7 +127,7 @@ fun! Cheat()
   echo "<leader>d    Git diff"
   echo " "
   echo "tmux_________________________________"
-  echo "w            List windows"
+  echo "&            Close window"
   echo "z            Toggle pane zoom"
 endf
 
