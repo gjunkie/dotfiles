@@ -29,10 +29,12 @@ nnoremap ˙ <C-W><C-H>
 "nnoremap <C-L> :5wincmd ><CR> " Right
 
 " -------------------------------------
-" Window reordering
+" Window Handling
 " -------------------------------------
 nnoremap <C-H> <C-W>R " Rotate Windows Up/Left
 nnoremap <C-L> <C-W>x " Move Current Window Down/Right
+nnoremap + <C-w>v " Vertical split
+nnoremap _ <C-w>s " Horizontal split
 
 " -------------------------------------
 " vim-fugitive
@@ -73,8 +75,13 @@ map <S-Tab> :NERDTreeFind<CR>
 " -------------------------------------
 nnoremap F :Find<SPACE>
 nnoremap K :Find <C-R><C-W><CR>
-nnoremap <Space> :Buffers<CR>
 nnoremap \ :call fzf#run(fzf#wrap({'source': 'git ls-files --exclude-standard --others --cached'}))<CR>
+
+" -------------------------------------
+" Buffer handling
+" -------------------------------------
+nnoremap <Space> :Buffers<CR>
+nnoremap <Leader><Space> :b#<CR>
 
 " -------------------------------------
 " Vim Tabs
@@ -125,10 +132,10 @@ fun! Cheat()
   echo "<C-l>        Move Current Window Down"
   echo "<leader>\    Browse to github file"
   echo "<leader>d    Git diff"
+  echo "<Options-c>  Git commits"
   echo " "
   echo "tmux_________________________________"
   echo "&            Close window"
-  echo "z            Toggle pane zoom"
 endf
 
 noremap H :call Cheat() <CR>

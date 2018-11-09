@@ -12,8 +12,8 @@
 " --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 " --color: Search color options
 
-"command! -bang -nargs=* Find call
-  "\ fzf#vim#grep('rg --line-number --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+ command! -bang -nargs=* Find call
+  " \ fzf#vim#grep('rg --line-number --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
 command! -bang -nargs=* Find
   \ call fzf#vim#grep(
@@ -27,7 +27,7 @@ let g:fzf_layout = { 'down': '~50%' }
 
 let g:fzf_colors =
     \ { 'fg':      ['fg', 'Normal'],
-      \ 'bg':      ['bg', 'Normal'],
+      \ 'bg':      ['bg', 'Comment'],
       \ 'hl':      ['fg', 'Comment'],
       \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
       \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
@@ -38,4 +38,4 @@ let g:fzf_colors =
       \ 'pointer': ['fg', 'Exception'],
       \ 'marker':  ['fg', 'Keyword'],
       \ 'spinner': ['fg', 'Label'],
-      \ 'header':  ['fg', 'Comment'] }
+      \ 'header':  ['fg', 'Keyword'] }

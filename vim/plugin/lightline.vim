@@ -18,22 +18,25 @@ let g:lightline = {
   \                'linter_warnings',
   \                'linter_ok',
   \              ],
-  \              [ 'gitbranch' ],
+  \              [ 'shouldPrintBranch' ],
   \            ]
   \ },
   \ 'inactive': {
   \   'left': [
   \             [ 'mode', 'paste' ],
   \             [
-  \               'relativepath',
+  \               'filename',
   \             ]
   \           ],
   \   'right': [
+  \              [ 'gitbranch' ],
   \            ]
   \ },
   \ 'component_function': {
-  \   'gitbranch': 'LightLineBranchName',
-  \   'relativepath': 'LightLineRelativePath'
+  \   'shouldPrintBranch': 'LightLineBranchName',
+  \   'gitbranch': 'PrintGitBranch',
+  \   'relativepath': 'LightLineRelativePath',
+  \   'filename': 'LightLineFileName'
   \ },
   \ 'component_expand': {
   \   'linter_warnings': 'LightlineLinterWarnings',
@@ -44,32 +47,42 @@ let g:lightline = {
   \    'linter_errors': 'error',
   \    'linter_warnings': 'warning',
   \    'linter_ok': 'ok',
-  \    'gitbranch': 'warning'
   \ }
 \ }
 let g:lightline.separator = {
 	\   'left': '', 'right': ''
   \}
-" let g:lightline.subseparator = {
-	" \   'left': '', 'right': ''
-  " \}
 
 function! LightLineRelativePath()
-  let path = (winwidth(0) > 100) ? expand('%:p:h') : expand('%:t')
+  let path = (winwidth(0) > 150) ? expand('%:f') : expand('%:t')
+  return path
+endfunction
+
+function! LightLineFileName()
+  let path = expand('%:t')
   return path
 endfunction
 
 function! LightLineBranchName()
   try
     if exists('*fugitive#head')
-      let branch = fugitive#head()
-      return branch !=# '' ? '⭠ '.branch : ''
+      let isWideEnough = winwidth(0) > 150
+      if isWideEnough
+        return PrintGitBranch()
+      else
+        return ''
+      endif
     endif
   catch
   endtry
   return ''
   " let branch = (winwidth(0) > 100) ? fugitive#head() u'\uE0A0' : ''
   " return branch
+endfunction
+
+function! PrintGitBranch()
+  let branch = fugitive#head()
+  return branch !=# '' ? '⭠ '.branch : ''
 endfunction
 
 function! LightlineLinterOK() abort
