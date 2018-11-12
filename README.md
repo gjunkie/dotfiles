@@ -14,4 +14,5 @@
 ### Acknowledgements 
 Inspiration and code was taken from many sources, including:
 - [@chrisopedia](https://github.com/chrisopedia/) (Chris Newton) [https://github.com/chrisopedia/dotfiles](https://github.com/chrisopedia/dotfiles)
+- [@lifepillar](https://github.com/lifepillar/) (Lifepillar) [https://github.com/lifepillar/vimrc](https://github.com/lifepillar/vimrc)
 - [/r/vim](https://www.reddit.com/r/vim/) (ViM subreddit)

@@ -129,20 +129,3 @@ nnoremap k gk
 " -------------------------------------
 vmap <Tab> >gv
 vmap <S-Tab> <gv
-
-fun! Cheat()
-  " Add handy bindings you tend to forget or want to learn.
-  echo "Vim__________________________________"
-  echo "RR           Replace word"
-  echo "RW           Replace word at cursor"
-  echo "<C-h>        Rotate Windows Up"
-  echo "<C-l>        Move Current Window Down"
-  echo "<leader>\    Browse to github file"
-  echo "<leader>d    Git diff"
-  echo "<Options-c>  Git commits"
-  echo " "
-  echo "tmux_________________________________"
-  echo "&            Close window"
-endf
-
-noremap H :call Cheat() <CR>
