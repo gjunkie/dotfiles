@@ -4,6 +4,7 @@
 **Note**: This will will override your `.vim` folder and your dotfiles.
 - cd into the repo and run `sh install`.
 - You will be prompted with several questions to get set up. Initially it will ask you if you want to go through some software install options. These include things like `yarn`, `npm`, `xcode-select`, etc.
+- You will then be promted to to install and update Vim plugins.
 
 ### ViM
 - Don't forget to check if your color scheme requires you to import its `.itermcolors` profile into iTerm.
@@ -15,4 +16,4 @@
 Inspiration and code was taken from many sources, including:
 - [@chrisopedia](https://github.com/chrisopedia/) (Chris Newton) [https://github.com/chrisopedia/dotfiles](https://github.com/chrisopedia/dotfiles)
 - [@lifepillar](https://github.com/lifepillar/) (Lifepillar) [https://github.com/lifepillar/vimrc](https://github.com/lifepillar/vimrc)
-- [/r/vim](https://www.reddit.com/r/vim/) (ViM subreddit)
+- [/r/vim](https://www.reddit.com/r/vim/) (Vim subreddit)
