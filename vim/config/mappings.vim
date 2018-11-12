@@ -37,6 +37,12 @@ nnoremap + <C-w>v " Vertical split
 nnoremap _ <C-w>s " Horizontal split
 
 " -------------------------------------
+" Toggle commenting
+" -------------------------------------
+nnoremap <silent>  C :set opfunc=comment#toggle_comment<cr>g@<Right>
+vnoremap <silent>  C :<c-u>call comment#toggle_comment(visualmode(), 1)<cr>
+
+" -------------------------------------
 " vim-fugitive
 " -------------------------------------
 map <Leader>b :Gblame<CR>
@@ -57,12 +63,6 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 " UndoTreeToggle
 " -------------------------------------
 nnoremap <silent> - :UndotreeToggle<cr>
-
-" -------------------------------------
-" NERDComment
-" -------------------------------------
-nnoremap <S-c> :call NERDComment(0,"toggle")<CR>
-vnoremap <S-c> :call NERDComment(0,"toggle")<CR>
 
 " -------------------------------------
 "NERDTree

@@ -41,7 +41,7 @@ let g:mucomplete#chains = {
   \ 'default':  ['user', 'c-n'],
   \ 'coffee':  ['c-n', 'c-p'],
   \ 'js':  ['user', 'c-n'],
-  \ 'markdown': ['keyn', 'spel', 'dict'],
+  \ 'markdown': ['c-n', 'spel', 'dict'],
   \ 'rb':  ['c-n'],
   \ }
 
