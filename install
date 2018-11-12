@@ -4,8 +4,7 @@
 readonly PROGNAME="$(basename "$0")"
 readonly PROGDIR="${HOME}/Projects/dotfiles"
 #readonly VERSION=$(cat "$PROGDIR/VERSION.md")
-readonly TODAY=$(date +"%m-%d-%y")
-readonly ARGS="$@"
+readonly TODAY=$(date +"%m-%d-%y") readonly ARGS="$@"
 
 # utility functions
 _is_empty() {
@@ -282,6 +281,15 @@ setup_bash_files() {
   && _print_success "bash files symlinked"
 }
 
+setup_tmux_files() {
+  rm -rf "${HOME}/.tmux.conf"
+
+  ln -fs "${PROGDIR}/conf/runcom/tmux.conf"          "${HOME}/.tmux.conf"
+
+  [[ $? ]] \
+  && _print_success "tmux files symlinked"
+}
+
 source_bash() {
   source "${HOME}/.bashrc"
   source "${HOME}/.bash_profile"
@@ -307,6 +315,7 @@ main() {
 
   setup_vim
   setup_bash_files
+  setup_tmux_files
   source_bash
 
   #setup_global_gitconfig
