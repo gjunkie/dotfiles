@@ -1,0 +1,31 @@
+snippet func-exp-snip
+const ___ = () {
+   const ___;
+};
+
+snippet func-dec-snip
+function ___(___) {
+   const ___ = ___;
+};
+
+snippet func-method-snip
+___(___) {
+   const ___ = ___;
+}
+
+snippet log-snip
+console.log(___);
+
+snippet log-color-snip
+console.log('%c ___', 'background: #222; color: #bada55');
+
+snippet component-stateless-snip
+import React from 'react';
+const ___ = ({
+  ___
+}) => {
+};
+___.propTypes = {
+  workflowValid: bool,
+};
+export default ___;

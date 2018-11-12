@@ -20,15 +20,17 @@ Plugin 'Raimondi/delimitMate'			" auto closing of quotes and such
 Plugin 'sheerun/vim-polyglot'			" Language Pack for syntax highlighting
 Plugin 'scrooloose/nerdcommenter'		" Easily comment code
 Plugin 'scrooloose/nerdtree'                    " File tree
-Plugin 'vimwiki/vimwiki'                        " VimWiki
 Plugin 'lifepillar/vim-mucomplete'              " Complete suggestions
 Plugin 'w0rp/ale'				" Ale linter
-" Plugin 'vim-syntastic/syntastic'
 " Autosave taskpaper files
 Plugin 'davidoc/taskpaper.vim'
 Plugin 'vim-scripts/vim-auto-save'
 Plugin 'djoshea/vim-autoread'
 call vundle#end()
+
+source ~/.vim/config/settings.vim
+source ~/.vim/config/mappings.vim
+source ~/.vim/config/color.vim
 
 syntax enable
 filetype plugin indent on
