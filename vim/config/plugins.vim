@@ -29,4 +29,3 @@ Plugin 'w0rp/ale'
 " Autosave taskpaper files
 Plugin 'davidoc/taskpaper.vim'
 Plugin 'vim-scripts/vim-auto-save'
-Plugin 'djoshea/vim-autoread'
