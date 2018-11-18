@@ -10,6 +10,4 @@ if [ -f ~/.bash_profile.local.bash ]; then
   source ~/.bash_profile.local.bash
 fi
 
-eval "$(hub alias -s)"
-
 PS1='\[\e[34m\][\w] \[$(branch_color)\]$(parse_git_branch)\[${c_sgr0}\]\n→ '
