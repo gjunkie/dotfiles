@@ -2,7 +2,7 @@
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 " Lightline status line
-Plugin 'itchyny/lightline.vim'
+" Plugin 'itchyny/lightline.vim'
 " fzf - fuzzy searcher
 Plugin 'junegunn/fzf'
 " fzf - fuzzy searcher for vim
@@ -16,7 +16,7 @@ Plugin 'nathanaelkane/vim-indent-guides'
 " Git/Vim integration
 Plugin 'tpope/vim-fugitive'
 " Auto closing of quotes and such
-" Plugin 'Raimondi/delimitMate'
+Plugin 'Raimondi/delimitMate'
 " Language Pack for syntax highlighting
 Plugin 'sheerun/vim-polyglot'
 " File tree
@@ -24,7 +24,7 @@ Plugin 'scrooloose/nerdtree'
 " Auto Complete suggestions
 Plugin 'lifepillar/vim-mucomplete'
 " Ale linter
-Plugin 'w0rp/ale'
+" Plugin 'w0rp/ale'
 
 " Autosave taskpaper files
 Plugin 'davidoc/taskpaper.vim'
