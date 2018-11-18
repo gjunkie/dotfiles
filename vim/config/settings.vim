@@ -1,3 +1,5 @@
+source ~/.vim/config/statusline.vim
+
 " File Encoding
 set enc=utf-8
 
@@ -5,29 +7,8 @@ set enc=utf-8
 set wildignore+=*/tmp/*
 set wildignore+=*/test/*
 set wildignore+=*/vendor/assets/bower_components/*
-set wildignore+=*/public/*
-
-" Status bar and Linenumbers
-"  Make the command line two lines high and change the statusline display to
-"  something that looks useful.
-set cmdheight=1
-set laststatus=2
+set wildignore+=*/public/* 
 set nonumber
-
-"set statusline=%t       "tail of the filename
-"set statusline+=%h      "help file flag
-"set statusline+=%m      "modified flag
-"set statusline+=%r      "read only flag
-"set statusline+=%=      "left/right separator
-"set statusline+=%c,     "cursor column
-"set statusline+=%l/%L   "cursor line/total lines
-"set statusline+=\ %P    "percent through file
-"set statusline+=\ [%{strlen(&fenc)?&fenc:'none'}] "file encoding
-"set statusline+=%{&ff}] "file format
-"set statusline+=%y      "filetype
-"set statusline+=%f       "path of file
-"set statusline=%{fugitive#statusline()}
-
 set expandtab
 set tabstop=2
 set shiftwidth=2
@@ -66,7 +47,7 @@ autocmd BufNewFile,BufRead *.master setfiletype html
 autocmd BufNewFile,BufRead *.aspx setfiletype html
 autocmd BufNewFile,BufRead *.ascx setfiletype html
 autocmd BufNewFile,BufRead *.ejs setfiletype html
-autocmd BufNewFile,BufRead javascript.jsx set ft=javascript
+autocmd BufNewFile,BufRead *.jsx set ft=javascript
 autocmd BufNewFile,BufRead *.json setlocal ft=javascript
 autocmd BufNewFile,BufRead *.less setlocal ft=less
 autocmd BufNewFile,BufRead *.txt setlocal ft=rst
@@ -80,9 +61,26 @@ augroup FiletypeGroup
   au BufNewFile,BufRead *.jsx set filetype=js
 augroup END
 
+autocmd FileType javascript setlocal makeprg=lint\ --format\ compact
+autocmd BufWritePost *.py,*.js silent make! <afile> | silent redraw!
+autocmd QuickFixCmdPost [^l]* cwindow
+
+" ColorScheme runs after the colorscheme has been loaded
+autocmd ColorScheme *
+  \ hi User1 ctermfg=007 |
+  \ hi User2 ctermfg=008 |
+  \ hi User3 ctermfg=008 |
+  \ hi User4 ctermfg=008 |
+  \ hi User5 ctermfg=008 |
+  \ hi User7 ctermfg=008 |
+  \ hi User8 ctermfg=008 |
+  \ hi User9 ctermfg=007
+
 let vimDir = '$HOME/.vim'
 let &runtimepath.=','.vimDir
 
 if !has('gui_running')
   set t_Co=256
 endif
+
+set term=xterm-256color
