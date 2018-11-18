@@ -73,8 +73,8 @@ map <S-Tab> :NERDTreeFind<CR>
 " -------------------------------------
 " fzf
 " -------------------------------------
-nnoremap F :Find<SPACE>
-nnoremap K :Find <C-R><C-W><CR>
+nnoremap F :Rg<SPACE>
+nnoremap K :Rg <C-R><C-W><CR>
 nnoremap \ :call fzf#run(fzf#wrap({'source': 'git ls-files --exclude-standard --others --cached'}))<CR>
 
 " -------------------------------------
