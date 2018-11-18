@@ -1,2 +1,2 @@
-set termguicolors
+" set termguicolors
 colorscheme nord

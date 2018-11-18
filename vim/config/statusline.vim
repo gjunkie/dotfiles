@@ -2,50 +2,19 @@
 "  Make the command line two lines high and change the statusline display to
 "  something that looks useful.
 set cmdheight=1
+set laststatus=2
 
-" This code seems to have a strange effect.
-" It glitches out some charaters when navigating.
-" function! GitBranch()
-"   return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-" endfunction
-" 
-" function! StatuslineGit()
-"   let l:branchname = GitBranch()
-"   return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
-" endfunction
-" 
-" set statusline=%t       "tail of the filename
-" set statusline+=%#PmenuSel#
-" set statusline+=%h      "help file flag
-" set statusline+=%m      "modified flag
-" set statusline+=%r      "read only flag
-" set statusline+=%=      "left/right separator
-" set statusline+=%c,     "cursor column
-" set statusline+=%l/%L   "cursor line/total lines
-" set statusline+=\ %P    "percent through file
-" set statusline+=\ [%{strlen(&fenc)?&fenc:'none'}] "file encoding
-" set statusline+=%{&ff}] "file format
-" set statusline+=%y      "filetype
-" set statusline+=%f       "path of file
+set statusline=
+set statusline+=%{ChangeStatuslineColor()}                 " Changing the statusline color
+set statusline+=%0*\ %{toupper(g:currentmode[mode()])}     " Current mode
+set statusline+=%8*\ %{expand('%:p:h:t')}/                 " directory of current file
+set statusline+=%7*\%<%t\ %{ReadOnly()}%m\ %w\          " File
+set statusline+=%*
+set statusline+=%9*\ %=                                    " Space
+set statusline+=%8*\ %{GitInfo()}\                         " Git Branch name
+set statusline+=%0*\ %l:%c\                                " Rownumber/total (%)
 
-" set statusline=
-" set statusline=\ %{FugitiveHead()}\ 
-" set statusline+=%#PmenuSel#
-" set statusline+=%#LineNr#
-" set statusline+=
-" " set statusline+=%{StatuslineGit()}
-" set statusline+=%#LineNr#
-" set statusline+=\ %f
-" " set statusline+=%m\
-" set statusline+=%=
-" set statusline+=%#CursorColumn#
-" " set statusline+=\ %y
-" " set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
-" " set statusline+=\[%{&fileformat}\]
-" " set statusline+=\ %p%%
-" set statusline+=
-" set statusline+=\ %l:%c
-" 
+" Map Vim mode to custom identifiers
 let g:currentmode={
     \ 'n'      : 'N ',
     \ 'no'     : 'N·Operator Pending ',
@@ -121,21 +90,42 @@ function! GitInfo()
     return ''
 endfunction
 
-
-set laststatus=2
-
-set statusline=
-set statusline+=%{ChangeStatuslineColor()}                 " Changing the statusline color
-set statusline+=%0*\ %{toupper(g:currentmode[mode()])}     " Current mode
-set statusline+=%1*
+" This code seems to have a strange effect.
+" It glitches out some charaters when navigating.
+" function! GitBranch()
+"   return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+" endfunction
+" 
+" function! StatuslineGit()
+"   let l:branchname = GitBranch()
+"   return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+" endfunction
+" 
+" set statusline=%t       "tail of the filename
+" set statusline+=%#PmenuSel#
+" set statusline+=%h      "help file flag
+" set statusline+=%m      "modified flag
+" set statusline+=%r      "read only flag
+" set statusline+=%=      "left/right separator
+" set statusline+=%c,     "cursor column
+" set statusline+=%l/%L   "cursor line/total lines
+" set statusline+=\ %P    "percent through file
+" set statusline+=\ [%{strlen(&fenc)?&fenc:'none'}] "file encoding
+" set statusline+=%{&ff}] "file format
+" set statusline+=%y      "filetype
+" set statusline+=%f       "path of file
 " set statusline+=%8*\ [%n]                                " buffernr
-set statusline+=%9*\ %{expand('%:p:h:t')}                  " directory of current file
-set statusline+=%8*\%</%t\ %{ReadOnly()}\ %m\ %w\          " File
+
+" set statusline=
+" set statusline+=%#PmenuSel#
+" set statusline+=%{StatuslineGit()}
+" set statusline+=%m\
+" set statusline+=%#CursorColumn#
+" set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+" set statusline+=\[%{&fileformat}\]
+" set statusline+=\ %p%%
+" set statusline+=\ %l:%c
 " set statusline+=%#warningmsg#
-set statusline+=%*
-set statusline+=%9*\ %=                                    " Space
 " set statusline+=%7*\ %{(&fenc!=''?&fenc:&enc)}\[%{&ff}]\ " Encoding & Fileformat
 " set statusline+=%8*\ %-3(%{FileSize()}%)                 " File size
-set statusline+=%8*\ %{GitInfo()}\                         " Git Branch name
-set statusline+=%1*
-set statusline+=%0*\ %l:%c\                                " Rownumber/total (%)
+" 
