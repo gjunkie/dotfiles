@@ -40,7 +40,7 @@ autocmd CompleteDone * call js#expand_snippet()
 let g:mucomplete#chains = {
   \ 'default':  ['user', 'c-n'],
   \ 'coffee':  ['c-n', 'c-p'],
-  \ 'js':  ['user', 'c-n'],
+  \ 'js':  ['user', 'keyp', 'keyn'],
   \ 'markdown': ['c-n', 'spel', 'dict'],
   \ 'rb':  ['c-n'],
   \ }

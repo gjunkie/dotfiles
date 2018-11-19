@@ -14,7 +14,7 @@ Plugin 'mbbill/undotree'
 " Indent guides
 Plugin 'nathanaelkane/vim-indent-guides'
 " Git/Vim integration
-Plugin 'tpope/vim-fugitive'
+" Plugin 'tpope/vim-fugitive'
 " Auto closing of quotes and such
 Plugin 'Raimondi/delimitMate'
 " Language Pack for syntax highlighting
