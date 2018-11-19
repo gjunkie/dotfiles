@@ -168,6 +168,14 @@ install_software() {
     esac
   done
 
+  echo "Do you wish to install fzf?"
+  select yn in "Yes" "No"; do
+    case $yn in
+    Yes ) install_fzf; break;;
+    No ) break;;
+    esac
+  done
+
   echo "Do you wish to install iTerm2?"
   select yn in "Yes" "No"; do
     case $yn in
@@ -176,16 +184,14 @@ install_software() {
     esac
   done
 
-  echo "Do you wish to install MacVim?"
-  select yn in "Yes" "No"; do
-    case $yn in
-    Yes ) install_macvim; break;;
-    No ) break;;
-    esac
-  done
-
   [[ $? ]] \
   && _print_success "Software installs complete"
+}
+
+install_fzf() {
+  brew install fzf
+  [[ $? ]] \
+  && _print_success "Installed fzf"
 }
 
 install_git() {
@@ -217,12 +223,6 @@ install_iterm2() {
   brew cask install iterm2
   [[ $? ]] \
   && _print_success "Installed iTerm2"
-}
-
-install_macvim() {
-  brew cask install macvim
-  [[ $? ]] \
-  && _print_success "Installed and linked MacVim"
 }
 
 install_npm() {
