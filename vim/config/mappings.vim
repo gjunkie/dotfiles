@@ -45,19 +45,27 @@ vnoremap <silent>  C :<c-u>call comment#toggle_comment(visualmode(), 1)<cr>
 " -------------------------------------
 " vim-fugitive
 " -------------------------------------
-map <Leader>b :Gblame<CR>
-map <Leader>d :Gdiff<CR>
-map <Leader>\ :Gbrowse<CR>
-map <Leader><Tab> :Gstatus<CR>
-nmap ç :Commits<CR> "<Option-c>
+" map <Leader>b :Gblame<CR>
+" map <Leader>d :Gdiff<CR>
+" map <Leader>\ :Gbrowse<CR>
+" map <Leader><Tab> :Gstatus<CR>
+" nmap ç :Commits<CR> "<Option-c>
+
+" noremap <leader>b :execute "Shell git blame -L " . eval(line(".")-5) . ",+10 %"<cr>
+
+" -------------------------------------
+" Git
+" -------------------------------------
+noremap <silent> <leader>\ V:<c-u>call OpenCurrentFileInGithub()<cr>
+xnoremap <silent> <leader>\ :<c-u>call OpenCurrentFileInGithub()<cr>
 
 " -------------------------------------
 " Ale Linter
 " -------------------------------------
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
-"nmap <silent> <leader>aj :ALENext<cr>
-"nmap <silent> <leader>ak :ALEPrevious<cr>
+" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+" nmap <silent> <C-j> <Plug>(ale_next_wrap)
+" nmap <silent> <leader>aj :ALENext<cr>
+" nmap <silent> <leader>ak :ALEPrevious<cr>
 
 " -------------------------------------
 " UndoTreeToggle

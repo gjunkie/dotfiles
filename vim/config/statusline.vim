@@ -11,7 +11,7 @@ set statusline+=%8*\ %{expand('%:p:h:t')}/                 " directory of curren
 set statusline+=%7*\%<%t\ %{ReadOnly()}%m\ %w\          " File
 set statusline+=%*
 set statusline+=%9*\ %=                                    " Space
-set statusline+=%8*\ %{GitInfo()}\                         " Git Branch name
+" set statusline+=%8*\ %{GitInfo()}\                         " Git Branch name
 set statusline+=%0*\ %l:%c\                                " Rownumber/total (%)
 
 " Map Vim mode to custom identifiers
