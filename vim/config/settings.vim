@@ -1,10 +1,9 @@
-" -------------------------------------
 " General Settings
 " -------------------------------------
 let mapleader="`"
 
-source ~/.vim/config/autocmd.vim
-source ~/.vim/config/statusline.vim
+source ~/.vim/settings/autocmd.vim
+source ~/.vim/settings/statusline.vim
 
 " Misc Settings
 set enc=utf-8
@@ -47,3 +46,6 @@ set term=xterm-256color
 
 " set termguicolors
 colorscheme nord
+
+syntax enable
+filetype plugin indent on

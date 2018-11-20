@@ -1,3 +1,5 @@
+" AutoCmds
+" ---------------------------------
 
 " Set File Types
 autocmd BufNewFile,BufRead *.html setfiletype html

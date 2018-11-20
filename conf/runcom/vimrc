@@ -1,18 +1,6 @@
 " Main .vimrc
 " ---------------------------------
-" All settings and mappings located in vim/plugin
 
-set nocompatible
-filetype off
-
-" Vundle setup
-silent! set rtp+=~/.vim/bundle/Vundle.vim
-silent! call vundle#begin()
 source ~/.vim/config/plugins.vim
-call vundle#end()
-
-source ~/.vim/config/settings.vim
 source ~/.vim/config/mappings.vim
-
-syntax enable
-filetype plugin indent on
+source ~/.vim/config/settings.vim

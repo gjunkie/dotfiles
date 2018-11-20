@@ -1,3 +1,6 @@
+" Status Line
+" -------------------------------------
+
 " Status bar and Linenumbers
 "  Make the command line two lines high and change the statusline display to
 "  something that looks useful.
