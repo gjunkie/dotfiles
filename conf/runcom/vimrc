@@ -13,7 +13,6 @@ call vundle#end()
 
 source ~/.vim/config/settings.vim
 source ~/.vim/config/mappings.vim
-source ~/.vim/config/color.vim
 
 syntax enable
 filetype plugin indent on

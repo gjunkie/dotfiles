@@ -1,23 +1,21 @@
+" -------------------------------------
+" General Settings
+" -------------------------------------
+let mapleader="`"
+
 source ~/.vim/config/autocmd.vim
 source ~/.vim/config/statusline.vim
 
-" File Encoding
-set enc=utf-8
-
 " Misc Settings
-set wildignore+=*/tmp/*
-set wildignore+=*/test/*
-set wildignore+=*/vendor/assets/bower_components/*
-set wildignore+=*/public/* 
+set enc=utf-8
 set nonumber
 set expandtab
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 
-set tags=./tags,tags;$HOME
+" set tags=./tags,tags;$HOME
 
-" Final Settings
 let html_no_rendering=1
 set backspace=indent,eol,start
 set foldmethod=indent
@@ -46,3 +44,6 @@ if !has('gui_running')
 endif
 
 set term=xterm-256color
+
+" set termguicolors
+colorscheme nord

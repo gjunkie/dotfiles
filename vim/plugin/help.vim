@@ -15,6 +15,3 @@ fun! CheatTmux()
   echo "________________[ tmux ]________________"
   echo "&            Close window"
 endf
-
-noremap HV :call CheatVim() <CR>
-noremap HT :call CheatTmux() <CR>
