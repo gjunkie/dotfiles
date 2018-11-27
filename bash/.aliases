@@ -1,6 +1,15 @@
-alias ls='ls -la'
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
 alias play='cd ~/Projects/'
+
+alias ls='ls -lF -G'
+
 alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
+
+# Put machine to sleep
+alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 
 # FZF Aliases
 alias gitl="git log --pretty=oneline --abbrev-commit --no-merges | fzf --preview 'echo {} | cut -f 1 -d \" \" | xargs git show --color=always'"

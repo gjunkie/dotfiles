@@ -23,3 +23,6 @@ branch_color ()
     fi
     echo -ne $color
 }
+
+# Prompt
+PS1='\[\e[34m\][\w] \[$(branch_color)\]$(parse_git_branch)\[${c_sgr0}\]\n→ '

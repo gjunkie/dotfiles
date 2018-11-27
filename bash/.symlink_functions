@@ -12,8 +12,8 @@ link_vim_files() {
 
 link_bash_files() {
   rm -rf "${HOME}/.bash"
-  rm "${HOME}/.bashrc"
-  rm "${HOME}/.profile"
+  rm -rf "${HOME}/.bashrc"
+  rm -rf "${HOME}/.profile"
 
   ln -fs "${PROGDIR}/conf/runcom/bashrc"  "${HOME}/.bashrc"
   ln -fs "${PROGDIR}/bash"                "${HOME}/.bash"
