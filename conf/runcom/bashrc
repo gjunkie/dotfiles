@@ -1,13 +1,13 @@
-# --files: List files that would be searched but do not search
-# --no-ignore: Do not respect .gitignore, etc...
-# --hidden: Search hidden files and folders
-# --follow: Follow symlinks
-# --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
-# export FZF_DEFAULT_COMMAND='fd --files f --hidden --follow --exclude .git'
-export TERM=xterm-256color
-export REVIEW_BASE=master
+source ~/.bash/aliases.bash
+source ~/.bash/colors.bash
+source ~/.bash/git-functions.bash
+source ~/.bash/git-completion.bash
+source ~/.bash/fzf.bash
+source ~/.bash/paths.bash
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+if [ -f ~/.bash_profile.local.bash ]; then
+  source ~/.bash_profile.local.bash
+fi
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+# Prompt
+PS1='\[\e[34m\][\w] \[$(branch_color)\]$(parse_git_branch)\[${c_sgr0}\]\n→ '

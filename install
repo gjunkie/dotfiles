@@ -6,8 +6,8 @@ readonly PROGDIR="${HOME}/Projects/dotfiles"
 #readonly VERSION=$(cat "$PROGDIR/VERSION.md")
 readonly TODAY=$(date +"%m-%d-%y") readonly ARGS="$@"
 
-. ./conf/bash/helpers/functions.bash
-. ./conf/bash/helpers/symlink_functions.bash
+. ./bash/functions.bash
+. ./bash/symlink_functions.bash
 
 install_software() {
   echo "Do you wish to install xcode-select?"

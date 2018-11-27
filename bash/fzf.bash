@@ -1,3 +1,15 @@
+# --files: List files that would be searched but do not search
+# --no-ignore: Do not respect .gitignore, etc...
+# --hidden: Search hidden files and folders
+# --follow: Follow symlinks
+# --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+# export FZF_DEFAULT_COMMAND='fd --files f --hidden --follow --exclude .git'
+export TERM=xterm-256color
+export REVIEW_BASE=master
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 # export FZF_DEFAULT_OPTS="--preview 'cat {}'"
 # export FZF_DEFAULT_OPTS='
 #   --color fg:124,bg:16,hl:202,fg+:214,bg+:52,hl+:231
