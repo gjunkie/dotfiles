@@ -15,10 +15,6 @@ autocmd BufNewFile,BufRead *.json setlocal ft=javascript
 autocmd BufNewFile,BufRead *.less setlocal ft=less
 autocmd BufNewFile,BufRead *.txt setlocal ft=rst
 
-" To Dos
-autocmd filetype taskpaper let g:auto_save = 1
-autocmd filetype taskpaper :WatchForChanges!
-
 augroup FiletypeGroup
   autocmd!
   au BufNewFile,BufRead *.jsx set filetype=js
