@@ -6,10 +6,13 @@
 function! s:Blame(bufnr, filename, ...)
   execute "terminal tig blame +" . line(".") . " -- " . a:filename
 endfunction
+command! -count Blame call s:Blame(bufnr('%'), expand('%:p'), <f-args>)
 
 " nnoremap <silent> <leader>b :execute "terminal tig blame +" . line(".") . " -- " . expand("%")<CR>
 " nnoremap <silent> <leader>b :call Blame(bufnr('%'), expand('%:p'))<CR>
 nnoremap <silent> <leader>b :Blame<CR>
+noremap <silent> <leader>\ V:<c-u>call OpenCurrentFileInGithub()<cr>
+xnoremap <silent> <leader>\ :<c-u>call OpenCurrentFileInGithub()<cr>
 
 " noremap <leader>b :vsp :execute "term git blame -L " . eval(line(".")-5) . ",+10 %"<cr>
 " function! s:Blame(bufnr, filename, ...)
@@ -29,11 +32,4 @@ nnoremap <silent> <leader>b :Blame<CR>
 "   set scrollbind
 "   call winrestview(view)
 " endfunction
-command! -count Blame call s:Blame(bufnr('%'), expand('%:p'), <f-args>)
 
-" command! Blame normal!:let @a=expand('%')<CR>:let @b=line('.')<CR>:new<CR>:set bt=nofile<CR>:%!git blame -wM <C-R>a<CR>:<C-R>b<CR>
-" -------------------------------------
-" Git
-" -------------------------------------
-noremap <silent> <leader>\ V:<c-u>call OpenCurrentFileInGithub()<cr>
-xnoremap <silent> <leader>\ :<c-u>call OpenCurrentFileInGithub()<cr>

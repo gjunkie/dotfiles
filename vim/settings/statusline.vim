@@ -14,7 +14,7 @@ set statusline+=%8*\ %{expand('%:p:h:t')}/                 " directory of curren
 set statusline+=%7*\%<%t\ %{ReadOnly()}%m\ %w\          " File
 set statusline+=%*
 set statusline+=%9*\ %=                                    " Space
-" set statusline+=%8*\ %{GitInfo()}\                         " Git Branch name
+" set statusline+=%8*\ %{StatuslineGit()}\                         " Git Branch name
 set statusline+=%0*\ %l:%c\                                " Rownumber/total (%)
 
 " Map Vim mode to custom identifiers
@@ -85,24 +85,24 @@ function! ReadOnly()
     return ''
 endfunction
 
-function! GitInfo()
-  let git = fugitive#head()
-  if git != ''
-    return ' '.fugitive#head()
-  else
-    return ''
-endfunction
+" function! GitInfo()
+"   let git = fugitive#head()
+"   if git != ''
+"     return ' '.fugitive#head()
+"   else
+"     return ''
+" endfunction
 
 " This code seems to have a strange effect.
 " It glitches out some charaters when navigating.
-" function! GitBranch()
-"   return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-" endfunction
+function! GitBranch()
+  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+endfunction
 " 
-" function! StatuslineGit()
-"   let l:branchname = GitBranch()
-"   return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
-" endfunction
+function! StatuslineGit()
+  let l:branchname = GitBranch()
+  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+endfunction
 " 
 " set statusline=%t       "tail of the filename
 " set statusline+=%#PmenuSel#
