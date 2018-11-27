@@ -1,10 +1,10 @@
 " -------------------------------------
 " fzf
 " -------------------------------------
-nnoremap F :Rg<SPACE>
-nnoremap K :Rg <C-R><C-W><CR>
-vnoremap K :Rg y/<C-R>"<CR>
-nnoremap \ :call fzf#run(fzf#wrap({'source': 'git ls-files --exclude-standard --others --cached'}))<CR>
+nnoremap fs :Rg<SPACE>
+nnoremap fw :Rg <C-R><C-W><CR>
+vnoremap fw :Rg y/<C-R>"<CR>
+nnoremap ff :call fzf#run(fzf#wrap({'source': 'git ls-files --exclude-standard --others --cached'}))<CR>
 
 " Buffer handling
 nnoremap <Space> :Buffers<CR>
