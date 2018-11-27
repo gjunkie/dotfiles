@@ -2,19 +2,13 @@
 " Git
 " -------------------------------------
 
-" map <Leader>b <C-w>n<C-w>H :0 r !git blame #<CR>
-function! s:Blame(bufnr, filename, ...)
-  execute "terminal tig blame +" . line(".") . " -- " . a:filename
-endfunction
-command! -count Blame call s:Blame(bufnr('%'), expand('%:p'), <f-args>)
+nnoremap gb :Blame<CR>
+xnoremap g\ :<c-u>call git#OpenCurrentFileInGithub()<cr>
+noremap g\ V:<c-u>call git#OpenCurrentFileInGithub()<cr>
 
 " nnoremap <silent> <leader>b :execute "terminal tig blame +" . line(".") . " -- " . expand("%")<CR>
-" nnoremap <silent> <leader>b :call Blame(bufnr('%'), expand('%:p'))<CR>
-nnoremap <silent> <leader>b :Blame<CR>
-noremap <silent> <leader>\ V:<c-u>call OpenCurrentFileInGithub()<cr>
-xnoremap <silent> <leader>\ :<c-u>call OpenCurrentFileInGithub()<cr>
-
 " noremap <leader>b :vsp :execute "term git blame -L " . eval(line(".")-5) . ",+10 %"<cr>
+"
 " function! s:Blame(bufnr, filename, ...)
 "   let view = winsaveview()
 "   normal! gg

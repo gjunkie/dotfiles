@@ -2,7 +2,7 @@
 " Git Helpers
 " -------------------------------------
 
-function! OpenCurrentFileInGithub()
+function git#OpenCurrentFileInGithub()
   let file_dir = expand('%:h')
   let git_root = system('cd ' . file_dir . '; git rev-parse --show-toplevel | tr -d "\n"')
   let file_path = substitute(expand('%:p'), git_root . '/', '', '')
@@ -16,3 +16,9 @@ function! OpenCurrentFileInGithub()
   if last_line != first_line | let url .= '-L' . last_line | endif
   call system('open ' . url)
 endfunction
+
+function git#BlameCurrentFile(bufnr, filename, ...)
+  execute "terminal tig blame +" . line(".") . " -- " . a:filename
+endfunction
+
+command! -count Blame call git#BlameCurrentFile(bufnr('%'), expand('%:p'), <f-args>)

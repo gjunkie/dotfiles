@@ -3,4 +3,5 @@
 
 source ~/.vim/config/plugins.vim
 source ~/.vim/config/mappings.vim
+source ~/.vim/config/autocmd.vim
 source ~/.vim/config/settings.vim

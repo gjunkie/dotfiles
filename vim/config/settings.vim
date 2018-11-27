@@ -2,9 +2,6 @@
 " -------------------------------------
 let mapleader="`"
 
-source ~/.vim/settings/autocmd.vim
-source ~/.vim/settings/statusline.vim
-
 " Misc Settings
 set enc=utf-8
 set nonumber
