@@ -20,9 +20,13 @@ augroup FiletypeGroup
   au BufNewFile,BufRead *.jsx set filetype=js
 augroup END
 
-autocmd FileType javascript setlocal makeprg=lint\ --format\ compact
-autocmd BufWritePost *.py,*.js silent make! <afile> | silent redraw!
-autocmd QuickFixCmdPost [^l]* cwindow
+" Native linting using quickfix
+augroup Linting
+	autocmd!
+  autocmd FileType javascript setlocal makeprg=eslint\ --format\ --no-eslintrc\ compact
+  autocmd BufWritePost *.js silent make! <afile> | silent redraw!
+  autocmd QuickFixCmdPost * cwindow
+augroup END
 
 " ColorScheme runs after the colorscheme has been loaded
 autocmd ColorScheme *

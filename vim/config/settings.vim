@@ -10,7 +10,8 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 
-" set tags=./tags,tags;$HOME
+set tags=./tags,tags;$HOME
+" set tags=tags;/
 
 let html_no_rendering=1
 set backspace=indent,eol,start
