@@ -22,6 +22,15 @@ link_bash_files() {
   && _print_success "bash files symlinked"
 }
 
+link_git_files() {
+  rm -rf "${HOME}/.gitconfig"
+
+  ln -fs "${PROGDIR}/git/.gitconfig" "${HOME}/.gitconfig"
+
+  [[ $? ]] \
+  && _print_success "git files symlinked"
+}
+
 link_tmux_files() {
   rm -rf "${HOME}/.tmux.conf"
 

@@ -185,6 +185,7 @@ main() {
 
   link_vim_files
   link_bash_files
+  link_git_files
   link_tmux_files
   source_bash
 

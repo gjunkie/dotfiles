@@ -1,0 +1,84 @@
+[user]
+  name = Freddie Carthy
+  email = fcarthy@gmail.com
+
+[alias]
+  d=diff --color
+  st=status
+  co=checkout
+  cob=checkout -b
+  co2 = "!sh -c 'git checkout `git branch -r | grep $1 | head -n 1 | sed \"s@origin/@@\"`' -"
+  # abbreviated commits with author
+  lg=log --graph --oneline --no-merges --pretty=format:'%Cred%h%Creset - %s %Cgreen(%an - %cr)%Creset %C(yellow)%d%Creset' --abbrev-commit
+  # abbreviated commits without author
+  lg2=log --graph --oneline --no-merges --pretty=format:'%Cred%h%Creset - %s %Cgreen[%cr]%Creset %C(yellow)%d%Creset' --abbrev-commit
+  # abbreviated commits with files changed
+  lf=log --name-only --oneline --no-merges --pretty=format:'%Cred%h%Creset - %s %Cgreen(%an - %cr)%Creset %C(yellow)%d%Creset' --abbrev-commit
+  # compare base branch to another
+  cmp = !sh -c 'git log --left-right --oneline --no-merges --pretty=format:\"%m %Cred%h%Creset - %s %Cgreen(%an - %cr)%Creset %C(yellow)%d%Creset\" $0...'
+  lb=!git l --branches
+  br="!sh -c 'git fetch origin;git checkout --no-track -b feat/${0/#feature\\//} origin/master'"
+  mb2=merge --squash
+  mb=merge --no-ff
+  f2=log --oneline --first-parent --pretty=format:'%Cred%h%Creset - %s %Cgreen(%an - %ci)%Creset %C(yellow)%d%Creset' --abbrev-commit
+  f=log --oneline --pretty=format:'%Cred%h%Creset - %s %Cgreen(%an - %cr)%Creset %C(yellow)%d%Creset' --abbrev-commit --merges
+  sf="!sh -c 'git lg --boundary $0~1..$0'"
+  sfd="!sh -c 'git log -p --boundary $0~1..$0'"
+  # list files which have changed since REVIEW_BASE
+  # (REVIEW_BASE defaults to 'master' in my zshrc)
+  files = !git diff --name-only $(git merge-base HEAD \"$REVIEW_BASE\")
+
+  # Same as above, but with a diff stat instead of just names
+  # (better for interactive use)
+  stat = !git diff --stat $(git merge-base HEAD \"$REVIEW_BASE\")
+  depgraph = !git madge image --webpack-config webpack.config.js --basedir . --style solarized-dark src
+
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+  ui = true
+  pager = true
+
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+
+[core]
+  autocrlf = input
+  excludesfile = /Users/admin/.gitignore_global
+  editor = /Applications/MacVim.app/Contents/MacOS/Vim
+
+[diff]
+	tool = vimdiff
+
+[difftool]
+	prompt = false
+
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+
+[filter "space2tab"]
+  clean = unexpand --tabs=4 --first-only
+  smudge = unexpand --tabs=4 --first-only
+
+[push]
+  default = current
+
+[remote]
+  pushDefault=origin
