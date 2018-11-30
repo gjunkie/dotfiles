@@ -1,7 +1,11 @@
 " Main .vimrc
 " ---------------------------------
 
-" source all vim config files
-for f in split(glob('~/.vim/config/**/*.vim'), '\n')
-    exe 'source' f
+source ~/.vim/config/plugins.vim
+source ~/.vim/config/settings.vim
+source ~/.vim/config/autocmd.vim
+
+" source all mapping files
+for f in split(glob('~/.vim/config/mappings/**/*.vim'), '\n')
+  exe 'source' f
 endfor
