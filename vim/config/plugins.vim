@@ -18,8 +18,6 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'Raimondi/delimitMate'
 " Language Pack for syntax highlighting
 Plugin 'sheerun/vim-polyglot'
-" File tree
-Plugin 'scrooloose/nerdtree'
 " Auto Complete suggestions
 Plugin 'lifepillar/vim-mucomplete'
 
