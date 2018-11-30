@@ -62,6 +62,9 @@
   excludesfile = /Users/admin/.gitignore_global
   editor = /Applications/MacVim.app/Contents/MacOS/Vim
 
+[merge]
+	tool = vimdiff
+
 [diff]
 	tool = vimdiff
 
