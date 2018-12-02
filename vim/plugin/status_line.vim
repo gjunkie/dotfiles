@@ -1,33 +1,27 @@
 " Status Line
 " -------------------------------------
 
-" Status bar and Linenumbers
-"  Make the command line two lines high and change the statusline display to
-"  something that looks useful.
-set cmdheight=1
-set laststatus=2
-
 " Map Vim mode to custom identifiers
 let g:currentmode={
-    \ 'n'      : 'N ',
-    \ 'no'     : 'N·Operator Pending ',
-    \ 'v'      : 'V ',
-    \ 'V'      : 'V·Line ',
-    \ '\<C-V>' : 'V·Block ',
-    \ 's'      : 'Select ',
-    \ 'S'      : 'S·Line ',
-    \ '\<C-S>' : 'S·Block ',
-    \ 'i'      : 'I ',
-    \ 'R'      : 'R ',
-    \ 'Rv'     : 'V·Replace ',
-    \ 'c'      : 'Command ',
-    \ 'cv'     : 'Vim Ex ',
-    \ 'ce'     : 'Ex ',
-    \ 'r'      : 'Prompt ',
-    \ 'rm'     : 'More ',
-    \ 'r?'     : 'Confirm ',
-    \ '!'      : 'Shell ',
-    \ 't'      : 'Terminal '
+    \'n'      : 'N ',
+    \'no'     : 'N·Operator Pending ',
+    \'v'      : 'V ',
+    \'V'      : 'V·Line ',
+    \'\<C-V>' : 'V·Block ',
+    \'s'      : 'Select ',
+    \'S'      : 'S·Line ',
+    \'\<C-S>' : 'S·Block ',
+    \'i'      : 'I ',
+    \'R'      : 'R ',
+    \'Rv'     : 'V·Replace ',
+    \'c'      : 'Command ',
+    \'cv'     : 'Vim Ex ',
+    \'ce'     : 'Ex ',
+    \'r'      : 'Prompt ',
+    \'rm'     : 'More ',
+    \'r?'     : 'Confirm ',
+    \'!'      : 'Shell ',
+    \'t'      : 'Terminal '
     \}
 
 " Automatically change the statusline color depending on mode
@@ -85,42 +79,3 @@ function! StatuslineGit()
   let l:branchname = GitBranch()
   return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
 endfunction
-
-set statusline=
-set statusline+=%{ChangeStatuslineColor()}                 " Changing the statusline color
-set statusline+=%0*\ %{toupper(g:currentmode[mode()])}     " Current mode
-set statusline+=%8*\ %{expand('%:p:h:t')}/                 " directory of current file
-set statusline+=%7*\%<%t\ %{ReadOnly()}%m\ %w\          " File
-set statusline+=%*
-set statusline+=%9*\ %=                                    " Space
-" set statusline+=%8*\ %{StatuslineGit()}\                         " Git Branch name
-set statusline+=%0*\ %l:%c\                                " Rownumber/total (%)
-" 
-" set statusline=%t       "tail of the filename
-" set statusline+=%#PmenuSel#
-" set statusline+=%h      "help file flag
-" set statusline+=%m      "modified flag
-" set statusline+=%r      "read only flag
-" set statusline+=%=      "left/right separator
-" set statusline+=%c,     "cursor column
-" set statusline+=%l/%L   "cursor line/total lines
-" set statusline+=\ %P    "percent through file
-" set statusline+=\ [%{strlen(&fenc)?&fenc:'none'}] "file encoding
-" set statusline+=%{&ff}] "file format
-" set statusline+=%y      "filetype
-" set statusline+=%f       "path of file
-" set statusline+=%8*\ [%n]                                " buffernr
-
-" set statusline=
-" set statusline+=%#PmenuSel#
-" set statusline+=%{StatuslineGit()}
-" set statusline+=%m\
-" set statusline+=%#CursorColumn#
-" set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
-" set statusline+=\[%{&fileformat}\]
-" set statusline+=\ %p%%
-" set statusline+=\ %l:%c
-" set statusline+=%#warningmsg#
-" set statusline+=%7*\ %{(&fenc!=''?&fenc:&enc)}\[%{&ff}]\ " Encoding & Fileformat
-" set statusline+=%8*\ %-3(%{FileSize()}%)                 " File size
-" 

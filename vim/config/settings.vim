@@ -32,6 +32,17 @@ set smartcase
 set undoreload=10000
 set undolevels=1000
 
+set cmdheight=1
+set laststatus=2
+set statusline=
+set statusline+=%{ChangeStatuslineColor()}                 " Changing the statusline color
+set statusline+=%0*\ %{toupper(g:currentmode[mode()])}     " Current mode
+set statusline+=%8*\ %{expand('%:p:h:t')}/                 " directory of current file
+set statusline+=%7*\%<%t\ %{ReadOnly()}%m\ %w\             " File
+set statusline+=%*
+set statusline+=%9*\ %=                                    " Space
+set statusline+=%0*\ %l:%c\                                " Rownumber/total (%)
+
 let vimDir = '$HOME/.vim'
 let &runtimepath.=','.vimDir
 
