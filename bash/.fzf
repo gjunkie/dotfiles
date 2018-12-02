@@ -4,6 +4,8 @@
 # --follow: Follow symlinks
 # --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+# export FZF_CTRL_R_OPTS="--preview-window up:3 --preview 'echo {}'"
+# export FZF_CTRL_R_OPTS="--preview-window right:30% --preview 'echo {}'"
 # export FZF_DEFAULT_COMMAND='fd --files f --hidden --follow --exclude .git'
 export TERM=xterm-256color
 export REVIEW_BASE=master

@@ -22,6 +22,10 @@
 "   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
 "   \   <bang>0)
 
+" Pass an empty option dictionary if the screen is narrow
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, &columns > 80 ? fzf#vim#with_preview() : {}, <bang>0)
+
 set rtp+=/usr/local/bin/fzf
 let g:fzf_layout = { 'down': '~40%' }
 

@@ -1,7 +1,7 @@
 " Plugins
 " -------------------------------------
 
-set nocompatible
+" set nocompatible
 filetype off
 
 " Vundle setup

@@ -38,12 +38,12 @@ autocmd CompleteDone * call js#expand_snippet()
 " Ccompletion Chains
 " ---------------------------------
 let g:mucomplete#chains = {
-  \ 'default':  ['user', 'c-n'],
-  \ 'coffee':  ['c-n', 'c-p'],
-  \ 'js':  ['user', 'keyp', 'keyn'],
-  \ 'markdown': ['c-n', 'spel', 'dict'],
-  \ 'rb':  ['c-n'],
-  \ }
+  \'default':  ['user', 'c-n'],
+  \'coffee':  ['c-n', 'c-p'],
+  \'javascript':  ['user', 'keyp', 'keyn'],
+  \'markdown': ['c-n', 'spel', 'dict'],
+  \'rb':  ['c-n'],
+  \}
 
 let g:mucomplete#enable_auto_at_startup = 1
 let g:mucomplete#popup_direction = { 'keyp' : 1, 'keyn' : 1 }
