@@ -75,14 +75,6 @@ function! ReadOnly()
     return ''
 endfunction
 
-" function! GitInfo()
-"   let git = fugitive#head()
-"   if git != ''
-"     return ' '.fugitive#head()
-"   else
-"     return ''
-" endfunction
-
 " This code seems to have a strange effect.
 " It glitches out some charaters when navigating.
 function! GitBranch()

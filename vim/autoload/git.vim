@@ -1,7 +1,6 @@
 " -------------------------------------
 " Git Helpers
 " -------------------------------------
-
 function git#OpenCurrentFileInGithub()
   let file_dir = expand('%:h')
   let git_root = system('cd ' . file_dir . '; git rev-parse --show-toplevel | tr -d "\n"')
@@ -20,5 +19,3 @@ endfunction
 function git#BlameCurrentFile(bufnr, filename, ...)
   execute "terminal tig blame +" . line(".") . " -- " . a:filename
 endfunction
-
-command! -count Blame call git#BlameCurrentFile(bufnr('%'), expand('%:p'), <f-args>)
