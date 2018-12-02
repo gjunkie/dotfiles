@@ -43,6 +43,7 @@ fun! js#expand_snippet()
     let l:indent = matchstr(getline('.'), '^\s\+')
     call setline('.', l:indent . l:snippet[0])
     call append('.', map(l:snippet[1:-1], { _,t -> l:indent . t}))
+    call cursor('.', 1)
     call search('___')
     let l:save_cursor = getcurpos()
     " Enable searching for ___ with // and ?? and replacing the next ___ with gnc:
