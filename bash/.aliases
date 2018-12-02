@@ -6,8 +6,6 @@ alias play='cd ~/Projects/'
 
 alias ls='ls -lF -G'
 
-alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
-
 # Put machine to sleep
 alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 
