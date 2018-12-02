@@ -90,6 +90,14 @@ install_software() {
     esac
   done
 
+  echo "Do you wish to install Vim?"
+  select yn in "Yes" "No"; do
+    case $yn in
+    Yes ) install_vim; break;;
+    No ) break;;
+    esac
+  done
+
   [[ $? ]] \
   && _print_success "Software installs complete"
 }
@@ -159,6 +167,12 @@ install_yarn() {
   brew install yarn
   [[ $? ]] \
   && _print_success "Installed yarn"
+}
+
+install_vim() {
+  brew install vim
+  [[ $? ]] \
+  && _print_success "Installed Vim"
 }
 
 update_vim_plugins() {
