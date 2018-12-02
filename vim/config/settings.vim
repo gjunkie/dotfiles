@@ -1,6 +1,6 @@
 " General Settings
 " -------------------------------------
-let mapleader="`"
+" let mapleader="`"
 
 " Misc Settings
 set enc=utf-8
@@ -13,7 +13,6 @@ set softtabstop=2
 set tags=./tags,tags;$HOME
 " set tags=tags;/
 
-let html_no_rendering=1
 set backspace=indent,eol,start
 set foldmethod=indent
 set foldnestmax=10

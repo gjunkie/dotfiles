@@ -23,9 +23,6 @@ nnoremap qq :q<CR>
 noremap HV :call CheatVim() <CR>
 noremap HT :call CheatTmux() <CR>
 
-" toggle mouse mode
-map <Leader>m :ToggleMouse<CR>
-
 " Toggle Filetree (netrw)
 nmap <Tab> :call NetrwToggle("%:p:h")<CR>
 nmap <S-Tab> :call NetrwToggle(getcwd())<CR>
@@ -34,16 +31,13 @@ nnoremap r :redo<CR>
 
 " replace word
 map RR :%s:
-
 " replace cursor word
 map RW :%s:<C-R><C-W>:
 
 " search cursor word in buffer
 nmap ? /<C-R><C-W><CR>
-
 " next search result in buffer
 nnoremap n nzz
-
 " previous search result in buffer
 nnoremap N Nzz
 
@@ -68,35 +62,14 @@ nmap <S-t> :tabnew<CR>
 nmap <leader>[ :tabp<CR>
 nmap <leader>] :tabn<CR>
 
-
-" Plugins
-" -------------------------------------
-
-" Git
+" Git helpers utilizing Tig
 nnoremap gb :Blame<CR>
+nnoremap gc :Commits<CR>
 xnoremap g\ :<c-u>call git#OpenCurrentFileInGithub()<cr>
 noremap g\ V:<c-u>call git#OpenCurrentFileInGithub()<cr>
 
-" nnoremap <silent> <leader>b :execute "terminal tig blame +" . line(".") . " -- " . expand("%")<CR>
-" noremap <leader>b :vsp :execute "term git blame -L " . eval(line(".")-5) . ",+10 %"<cr>
-"
-" function! s:Blame(bufnr, filename, ...)
-"   let view = winsaveview()
-"   normal! gg
-"   let width = get(a:000, 0, 40)
-"   execute 'leftabove ' . width . 'vnew'
-"   set buftype=nofile
-"   set bufhidden=wipe
-"   set nowrap
-"   set noswapfile
-"   execute 'autocmd BufWipeout <buffer> call setbufvar(' . a:bufnr .', "&scrollbind", 0)'
-"   execute 'read!git blame ' . shellescape(a:filename)
-"   0delete _
-"   set scrollbind
-"   wincmd p
-"   set scrollbind
-"   call winrestview(view)
-" endfunction
+" Plugins
+" -------------------------------------
 
 " DelimitMate
 imap <C-l> <C-G>g
@@ -104,26 +77,7 @@ imap <C-l> <C-G>g
 " FZF
 nnoremap fs :Rg<SPACE>
 nnoremap fw :Rg <C-R><C-W><CR>
-vnoremap fw :Rg y/<C-R>"<CR>
+vnoremap fw :<C-U>Rg y/<C-R>"<CR>
 nnoremap ff :call fzf#run(fzf#wrap({'source': 'git ls-files --exclude-standard --others --cached'}))<CR>
+nnoremap fb :Buffers<CR>
 nnoremap f<Space> :b#<CR>
-nnoremap ` :Buffers<CR>
-
-" Buffer handling
-
-" function! s:fzf_insert(data)
-"   execute 'normal!' (empty(s:fzf_query) ? 'a' : 'ciW')."\<C-R>=a:data\<CR>"
-"   startinsert!
-" endfunction
-"
-" function! s:fzf_words(query)
-"   let s:fzf_query = a:query
-"   let matches = fzf#run({
-"   \ 'source':  'cat /usr/share/dict/words',
-"   \ 'sink':    function('s:fzf_insert'),
-"   \ 'options': '--no-multi --query="'.escape(a:query, '"').'"',
-"   \ 'down':    '40%'
-"   \ })
-" endfunction
-
-" inoremap <silent> <C-n> <C-o>:call <SID>fzf_words(expand('<cWORD>'))<CR>
