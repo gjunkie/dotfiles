@@ -10,120 +10,13 @@ readonly TODAY=$(date +"%m-%d-%y") readonly ARGS="$@"
 . ./bash/.symlink_functions
 
 install_software() {
-  echo "Do you wish to install xcode-select?"
-  select yn in "Yes" "No"; do
-    case $yn in
-    Yes ) install_xcode; break;;
-    No ) break;;
-    esac
-  done
-
-  echo "Do you wish to install Homebrew?"
-  select yn in "Yes" "No"; do
-    case $yn in
-    Yes ) install_homebrew; break;;
-    No ) break;;
-    esac
-  done
-
-  echo "Do you wish to install Homebrew Cask?"
-  select yn in "Yes" "No"; do
-    case $yn in
-    Yes ) install_homebrew_cask; break;;
-    No ) break;;
-    esac
-  done
-
-  echo "Do you wish to install yarn?"
-  select yn in "Yes" "No"; do
-    case $yn in
-    Yes ) install_yarn; break;;
-    No ) break;;
-    esac
-  done
-
-  echo "Do you wish to install npm?"
-  select yn in "Yes" "No"; do
-    case $yn in
-    Yes ) install_npm; break;;
-    No ) break;;
-    esac
-  done
-
-  echo "Do you wish to install git?"
-  select yn in "Yes" "No"; do
-    case $yn in
-    Yes ) install_git; break;;
-    No ) break;;
-    esac
-  done
-
-  echo "Do you wish to install tig?"
-  select yn in "Yes" "No"; do
-    case $yn in
-    Yes ) install_tig break;;
-    No ) break;;
-    esac
-  done
-
-  echo "Do you wish to install tmux?"
-  select yn in "Yes" "No"; do
-    case $yn in
-    Yes ) install_tmux; break;;
-    No ) break;;
-    esac
-  done
-
-  echo "Do you wish to install fzf?"
-  select yn in "Yes" "No"; do
-    case $yn in
-    Yes ) install_fzf; break;;
-    No ) break;;
-    esac
-  done
-
-  echo "Do you wish to install iTerm2?"
-  select yn in "Yes" "No"; do
-    case $yn in
-    Yes ) install_iterm2; break;;
-    No ) break;;
-    esac
-  done
-
-  echo "Do you wish to install Vim?"
-  select yn in "Yes" "No"; do
-    case $yn in
-    Yes ) install_vim; break;;
-    No ) break;;
-    esac
-  done
+  install_homebrew
+  install_brews
+  install_npm
+  install_xcode
 
   [[ $? ]] \
   && _print_success "Software installs complete"
-}
-
-install_fzf() {
-  brew install fzf
-  [[ $? ]] \
-  && _print_success "Installed fzf"
-}
-
-install_git() {
-  brew install git
-  [[ $? ]] \
-  && _print_success "Installed git"
-}
-
-install_tig() {
-  brew install tig
-  [[ $? ]] \
-  && _print_success "Installed tig"
-}
-
-install_tmux() {
-  brew install tmux
-  [[ $? ]] \
-  && _print_success "Installed tmux"
 }
 
 install_homebrew() {
@@ -133,16 +26,10 @@ install_homebrew() {
   && _print_success "Installed Homebrew"
 }
 
-install_homebrew_cask() {
-  brew tap caskroom/cask
+install_brews() {
+  brew bundle
   [[ $? ]] \
-  && _print_success "Installed Homebrew Cask"
-}
-
-install_iterm2() {
-  brew cask install iterm2
-  [[ $? ]] \
-  && _print_success "Installed iTerm2"
+  && _print_success "Installed Homebrew apps"
 }
 
 install_npm() {
@@ -151,47 +38,31 @@ install_npm() {
   && _print_success "Installed npm"
 }
 
-install_sketch() {
-  brew cask install sketch
-  [[ $? ]] \
-  && _print_success "Installed Sketch"
-}
-
 install_xcode() {
   xcode-select --install
   [[ $? ]] \
   && _print_success "Installed xcode-select"
 }
 
-install_yarn() {
-  brew install yarn
-  [[ $? ]] \
-  && _print_success "Installed yarn"
-}
-
-install_vim() {
-  brew install vim
-  [[ $? ]] \
-  && _print_success "Installed Vim"
-}
-
 update_vim_plugins() {
   vim +PluginInstall +PluginUpdate +qall
   [[ $? ]] \
-  && _print_success "Updated ViM bundles"
+  && _print_success "Updated Vim bundles"
 }
 
 main() {
   _is_empty "$PROGDIR" \
   && error_out
 
+  source_bash
+
   cmdline "$ARGS"
 
-  echo "Do you want to go through the software install options?"
-  select yn in "Yes" "No"; do
+  echo "Install everything, or skip to dotfiles?"
+  select yn in "Everything" "Skip"; do
     case $yn in
-    Yes ) install_software; break;;
-    No ) break;;
+    Everything ) install_software; break;;
+    Skip ) break;;
     esac
   done
 
@@ -201,17 +72,10 @@ main() {
   link_bash_files
   link_git_files
   link_tmux_files
-  source_bash
 
   #setup_global_gitconfig
 
-  echo "Do you wish to install and update ViM plugins?"
-  select yn in "Yes" "No"; do
-    case $yn in
-    Yes ) update_vim_plugins; break;;
-    No ) break;;
-    esac
-  done
+  update_vim_plugins
 
   _print_success "All done!"
 }

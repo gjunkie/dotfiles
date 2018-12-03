@@ -7,7 +7,7 @@ link_vim_files() {
   ln -fs "${PROGDIR}/conf/runcom/vimrc"   "${HOME}/.vimrc"
 
   [[ $? ]] \
-  && _print_success "ViM files symlinked"
+  && _print_success "Vim files symlinked"
 }
 
 link_bash_files() {
