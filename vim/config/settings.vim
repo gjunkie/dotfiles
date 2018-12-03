@@ -1,8 +1,6 @@
 " General Settings
 " -------------------------------------
-" let mapleader="`"
 
-" Misc Settings
 set enc=utf-8
 set nonumber
 set expandtab
@@ -32,6 +30,10 @@ set smartcase
 set undoreload=10000
 set undolevels=1000
 
+set term=xterm-256color
+set termguicolors
+colorscheme nord
+
 set cmdheight=1
 set laststatus=2
 set statusline=
@@ -49,11 +51,3 @@ let &runtimepath.=','.vimDir
 if !has('gui_running')
   set t_Co=256
 endif
-
-set term=xterm-256color
-
-" set termguicolors
-colorscheme nord
-
-syntax enable
-filetype plugin indent on

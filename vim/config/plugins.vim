@@ -10,8 +10,7 @@ silent! call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-
-" fzf - fuzzy searcher
+" fuzzy searcher
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 " Auto closing of quotes and such
@@ -22,3 +21,6 @@ Plugin 'sheerun/vim-polyglot'
 Plugin 'lifepillar/vim-mucomplete'
 
 call vundle#end()
+
+syntax enable
+filetype plugin indent on
