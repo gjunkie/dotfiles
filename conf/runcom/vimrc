@@ -1,7 +1,7 @@
 " Main .vimrc
 " ---------------------------------
 
-source ~/.vim/config/plugins.vim
-source ~/.vim/config/settings.vim
-source ~/.vim/config/mappings.vim
-source ~/.vim/config/autocmd.vim
+runtime config/plugins.vim
+runtime config/settings.vim
+runtime config/mappings.vim
+runtime config/autocmd.vim
