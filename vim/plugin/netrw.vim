@@ -46,3 +46,14 @@ fun! NormalizeWidths()
   set equalalways! equalalways!
   let &eadirection = eadir_pref
 endf
+
+" Overwrites netrw's new file function
+" by creating the file and redrawing the
+" directory tree to show the file name
+" in the list, rather than opening the
+" file.
+fun! ShowNewFileInDirList()
+  let l:filename = input("please enter filename: ")
+  execute 'silent !touch ' . b:netrw_curdir.'/'.l:filename
+  redraw!
+endf

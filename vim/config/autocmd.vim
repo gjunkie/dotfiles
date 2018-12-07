@@ -14,13 +14,21 @@ autocmd BufNewFile,BufRead *.json setlocal ft=javascript
 autocmd BufNewFile,BufRead *.less setlocal ft=less
 autocmd BufNewFile,BufRead *.txt setlocal ft=rst
 
+autocmd filetype netrw call Netrw_mappings()
+" Overwrites netrw's new file mapping
+function! Netrw_mappings()
+  noremap <buffer>% :call ShowNewFileInDirList()<cr>
+endfunction
+
+" au FileType netrw au BufLeave <buffer> :q
+
 " Native linting using quickfix
-augroup Linting
-	autocmd!
-  autocmd FileType javascript setlocal makeprg=eslint\ --format\ --no-eslintrc\ compact
-  autocmd BufWritePost *.js silent make! <afile> | silent redraw!
-  autocmd QuickFixCmdPost * cwindow
-augroup END
+" augroup Linting
+" 	autocmd!
+"   autocmd FileType javascript setlocal makeprg=eslint\ --format\ --no-eslintrc\ compact
+"   autocmd BufWritePost *.js silent make! <afile> | silent redraw!
+"   autocmd QuickFixCmdPost * cwindow
+" augroup END
 
 " ColorScheme runs after the colorscheme has been loaded
 autocmd ColorScheme *
