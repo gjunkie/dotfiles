@@ -4,10 +4,10 @@
 
 " Window Management
 " -------------------------------------
-nnoremap <Space>h <C-w>h
-nnoremap <Space>j <C-w>j
-nnoremap <Space>k <C-w>k
-nnoremap <Space>l <C-w>l
+nnoremap fh <C-w>h
+nnoremap fj <C-w>j
+nnoremap fk <C-w>k
+nnoremap fl <C-w>l
 " Windown resizing
 "nnoremap <C-K> :5wincmd +<CR> " Up
 "nnoremap <C-J> :5wincmd -<CR> " Down
@@ -48,6 +48,10 @@ nnoremap k gk
 " toggle commenting
 nnoremap <silent>  C :set opfunc=comment#toggle_comment<cr>g@<Right>
 vnoremap <silent>  C :<c-u>call comment#toggle_comment(visualmode(), 1)<cr>
+
+" smooth scrolling
+nnoremap <silent> <C-u> :call scroll#SmoothScroll(1)<cr>
+nnoremap <silent> <C-d> :call scroll#SmoothScroll(0)<cr>
 
 " indentation
 vmap <Tab> >gv
