@@ -15,8 +15,8 @@ link_bash_files() {
   rm -rf "${HOME}/.bashrc"
   rm -rf "${HOME}/.profile"
 
-  ln -fs "${PROGDIR}/conf/runcom/bashrc"  "${HOME}/.bashrc"
-  ln -fs "${PROGDIR}/bash"                "${HOME}/.bash"
+  ln -fs "${PROGDIR}/conf/runcom/bash_profile"  "${HOME}/.bash_profile"
+  ln -fs "${PROGDIR}/bash"                      "${HOME}/.bash"
 
   [[ $? ]] \
   && _print_success "bash files symlinked"
@@ -41,7 +41,7 @@ link_tmux_files() {
 }
 
 source_bash() {
-  source "${HOME}/.bashrc"
+  source "${HOME}/.bash_profile"
   [[ $? ]] \
   && _print_success "bash files sourced"
 }

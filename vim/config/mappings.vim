@@ -24,18 +24,18 @@ noremap HV :call CheatVim() <CR>
 noremap HT :call CheatTmux() <CR>
 
 " Toggle Filetree (netrw)
-nmap <Tab> :call NetrwToggle("%:p:h")<CR>
-nmap <S-Tab> :call NetrwToggle(getcwd())<CR>
+nnoremap <Tab> :call NetrwToggle("%:p:h")<CR>
+nnoremap <S-Tab> :call NetrwToggle(getcwd())<CR>
 
 nnoremap r :redo<CR>
 
 " replace word
-map RR :%s:
+nnoremap RR :%s:
 " replace cursor word
-map RW :%s:<C-R><C-W>:
+nnoremap RW :%s:<C-R><C-W>:
 
 " search cursor word in buffer
-nmap ? /<C-R><C-W><CR>
+nnoremap ? /<C-R><C-W><CR>
 " next search result in buffer
 nnoremap n nzz
 " previous search result in buffer
@@ -66,11 +66,13 @@ nmap <S-t> :tabnew<CR>
 nmap <leader>[ :tabp<CR>
 nmap <leader>] :tabn<CR>
 
-" Git helpers utilizing Tig
+" Git helpers
+nnoremap gs :GFiles?<CR>
 nnoremap gb :Blame<CR>
-nnoremap gc :Commits<CR>
-xnoremap g\ :<c-u>call git#OpenCurrentFileInGithub()<cr>
-noremap g\ V:<c-u>call git#OpenCurrentFileInGithub()<cr>
+nnoremap gc :BCommits<CR>
+nnoremap gac :Commits!<CR>
+xnoremap g\ :<c-u>call git#OpenCurrentFileInGithub()<CR>
+noremap g\ V:<c-u>call git#OpenCurrentFileInGithub()<CR>
 
 " Plugins
 " -------------------------------------
@@ -79,6 +81,7 @@ noremap g\ V:<c-u>call git#OpenCurrentFileInGithub()<cr>
 imap <C-l> <C-G>g
 
 " FZF
+" nnoremap fd :execute 'Files ' . expand('%:p:h')<CR>
 nnoremap fs :Rg<SPACE>
 nnoremap fw :Rg <C-R><C-W><CR>
 vnoremap fw :<C-U>Rg y/<C-R>"<CR>

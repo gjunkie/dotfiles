@@ -6,7 +6,7 @@ readonly PROGDIR="${HOME}/Projects/dotfiles"
 #readonly VERSION=$(cat "$PROGDIR/VERSION.md")
 readonly TODAY=$(date +"%m-%d-%y") readonly ARGS="$@"
 
-. ./bash/.functions
+. ./bash/.helper_functions
 . ./bash/.symlink_functions
 
 install_software() {
@@ -47,14 +47,12 @@ install_xcode() {
 update_vim_plugins() {
   vim +PluginInstall +PluginUpdate +qall
   [[ $? ]] \
-  && _print_success "Updated Vim bundles"
+  && _print_success "Updated Vim plugins"
 }
 
 main() {
   _is_empty "$PROGDIR" \
   && error_out
-
-  source_bash
 
   cmdline "$ARGS"
 
@@ -72,6 +70,8 @@ main() {
   link_bash_files
   link_git_files
   link_tmux_files
+
+  source_bash
 
   #setup_global_gitconfig
 
