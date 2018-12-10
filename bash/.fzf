@@ -1,14 +1,7 @@
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export TERM=xterm-256color
-export REVIEW_BASE=master
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-# export FZF_DEFAULT_OPTS="--preview 'cat {}'"
-# export FZF_DEFAULT_OPTS='
-#   --color fg:124,bg:16,hl:202,fg+:214,bg+:52,hl+:231
-#   --color info:52,prompt:196,spinner:208,pointer:196,marker:208
-# '
 
 
 ### PROCESS
@@ -18,17 +11,17 @@ export REVIEW_BASE=master
 # or press [escape] to go back to the process list. Press [escape] twice to exit completely.
 
 pkill() {
-    local pid 
-    if [ "$UID" != "0" ]; then
-        pid=$(ps -f -u $UID | sed 1d | fzf -m | awk '{print $2}')
-    else
-        pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
-    fi  
+  local pid
+  if [ "$UID" != "0" ]; then
+    pid=$(ps -f -u $UID | sed 1d | fzf -m | awk '{print $2}')
+  else
+    pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+  fi
 
-    if [ "x$pid" != "x" ]
-    then
-        echo $pid | xargs kill -${1:-9}
-    fi  
+  if [ "x$pid" != "x" ]
+  then
+    echo $pid | xargs kill -${1:-9}
+  fi
 }
 
 # fstash - easier way to deal with stashes
@@ -110,29 +103,30 @@ fcs() {
   echo -n $(echo "$commit" | sed "s/ .*//")
 }
 
-" compare current branch to master, pipe results to fzf
+# compare current branch to master, pipe results to fzf
 compare() {
-  # Check if it's a git repo
-  [[ $(git root 2>&1) == 'Not a git repo!' ]] && echo "Not a git repo!" && exit 1
+	# Check if it's a git repo
+	[[ $(git root 2>&1) == 'Not a git repo!' ]] && echo "Not a git repo!" && exit 1
 
-  # Assign master to $branch if not defined yet
-  local branch
-  [[ -z "$1" ]] && branch='master' || branch=$1
+	# Assign master to $branch if not defined yet
+	local branch
+	[[ -z "$1" ]] && branch='master' || branch=$1
 
-  pipe() {
-    glNoGraph() {
-      git log "$branch".. --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr% C(auto)%an" "$@"
-    }
-    _gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
-    _viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always %'"
+	function git-stack() {
+		glNoGraph() {
+			git log "$branch".. --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr% C(auto)%an" "$@"
+		}
 
-    glNoGraph |
-      fzf --cycle --no-sort --reverse --tiebreak=index --no-multi \
-        --ansi --preview="$_viewGitLogLine" \
-        --header "enter to view, alt-y to copy hash" \
-        --bind "enter:execute:$_viewGitLogLine   | less -R" \
-        --bind "alt-y:execute:$_gitLogLineToHash | xclip"
-  }
+		_gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
+		_viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always %'"
 
-  pipe
+		glNoGraph |
+			fzf --cycle --no-sort --reverse --tiebreak=index --no-multi \
+				--ansi --preview="$_viewGitLogLine" \
+				--header "enter to view, alt-y to copy hash" \
+				--bind "enter:execute:$_viewGitLogLine   | less -R" \
+				--bind "alt-y:execute:$_gitLogLineToHash | xclip"
+	}
+
+	git-stack
 }

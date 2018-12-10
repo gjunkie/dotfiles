@@ -29,7 +29,6 @@ endf
 
 " Comment/uncomment a region of text.
 fun! comment#toggle_comment(type, ...) abort " See :h map-operator
-  echom "it works"
   let [l:lc, l:rc] = comment#comment_delimiters()
   let [l:first, l:last] = a:0 ? [line("'<"), line("'>")] : [line("'["), line("']")]
   if match(getline(l:first), '^\s*'.l:lc) > -1
