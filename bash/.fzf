@@ -53,6 +53,24 @@ fstash() {
   done
 }
 
+# Lists local branches, checks out selected branch
+branches() {
+  local branches branch
+  branches=$(git branch -vv) &&
+  branch=$(echo "$branches" | fzf +m) &&
+  git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+}
+
+# Lists local branches not merged into local master
+unmerged() {
+  git branch --merged master | grep -v 'master$'
+}
+
+# Prunes local branches not merged into local master
+prune() {
+  git branch --merged master | grep -v 'master$' | xargs git branch -d
+}
+
 cd() {
   if [[ "$#" != 0 ]]; then
     builtin cd "$@";
