@@ -38,9 +38,9 @@ autocmd CompleteDone * call js#expand_snippet()
 " Ccompletion Chains
 " ---------------------------------
 let g:mucomplete#chains = {
-  \'default':  ['user', 'c-n'],
+  \'default':  ['keyp', 'keyn', 'c-n'],
   \'coffee':  ['c-n', 'c-p'],
-  \'javascript':  ['user', 'keyp', 'keyn'],
+  \'javascript.jsx':  ['user', 'keyp', 'keyn'],
   \'markdown': ['c-n', 'spel', 'dict'],
   \'rb':  ['c-n'],
   \}

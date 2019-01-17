@@ -9,7 +9,6 @@ export TERM=xterm-256color
 # show output of "ps -ef", use [tab] to select one or multiple entries
 # press [enter] to kill selected processes and go back to the process list.
 # or press [escape] to go back to the process list. Press [escape] twice to exit completely.
-
 pkill() {
   local pid
   if [ "$UID" != "0" ]; then
@@ -34,6 +33,7 @@ fstash() {
   while out=$(
     git stash list --pretty="%C(yellow)%h %>(14)%Cgreen%cr %C(blue)%gs" |
     fzf --ansi --no-sort --query="$q" --print-query \
+				--header "[Enter] show contents, [Ctrl-d] show diff, [Ctrl-b] checkout as branch" \
         --expect=ctrl-d,ctrl-b);
   do
     mapfile -t out <<< "$out"
