@@ -50,8 +50,8 @@ nnoremap <silent>  C :set opfunc=comment#toggle_comment<cr>g@<Right>
 vnoremap <silent>  C :<c-u>call comment#toggle_comment(visualmode(), 1)<cr>
 
 " smooth scrolling
-nnoremap <silent> <C-u> :call scroll#SmoothScroll(1)<cr>
-nnoremap <silent> <C-d> :call scroll#SmoothScroll(0)<cr>
+" nnoremap <silent> <C-u> :call scroll#SmoothScroll(1)<cr>
+" nnoremap <silent> <C-d> :call scroll#SmoothScroll(0)<cr>
 
 " indentation
 vmap <Tab> >gv

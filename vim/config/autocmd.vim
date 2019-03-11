@@ -25,7 +25,8 @@ endfunction
 " Native linting using quickfix
 " augroup Linting
 " 	autocmd!
-"   autocmd FileType javascript setlocal makeprg=eslint\ --format\ --no-eslintrc\ compact
+  " autocmd FileType javascript setlocal makeprg=eslint\ --format\ "table" --no-eslintrc\ compact
+"   autocmd FileType javascript.jsx setlocal makeprg=eslint\ --no-eslintrc\ --format\ "stylish"
 "   autocmd BufWritePost *.js silent make! <afile> | silent redraw!
 "   autocmd QuickFixCmdPost * cwindow
 " augroup END

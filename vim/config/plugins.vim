@@ -19,6 +19,8 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'sheerun/vim-polyglot'
 " Auto Complete suggestions
 Plugin 'lifepillar/vim-mucomplete'
+" Linting
+Plugin 'w0rp/ale'
 
 call vundle#end()
 
