@@ -88,3 +88,7 @@ vnoremap fw :<C-U>Rg y/<C-R>"<CR>
 nnoremap ff :call fzf#run(fzf#wrap({'source': 'git ls-files --exclude-standard --others --cached'}))<CR>
 nnoremap fb :Buffers<CR>
 nnoremap f<Space> :b#<CR>
+
+" ALE Linter
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)

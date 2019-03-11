@@ -31,14 +31,22 @@ endfunction
 "   autocmd QuickFixCmdPost * cwindow
 " augroup END
 
+fun! s:highlight()
+  hi User1 ctermfg=001
+  hi User2 ctermfg=002
+  hi User3 ctermfg=003
+  hi User4 ctermfg=004
+  hi User5 ctermfg=005
+  hi User6 ctermfg=006
+  hi User7 ctermfg=007
+  hi User8 ctermfg=008
+  hi User9 ctermfg=009
+endfun
+
 " ColorScheme runs after the colorscheme has been loaded
-autocmd ColorScheme *
-  \ hi User1 ctermfg=001 |
-  \ hi User2 ctermfg=002 |
-  \ hi User3 ctermfg=003 |
-  \ hi User4 ctermfg=004 |
-  \ hi User5 ctermfg=005 |
-  \ hi User6 ctermfg=006 |
-  \ hi User7 ctermfg=007 |
-  \ hi User8 ctermfg=008 |
-  \ hi User9 ctermfg=009 
+augroup run_highlight
+  autocmd!
+  autocmd ColorScheme * call s:highlight()
+augroup end
+
+call s:highlight()

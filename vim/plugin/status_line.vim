@@ -39,6 +39,86 @@ function! ChangeStatuslineColor()
   return ''
 endfunction
 
+function! LinterErrors() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+
+  if !l:all_errors
+    return ''
+  endif
+
+  if l:all_errors == 1
+    return printf(
+    \   ' %d Error ',
+    \   all_errors
+    \)
+  endif
+
+  return printf(
+  \   ' %d Errors ',
+  \   all_errors
+  \)
+endfunction
+
+function! LinterNoErrors() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+
+  if !l:all_errors && l:all_non_errors
+    return ' 0 Errors '
+  endif
+
+  return ''
+endfunction
+
+function! LinterWarnings() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+
+  if !l:all_non_errors
+    return ''
+  endif
+
+  if l:all_non_errors == 1
+    return printf(
+    \   '%d Warning ',
+    \   all_non_errors,
+    \)
+  endif
+
+  return printf(
+  \   '%d Warnings ',
+  \   all_non_errors,
+  \)
+endfunction
+
+function! LinterNoWarnings() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+
+  if l:all_non_errors == 0 && l:all_errors > 0
+    return '0 Warnings '
+  endif
+
+  return ''
+endfunction
+
+function! LinterOK() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+
+  if !l:all_errors && !l:all_non_errors
+    return 'OK '
+  else
+    return ''
+  endif
+endfunction
+
 " Find out current buffer's size and output it.
 function! FileSize()
   let bytes = getfsize(expand('%:p'))
