@@ -45,6 +45,12 @@ nnoremap N Nzz
 nnoremap j gj
 nnoremap k gk
 
+" move lines without dd
+nnoremap <S-k> :m-2<CR>
+nnoremap <S-j> :m+<CR>
+vnoremap <S-k> :m '<-2<CR>gv=gv
+vnoremap <S-j> :m '>+1<CR>gv=gv
+
 " toggle commenting
 nnoremap <silent>  C :set opfunc=comment#toggle_comment<cr>g@<Right>
 vnoremap <silent>  C :<c-u>call comment#toggle_comment(visualmode(), 1)<cr>
