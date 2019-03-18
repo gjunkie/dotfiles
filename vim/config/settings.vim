@@ -54,17 +54,16 @@ colorscheme nord
 
 set statusline=
 " set statusline+=%{ChangeStatuslineColor()}                 " Changing the statusline color
-set statusline+=%7*\ %{toupper(g:currentmode[mode()])}     " Current mode
-set statusline+=%7*\ %{expand('%:p:h:t')}/                 " directory of current file
-set statusline+=%7*\%<%t\ %{ReadOnly()}%m\ %w\             " File
+set statusline+=%#function#\ %{toupper(g:currentmode[mode()])}     " Current mode
+set statusline+=%*
+set statusline+=%7*%{expand('%:p:h:t')}/                 " directory of current file
+set statusline+=%3*%<%t\ %{ReadOnly()}%m\ %w\             " File
 set statusline+=%*
 set statusline+=%9*\ %=                                    " Space
-set statusline+=%7*\ %l:%c\                                " Rownumber/total (%)
+set statusline+=%7*\ %l:%c\                                " Row:Column
 set statusline+=%*
-set statusline+=%3*\%{LinterWarnings()}                          " Changing the statusline color
-set statusline+=%2*\%{LinterNoWarnings()}                          " Changing the statusline color
-set statusline+=%1*\%{LinterErrors()}                          " Changing the statusline color
-set statusline+=%2*\%{LinterNoErrors()}                          " Changing the statusline color
+set statusline+=%3*\%{LinterWarnings()}                    " Changing the statusline color
+set statusline+=%1*\%{LinterErrors()}                      " Changing the statusline color
 set statusline+=%2*\%{LinterOK()}                          " Changing the statusline color
 
 if !has('gui_running')

@@ -3,16 +3,16 @@
 
 " Map Vim mode to custom identifiers
 let g:currentmode={
-    \'n'      : 'N ',
+    \'n'      : 'NORMAL ',
     \'no'     : 'N·Operator Pending ',
-    \'v'      : 'V ',
+    \'v'      : 'VISUAL ',
     \'V'      : 'V·Line ',
     \'\<C-V>' : 'V·Block ',
     \'s'      : 'Select ',
     \'S'      : 'S·Line ',
     \'\<C-S>' : 'S·Block ',
-    \'i'      : 'I ',
-    \'R'      : 'R ',
+    \'i'      : 'INSERT ',
+    \'R'      : 'REPLACE ',
     \'Rv'     : 'V·Replace ',
     \'c'      : 'Command ',
     \'cv'     : 'Vim Ex ',
@@ -26,18 +26,23 @@ let g:currentmode={
 
 " Automatically change the statusline color depending on mode
 function! ChangeStatuslineColor()
+  echom mode()
   if (mode() =~# '\v(n|no)')
-    exe 'hi! StatusLine ctermfg=008'
+    hi StatusLine ctermfg=008
   elseif (mode() =~# '\v(v|V)' || g:currentmode[mode()] ==# 'V·Block' || get(g:currentmode, mode(), '') ==# 't')
-    exe 'hi! StatusLine ctermfg=005'
+    hi StatusLine ctermfg=005
   elseif (mode() ==# 'i')
-    exe 'hi! StatusLine ctermfg=004'
+    hi StatusLine ctermfg=004
   else
-    exe 'hi! StatusLine ctermfg=006'
+    hi StatusLine ctermfg=006
   endif
 
   return ''
 endfunction
+
+au InsertEnter * call ChangeStatuslineColor()
+au InsertChange * call ChangeStatuslineColor()
+au InsertLeave * hi statusline guibg=green
 
 function! LinterErrors() abort
   let l:counts = ale#statusline#Count(bufnr(''))
@@ -60,18 +65,6 @@ function! LinterErrors() abort
   \)
 endfunction
 
-function! LinterNoErrors() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-
-  if !l:all_errors && l:all_non_errors
-    return ' 0 Errors '
-  endif
-
-  return ''
-endfunction
-
 function! LinterWarnings() abort
   let l:counts = ale#statusline#Count(bufnr(''))
   let l:all_errors = l:counts.error + l:counts.style_error
@@ -92,19 +85,6 @@ function! LinterWarnings() abort
   \   '%d Warnings ',
   \   all_non_errors,
   \)
-endfunction
-
-function! LinterNoWarnings() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-
-  if l:all_non_errors == 0 && l:all_errors > 0
-    return '0 Warnings '
-  endif
-
-  return ''
 endfunction
 
 function! LinterOK() abort
