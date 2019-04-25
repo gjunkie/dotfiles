@@ -22,8 +22,6 @@ function! Netrw_mappings()
   noremap <buffer>% :call ShowNewFileInDirList()<cr>
 endfunction
 
-" au FileType netrw au BufLeave <buffer> :q
-
 " Native linting using quickfix
 " augroup Linting
 " 	autocmd!
@@ -51,8 +49,7 @@ fun! s:highlight()
 
   hi User8 ctermfg=214
 
-  hi User9 ctermfg=255
-  hi User9 ctermbg=160
+  hi User9 ctermfg=202
 endfun
 " 
 " ColorScheme runs after the colorscheme has been loaded

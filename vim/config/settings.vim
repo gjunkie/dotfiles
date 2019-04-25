@@ -39,6 +39,10 @@ set tabstop=2
 set undoreload=10000
 set undolevels=1000
 
+set diffopt+=iwhiteall
+set diffopt+=hiddenoff
+set diffopt+=internal,algorithm:patience
+
 " Keep undo history across sessions by storing it in a file
 if has('persistent_undo')
   let myUndoDir = expand(vimDir . '/undodir')

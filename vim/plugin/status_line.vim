@@ -136,15 +136,17 @@ function! StatuslineGit()
 endfunction
 
 set statusline=
-set statusline+=%{ChangeStatuslineColor()}                 " Changing the statusline color
-set statusline+=%*\ %{toupper(g:currentmode[mode()])}\      " Current mode
+set statusline+=%{ChangeStatuslineColor()}                          " Changing the statusline color
+set statusline+=%*\ %{toupper(g:currentmode[mode()])}\              " Current mode
 set statusline+=%*
-set statusline+=%3*\ %{expand('%:p:h:t')}/                 " directory of current file
-set statusline+=%3*%<%t\ %{ReadOnly()}%m\ %w\             " File
+set statusline+=%3*\ %{expand('%:p:h:t')}/                          " Directory of current file
+set statusline+=%3*%<%t%w\                                          " File name
+set statusline+=%9*%<%m                                             " Modified
+set statusline+=%3*%{ReadOnly()}                                    " Read Only icon
 set statusline+=%*
-set statusline+=%1*\ %=                                    " Space
-set statusline+=%6*\ %l:%c\                                " Row:Column
-set statusline+=%2*%{strlen(LinterOK())==2?LinterOK():''}
+set statusline+=%1*\ %=                                             " Space
+set statusline+=%6*\ %l:%c\                                         " Row:Column
+" set statusline+=%2*%{strlen(LinterOK())==2?LinterOK():''}
 set statusline+=%8*%{strlen(LinterWarnings())>0?LinterWarnings():''}
 set statusline+=%9*%{strlen(LinterErrors())>0?LinterErrors():''}
 set statusline+=%*

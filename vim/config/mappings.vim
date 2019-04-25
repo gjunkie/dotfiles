@@ -93,20 +93,8 @@ nnoremap fw :Rg <C-R><C-W><CR>
 vnoremap fw :<C-U>Rg y/<C-R>"<CR>
 nnoremap ff :call fzf#run(fzf#wrap({'source': 'git ls-files --exclude-standard --others --cached'}))<CR>
 nnoremap FF :Files<CR>
-" nnoremap ff :call fzf#run(fzf#wrap({
-"       \ 'source': 'git ls-files --exclude-standard --others --cached',
-"       \ 'options': '--ansi --expect=ctrl-t,ctrl-v,ctrl-x --delimiter : --nth 4.. '.
-"       \ '--multi --bind=ctrl-a:select-all,ctrl-d:deselect-all '.
-"       \ '--color hl:68,hl+:110',
-"       \ }))<CR>
-" nnoremap ff :call fzf#run({
-" \   'source':
-" \     map(split(globpath(&rtp, "colors/*.vim"), "\n"),
-" \         "substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')"),
-" \   'sink':    'colo',
-" \   'options': '+m',
-" \   'left':    30
-" \ })<CR>
+nnoremap FL :Lines<CR>
+nnoremap FB :BLines<CR>
 nnoremap fb :Buffers<CR>
 nnoremap f<Space> :b#<CR>
 
