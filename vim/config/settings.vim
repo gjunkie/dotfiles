@@ -24,7 +24,7 @@ set laststatus=2
 set nobackup
 set noerrorbells
 set nofoldenable
-set nonumber
+" set nonumber
 set noshowmode
 set noswapfile
 set scrolloff=20
@@ -34,8 +34,8 @@ set softtabstop=2
 set splitbelow
 set splitright
 set tabstop=2
-set term=xterm-256color
-set termguicolors
+" set term=xterm-256color
+" set termguicolors
 set undoreload=10000
 set undolevels=1000
 
@@ -50,21 +50,7 @@ if has('persistent_undo')
   set undofile
 endif
 
-colorscheme nord
-
-set statusline=
-" set statusline+=%{ChangeStatuslineColor()}                 " Changing the statusline color
-set statusline+=%#function#\ %{toupper(g:currentmode[mode()])}     " Current mode
-set statusline+=%*
-set statusline+=%7*%{expand('%:p:h:t')}/                 " directory of current file
-set statusline+=%3*%<%t\ %{ReadOnly()}%m\ %w\             " File
-set statusline+=%*
-set statusline+=%9*\ %=                                    " Space
-set statusline+=%7*\ %l:%c\                                " Row:Column
-set statusline+=%*
-set statusline+=%3*\%{LinterWarnings()}                    " Changing the statusline color
-set statusline+=%1*\%{LinterErrors()}                      " Changing the statusline color
-set statusline+=%2*\%{LinterOK()}                          " Changing the statusline color
+colorscheme grid
 
 if !has('gui_running')
   set t_Co=256

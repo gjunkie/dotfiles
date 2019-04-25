@@ -4,7 +4,7 @@ link_vim_files() {
   && rm -rf "${HOME}/.vim"
 
   ln -fs "${PROGDIR}/vim"                 "${HOME}/.vim"
-  ln -fs "${PROGDIR}/conf/runcom/vimrc"   "${HOME}/.vimrc"
+  ln -fs "${PROGDIR}/conf/runcom/vimrc.vim"   "${HOME}/.vimrc"
 
   [[ $? ]] \
   && _print_success "Vim files symlinked"
@@ -15,7 +15,7 @@ link_bash_files() {
   rm -rf "${HOME}/.bashrc"
   rm -rf "${HOME}/.profile"
 
-  ln -fs "${PROGDIR}/conf/runcom/bash_profile"  "${HOME}/.bash_profile"
+  ln -fs "${PROGDIR}/conf/runcom/bash_profile.sh"  "${HOME}/.bash_profile"
   ln -fs "${PROGDIR}/bash"                      "${HOME}/.bash"
 
   [[ $? ]] \

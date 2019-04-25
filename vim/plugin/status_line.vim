@@ -3,46 +3,41 @@
 
 " Map Vim mode to custom identifiers
 let g:currentmode={
-    \'n'      : 'NORMAL ',
-    \'no'     : 'N·Operator Pending ',
-    \'v'      : 'VISUAL ',
-    \'V'      : 'V·Line ',
-    \'\<C-V>' : 'V·Block ',
-    \'s'      : 'Select ',
-    \'S'      : 'S·Line ',
-    \'\<C-S>' : 'S·Block ',
-    \'i'      : 'INSERT ',
-    \'R'      : 'REPLACE ',
-    \'Rv'     : 'V·Replace ',
-    \'c'      : 'Command ',
-    \'cv'     : 'Vim Ex ',
-    \'ce'     : 'Ex ',
-    \'r'      : 'Prompt ',
-    \'rm'     : 'More ',
-    \'r?'     : 'Confirm ',
-    \'!'      : 'Shell ',
-    \'t'      : 'Terminal '
+    \'n'      : 'NORMAL',
+    \'no'     : 'N·Operator Pending',
+    \'v'      : 'VISUAL',
+    \'V'      : 'V·Line',
+    \'\<C-V>' : 'V·Block',
+    \'s'      : 'Select',
+    \'S'      : 'S·Line',
+    \'\<C-S>' : 'S·Block',
+    \'i'      : 'INSERT',
+    \'R'      : 'REPLACE',
+    \'Rv'     : 'V·Replace',
+    \'c'      : 'Command',
+    \'cv'     : 'Vim Ex',
+    \'ce'     : 'Ex',
+    \'r'      : 'Prompt',
+    \'rm'     : 'More',
+    \'r?'     : 'Confirm',
+    \'!'      : 'Shell',
+    \'t'      : 'Terminal'
     \}
 
 " Automatically change the statusline color depending on mode
 function! ChangeStatuslineColor()
-  echom mode()
   if (mode() =~# '\v(n|no)')
-    hi StatusLine ctermfg=008
+    hi StatusLine ctermfg=16 ctermbg=195
   elseif (mode() =~# '\v(v|V)' || g:currentmode[mode()] ==# 'V·Block' || get(g:currentmode, mode(), '') ==# 't')
-    hi StatusLine ctermfg=005
+    hi StatusLine ctermfg=16
   elseif (mode() ==# 'i')
-    hi StatusLine ctermfg=004
+    hi StatusLine ctermfg=16 ctermbg=214
   else
     hi StatusLine ctermfg=006
   endif
 
   return ''
 endfunction
-
-au InsertEnter * call ChangeStatuslineColor()
-au InsertChange * call ChangeStatuslineColor()
-au InsertLeave * hi statusline guibg=green
 
 function! LinterErrors() abort
   let l:counts = ale#statusline#Count(bufnr(''))
@@ -54,13 +49,13 @@ function! LinterErrors() abort
 
   if l:all_errors == 1
     return printf(
-    \   ' %d Error ',
+    \   '%d Error',
     \   all_errors
     \)
   endif
 
   return printf(
-  \   ' %d Errors ',
+  \   '%d Errors',
   \   all_errors
   \)
 endfunction
@@ -76,13 +71,13 @@ function! LinterWarnings() abort
 
   if l:all_non_errors == 1
     return printf(
-    \   '%d Warning ',
+    \   '%d Warning',
     \   all_non_errors,
     \)
   endif
 
   return printf(
-  \   '%d Warnings ',
+  \   '%d Warnings',
   \   all_non_errors,
   \)
 endfunction
@@ -93,7 +88,7 @@ function! LinterOK() abort
   let l:all_non_errors = l:counts.total - l:all_errors
 
   if !l:all_errors && !l:all_non_errors
-    return 'OK '
+    return 'OK'
   else
     return ''
   endif
@@ -139,3 +134,36 @@ function! StatuslineGit()
   let l:branchname = GitBranch()
   return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
 endfunction
+
+set statusline=
+set statusline+=%{ChangeStatuslineColor()}                 " Changing the statusline color
+set statusline+=%*\ %{toupper(g:currentmode[mode()])}\      " Current mode
+set statusline+=%*
+set statusline+=%3*\ %{expand('%:p:h:t')}/                 " directory of current file
+set statusline+=%3*%<%t\ %{ReadOnly()}%m\ %w\             " File
+set statusline+=%*
+set statusline+=%1*\ %=                                    " Space
+set statusline+=%6*\ %l:%c\                                " Row:Column
+set statusline+=%2*%{strlen(LinterOK())==2?LinterOK():''}
+set statusline+=%8*%{strlen(LinterWarnings())>0?LinterWarnings():''}
+set statusline+=%9*%{strlen(LinterErrors())>0?LinterErrors():''}
+set statusline+=%*
+
+function! LinteNotOk()
+  if strlen(LinterWarnings()) > 0
+    set statusline+=%8*\ %{LinterWarnings()}\                     " Linter warning
+  endif
+  echom len(LinterErrors())
+  if strlen(LinterErrors()) > 0
+    set statusline+=%9*\ %{LinterErrors()}\                       " Linter errors
+  endif
+endfunction
+
+" au InsertEnter * call UpdateErrors()
+" au InsertChange * call UpdateErrors()
+" au InsertLeave * call UpdateErrors()
+
+au InsertEnter * call ChangeStatuslineColor()
+au InsertChange * call ChangeStatuslineColor()
+au InsertLeave * call ChangeStatuslineColor()
+" au InsertLeave * hi statusline guibg=green

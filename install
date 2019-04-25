@@ -6,8 +6,8 @@ readonly PROGDIR="${HOME}/Projects/dotfiles"
 #readonly VERSION=$(cat "$PROGDIR/VERSION.md")
 readonly TODAY=$(date +"%m-%d-%y") readonly ARGS="$@"
 
-. ./bash/.helper_functions
-. ./bash/.symlink_functions
+. ./bash/helper_functions.sh
+. ./bash/symlink_functions.sh
 
 install_software() {
   install_homebrew

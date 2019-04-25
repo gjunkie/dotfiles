@@ -7,15 +7,15 @@ set rtp+=/usr/local/bin/fzf
 let g:fzf_layout = { 'down': '~40%' }
 let g:fzf_colors =
     \ { 'fg':      ['fg', 'Normal'],
-      \ 'bg':      ['bg', 'Comment'],
+      \ 'bg':      ['bg', 'Pmenu'],
       \ 'hl':      ['fg', 'Comment'],
-      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'fg+':     ['fg', 'Comment', 'Normal'],
+      \ 'bg+':     ['bg', 'Pmenu'],
       \ 'hl+':     ['fg', 'Statement'],
-      \ 'info':    ['fg', 'PreProc'],
+      \ 'info':    ['fg', 'Statement'],
       \ 'border':  ['fg', 'Ignore'],
       \ 'prompt':  ['fg', 'Conditional'],
-      \ 'pointer': ['fg', 'Exception'],
+      \ 'pointer': ['fg', 'Statement'],
       \ 'marker':  ['fg', 'Keyword'],
       \ 'spinner': ['fg', 'Label'],
       \ 'header':  ['fg', 'Keyword'] }
@@ -45,8 +45,16 @@ let s:fzf_options = "--multi --tabstop 4 --no-reverse --no-margin
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, &columns > 80 ? fzf#vim#with_preview() : {}, <bang>0)
 
-" command! -bang Commits
-"   \ call fzf#vim#commits({'right': '75%'}, <bang>0)
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 0, { 'options': '--color hl:195,hl+:195,fg+:008,fg:250,prompt:195' }, 0)
+
+" let $BAT_THEME = 'TwoDark'
+" command! -bang -nargs=* Rg
+"   \ call fzf#vim#grep('rg --column --no-heading --line-number --color=always '.shellescape(<q-args>),
+"   \ 1,
+"   \ fzf#vim#with_preview(),
+"   \ <bang>0)
 
 
 " let s:files_source = 'fd -HLp -t f -c never'
