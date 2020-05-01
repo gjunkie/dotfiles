@@ -120,18 +120,18 @@ else
 	brews="${DIR}/opt/homebrew"
 
 	# Update and upgrade all packages
-	_process "Update Homebrew"
-	brew update
-	_process "Upgrade Homebrew"
-	brew upgrade
+	#_process "Update Homebrew"
+	#brew update
+	#_process "Upgrade Homebrew"
+	#brew upgrade
 
 	# Tap some necessary formulae
 	_process "tab versions"
-	brew tap homebrew/cask-versions
+	#brew tap homebrew/cask-versions
 	_process "tab driver"
-	brew tap homebrew/cask-drivers
+	#brew tap homebrew/cask-drivers
 	_process "tab scripts"
-	brew tap vitorgalvao/tiny-scripts
+	#brew tap vitorgalvao/tiny-scripts
 
 	# Store IFS within a temp variable
 	OIFS=$IFS
@@ -144,21 +144,21 @@ else
 	# Loop through split list of formulae
 	_process "Checking status of desired Homebrew formulae"
 	for index in ${!formulae[*]}
-	do
+	#do
 		# Test whether a Homebrew formula is already installed
-		if ! brew list ${formulae[$index]} &> /dev/null; then
-			brew install ${formulae[$index]}
-		fi
-	done
+		#if ! brew list ${formulae[$index]} &> /dev/null; then
+			#brew install ${formulae[$index]}
+		#fi
+	#done
 
 	# Reset IFS back
 	IFS=$OIFS
 
-	brew install vim --HEAD --with-override-system-vi
-	brew cleanup
+	#brew install vim --HEAD --with-override-system-vi
+	#brew cleanup
 
 	# Set up hash file for brew installation
-	echo $(md5 "${brews}" | cut -d ' ' -f 4) > "${DIR}/var/homebrew"
+	#echo $(md5 "${brews}" | cut -d ' ' -f 4) > "${DIR}/var/homebrew"
 
 	[[ $? ]] && _print_success "Installed all Homebrew packages"
 fi
