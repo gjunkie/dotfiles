@@ -155,13 +155,6 @@ if [ -e "${HOME}/.vim" ]; then
 	rm -rf "${HOME}/.vim"
 fi
 
-# Symlink all necessary vim configuration files
-_process "Symlink vim files"
-ln -fs "${DIR}/vim"                "${HOME}/.vim"
-ln -fs "${DIR}/conf/runcom/vim"    "${HOME}/.vimrc"
-
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
 # Create the necessary symbolic links between the `.dotfiles` and `HOME`
 # directory. The `bash_profile` sources other files directly from the
 # `.dotfiles` repository.
@@ -203,6 +196,8 @@ if [[ -f "${DIR}/opt/symlinks" ]]; then
 
 	[[ $? ]] && _print_success "All files have been symlinked"
 fi
+
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 _process "Sourcing $HOME/.bash_profile"
 source "${HOME}/.bash_profile"
