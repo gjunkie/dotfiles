@@ -1,9 +1,9 @@
-source /usr/local/opt/dotfiles/conf/bash/aliases.sh
-source /usr/local/opt/dotfiles/conf/bash/colors.sh
-source /usr/local/opt/dotfiles/conf/bash/fzf.sh
-source /usr/local/opt/dotfiles/conf/bash/git_completion.sh
-source /usr/local/opt/dotfiles/conf/bash/paths.sh
-source /usr/local/opt/dotfiles/conf/bash/prompt.sh
+source ${HOME}/.bash/aliases.sh
+source ${HOME}/.bash/colors.sh
+source ${HOME}/.bash/fzf.sh
+source ${HOME}/.bash/git_completion.sh
+source ${HOME}/.bash/paths.sh
+source ${HOME}/.bash/prompt.sh
 
 if [ -f ~/.bash_profile.local ]; then
   source ~/.bash_profile.local
