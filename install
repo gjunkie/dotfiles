@@ -99,8 +99,8 @@ git fetch origin master
 # git reset --hard FETCH_HEAD
 
 # Remove any untracked files
-_process "Removing any untracked files"
-git clean -fd
+# _process "Removing any untracked files"
+# git clean -fd
 
 [[ $? ]] && _print_success "Repository has been initialized"
 
@@ -109,6 +109,59 @@ _process "Pulling down latest changes"
 git pull --rebase origin master
 
 [[ $? ]] && _print_success "Repository has been updated"
+
+# Install Homebrew formulae
+if ! type -P 'brew' &> /dev/null; then
+	_error "Homebrew not found"
+else
+	_process "Installing Homebrew packages"
+
+	# Set variable for list of homebrew formulaes
+	brews="${DIR}/opt/homebrew"
+
+	# Update and upgrade all packages
+	_process "Update Homebrew"
+	brew update
+	_process "Upgrade Homebrew"
+	brew upgrade
+
+	# Tap some necessary formulae
+	_process "tab versions"
+	brew tap homebrew/cask-versions
+	_process "tab driver"
+	brew tap homebrew/cask-drivers
+	_process "tab scripts"
+	brew tap vitorgalvao/tiny-scripts
+
+	# Store IFS within a temp variable
+	OIFS=$IFS
+
+	# Set the separator to a carriage return & a new line break
+	# read in passed-in file and store as an array
+	_process "IFS"
+	IFS=$'\r\n' formulae=($(cat "${brews}"))
+
+	# Loop through split list of formulae
+	_process "Checking status of desired Homebrew formulae"
+	for index in ${!formulae[*]}
+	do
+		 Test whether a Homebrew formula is already installed
+		if ! brew list ${formulae[$index]} &> /dev/null; then
+			brew install ${formulae[$index]}
+		fi
+	done
+
+	# Reset IFS back
+	IFS=$OIFS
+
+	brew install vim --HEAD --with-override-system-vi
+	brew cleanup
+
+	# Set up hash file for brew installation
+	echo $(md5 "${brews}" | cut -d ' ' -f 4) > "${DIR}/var/homebrew"
+
+	[[ $? ]] && _print_success "Installed all Homebrew packages"
+fi
 
 # Install Node
 if ! type -P 'npm' &> /dev/null; then
