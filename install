@@ -134,16 +134,16 @@ else
 	#brew tap vitorgalvao/tiny-scripts
 
 	# Store IFS within a temp variable
-	OIFS=$IFS
+	#OIFS=$IFS
 
 	# Set the separator to a carriage return & a new line break
 	# read in passed-in file and store as an array
 	_process "IFS"
-	IFS=$'\r\n' formulae=($(cat "${brews}"))
+	#IFS=$'\r\n' formulae=($(cat "${brews}"))
 
 	# Loop through split list of formulae
 	_process "Checking status of desired Homebrew formulae"
-	for index in ${!formulae[*]}
+	#for index in ${!formulae[*]}
 	#do
 		# Test whether a Homebrew formula is already installed
 		#if ! brew list ${formulae[$index]} &> /dev/null; then
@@ -152,7 +152,7 @@ else
 	#done
 
 	# Reset IFS back
-	IFS=$OIFS
+	#IFS=$OIFS
 
 	#brew install vim --HEAD --with-override-system-vi
 	#brew cleanup
