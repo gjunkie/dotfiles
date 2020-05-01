@@ -182,7 +182,7 @@ if [[ -f "${DIR}/opt/symlinks" ]]; then
 			# create an array of line items
 			symlink=(${links[$index]})
 			# Create symbolic link
-			cp "${DIR}/${symlink[0]}" "${HOME}/${symlink[1]}"
+			cp -r "${DIR}/${symlink[0]}" "${HOME}/${symlink[1]}"
 		done
 		# set separater back to carriage return & new line break
 		IFS=$'\r\n'
