@@ -10,6 +10,15 @@ link_vim_files() {
   && _print_success "Vim files symlinked"
 }
 
+link_zsh_files() {
+
+  ln -fs "${PROGDIR}/zsh"                 "${HOME}/.zsh"
+  ln -fs "${PROGDIR}/conf/runcom/zshrc.zsh"  "${HOME}/.zshrc"
+
+  [[ $? ]] \
+  && _print_success "zsh files symlinked"
+}
+
 link_bash_files() {
   rm -rf "${HOME}/.bash"
   rm -rf "${HOME}/.bashrc"

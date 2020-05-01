@@ -7,3 +7,4 @@ export PATH=/usr/local/share/npm/bin/:$PATH
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH=$PATH:$HOME/Library/Python/2.7/bin

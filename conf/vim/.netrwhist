@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/Users/freddiecarthy/Sites/personal/dotfiles/bash'
+let g:netrw_dirhist_3='/Users/freddiecarthy/Sites/personal/dotfiles'
+let g:netrw_dirhist_2='/Users/freddiecarthy/Sites/personal/dotfiles/conf/tmux'
+let g:netrw_dirhist_1='/Users/freddiecarthy/Sites/personal/dotfiles/conf'
+let g:netrw_dirhist_0='/Users/freddiecarthy/Sites/personal/dotfiles'
+let g:netrw_dirhist_9='/Users/freddiecarthy/Sites/personal'
+let g:netrw_dirhist_8='/Users/freddiecarthy/Sites'
+let g:netrw_dirhist_7='/Users/freddiecarthy/Sites/awesome-opal'
+let g:netrw_dirhist_6='/Users/freddiecarthy/Sites/awesome-opal/fcarthy'
+let g:netrw_dirhist_5='/Users/freddiecarthy/Sites/awesome-opal/fcarthy/docker-vim'

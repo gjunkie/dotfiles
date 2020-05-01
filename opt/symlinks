@@ -1,0 +1,5 @@
+/conf/git/.gitconfig .gitconfig
+/conf/tmux/tmux.conf .tmux.conf
+/conf/runcom/bash_profile .bash_profile
+/conf/runcom/vimrc .vimrc
+/conf/runcom/zshrc .zshrc

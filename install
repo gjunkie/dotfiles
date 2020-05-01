@@ -1,83 +1,256 @@
 #!/usr/bin/env bash
+LOG="${HOME}/Library/Logs/dotfiles.log"
+GITHUB_USER="gjunkie"
 
 # constants
 readonly PROGNAME="$(basename "$0")"
-readonly PROGDIR="${HOME}/Projects/dotfiles"
+readonly PROGDIR="${HOME}/Sites/personal/dotfiles"
 #readonly VERSION=$(cat "$PROGDIR/VERSION.md")
 readonly TODAY=$(date +"%m-%d-%y") readonly ARGS="$@"
 
-. ./bash/helper_functions.sh
-. ./bash/symlink_functions.sh
+# Check for environment variable for directory, otherwise set to default
+if [[ ! -z ${DOTFILES_DIRECTORY} ]]; then
+	DIR="${DOTFILES_DIRECTORY}"
+else
+	DIR="/usr/local/opt/dotfiles"
+fi
 
-install_software() {
-  install_homebrew
-  install_brews
-  install_npm
-  install_xcode
-
-  [[ $? ]] \
-  && _print_success "Software installs complete"
+# Warning logging
+_warning() {
+	echo "$(date) WARNING:  $@" >> $LOG
+	printf "$(tput setaf 3)⚠ Warning:$(tput sgr0) %s!\n" "$@"
 }
 
-install_homebrew() {
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+# Error logging
+_error() {
+	echo "$(date) ERROR:  $@" >> $LOG
+	printf "$(tput setaf 1)⊘ Error:$(tput sgr0) %s. Aborting!\n" "$@"
+	exit 1
+}
+
+# Command/Processing logging
+_process() {
+	echo "$(date) PROCESSING:  $@" >> $LOG
+	printf "$(tput setaf 6)┃$(tput sgr0)$(tput setaf 7) %s...$(tput sgr0)\n" "$@"
+}
+
+_print_success() {
+  local message=$1
+  printf "%s✓ Success:%s\n" "$(tput setaf 2)" "$(tput sgr0) $message"
+}
+
+if ! type -P 'brew' &> /dev/null; then
+    _process "Installing Homebrew"
+  if [[ "$OSTYPE" =~ ^darwin ]]; then
+    ruby -e "$(curl -#fkL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  else
+    ruby -e "$(wget -O- https://raw.github.com/Homebrew/linuxbrew/go/install)"
+  fi
+
+  _process "Running brew doctor"
   brew doctor
   [[ $? ]] \
   && _print_success "Installed Homebrew"
-}
+fi
 
-install_brews() {
-  brew bundle
-  [[ $? ]] \
-  && _print_success "Installed Homebrew apps"
-}
+# If missing, download and extract the dotfiles repository
+if [[ -d "${DIR}" ]]; then
+	_process "Dotfiles already installed.  Upgrading dotfiles"
+	dotfiles
+else
+	_warning "No ${DIR} found"
 
-install_npm() {
+	_process "Creating directory at ${DIR} and setting permissions"
+	mkdir -p "${DIR}"
+
+	_process "Downloading repository to /tmp directory"
+	# (-#) shows the progress bar as # sign
+	# (-f) fail silently
+	# (-L) follow the headers
+	# (-o) output to a file
+	curl -#fLo /tmp/dotfiles.tar.gz "https://github.com/${GITHUB_USER}/dotfiles/tarball/master"
+
+	_process "Extracting files to ${DIR}"
+	tar -zxf /tmp/dotfiles.tar.gz --strip-components 1 -C "${DIR}"
+
+	_process "Removing tarball from /tmp directory"
+	rm -rf /tmp/dotfiles.tar.gz
+
+	[[ $? ]] && _print_success "${DIR} created, repository downloaded and extracted"
+fi
+
+
+# Change to the dotfiles directory
+cd "${DIR}"
+
+# Initialize the git repository if it's missing
+_process "Initializing git repository"
+git init
+
+_process "Adding https://github.com/${GITHUB_USER}/dotfiles.git as origin"
+git remote add origin "https://github.com/${GITHUB_USER}/dotfiles.git"
+
+_process "Downloading changes from origin"
+git fetch origin master
+
+# Reset the index and working tree to the fetched HEAD
+# (submodules are cloned in the subsequent sync step)
+_process "Resetting index & working tree to fetched HEAD"
+git reset --hard FETCH_HEAD
+
+# Remove any untracked files
+_process "Removing any untracked files"
+git clean -fd
+
+[[ $? ]] && _print_success "Repository has been initialized"
+
+# Pull down the latest changes
+_process "Pulling down latest changes"
+git pull --rebase origin master
+
+[[ $? ]] && _print_success "Repository has been updated"
+
+# Install Homebrew formulae
+if ! type -P 'brew' &> /dev/null; then
+	_error "Homebrew not found"
+else
+	_process "Installing Homebrew packages"
+
+	# Set variable for list of homebrew formulaes
+	brews="${DIR}/opt/homebrew"
+
+	# Update and upgrade all packages
+	brew update
+	brew upgrade
+
+	# Tap some necessary formulae
+	brew tap homebrew/cask-versions
+	brew tap homebrew/cask-drivers
+	brew tap vitorgalvao/tiny-scripts
+
+	# Store IFS within a temp variable
+	OIFS=$IFS
+
+	# Set the separator to a carriage return & a new line break
+	# read in passed-in file and store as an array
+	IFS=$'\r\n' formulae=($(cat "${brews}"))
+
+	# Loop through split list of formulae
+	_process "Checking status of desired Homebrew formulae"
+	for index in ${!formulae[*]}
+	do
+		# Test whether a Homebrew formula is already installed
+		if ! brew list ${formulae[$index]} &> /dev/null; then
+			brew install ${formulae[$index]}
+		fi
+	done
+
+	# Reset IFS back
+	IFS=$OIFS
+
+	brew install vim --HEAD --with-override-system-vi
+	brew cleanup
+
+	# Set up hash file for brew installation
+	echo $(md5 "${brews}" | cut -d ' ' -f 4) > "${DIR}/var/homebrew"
+
+	[[ $? ]] && _print_success "Installed all Homebrew packages"
+fi
+
+# Install Node
+if ! type -P 'npm' &> /dev/null; then
+	_process "Installing node"
   curl https://www.npmjs.org/install.sh | sh
   [[ $? ]] \
   && _print_success "Installed npm"
-}
+fi
 
-install_xcode() {
-  xcode-select --install
-  [[ $? ]] \
-  && _print_success "Installed xcode-select"
-}
+# Install Node packages
+if ! type -P 'npm' &> /dev/null; then
+	_error "npm not found"
+else
+	_process "Installing npm packages"
 
-update_vim_plugins() {
-  vim +PluginInstall +PluginUpdate +qall
-  [[ $? ]] \
-  && _print_success "Updated Vim plugins"
-}
+	# Set variable for list of npm packages
+	npmfile="${DIR}/opt/npm"
 
-main() {
-  _is_empty "$PROGDIR" \
-  && error_out
+	# Store IFS within a temp variable
+	OIFS=$IFS
 
-  cmdline "$ARGS"
+	# Set the separator to a carriage return & a new line break
+	# read in passed-in file and store as an array
+	IFS=$'\r\n' packages=($(cat "${npmfile}"))
 
-  echo "Install everything, or skip to dotfiles?"
-  select yn in "Everything" "Skip"; do
-    case $yn in
-    Everything ) install_software; break;;
-    Skip ) break;;
-    esac
-  done
+	# Loop through array
+	for index in ${!packages[*]}
+	do
+		npm install --global --quiet ${packages[$index]}
+	done
 
-  _require_prog git "Git is required to use $PROGNAME" http://git-scm.com
+	# Reset IFS back
+	IFS=$OIFS
 
-  link_vim_files
-  link_bash_files
-  link_git_files
-  link_tmux_files
+	# Set up hash file for npm installation
+	echo $(md5 "${npmfile}" | cut -d ' ' -f 4) > "${DIR}/var/npm"
 
-  source_bash
+	[[ $? ]] && _print_success "Installed all npm packages"
+fi
 
-  #setup_global_gitconfig
+# Force remove the vim directory if it's already there.
+_process "Removing ${HOME}/.vim/ directory"
+if [ -e "${HOME}/.vim" ]; then
+	rm -rf "${HOME}/.vim"
+fi
 
-  update_vim_plugins
+# Symlink all necessary vim configuration files
+_process "Symlink vim files"
+ln -fs "${DIR}/vim"                "${HOME}/.vim"
+ln -fs "${DIR}/conf/runcom/vim"    "${HOME}/.vimrc"
 
-  _print_success "All done!"
-}
+# Create the necessary symbolic links between the `.dotfiles` and `HOME`
+# directory. The `bash_profile` sources other files directly from the
+# `.dotfiles` repository.
+if [[ -f "${DIR}/opt/symlinks" ]]; then
+	_process "Creating symlinks"
 
-main
+	# Set variable for list of symlinks
+	symlinks="${DIR}/opt/symlinks"
+
+	# Store IFS within a temp variable
+	OIFS=$IFS
+
+	# Set the separator to a carriage return & a new line break
+	# read in passed-in file and store as an array
+	IFS=$'\r\n'
+	links=($(cat "${symlinks}"))
+
+	# Loop through array
+	for index in ${!links[*]}
+	do
+		for link in ${links[$index]}
+		do
+			# set IFS back to space to split string on
+			IFS=$' '
+			# create an array of line items
+			symlink=(${links[$index]})
+			# Create symbolic link
+			ln -fs "${DIR}/${symlink[0]}" "${HOME}/${symlink[1]}"
+		done
+		# set separater back to carriage return & new line break
+		IFS=$'\r\n'
+	done
+
+	# Reset IFS back
+	IFS=$OIFS
+
+	# Set up hash file for brew installation
+	echo $(md5 "${symlinks}" | cut -d ' ' -f 4) > "${DIR}/var/symlinks"
+
+	[[ $? ]] && _print_success "All files have been symlinked"
+fi
+
+_process "Sourcing $HOME/.bash_profile"
+source "${HOME}/.bash_profile" 2&>/dev/null
+
+[[ $? ]] && _print_success "Dotfiles installed."
+

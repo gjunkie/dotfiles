@@ -85,3 +85,5 @@
 
 [remote]
   pushDefault=origin
+[credential]
+	helper = store
