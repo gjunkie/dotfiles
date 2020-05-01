@@ -3,7 +3,7 @@
 ### One-line Install
 **Note**: This will will override your `.vim` folder and your dotfiles.
 ```
-$ bash -c "$(curl -#fL raw.github.com/iamnewton/dotfiles/go/install)"
+$ bash -c "$(curl -#fL raw.github.com/gjunkie/dotfiles/master/install)"
 ```
 - You will be prompted with several questions to get set up. Initially it will ask you if you want to go through some software install options. These include things like `yarn`, `npm`, `xcode-select`, etc.
 - You will then be promted to to install and update Vim plugins.
