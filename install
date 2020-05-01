@@ -120,12 +120,17 @@ else
 	brews="${DIR}/opt/homebrew"
 
 	# Update and upgrade all packages
+	_process "Update Homebrew"
 	brew update
+	_process "Upgrade Homebrew"
 	brew upgrade
 
 	# Tap some necessary formulae
+	_process "tab versions"
 	brew tap homebrew/cask-versions
+	_process "tab driver"
 	brew tap homebrew/cask-drivers
+	_process "tab scripts"
 	brew tap vitorgalvao/tiny-scripts
 
 	# Store IFS within a temp variable
@@ -133,6 +138,7 @@ else
 
 	# Set the separator to a carriage return & a new line break
 	# read in passed-in file and store as an array
+	_process "IFS"
 	IFS=$'\r\n' formulae=($(cat "${brews}"))
 
 	# Loop through split list of formulae
@@ -250,7 +256,7 @@ if [[ -f "${DIR}/opt/symlinks" ]]; then
 fi
 
 _process "Sourcing $HOME/.bash_profile"
-source "${HOME}/.bash_profile" 2&>/dev/null
+source "${HOME}/.bash_profile"
 
 [[ $? ]] && _print_success "Dotfiles installed."
 
