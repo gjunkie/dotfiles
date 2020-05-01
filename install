@@ -95,8 +95,8 @@ git fetch origin master
 
 # Reset the index and working tree to the fetched HEAD
 # (submodules are cloned in the subsequent sync step)
-_process "Resetting index & working tree to fetched HEAD"
-git reset --hard FETCH_HEAD
+# _process "Resetting index & working tree to fetched HEAD"
+# git reset --hard FETCH_HEAD
 
 # Remove any untracked files
 _process "Removing any untracked files"
