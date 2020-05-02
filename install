@@ -249,9 +249,10 @@ main() {
 
 # Initial user prompt.
 # see: https://ss64.com/bash/read.html
-read -n -p 1 key "You are about to begin dotfiles installation. Press [Enter] to continue, [Esc] to cancel."
+read -n 1 -p "You are about to begin dotfiles installation. Press [Enter] to continue, [Esc] to cancel." key
 if [[ $key = "" ]]; then 
 	main
 else
+	_warning "Aborting installation..."
 	exit 1
 fi
