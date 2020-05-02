@@ -163,6 +163,12 @@ remove_old_directories() {
 	fi
 }
 
+update_vim_plugins() {
+	vim "${HOME}/.vim/settings/bundles.vim" +PluginInstall +PluginUpdate +qall
+	[[ $? ]] \
+	&& _print_success "Updated ViM bundles"
+}
+
 main() {
 	if ! type -P 'brew' &> /dev/null; then
 		install_homebrew
@@ -241,16 +247,10 @@ main() {
 
 	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-	update_vim_plugins() {
-		vim "${HOME}/.vim/settings/bundles.vim" +PluginInstall +PluginUpdate +qall
-		[[ $? ]] \
-		&& _print_success "Updated ViM bundles"
-	}
-
 	update_vim_plugins
 
 	_process "Sourcing $HOME/.bash_profile"
-	source "${HOME}/.bash_profile"
+	. "${HOME}/.bash_profile"
 
 	[[ $? ]] && _print_success "Dotfiles installed."
 
