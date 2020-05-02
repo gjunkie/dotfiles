@@ -141,7 +141,7 @@ initialize_repo() {
 
 	# Pull down the latest changes
 	_process "Pulling down latest changes"
-	git pull --rebase origin master
+	git pull origin master
 
 	[[ $? ]] && _print_success "Repository has been updated"
 }
