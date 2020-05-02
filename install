@@ -247,19 +247,22 @@ main() {
 
 }
 
-echo "
-########################################
-###                                  ###
-###       dotfiles installation      ###
-###                                  ###
-########################################"
+initialize_prompt() {
+	echo "
+	########################################
+	###                                  ###
+	###       dotfiles installation      ###
+	###                                  ###
+	########################################"
 
-# Initial user prompt.
-# see: https://ss64.com/bash/read.html
-read -n 1 -p "You are about to begin dotfiles installation. Press [Enter] to continue, [Esc] to cancel." key
-if [[ $key = "" ]]; then 
-	main
-else
-	echo "\n $(tput setaf 1)Aborting installation...$(tput sgr0)"
-	exit 1
-fi
+	# see: https://ss64.com/bash/read.html
+	read -n 1 -p "You are about to begin dotfiles installation. Press [Enter] to continue, [Esc] to cancel." key
+	if [[ $key = "" ]]; then 
+		main
+	else
+		echo "\n $(tput setaf 1)Aborting installation...$(tput sgr0)"
+		exit 1
+	fi
+}
+
+initialize_prompt
