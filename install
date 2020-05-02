@@ -8,6 +8,12 @@ readonly PROGDIR="${HOME}/Sites/personal/dotfiles"
 #readonly VERSION=$(cat "$PROGDIR/VERSION.md")
 readonly TODAY=$(date +"%m-%d-%y") readonly ARGS="$@"
 
+# Make sure only root can run our script
+if [ "$(id -u)" != "0" ]; then
+   echo "This script must be run as root" 1>&2
+   exit 1
+fi
+
 # Check for environment variable for directory, otherwise set to default
 if [[ ! -z ${DOTFILES_DIRECTORY} ]]; then
 	DIR="${DOTFILES_DIRECTORY}"
@@ -15,20 +21,18 @@ else
 	DIR="/usr/local/opt/dotfiles"
 fi
 
-# Warning logging
+# Helper functions
 _warning() {
 	echo "$(date) WARNING:  $@" >> $LOG
 	printf "$(tput setaf 3)⚠ Warning:$(tput sgr0) %s!\n" "$@"
 }
 
-# Error logging
 _error() {
 	echo "$(date) ERROR:  $@" >> $LOG
 	printf "$(tput setaf 1)⊘ Error:$(tput sgr0) %s. Aborting!\n" "$@"
 	exit 1
 }
 
-# Command/Processing logging
 _process() {
 	echo "$(date) PROCESSING:  $@" >> $LOG
 	printf "$(tput setaf 6)┃$(tput sgr0)$(tput setaf 7) %s...$(tput sgr0)\n" "$@"
@@ -39,179 +43,215 @@ _print_success() {
   printf "%s✓ Success:%s\n" "$(tput setaf 2)" "$(tput sgr0) $message"
 }
 
-if ! type -P 'brew' &> /dev/null; then
-    _process "Installing Homebrew"
-  if [[ "$OSTYPE" =~ ^darwin ]]; then
-    ruby -e "$(curl -#fkL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  else
-    ruby -e "$(wget -O- https://raw.github.com/Homebrew/linuxbrew/go/install)"
-  fi
+setup_dotfiles() {
+	# If missing, download and extract the dotfiles repository
+	if [[ -d "${DIR}" ]]; then
+		_process "Dotfiles already installed.  Upgrading dotfiles"
+		dotfiles
+	else
+		_warning "No ${DIR} found"
 
-  _process "Running brew doctor"
-  brew doctor
-  [[ $? ]] \
-  && _print_success "Installed Homebrew"
-fi
+		_process "Creating directory at ${DIR} and setting permissions"
+		mkdir -p "${DIR}"
 
-# If missing, download and extract the dotfiles repository
-if [[ -d "${DIR}" ]]; then
-	_process "Dotfiles already installed.  Upgrading dotfiles"
-	dotfiles
-else
-	_warning "No ${DIR} found"
+		_process "Downloading repository to /tmp directory"
+		# (-#) shows the progress bar as # sign
+		# (-f) fail silently
+		# (-L) follow the headers
+		# (-o) output to a file
+		curl -#fLo /tmp/dotfiles.tar.gz "https://github.com/${GITHUB_USER}/dotfiles/tarball/master"
 
-	_process "Creating directory at ${DIR} and setting permissions"
-	mkdir -p "${DIR}"
+		_process "Extracting files to ${DIR}"
+		tar -zxf /tmp/dotfiles.tar.gz --strip-components 1 -C "${DIR}"
 
-	_process "Downloading repository to /tmp directory"
-	# (-#) shows the progress bar as # sign
-	# (-f) fail silently
-	# (-L) follow the headers
-	# (-o) output to a file
-	curl -#fLo /tmp/dotfiles.tar.gz "https://github.com/${GITHUB_USER}/dotfiles/tarball/master"
+		_process "Removing tarball from /tmp directory"
+		rm -rf /tmp/dotfiles.tar.gz
 
-	_process "Extracting files to ${DIR}"
-	tar -zxf /tmp/dotfiles.tar.gz --strip-components 1 -C "${DIR}"
+		[[ $? ]] && _print_success "${DIR} created, repository downloaded and extracted"
+	fi
 
-	_process "Removing tarball from /tmp directory"
-	rm -rf /tmp/dotfiles.tar.gz
-
-	[[ $? ]] && _print_success "${DIR} created, repository downloaded and extracted"
-fi
-
-
-# Change to the dotfiles directory
-cd "${DIR}"
-
-# Initialize the git repository if it's missing
-_process "Initializing git repository"
-git init
-
-_process "Adding https://github.com/${GITHUB_USER}/dotfiles.git as origin"
-git remote add origin "https://github.com/${GITHUB_USER}/dotfiles.git"
-
-_process "Downloading changes from origin"
-git fetch origin master
-
-# Reset the index and working tree to the fetched HEAD
-# (submodules are cloned in the subsequent sync step)
-# _process "Resetting index & working tree to fetched HEAD"
-# git reset --hard FETCH_HEAD
-
-# Remove any untracked files
-# _process "Removing any untracked files"
-# git clean -fd
-
-[[ $? ]] && _print_success "Repository has been initialized"
-
-# Pull down the latest changes
-_process "Pulling down latest changes"
-git pull --rebase origin master
-
-[[ $? ]] && _print_success "Repository has been updated"
-
-# Install Node
-if ! type -P 'npm' &> /dev/null; then
-	_process "Installing node"
-  curl https://www.npmjs.org/install.sh | sh
-  [[ $? ]] \
-  && _print_success "Installed npm"
-fi
-
-# Install Node packages
-if ! type -P 'npm' &> /dev/null; then
-	_error "npm not found"
-else
-	_process "Installing npm packages"
-
-	# Set variable for list of npm packages
-	npmfile="${DIR}/opt/npm"
-
-	# Store IFS within a temp variable
-	OIFS=$IFS
-
-	# Set the separator to a carriage return & a new line break
-	# read in passed-in file and store as an array
-	IFS=$'\r\n' packages=($(cat "${npmfile}"))
-
-	# Loop through array
-	for index in ${!packages[*]}
-	do
-		npm install --global --quiet ${packages[$index]}
-	done
-
-	# Reset IFS back
-	IFS=$OIFS
-
-	# Set up hash file for npm installation
-	echo $(md5 "${npmfile}" | cut -d ' ' -f 4) > "${DIR}/var/npm"
-
-	[[ $? ]] && _print_success "Installed all npm packages"
-fi
-
-# Force remove the vim directory if it's already there.
-_process "Removing ${HOME}/.vim/ directory"
-if [ -e "${HOME}/.vim" ]; then
-	rm -rf "${HOME}/.vim"
-fi
-
-# Create the necessary symbolic links between the `.dotfiles` and `HOME`
-# directory. The `bash_profile` sources other files directly from the
-# `.dotfiles` repository.
-if [[ -f "${DIR}/opt/symlinks" ]]; then
-	_process "Creating symlinks"
-
-	# Set variable for list of symlinks
-	symlinks="${DIR}/opt/symlinks"
-
-	# Store IFS within a temp variable
-	OIFS=$IFS
-
-	# Set the separator to a carriage return & a new line break
-	# read in passed-in file and store as an array
-	IFS=$'\r\n'
-	links=($(cat "${symlinks}"))
-
-	# Loop through array
-	for index in ${!links[*]}
-	do
-		for link in ${links[$index]}
-		do
-			# set IFS back to space to split string on
-			IFS=$' '
-			# create an array of line items
-			symlink=(${links[$index]})
-			# Create symbolic link
-			cp "${DIR}/${symlink[0]}" "${HOME}/${symlink[1]}"
-		done
-		# set separater back to carriage return & new line break
-		IFS=$'\r\n'
-	done
-
-	cp -r "${DIR}/conf/vim" "${HOME}/.vim"
-	cp -r "${DIR}/conf/bash" "${HOME}/.bash"
-
-	# Reset IFS back
-	IFS=$OIFS
-
-	# Set up hash file for brew installation
-	echo $(md5 "${symlinks}" | cut -d ' ' -f 4) > "${DIR}/var/symlinks"
-
-	[[ $? ]] && _print_success "All files have been symlinked"
-fi
-
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
-update_vim_plugins() {
-	vim "${HOME}/.vim/settings/bundles.vim" +PluginInstall +PluginUpdate +qall
-	[[ $? ]] \
-	&& _print_success "Updated ViM bundles"
+	# Change to the dotfiles directory
+	cd "${DIR}"
 }
 
-update_vim_plugins
+install_homebrew() {
+	_process "Installing Homebrew"
+	if [[ "$OSTYPE" =~ ^darwin ]]; then
+		ruby -e "$(curl -#fkL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	else
+		ruby -e "$(wget -O- https://raw.github.com/Homebrew/linuxbrew/go/install)"
+	fi
 
-_process "Sourcing $HOME/.bash_profile"
-source "${HOME}/.bash_profile"
+	_process "Running brew doctor"
+	brew doctor
+	[[ $? ]] \
+	&& _print_success "Installed Homebrew"
+}
 
-[[ $? ]] && _print_success "Dotfiles installed."
+install_node_packages() {
+	if ! type -P 'npm' &> /dev/null; then
+		_error "npm not found"
+	else
+		_process "Installing npm packages"
 
+		# Set variable for list of npm packages
+		npmfile="${DIR}/opt/npm"
+
+		# Store IFS within a temp variable
+		OIFS=$IFS
+
+		# Set the separator to a carriage return & a new line break
+		# read in passed-in file and store as an array
+		IFS=$'\r\n' packages=($(cat "${npmfile}"))
+
+		# Loop through array
+		for index in ${!packages[*]}
+		do
+			npm install --global --quiet ${packages[$index]}
+		done
+
+		# Reset IFS back
+		IFS=$OIFS
+
+		# Set up hash file for npm installation
+		echo $(md5 "${npmfile}" | cut -d ' ' -f 4) > "${DIR}/var/npm"
+
+		[[ $? ]] && _print_success "Installed all npm packages"
+	fi
+}
+
+initialize_repo() {
+	# Initialize the git repository if it's missing
+	_process "Initializing git repository"
+	git init
+
+	_process "Adding https://github.com/${GITHUB_USER}/dotfiles.git as origin"
+	git remote add origin "https://github.com/${GITHUB_USER}/dotfiles.git"
+
+	_process "Downloading changes from origin"
+	git fetch origin master
+
+	# Reset the index and working tree to the fetched HEAD
+	# (submodules are cloned in the subsequent sync step)
+	# _process "Resetting index & working tree to fetched HEAD"
+	# git reset --hard FETCH_HEAD
+
+	# Remove any untracked files
+	# _process "Removing any untracked files"
+	# git clean -fd
+
+	[[ $? ]] && _print_success "Repository has been initialized"
+
+	# Pull down the latest changes
+	_process "Pulling down latest changes"
+	git pull --rebase origin master
+
+	[[ $? ]] && _print_success "Repository has been updated"
+}
+
+main() {
+	if ! type -P 'brew' &> /dev/null; then
+		install_homebrew
+	fi
+
+	if ! type -P 'git' &> /dev/null; then
+		_process "Installing git"
+
+		brew install git
+
+		[[ $? ]] \
+		&& _print_success "Installed git"
+	fi
+
+	setup_dotfiles
+
+	initialize_repo
+
+	# Install Node
+	if ! type -P 'npm' &> /dev/null; then
+		_process "Installing node"
+
+		curl https://www.npmjs.org/install.sh | sh
+
+		[[ $? ]] \
+		&& _print_success "Installed npm"
+	fi
+
+	install_node_packages
+
+	# Force remove the vim directory if it's already there.
+	if [ -e "${HOME}/.vim" ]; then
+		_process "Removing ${HOME}/.vim/ directory"
+		rm -rf "${HOME}/.vim"
+	fi
+
+	# Create the necessary symbolic links between the `.dotfiles` and `HOME`
+	# directory. The `bash_profile` sources other files directly from the
+	# `.dotfiles` repository.
+	if [[ -f "${DIR}/opt/symlinks" ]]; then
+		_process "Creating symlinks"
+
+		# Set variable for list of symlinks
+		symlinks="${DIR}/opt/symlinks"
+
+		# Store IFS within a temp variable
+		OIFS=$IFS
+
+		# Set the separator to a carriage return & a new line break
+		# read in passed-in file and store as an array
+		IFS=$'\r\n'
+		links=($(cat "${symlinks}"))
+
+		# Loop through array
+		for index in ${!links[*]}
+		do
+			for link in ${links[$index]}
+			do
+				# set IFS back to space to split string on
+				IFS=$' '
+				# create an array of line items
+				symlink=(${links[$index]})
+				# Create symbolic link
+				cp "${DIR}/${symlink[0]}" "${HOME}/${symlink[1]}"
+			done
+			# set separater back to carriage return & new line break
+			IFS=$'\r\n'
+		done
+
+		cp -r "${DIR}/conf/vim" "${HOME}/.vim"
+		cp -r "${DIR}/conf/bash" "${HOME}/.bash"
+
+		# Reset IFS back
+		IFS=$OIFS
+
+		# Set up hash file for brew installation
+		echo $(md5 "${symlinks}" | cut -d ' ' -f 4) > "${DIR}/var/symlinks"
+
+		[[ $? ]] && _print_success "All files have been symlinked"
+	fi
+
+	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+	update_vim_plugins() {
+		vim "${HOME}/.vim/settings/bundles.vim" +PluginInstall +PluginUpdate +qall
+		[[ $? ]] \
+		&& _print_success "Updated ViM bundles"
+	}
+
+	update_vim_plugins
+
+	_process "Sourcing $HOME/.bash_profile"
+	source "${HOME}/.bash_profile"
+
+	[[ $? ]] && _print_success "Dotfiles installed."
+
+}
+
+# Initial user prompt.
+# see: https://ss64.com/bash/read.html
+read -p -n 1 key "You are about to begin dotfiles installation. Press [Enter] to continue, [Esc] to cancel."
+if [[ $key = "" ]]; then 
+	main
+else
+	exit 1
+fi
