@@ -149,6 +149,20 @@ initialize_repo() {
 	[[ $? ]] && _print_success "Repository has been updated"
 }
 
+remove_old_directories() {
+	# Force remove the vim directory if it's already there.
+	if [ -e "${HOME}/.vim" ]; then
+		_process "Removing ${HOME}/.vim/ directory"
+		rm -rf "${HOME}/.vim"
+	fi
+
+	# Force remove the bash directory if it's already there.
+	if [ -e "${HOME}/.bash" ]; then
+		_process "Removing ${HOME}/.bash/ directory"
+		rm -rf "${HOME}/.bash"
+	fi
+}
+
 main() {
 	if ! type -P 'brew' &> /dev/null; then
 		install_homebrew
@@ -178,12 +192,7 @@ main() {
 	fi
 
 	install_node_packages
-
-	# Force remove the vim directory if it's already there.
-	if [ -e "${HOME}/.vim" ]; then
-		_process "Removing ${HOME}/.vim/ directory"
-		rm -rf "${HOME}/.vim"
-	fi
+	remove_old_directories
 
 	# Create the necessary symbolic links between the `.dotfiles` and `HOME`
 	# directory. The `bash_profile` sources other files directly from the
