@@ -207,6 +207,9 @@ main() {
 	install_node_packages
 	remove_old_directories
 
+  cp -r "${DIR}/conf/vim" "${HOME}/.vim"
+  cp -r "${DIR}/conf/bash" "${HOME}/.bash"
+
 	# Create the necessary symbolic links between the `.dotfiles` and `HOME`
 	# directory. The `bash_profile` sources other files directly from the
 	# `.dotfiles` repository.
@@ -250,10 +253,6 @@ main() {
 	fi
 
 	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
-
-  cp -r "${DIR}/conf/vim" "${HOME}/.vim"
-  cp -r "${DIR}/conf/bash" "${HOME}/.bash"
 
 	update_vim_bundles
 
