@@ -163,21 +163,17 @@ remove_old_directories() {
 	fi
 }
 
-update_vim_plugins() {
+update_vim_bundles() {
   # Check for Vim; install bundles
-  if [[ -f "${HOME}/.vim/config/plugins.vim" ]]; then
-    _process "Updating ViM plugins"
+  if [[ -f "${HOME}/.vim/config/bundles.vim" ]]; then
+    _process "Updating ViM bundles"
 
     # Set variable for vim bundles
-    vimbundles="${HOME}/.vim/config/plugins.vim"
+    vimbundles="${HOME}/.vim/config/bundles.vim"
     vim "${vimbundles}" +PluginInstall +qall
-    echo $(md5 "${vimbundles}" | cut -d ' ' -f 4) > "${DIR}/var/vim"
 
     [[ $? ]] && _success "Updated ViM bundles"
   fi
-	#vim "${HOME}/.vim/settings/bundles.vim" +PluginInstall +PluginUpdate +qall
-	#[[ $? ]] \
-	#&& _print_success "Updated ViM bundles"
 }
 
 main() {
@@ -244,9 +240,6 @@ main() {
 			IFS=$'\r\n'
 		done
 
-		cp -r "${DIR}/conf/vim" "${HOME}/.vim"
-		cp -r "${DIR}/conf/bash" "${HOME}/.bash"
-
 		# Reset IFS back
 		IFS=$OIFS
 
@@ -258,7 +251,10 @@ main() {
 
 	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-	update_vim_plugins
+	update_vim_bundles
+
+  cp -r "${DIR}/conf/vim" "${HOME}/.vim"
+  cp -r "${DIR}/conf/bash" "${HOME}/.bash"
 
 	_process "Sourcing $HOME/.bash_profile"
 	. "${HOME}/.bash_profile"
