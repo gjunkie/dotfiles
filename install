@@ -249,7 +249,7 @@ main() {
 
 # Initial user prompt.
 # see: https://ss64.com/bash/read.html
-read -p -n 1 key "You are about to begin dotfiles installation. Press [Enter] to continue, [Esc] to cancel."
+read -n -p 1 key "You are about to begin dotfiles installation. Press [Enter] to continue, [Esc] to cancel."
 if [[ $key = "" ]]; then 
 	main
 else
