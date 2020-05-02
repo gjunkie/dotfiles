@@ -260,7 +260,6 @@ read -n 1 -p "You are about to begin dotfiles installation. Press [Enter] to con
 if [[ $key = "" ]]; then 
 	main
 else
-	[[ $? ]] \
-	_warning "Aborting installation..."
+	echo "$(tput setaf 1)Aborting installation...$(tput sgr0)"
 	exit 1
 fi
