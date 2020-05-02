@@ -251,10 +251,11 @@ main() {
 
 	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-	update_vim_bundles
 
   cp -r "${DIR}/conf/vim" "${HOME}/.vim"
   cp -r "${DIR}/conf/bash" "${HOME}/.bash"
+
+	update_vim_bundles
 
 	_process "Sourcing $HOME/.bash_profile"
 	. "${HOME}/.bash_profile"
