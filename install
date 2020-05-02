@@ -164,9 +164,20 @@ remove_old_directories() {
 }
 
 update_vim_plugins() {
-	vim "${HOME}/.vim/settings/bundles.vim" +PluginInstall +PluginUpdate +qall
-	[[ $? ]] \
-	&& _print_success "Updated ViM bundles"
+  # Check for Vim; install bundles
+  if [[ -f "${HOME}/.vim/config/plugins.vim" ]]; then
+    _process "Updating ViM plugins"
+
+    # Set variable for vim bundles
+    vimbundles="${HOME}/.vim/config/plugins.vim"
+    vim "${vimbundles}" +PluginInstall +qall
+    echo $(md5 "${vimbundles}" | cut -d ' ' -f 4) > "${DIR}/var/vim"
+
+    [[ $? ]] && _success "Updated ViM bundles"
+  fi
+	#vim "${HOME}/.vim/settings/bundles.vim" +PluginInstall +PluginUpdate +qall
+	#[[ $? ]] \
+	#&& _print_success "Updated ViM bundles"
 }
 
 main() {
