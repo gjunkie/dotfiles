@@ -260,8 +260,8 @@ initialize_prompt() {
 	if [[ $key = "" ]]; then 
 		main
 	else
-		echo \n
-		echo "$(tput setaf 1)Aborting installation...$(tput sgr0)"
+		echo \
+		&& echo "$(tput setaf 1)Aborting installation...$(tput sgr0)"
 		exit 1
 	fi
 }
