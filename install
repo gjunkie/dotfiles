@@ -113,9 +113,6 @@ install_node_packages() {
 		# Reset IFS back
 		IFS=$OIFS
 
-		# Set up hash file for npm installation
-		echo $(md5 "${npmfile}" | cut -d ' ' -f 4) > "${DIR}/var/npm"
-
 		[[ $? ]] && _print_success "Installed all npm packages"
 	fi
 }
@@ -172,7 +169,7 @@ update_vim_bundles() {
     vimbundles="${HOME}/.vim/config/bundles.vim"
     vim "${vimbundles}" +PluginInstall +qall
 
-    [[ $? ]] && _success "Updated ViM bundles"
+    [[ $? ]] && _print_success "Updated ViM bundles"
   fi
 }
 
@@ -245,9 +242,6 @@ main() {
 
 		# Reset IFS back
 		IFS=$OIFS
-
-		# Set up hash file for brew installation
-		echo $(md5 "${symlinks}" | cut -d ' ' -f 4) > "${DIR}/var/symlinks"
 
 		[[ $? ]] && _print_success "All files have been symlinked"
 	fi
