@@ -54,7 +54,10 @@ if has('persistent_undo')
   set undofile
 endif
 
-colorscheme grid
+try
+    colorscheme grid
+catch /^Vim\%((\a\+)\)\=:E185/
+endtry
 
 if !has('gui_running')
   set t_Co=256
