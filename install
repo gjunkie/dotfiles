@@ -4,12 +4,6 @@ GITHUB_USER="gjunkie"
 GIT_AUTHOR_NAME=""
 GIT_AUTHOR_EMAIL=""
 
-# constants
-readonly PROGNAME="$(basename "$0")"
-readonly PROGDIR="${HOME}/Sites/personal/dotfiles"
-#readonly VERSION=$(cat "$PROGDIR/VERSION.md")
-readonly TODAY=$(date +"%m-%d-%y") readonly ARGS="$@"
-
 # Make sure only root can run our script
 # if [ "$(id -u)" != "0" ]; then
 #    echo "This script must be run as root" 1>&2
@@ -294,7 +288,7 @@ main() {
 	fi
 
 	if ! type -P 'git' &> /dev/null; then
-    install_git
+		install_git
 	fi
 
 	setup_git_authorship
@@ -334,6 +328,9 @@ main() {
 	_process "Installing vim-plug"
 	curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 		"https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+
+	_process "Installing Tmux Plugin Manager"
+	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 	update_vim_bundles
 

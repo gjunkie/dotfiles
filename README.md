@@ -14,7 +14,6 @@ $ bash -c "$(curl -#fL raw.github.com/gjunkie/dotfiles/master/install)"
 ### To do
 - Add `pip` to software list.
 - Add `n` to software list.
-- Handle `Vundle` install more cleanly.
 - Add `tmux` plugin manager.
 
 ### Acknowledgements 
