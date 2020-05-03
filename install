@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 LOG="${HOME}/Library/Logs/dotfiles.log"
 GITHUB_USER="gjunkie"
+GIT_AUTHOR_NAME=""
+GIT_AUTHOR_EMAIL=""
 
 # constants
 readonly PROGNAME="$(basename "$0")"
@@ -74,6 +76,45 @@ setup_dotfiles() {
 	cd "${DIR}"
 }
 
+install_git() {
+  _process "Installing git"
+
+  brew install git
+
+  [[ $? ]] \
+  && _print_success "Installed git"
+}
+
+setup_git_authorship() {
+	GIT_AUTHOR_NAME=git config user.name
+
+	if [[ ! -z "$GIT_AUTHOR_NAME" ]]; then
+		# Setup git authorship
+		_process "Setting up Git author"
+		# Git author name
+		_question "What's your name"
+		read USER_GIT_AUTHOR_NAME
+		if [[ ! -z "$USER_GIT_AUTHOR_NAME" ]]; then
+			GIT_AUTHOR_NAME="${USER_GIT_AUTHOR_NAME}"
+			$(git config --global user.name "$GIT_AUTHOR_NAME")
+		else
+			_warning "No Git user name has been set.  Please update manually"
+		fi
+
+		# Git author email
+		_question "What's your email"
+		read USER_GIT_AUTHOR_EMAIL
+		if [[ ! -z "$USER_GIT_AUTHOR_EMAIL" ]]; then
+			GIT_AUTHOR_EMAIL="${USER_GIT_AUTHOR_EMAIL}"
+			$(git config --global user.email "$GIT_AUTHOR_EMAIL")
+		else
+			_warning "No Git user email has been set.  Please update manually"
+		fi
+	else
+		_process "Git author already set, moving on..."
+	fi
+}
+
 install_homebrew() {
 	_process "Installing Homebrew"
 	if [[ "$OSTYPE" =~ ^darwin ]]; then
@@ -137,13 +178,11 @@ initialize_repo() {
 	_process "Removing any untracked files"
 	git clean -fd
 
-	[[ $? ]] && _print_success "Repository has been initialized"
-
 	# Pull down the latest changes
 	_process "Pulling down latest changes"
 	git pull origin master
 
-	[[ $? ]] && _print_success "Repository has been updated"
+	[[ $? ]] && _print_success "Repository has been initialized"
 }
 
 remove_old_directories() {
@@ -161,16 +200,16 @@ remove_old_directories() {
 }
 
 update_vim_bundles() {
-  # Check for Vim; install bundles
-  if [[ -f "${HOME}/.vim/config/bundles.vim" ]]; then
-    _process "Updating ViM bundles"
+	# Check for Vim; install bundles
+	if [[ -f "${HOME}/.vim/config/bundles.vim" ]]; then
+		_process "Updating ViM bundles"
 
-    # Set variable for vim bundles
-    vimbundles="${HOME}/.vim/config/bundles.vim"
-    vim "${vimbundles}" +PluginInstall +qall
+		# Set variable for vim bundles
+		vimbundles="${HOME}/.vim/config/bundles.vim"
+		vim "${vimbundles}" +PluginInstall +qall
 
-    [[ $? ]] && _print_success "Updated ViM bundles"
-  fi
+		[[ $? ]] && _print_success "Updated ViM bundles"
+	fi
 }
 
 main() {
@@ -179,13 +218,10 @@ main() {
 	fi
 
 	if ! type -P 'git' &> /dev/null; then
-		_process "Installing git"
-
-		brew install git
-
-		[[ $? ]] \
-		&& _print_success "Installed git"
+    install_git
 	fi
+
+	setup_git_authorship
 
 	setup_dotfiles
 
@@ -204,8 +240,9 @@ main() {
 	install_node_packages
 	remove_old_directories
 
-  cp -r "${DIR}/conf/vim" "${HOME}/.vim"
-  cp -r "${DIR}/conf/bash" "${HOME}/.bash"
+	_process "Copying .vim and .bash folders"
+	cp -r "${DIR}/conf/vim" "${HOME}/.vim"
+	cp -r "${DIR}/conf/bash" "${HOME}/.bash"
 
 	# Create the necessary symbolic links between the `.dotfiles` and `HOME`
 	# directory. The `bash_profile` sources other files directly from the
