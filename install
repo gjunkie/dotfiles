@@ -40,7 +40,7 @@ _process() {
 	printf "$(tput setaf 6) %s...$(tput sgr0)\n" "$@"
 }
 
-_print_success() {
+_success() {
   local message=$1
   printf "%s✓ Success:%s\n" "$(tput setaf 2)" "$(tput sgr0) $message"
 }
@@ -69,7 +69,7 @@ setup_dotfiles() {
 		_process "→ Removing tarball from /tmp directory"
 		rm -rf /tmp/dotfiles.tar.gz
 
-		[[ $? ]] && _print_success "${DIR} created, repository downloaded and extracted"
+		[[ $? ]] && _success "${DIR} created, repository downloaded and extracted"
 	fi
 
 	# Change to the dotfiles directory
@@ -82,7 +82,7 @@ install_git() {
   brew install git
 
   [[ $? ]] \
-  && _print_success "Installed git"
+  && _success "Installed git"
 }
 
 setup_git_authorship() {
@@ -127,7 +127,7 @@ install_homebrew() {
 	_process "→ Running brew doctor"
 	brew doctor
 	[[ $? ]] \
-	&& _print_success "Installed Homebrew"
+	&& _success "Installed Homebrew"
 }
 
 install_homebrew_packages() {
@@ -140,6 +140,7 @@ install_homebrew_packages() {
 		brews="${DIR}/opt/homebrew"
 
 		# Update and upgrade all packages
+		_process "→ Updating and upgrading Homebrew packages"
 		brew update
 		brew upgrade
 
@@ -170,7 +171,7 @@ install_homebrew_packages() {
 
 		brew cleanup
 
-		[[ $? ]] && _success "Installed all Homebrew packages"
+		[[ $? ]] && _success "All Homebrew packages installed and updated"
 	fi
 }
 
@@ -199,21 +200,21 @@ install_node_packages() {
 		# Reset IFS back
 		IFS=$OIFS
 
-		[[ $? ]] && _print_success "Installed all npm packages"
+		[[ $? ]] && _success "Installed all npm packages"
 	fi
 }
 
 copy_files() {
-	_process "→ Copying vim folder..."
+	_process "→ Copying vim folder"
 	cp -r "${DIR}/conf/vim" "${HOME}/.vim"
-	_process "→ Copying bash folder..."
+	_process "→ Copying bash folder"
 	cp -r "${DIR}/conf/bash" "${HOME}/.bash"
 
 	# copy over files to the HOME directory. These were
 	# originally symlinks but ran into permissions issues
 	# with Docker containers.
 	if [[ -f "${DIR}/opt/files" ]]; then
-		_process "→ Copying files..."
+		_process "→ Copying files"
 
 		# Set variable for list of files
 		files="${DIR}/opt/files"
@@ -245,7 +246,7 @@ copy_files() {
 		# Reset IFS back
 		IFS=$OIFS
 
-		[[ $? ]] && _print_success "All files have been copied"
+		[[ $? ]] && _success "All files have been copied"
 	fi
 }
 
@@ -273,7 +274,7 @@ initialize_repo() {
 	_process "→ Pulling down latest changes"
 	git pull origin master
 
-	[[ $? ]] && _print_success "Repository has been initialized"
+	[[ $? ]] && _success "Repository has been initialized"
 }
 
 update_vim_bundles() {
@@ -283,7 +284,7 @@ update_vim_bundles() {
 
 		vim +'PlugInstall --sync' +qa
 
-		[[ $? ]] && _print_success "Updated ViM bundles"
+		[[ $? ]] && _success "Updated ViM bundles"
 	fi
 }
 
@@ -307,7 +308,7 @@ main() {
 		curl https://www.npmjs.org/install.sh | sh
 
 		[[ $? ]] \
-		&& _print_success "Installed npm"
+		&& _success "Installed npm"
 	fi
 
 	install_node_packages
@@ -339,7 +340,7 @@ main() {
 	_process "Sourcing $HOME/.bash_profile"
 	. "${HOME}/.bash_profile"
 
-	[[ $? ]] && _print_success "Dotfiles installed."
+	[[ $? ]] && _success "Dotfiles installed."
 
 }
 
