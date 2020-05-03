@@ -1,6 +1,7 @@
 " Plugins
 " -------------------------------------
 
+call plug#begin('~/.vim/plugged')
 " fuzzy searcher
 Plugi'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
@@ -18,3 +19,4 @@ Plug 'lifepillar/vim-mucomplete'
 Plug 'w0rp/ale'
 " Auto Complete suggestions
 Plug 'gjunkie/vim-grid-color'
+call plug#end()
