@@ -1,10 +1,6 @@
 " Plugins
 " -------------------------------------
 
-" Vundle setup
-silent! set rtp+=~/.vim/bundle/Vundle.vim
-silent! call vundle#begin()
-
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 " fuzzy searcher
@@ -24,5 +20,3 @@ Plugin 'lifepillar/vim-mucomplete'
 Plugin 'w0rp/ale'
 " Auto Complete suggestions
 Plugin 'gjunkie/vim-grid-color'
-
-call vundle#end()
