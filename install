@@ -86,7 +86,7 @@ install_git() {
 }
 
 setup_git_authorship() {
-	GIT_AUTHOR_NAME=$(git config user.name)
+	GIT_AUTHOR_NAME=eval "git config user.name"
 
 	if [[ ! -z "$GIT_AUTHOR_NAME" ]]; then
 		# Setup git authorship
