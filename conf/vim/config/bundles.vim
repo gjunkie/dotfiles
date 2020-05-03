@@ -1,8 +1,6 @@
 " Plugins
 " -------------------------------------
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
 " fuzzy searcher
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'

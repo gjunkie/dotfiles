@@ -283,7 +283,9 @@ main() {
 		[[ $? ]] && _print_success "All files have been symlinked"
 	fi
 
-	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+	_process "Installing vim-plug"
+	curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+		"https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 
 	update_vim_bundles
 
