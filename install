@@ -130,120 +130,7 @@ install_homebrew() {
 	&& _print_success "Installed Homebrew"
 }
 
-install_node_packages() {
-	if ! type -P 'npm' &> /dev/null; then
-		_error "npm not found"
-	else
-		_process "Installing npm packages"
-
-		# Set variable for list of npm packages
-		npmfile="${DIR}/opt/npm"
-
-		# Store IFS within a temp variable
-		OIFS=$IFS
-
-		# Set the separator to a carriage return & a new line break
-		# read in passed-in file and store as an array
-		IFS=$'\r\n' packages=($(cat "${npmfile}"))
-
-		# Loop through array
-		for index in ${!packages[*]}
-		do
-			npm install --global --quiet ${packages[$index]}
-		done
-
-		# Reset IFS back
-		IFS=$OIFS
-
-		[[ $? ]] && _print_success "Installed all npm packages"
-	fi
-}
-
-initialize_repo() {
-	# Initialize the git repository if it's missing
-	_process "Initializing git repository"
-	git init
-
-	_process "Adding https://github.com/${GITHUB_USER}/dotfiles.git as origin"
-	git remote add origin "https://github.com/${GITHUB_USER}/dotfiles.git"
-
-	_process "Downloading changes from origin"
-	git fetch origin master
-
-	# Reset the index and working tree to the fetched HEAD
-	# (submodules are cloned in the subsequent sync step)
-	_process "Resetting index & working tree to fetched HEAD"
-	git reset --hard FETCH_HEAD
-
-	# Remove any untracked files
-	_process "Removing any untracked files"
-	git clean -fd
-
-	# Pull down the latest changes
-	_process "Pulling down latest changes"
-	git pull origin master
-
-	[[ $? ]] && _print_success "Repository has been initialized"
-}
-
-remove_old_directories() {
-	# Force remove the vim directory if it's already there.
-	if [ -e "${HOME}/.vim" ]; then
-		_process "Removing ${HOME}/.vim/ directory"
-		rm -rf "${HOME}/.vim"
-	fi
-
-	# Force remove the bash directory if it's already there.
-	if [ -e "${HOME}/.bash" ]; then
-		_process "Removing ${HOME}/.bash/ directory"
-		rm -rf "${HOME}/.bash"
-	fi
-}
-
-update_vim_bundles() {
-	# Check for Vim; install bundles
-	if [[ -f "${HOME}/.vim/config/bundles.vim" ]]; then
-		_process "Updating ViM bundles"
-
-		vim +'PlugInstall --sync' +qa
-
-		[[ $? ]] && _print_success "Updated ViM bundles"
-	fi
-}
-
-main() {
-	if ! type -P 'brew' &> /dev/null; then
-		install_homebrew
-	fi
-
-	if ! type -P 'git' &> /dev/null; then
-    install_git
-	fi
-
-	setup_git_authorship
-
-	setup_dotfiles
-
-	initialize_repo
-
-	# Install Node
-	if ! type -P 'npm' &> /dev/null; then
-		_process "Installing node"
-
-		curl https://www.npmjs.org/install.sh | sh
-
-		[[ $? ]] \
-		&& _print_success "Installed npm"
-	fi
-
-	install_node_packages
-	remove_old_directories
-
-	_process "Copying .vim and .bash folders"
-	cp -r "${DIR}/conf/vim" "${HOME}/.vim"
-	cp -r "${DIR}/conf/bash" "${HOME}/.bash"
-
-	# Install Homebrew formulae
+install_homebrew_packages() {
 	if ! type -P 'brew' &> /dev/null; then
 		_error "Homebrew not found"
 	else
@@ -281,20 +168,53 @@ main() {
 		# Reset IFS back
 		IFS=$OIFS
 
-		brew install vim --HEAD --with-override-system-vi
 		brew cleanup
 
 		[[ $? ]] && _success "Installed all Homebrew packages"
 	fi
+}
 
-	# Create the necessary symbolic links between the `.dotfiles` and `HOME`
-	# directory. The `bash_profile` sources other files directly from the
-	# `.dotfiles` repository.
-	if [[ -f "${DIR}/opt/symlinks" ]]; then
-		_process "Creating symlinks"
+install_node_packages() {
+	if ! type -P 'npm' &> /dev/null; then
+		_error "npm not found"
+	else
+		_process "Installing npm packages"
 
-		# Set variable for list of symlinks
-		symlinks="${DIR}/opt/symlinks"
+		# Set variable for list of npm packages
+		npmfile="${DIR}/opt/npm"
+
+		# Store IFS within a temp variable
+		OIFS=$IFS
+
+		# Set the separator to a carriage return & a new line break
+		# read in passed-in file and store as an array
+		IFS=$'\r\n' packages=($(cat "${npmfile}"))
+
+		# Loop through array
+		for index in ${!packages[*]}
+		do
+			npm install --global --quiet ${packages[$index]}
+		done
+
+		# Reset IFS back
+		IFS=$OIFS
+
+		[[ $? ]] && _print_success "Installed all npm packages"
+	fi
+}
+
+copy_files() {
+	_process "Copying .vim and .bash folders"
+	cp -r "${DIR}/conf/vim" "${HOME}/.vim"
+	cp -r "${DIR}/conf/bash" "${HOME}/.bash"
+	# copy over files to the HOME directory. These were
+	# originally symlinks but ran into permissions issues
+	# with Docker containers.
+	if [[ -f "${DIR}/opt/files" ]]; then
+		_process "Copying files"
+
+		# Set variable for list of files
+		files="${DIR}/opt/files"
 
 		# Store IFS within a temp variable
 		OIFS=$IFS
@@ -302,7 +222,7 @@ main() {
 		# Set the separator to a carriage return & a new line break
 		# read in passed-in file and store as an array
 		IFS=$'\r\n'
-		links=($(cat "${symlinks}"))
+		links=($(cat "${files}"))
 
 		# Loop through array
 		for index in ${!links[*]}
@@ -312,9 +232,9 @@ main() {
 				# set IFS back to space to split string on
 				IFS=$' '
 				# create an array of line items
-				symlink=(${links[$index]})
+				file=(${links[$index]})
 				# Create symbolic link
-				cp "${DIR}/${symlink[0]}" "${HOME}/${symlink[1]}"
+				cp "${DIR}/${file[0]}" "${HOME}/${file[1]}"
 			done
 			# set separater back to carriage return & new line break
 			IFS=$'\r\n'
@@ -323,8 +243,90 @@ main() {
 		# Reset IFS back
 		IFS=$OIFS
 
-		[[ $? ]] && _print_success "All files have been symlinked"
+		[[ $? ]] && _print_success "All files have been copied"
 	fi
+}
+
+initialize_repo() {
+	# Initialize the git repository if it's missing
+	_process "Initializing git repository"
+	git init
+
+	_process "Adding https://github.com/${GITHUB_USER}/dotfiles.git as origin"
+	git remote add origin "https://github.com/${GITHUB_USER}/dotfiles.git"
+
+	_process "Downloading changes from origin"
+	git fetch origin master
+
+	# Reset the index and working tree to the fetched HEAD
+	# (submodules are cloned in the subsequent sync step)
+	_process "Resetting index & working tree to fetched HEAD"
+	git reset --hard FETCH_HEAD
+
+	# Remove any untracked files
+	_process "Removing any untracked files"
+	git clean -fd
+
+	# Pull down the latest changes
+	_process "Pulling down latest changes"
+	git pull origin master
+
+	[[ $? ]] && _print_success "Repository has been initialized"
+}
+
+update_vim_bundles() {
+	# Check for Vim; install bundles
+	if [[ -f "${HOME}/.vim/config/bundles.vim" ]]; then
+		_process "Updating ViM bundles"
+
+		vim +'PlugInstall --sync' +qa
+
+		[[ $? ]] && _print_success "Updated ViM bundles"
+	fi
+}
+
+main() {
+	if ! type -P 'brew' &> /dev/null; then
+		install_homebrew
+	fi
+
+	if ! type -P 'git' &> /dev/null; then
+    install_git
+	fi
+
+	setup_git_authorship
+
+	setup_dotfiles
+
+	# Install Node
+	if ! type -P 'npm' &> /dev/null; then
+		_process "Installing node"
+
+		curl https://www.npmjs.org/install.sh | sh
+
+		[[ $? ]] \
+		&& _print_success "Installed npm"
+	fi
+
+	install_node_packages
+
+	install_homebrew_packages
+
+	initialize_repo
+
+	# Force remove the vim directory if it's already there.
+	if [ -e "${HOME}/.vim" ]; then
+		_process "Removing ${HOME}/.vim/ directory"
+		rm -rf "${HOME}/.vim"
+	fi
+
+	# Force remove the bash directory if it's already there.
+	if [ -e "${HOME}/.bash" ]; then
+		_process "Removing ${HOME}/.bash/ directory"
+		rm -rf "${HOME}/.bash"
+	fi
+
+	copy_files
 
 	_process "Installing vim-plug"
 	curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
