@@ -6,15 +6,16 @@
 $ bash -c "$(curl -#fL raw.github.com/gjunkie/dotfiles/master/install)"
 ```
 
-### Vim
-- Don't forget to check if your color scheme requires you to import its `.itermcolors` profile into iTerm.
+### Custom bash prompt
 
-![vim theme](https://raw.githubusercontent.com/gjunkie/dotfiles/master/images/vim_theme2.png)
+When your current working directory is a Git repository, the $PROMPT will display the checked-out branch's name (and failing that, the commit SHA that HEAD is pointing to). The state of the working tree is reflected by the color of the branch name (green: no changes, yellow: staged changes, red: unstaged changes or untracked files).
 
-### To do
-- Add `pip` to software list.
-- Add `n` to software list.
-- Add `tmux` plugin manager.
+#### Screenshot
+![bash prompt](https://raw.githubusercontent.com/gjunkie/dotfiles/master/images/bash_prompt_and_git.png)
+
+### Local/private Bash configuration
+
+Any private and custom Bash commands and configuration should be placed in a ~/.bash_profile.local file. This file will not be under version control or committed to a public repository. If ~/.bash_profile.local exists, it will be sourced for inclusion in bash_profile.
 
 ### Acknowledgements 
 Inspiration and code was taken from many sources, including:
