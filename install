@@ -130,12 +130,12 @@ initialize_repo() {
 
 	# Reset the index and working tree to the fetched HEAD
 	# (submodules are cloned in the subsequent sync step)
-	# _process "Resetting index & working tree to fetched HEAD"
-	# git reset --hard FETCH_HEAD
+	_process "Resetting index & working tree to fetched HEAD"
+	git reset --hard FETCH_HEAD
 
 	# Remove any untracked files
-	# _process "Removing any untracked files"
-	# git clean -fd
+	_process "Removing any untracked files"
+	git clean -fd
 
 	[[ $? ]] && _print_success "Repository has been initialized"
 
