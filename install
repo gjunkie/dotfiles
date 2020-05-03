@@ -206,7 +206,8 @@ update_vim_bundles() {
 
 		# Set variable for vim bundles
 		vimbundles="${HOME}/.vim/config/bundles.vim"
-		vim "${vimbundles}" +PluginInstall +qall
+		#vim "${vimbundles}" +PluginInstall +qall
+		vim +'PlugInstall --sync' +qa
 
 		[[ $? ]] && _print_success "Updated ViM bundles"
 	fi

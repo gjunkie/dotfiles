@@ -3,7 +3,7 @@
 
 call plug#begin('~/.vim/plugged')
 " fuzzy searcher
-Plugi'junegunn/fzf'
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 " Auto closing of quotes and such
 Plug 'Raimondi/delimitMate'
