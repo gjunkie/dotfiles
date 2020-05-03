@@ -204,9 +204,6 @@ update_vim_bundles() {
 	if [[ -f "${HOME}/.vim/config/bundles.vim" ]]; then
 		_process "Updating ViM bundles"
 
-		# Set variable for vim bundles
-		vimbundles="${HOME}/.vim/config/bundles.vim"
-		#vim "${vimbundles}" +PluginInstall +qall
 		vim +'PlugInstall --sync' +qa
 
 		[[ $? ]] && _print_success "Updated ViM bundles"
@@ -244,6 +241,50 @@ main() {
 	_process "Copying .vim and .bash folders"
 	cp -r "${DIR}/conf/vim" "${HOME}/.vim"
 	cp -r "${DIR}/conf/bash" "${HOME}/.bash"
+
+	# Install Homebrew formulae
+	if ! type -P 'brew' &> /dev/null; then
+		_error "Homebrew not found"
+	else
+		_process "Installing Homebrew packages"
+
+		# Set variable for list of homebrew formulaes
+		brews="${DIR}/opt/homebrew"
+
+		# Update and upgrade all packages
+		brew update
+		brew upgrade
+
+		# Tap some necessary formulae
+		brew tap homebrew/cask-versions
+		brew tap homebrew/cask-drivers
+		brew tap vitorgalvao/tiny-scripts
+
+		# Store IFS within a temp variable
+		OIFS=$IFS
+
+		# Set the separator to a carriage return & a new line break
+		# read in passed-in file and store as an array
+		IFS=$'\r\n' formulae=($(cat "${brews}"))
+
+		# Loop through split list of formulae
+		_process "Checking status of desired Homebrew formulae"
+		for index in ${!formulae[*]}
+		do
+			# Test whether a Homebrew formula is already installed
+			if ! brew list ${formulae[$index]} &> /dev/null; then
+				brew install ${formulae[$index]}
+			fi
+		done
+
+		# Reset IFS back
+		IFS=$OIFS
+
+		brew install vim --HEAD --with-override-system-vi
+		brew cleanup
+
+		[[ $? ]] && _success "Installed all Homebrew packages"
+	fi
 
 	# Create the necessary symbolic links between the `.dotfiles` and `HOME`
 	# directory. The `bash_profile` sources other files directly from the
