@@ -48,25 +48,25 @@ _print_success() {
 setup_dotfiles() {
 	# If missing, download and extract the dotfiles repository
 	if [[ -d "${DIR}" ]]; then
-		_process "Dotfiles already installed.  Upgrading dotfiles"
+		_process "→ Dotfiles already installed.  Upgrading dotfiles"
 		dotfiles
 	else
 		_warning "No ${DIR} found"
 
-		_process "Creating directory at ${DIR} and setting permissions"
+		_process "→ Creating directory at ${DIR} and setting permissions"
 		mkdir -p "${DIR}"
 
-		_process "Downloading repository to /tmp directory"
+		_process "→ Downloading repository to /tmp directory"
 		# (-#) shows the progress bar as # sign
 		# (-f) fail silently
 		# (-L) follow the headers
 		# (-o) output to a file
 		curl -#fLo /tmp/dotfiles.tar.gz "https://github.com/${GITHUB_USER}/dotfiles/tarball/master"
 
-		_process "Extracting files to ${DIR}"
+		_process "→ Extracting files to ${DIR}"
 		tar -zxf /tmp/dotfiles.tar.gz --strip-components 1 -C "${DIR}"
 
-		_process "Removing tarball from /tmp directory"
+		_process "→ Removing tarball from /tmp directory"
 		rm -rf /tmp/dotfiles.tar.gz
 
 		[[ $? ]] && _print_success "${DIR} created, repository downloaded and extracted"
@@ -77,7 +77,7 @@ setup_dotfiles() {
 }
 
 install_git() {
-  _process "Installing git"
+  _process "→ Installing git"
 
   brew install git
 
@@ -90,7 +90,7 @@ setup_git_authorship() {
 
 	if [[ ! -z "$GIT_AUTHOR_NAME" ]]; then
 		# Setup git authorship
-		_process "Setting up Git author"
+		_process "→ Setting up Git author"
 		# Git author name
 		_question "What's your name"
 		read USER_GIT_AUTHOR_NAME
@@ -111,12 +111,12 @@ setup_git_authorship() {
 			_warning "No Git user email has been set.  Please update manually"
 		fi
 	else
-		_process "Git author already set, moving on..."
+		_process "→ Git author already set, moving on..."
 	fi
 }
 
 install_homebrew() {
-	_process "Installing Homebrew"
+	_process "→ Installing Homebrew"
 	if [[ "$OSTYPE" =~ ^darwin ]]; then
 		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 	else
@@ -124,7 +124,7 @@ install_homebrew() {
 	fi
 
 
-	_process "Running brew doctor"
+	_process "→ Running brew doctor"
 	brew doctor
 	[[ $? ]] \
 	&& _print_success "Installed Homebrew"
@@ -134,7 +134,7 @@ install_homebrew_packages() {
 	if ! type -P 'brew' &> /dev/null; then
 		_error "Homebrew not found"
 	else
-		_process "Installing Homebrew packages"
+		_process "→ Installing Homebrew packages"
 
 		# Set variable for list of homebrew formulaes
 		brews="${DIR}/opt/homebrew"
@@ -156,7 +156,7 @@ install_homebrew_packages() {
 		IFS=$'\r\n' formulae=($(cat "${brews}"))
 
 		# Loop through split list of formulae
-		_process "Checking status of desired Homebrew formulae"
+		_process "→ Checking status of desired Homebrew formulae"
 		for index in ${!formulae[*]}
 		do
 			# Test whether a Homebrew formula is already installed
@@ -178,7 +178,7 @@ install_node_packages() {
 	if ! type -P 'npm' &> /dev/null; then
 		_error "npm not found"
 	else
-		_process "Installing npm packages"
+		_process "→ Installing npm packages"
 
 		# Set variable for list of npm packages
 		npmfile="${DIR}/opt/npm"
@@ -204,14 +204,16 @@ install_node_packages() {
 }
 
 copy_files() {
-	_process "Copying .vim and .bash folders"
+	_process "→ Copying vim folder..."
 	cp -r "${DIR}/conf/vim" "${HOME}/.vim"
+	_process "→ Copying bash folder..."
 	cp -r "${DIR}/conf/bash" "${HOME}/.bash"
+
 	# copy over files to the HOME directory. These were
 	# originally symlinks but ran into permissions issues
 	# with Docker containers.
 	if [[ -f "${DIR}/opt/files" ]]; then
-		_process "Copying files"
+		_process "→ Copying files..."
 
 		# Set variable for list of files
 		files="${DIR}/opt/files"
@@ -249,26 +251,26 @@ copy_files() {
 
 initialize_repo() {
 	# Initialize the git repository if it's missing
-	_process "Initializing git repository"
+	_process "→ Initializing git repository"
 	git init
 
-	_process "Adding https://github.com/${GITHUB_USER}/dotfiles.git as origin"
+	_process "→ Adding https://github.com/${GITHUB_USER}/dotfiles.git as origin"
 	git remote add origin "https://github.com/${GITHUB_USER}/dotfiles.git"
 
-	_process "Downloading changes from origin"
+	_process "→ Downloading changes from origin"
 	git fetch origin master
 
 	# Reset the index and working tree to the fetched HEAD
 	# (submodules are cloned in the subsequent sync step)
-	_process "Resetting index & working tree to fetched HEAD"
+	_process "→ Resetting index & working tree to fetched HEAD"
 	git reset --hard FETCH_HEAD
 
 	# Remove any untracked files
-	_process "Removing any untracked files"
+	_process "→ Removing any untracked files"
 	git clean -fd
 
 	# Pull down the latest changes
-	_process "Pulling down latest changes"
+	_process "→ Pulling down latest changes"
 	git pull origin master
 
 	[[ $? ]] && _print_success "Repository has been initialized"
@@ -277,7 +279,7 @@ initialize_repo() {
 update_vim_bundles() {
 	# Check for Vim; install bundles
 	if [[ -f "${HOME}/.vim/config/bundles.vim" ]]; then
-		_process "Updating ViM bundles"
+		_process "→ Updating ViM bundles"
 
 		vim +'PlugInstall --sync' +qa
 
@@ -300,7 +302,7 @@ main() {
 
 	# Install Node
 	if ! type -P 'npm' &> /dev/null; then
-		_process "Installing node"
+		_process "→ Installing node"
 
 		curl https://www.npmjs.org/install.sh | sh
 
@@ -316,13 +318,13 @@ main() {
 
 	# Force remove the vim directory if it's already there.
 	if [ -e "${HOME}/.vim" ]; then
-		_process "Removing ${HOME}/.vim/ directory"
+		_warning "Removing ${HOME}/.vim/ directory"
 		rm -rf "${HOME}/.vim"
 	fi
 
 	# Force remove the bash directory if it's already there.
 	if [ -e "${HOME}/.bash" ]; then
-		_process "Removing ${HOME}/.bash/ directory"
+		_warning "Removing ${HOME}/.bash/ directory"
 		rm -rf "${HOME}/.bash"
 	fi
 
