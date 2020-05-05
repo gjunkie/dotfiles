@@ -18,8 +18,13 @@ function parse_git_branch() {
 	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
 	if [ ! "${BRANCH}" == "" ]
 	then
-		STAT=`parse_git_dirty`
-		echo "${BRANCH} [${STAT}]"
+		STATUS=`parse_git_dirty`
+		if [ "${STATUS}" == "" ]
+		then
+			echo "${BRANCH}"
+		else
+			echo "${BRANCH} [${STATUS}]"
+		fi
 	else
 		echo ""
 	fi
