@@ -1,16 +1,5 @@
-parse_git_branch ()
-{
-  if git rev-parse --git-dir >/dev/null 2>&1
-    then
-      gitver=$(git branch 2>/dev/null| sed -n '/^\*/s/^\* //p')
-  else
-    return 0
-  fi
-  echo -e "(on branch $gitver)"
-}
-
 # Adds color coding to the branches
-branch_color ()
+function branch_color ()
 {
   git_status="$(git status 2> /dev/null)"
     # Set color based on clean/staged/dirty.
@@ -25,26 +14,39 @@ branch_color ()
 }
 
 # get current branch in git repo
-# function parse_git_branch() {
-# 	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
-# 	if [ ! "${BRANCH}" == "" ]
-# 	then
-# 		STAT=`parse_git_dirty`
-# 		echo "[${BRANCH}${STAT}]"
-# 	else
-# 		echo ""
-# 	fi
-# }
+function parse_git_branch() {
+	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+	if [ ! "${BRANCH}" == "" ]
+	then
+		STAT=`parse_git_dirty`
+		echo "${BRANCH} [${STAT}]"
+	else
+		echo ""
+	fi
+}
+
+# get current branch in git repo
+function print_if_in_repo() {
+	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+	if [ ! "${BRANCH}" == "" ]
+	then
+		echo "$1"
+	else
+		echo ""
+	fi
+}
 
 # get current status of git repo
 function parse_git_dirty {
 	gstatus=`git status 2>&1 | tee`
-	dirty=`echo -n "${gstatus}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
+	dirty=`echo -n "${gstatus}" 2> /dev/null | grep "Changes not staged for commit" &> /dev/null; echo "$?"`
 	untracked=`echo -n "${gstatus}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?"`
+	staged=`echo -n "${gstatus}" 2> /dev/null | grep "Changes to be committed" &> /dev/null; echo "$?"`
 	ahead=`echo -n "${gstatus}" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?"`
 	newfile=`echo -n "${gstatus}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?"`
 	renamed=`echo -n "${gstatus}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?"`
 	deleted=`echo -n "${gstatus}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?"`
+
 	bits=''
 	if [ "${renamed}" == "0" ]; then
 		bits=">${bits}"
@@ -64,79 +66,34 @@ function parse_git_dirty {
 	if [ "${dirty}" == "0" ]; then
 		bits="!${bits}"
 	fi
+	if [ "${staged}" == "0" ]; then
+		bits="↯${bits}"
+	fi
 	if [ ! "${bits}" == "" ]; then
-		echo " ${bits}"
+		echo "${bits}"
 	else
 		echo ""
 	fi
 }
 
-# export PS1="\W \`parse_git_branch\`: "
+# Black        0;30     Dark Gray     1;30
+# Red          0;31     Light Red     1;31
+# Green        0;32     Light Green   1;32
+# Brown/Orange 0;33     Yellow        1;33
+# Blue         0;34     Light Blue    1;34
+# Purple       0;35     Light Purple  1;35
+# Cyan         0;36     Light Cyan    1;36
+# Light Gray   0;37     White         1;37
+
+DARK_GRAY_FG='[1;30m'
+LIGHT_GRAY_FG='[0;37m'
+LIGHT_BLUE_FG='[1;34m'
+LIGHT_CYAN_FG='[1;36m'
+PURPLE_FG='[1;35m'
+WHITE_FG='[1;37m'
+YELLOW_FG='[0;33m'
+NC='[0m' # No Color
+
 # Prompt
-# PS1=$'[%~] \[$(branch_color)\]$(parse_git_branch)'
-PS1='\u: \w \[$(branch_color)\]$(parse_git_branch)\[${c_sgr0}\]\n→ '
-# PS1=$'[%~] \[$(branch_color)\]\$(vcs_info_msg_0_)\n→ '
+PS1='[\e${LIGHT_BLUE_FG}\u\e${NC}\e${LIGHT_GRAY_FG}:\e${NC}\e${YELLOW_FG}\h\e${NC}] in \e${PURPLE_FG}\w\e${NC}\[${c_sgr0}\] $(print_if_in_repo 'on') \[$(branch_color)\]$(parse_git_branch)\[${c_sgr0}\]\n\$ '
 
-# Echoes a username/host string when connected over SSH (empty otherwise)
-ssh_info() {
-  [[ "$SSH_CONNECTION" != '' ]] && echo '%(!.%{$fg[red]%}.%{$fg[yellow]%})%n%{$reset_color%}@%{$fg[green]%}%m%{$reset_color%}:' || echo ''
-}
-
-# Echoes information about Git repository status when inside a Git repository
-git_info() {
-
-  # Exit if not inside a Git repository
-  ! git rev-parse --is-inside-work-tree > /dev/null 2>&1 && return
-
-  # Git branch/tag, or name-rev if on detached head
-  local GIT_LOCATION=${$(git symbolic-ref -q HEAD || git name-rev --name-only --no-undefined --always HEAD)#(refs/heads/|tags/)}
-
-  local AHEAD="${RED}⇡NUM%{$reset_color%a"
-  local BEHIND="${CYAN}⇣NUM%{$reset_color%}"
-  local MERGING="${MAGENTA}⚡︎%{$reset_color%}"
-  local UNTRACKED="${RED}●%{$reset_color%}"
-  local MODIFIED="${LIGHT_GREEN}●%{$reset_color%}"
-  local STAGED="${YELLOW}●%{$reset_color%}"
-[${c_sgr0}\]
-  local -a DIVERGENCES
-  local -a FLAGS
-
-  local NUM_AHEAD="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
-  if [ "$NUM_AHEAD" -gt 0 ]; then
-    DIVERGENCES+=( "${AHEAD//NUM/$NUM_AHEAD}" )
-  fi
-
-  local NUM_BEHIND="$(git log --oneline ..@{u} 2> /dev/null | wc -l | tr -d ' ')"
-  if [ "$NUM_BEHIND" -gt 0 ]; then
-    DIVERGENCES+=( "${BEHIND//NUM/$NUM_BEHIND}" )
-  fi
-
-  local GIT_DIR="$(git rev-parse --git-dir 2> /dev/null)"
-  if [ -n $GIT_DIR ] && test -r $GIT_DIR/MERGE_HEAD; then
-    FLAGS+=( "$MERGING" )
-  fi
-
-  if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
-    FLAGS+=( "$UNTRACKED" )
-  fi
-
-  if ! git diff --quiet 2> /dev/null; then
-    FLAGS+=( "$MODIFIED" )
-  fi
-
-  if ! git diff --cached --quiet 2> /dev/null; then
-    FLAGS+=( "$STAGED" )
-  fi
-
-  local -a GIT_INFO
-  GIT_INFO+=( "\033[38;5;15m±" )
-  [ -n "$GIT_STATUS" ] && GIT_INFO+=( "$GIT_STATUS" )
-  [[ ${#DIVERGENCES[@]} -ne 0 ]] && GIT_INFO+=( "${(j::)DIVERGENCES}" )
-  [[ ${#FLAGS[@]} -ne 0 ]] && GIT_INFO+=( "${(j::)FLAGS}" )
-  GIT_INFO+=( "\033[38;5;15m$GIT_LOCATION%{$reset_color%}" )
-  echo "${(j: :)GIT_INFO}"
-
-}
-
-# PS1="
-# $(ssh_info)[\u] [\W] $(git_info) %(?.%{$fg[gray]%}.%{$fg[red]%})%(!.#.→)%{$reset_color%} "
