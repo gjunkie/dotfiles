@@ -43,6 +43,7 @@ function parse_git_dirty {
 	untracked=`echo -n "${gstatus}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?"`
 	staged=`echo -n "${gstatus}" 2> /dev/null | grep "Changes to be committed" &> /dev/null; echo "$?"`
 	ahead=`echo -n "${gstatus}" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?"`
+	behind=`echo -n "${gstatus}" 2> /dev/null | grep "commits behind" &> /dev/null; echo "$?"`
 	newfile=`echo -n "${gstatus}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?"`
 	renamed=`echo -n "${gstatus}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?"`
 	deleted=`echo -n "${gstatus}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?"`
@@ -52,7 +53,10 @@ function parse_git_dirty {
 		bits=">${bits}"
 	fi
 	if [ "${ahead}" == "0" ]; then
-		bits="*${bits}"
+		bits="⇡${bits}"
+	fi
+	if [ "${behind}" == "0" ]; then
+		bits="⇣${bits}"
 	fi
 	if [ "${newfile}" == "0" ]; then
 		bits="+${bits}"
