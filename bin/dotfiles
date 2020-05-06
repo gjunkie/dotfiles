@@ -207,16 +207,18 @@ update_repo() {
 }
 
 main() {
-  _is_empty "$PROGDIR" \
+	_is_empty "$PROGDIR" \
 	&& error_out
 
 	update_repo
 
+	chmod 755 "/usr/local/bin/dotfiles"
+
 	# cmdline "$ARGS"
 
-  setup_vim
-  setup_bash
-  update_vim_bundles
+	setup_vim
+	setup_bash
+	update_vim_bundles
 
 	. "${HOME}/.bash_profile"
 
