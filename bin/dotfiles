@@ -2,6 +2,13 @@ readonly PROGNAME="$(basename "$0")"
 readonly PROGDIR="/usr/local/opt/dotfiles"
 readonly ARGS="$@"
 
+# Check for environment variable for directory, otherwise set to default
+if [[ ! -z ${DOTFILES_DIRECTORY} ]]; then
+	DIR="${DOTFILES_DIRECTORY}"
+else
+	DIR="/usr/local/opt/dotfiles"
+fi
+
 _edit() {
 	cd "$PROGDIR" \
 	&& vim
