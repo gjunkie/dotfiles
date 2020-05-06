@@ -1,0 +1,204 @@
+readonly PROGNAME="$(basename "$0")"
+readonly PROGDIR="/usr/local/opt/dotfiles"
+readonly ARGS="$@"
+
+_edit() {
+	cd "$PROGDIR" \
+	&& vim
+}
+
+_error() {
+	local message=$1
+	printf "%s⊘ Error:%s %s. Aborting!\n\n" "$(tput setaf 1)" "$(tput sgr0)" "$message"
+}
+
+_error_out() {
+	_print_error "No $PROGDIR found!"
+	printf 'Run the installer <%shttps://github.com/gjunkie/dotfiles#one-line-install%s>\n' "$(tput smul)" "$(tput rmul)"
+	exit 1
+}
+
+_exists() {
+	local var=$1
+	[[ -e $var ]]
+}
+
+_print_help() {
+	cat <<- EOF
+	usage: $PROGNAME [options]
+	Update dotfiles with any new dependencies
+	OPTIONS:
+    -h --help              Show this help
+    -t --test              Run unit test to check the program
+    -v --version           Display dotfiles version
+    --prefix               Display dotfiles install path. Default: /usr/local/opt/dotfiles
+	Examples:
+    Run all tests:
+    $PROGNAME --test
+	Print current version:
+    $PROGNAME --version
+	Run:
+    $PROGNAME
+	EOF
+}
+
+_process() {
+	echo "$(date) PROCESSING:  $@" >> $LOG
+	printf "$(tput setaf 6) %s...$(tput sgr0)\n" "$@"
+}
+
+_success() {
+	local message=$1
+	printf "%s✓ Success:%s\n" "$(tput setaf 2)" "$(tput sgr0) $message"
+}
+
+_usage() {
+	printf "%s: usage: %s [-h|--help] [--prefix] [-v|--version]"  "$PROGNAME" "$PROGNAME"
+}
+
+# options
+cmdline() {
+	# got this idea from here:
+	# http://kirk.webfinish.com/2009/10/bash-shell-script-to-use-getopts-with-gnu-style-long-positional-parameters/
+	local arg=
+	for arg
+	do
+		local delim=""
+		case "$arg" in
+			#translate --gnu-long-options to -g (short options)
+			--edit)         args="${args}-e ";;
+			--help)         args="${args}-h ";;
+			--prefix)       args="${args}-p ";;
+			--test)         args="${args}-t ";;
+			--version)      args="${args}-v ";;
+			#pass through anything else
+			*) [[ "${arg:0:1}" == "-" ]] || delim="\""
+				args="${args}${delim}${arg}${delim} ";;
+		esac
+	done
+
+	#Reset the positional parameters to the short options
+	eval set -- "$args"
+
+	while getopts ":ehptv" OPTION
+	do
+		case $OPTION in
+			e)
+				_edit
+				exit 0
+				;;
+			h)
+				_print_help
+				exit 0
+				;;
+			p)
+				_print_directory
+				exit 0
+				;;
+			t)
+				_run_tests
+				exit 0
+				;;
+			v)
+				_version
+				exit 0
+				;;
+			\?)
+				_is_not_valid_option "-$OPTARG"
+				usage
+				exit 1
+				;;
+		esac
+	done
+
+	return 0
+}
+
+setup_vim() {
+  # Force remove the vim directory if it's already there.
+	exists "${HOME}/.vim" \
+	&& rm -rf "${HOME}/.vim"
+
+	cp -r "${DIR}/conf/vim" "${HOME}/.vim"
+	[[ $? ]] && _success "Copied vim folder"
+}
+
+setup_bash() {
+  # Force remove the bash directory if it's already there.
+	exists "${HOME}/.bash" \
+	&& rm -rf "${HOME}/.bash"
+
+	cp -r "${DIR}/conf/bash" "${HOME}/.bash"
+	[[ $? ]] && _success "Copied bash folder"
+}
+
+update_vim_bundles() {
+	# Check for Vim; install bundles
+	if [[ -f "${HOME}/.vim/config/bundles.vim" ]]; then
+		vim +'PlugInstall --sync' +qa
+
+		[[ $? ]] && _success "Updated ViM bundles"
+	fi
+}
+
+copy_config_files() {
+
+}
+
+install_formulae() {
+	# Updating Homebrew
+	brew update
+
+	# Upgrade Homebrew formulaes
+	brew upgrade
+  brews="${PROGDIR}/opt/homebrew"
+}
+
+upgrade_node() {
+
+}
+
+install_node_packages() {
+
+}
+
+update_repo() {
+	cd "$PROGDIR"
+
+	_process "→ Downloading changes from origin"
+	git fetch origin master
+
+	dirty=`echo -n "${gstatus}" 2> /dev/null | grep "Changes not staged for commit" &> /dev/null; echo "$?"`
+	if [ "${dirty}" == "0" ]; then
+    _error "You have uncommitted changes. Commit your changes or reset them prior to updating."
+		exit 1
+	fi
+
+	# Reset the index and working tree to the fetched HEAD
+	# (submodules are cloned in the subsequent sync step)
+	_process "→ Resetting index & working tree to fetched HEAD"
+	git reset --hard FETCH_HEAD
+
+	# Remove any untracked files
+	_process "→ Removing any untracked files"
+	git clean -fd
+
+	# Pull down the latest changes
+	_process "→ Pulling down latest changes"
+	git pull origin master
+
+	[[ $? ]] && _success "Repository has been updated"
+}
+
+main() {
+  _is_empty "$PROGDIR" \
+	&& error_out
+
+	update_repo
+
+	# cmdline "$ARGS"
+
+  setup_vim
+  setup_bash
+  update_vim_bundles
+}

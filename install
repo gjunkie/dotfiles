@@ -124,7 +124,7 @@ install_homebrew() {
 	&& _success "Installed Homebrew"
 }
 
-install_homebrew_packages() {
+install_formulae() {
 	if ! type -P 'brew' &> /dev/null; then
 		_error "Homebrew not found"
 	else
@@ -307,7 +307,7 @@ main() {
 
 	install_node_packages
 
-	install_homebrew_packages
+	install_formulae
 
 	initialize_repo
 
@@ -333,6 +333,9 @@ main() {
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 	update_vim_bundles
+
+  _process "Symlinking dotfiles command"
+  ln -fs "${DIR}/bin/dotfiles" "/usr/local/bin/dotfiles"
 
 	_process "Sourcing $HOME/.bash_profile"
 	. "${HOME}/.bash_profile"
