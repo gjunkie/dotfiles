@@ -202,3 +202,5 @@ main() {
   setup_bash
   update_vim_bundles
 }
+
+main
