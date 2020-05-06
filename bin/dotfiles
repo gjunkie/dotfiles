@@ -217,6 +217,10 @@ main() {
   setup_vim
   setup_bash
   update_vim_bundles
+
+	. "${HOME}/.bash_profile"
+
+	[[ $? ]] && _success "dotfiles updated!"
 }
 
 main

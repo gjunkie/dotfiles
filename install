@@ -335,7 +335,6 @@ main() {
   ln -fs "${DIR}/bin/dotfiles" "/usr/local/bin/dotfiles"
   chmod 755 "/usr/local/bin/dotfiles"
 
-	_process "Sourcing $HOME/.bash_profile"
 	. "${HOME}/.bash_profile"
 
 	[[ $? ]] && _success "Dotfiles installed."
