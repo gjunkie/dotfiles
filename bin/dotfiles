@@ -35,19 +35,24 @@ _is_empty() {
 	[[ -z $var ]]
 }
 
+_is_not_valid_option() {
+	local option=$1
+	printf "bash: %s: %s: invalid option\n" "$PROGNAME" "$option"
+}
+
 _print_help() {
 	cat <<- EOF
 	usage: $PROGNAME [options]
 	Update dotfiles with any new dependencies
 	OPTIONS:
-		-d --dotfiles          Update repo and copy dotfiles
-		-e --edit			   Launch Vim and edit dotfiles
-		-h --help              Show this help
-		-t --test              Run unit test to check the program
-		-v --version           Display dotfiles version
-		-p --prefix            Display dotfiles install path. Default: /usr/local/opt/dotfiles
-		-s --software		   Update brews, gems, and npm packages
-		-u --update			   Pull the latest from the dotfiles repo
+		-d --dotfiles      Update repo and copy dotfiles
+		-e --edit          Launch Vim and edit dotfiles
+		-h --help          Show this help
+		-t --test          Run unit test to check the program
+		-v --version       Display dotfiles version
+		-p --prefix        Display dotfiles install path. Default: /usr/local/opt/dotfiles
+		-s --software      Update brews, gems, and npm packages
+		-u --update        Pull the latest from the dotfiles repo
 	Examples:
 		Run all tests:
 		$PROGNAME --test
