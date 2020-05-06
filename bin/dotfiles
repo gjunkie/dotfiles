@@ -9,11 +9,7 @@ else
 	DIR="/usr/local/opt/dotfiles"
 fi
 
-_edit() {
-	cd "$PROGDIR" \
-	&& vim
-}
-
+# Status methods
 _error() {
 	local message=$1
 	printf "%s⊘ Error:%s %s. Aborting!\n\n" "$(tput setaf 1)" "$(tput sgr0)" "$message"
@@ -23,6 +19,15 @@ _error_out() {
 	_print_error "No $PROGDIR found!"
 	printf 'Run the installer <%shttps://github.com/gjunkie/dotfiles#one-line-install%s>\n' "$(tput smul)" "$(tput rmul)"
 	exit 1
+}
+
+_process() {
+	printf "$(tput setaf 6) %s...$(tput sgr0)\n" "$@"
+}
+
+_success() {
+	local message=$1
+	printf "%s✓ Success:%s\n" "$(tput setaf 2)" "$(tput sgr0) $message"
 }
 
 _exists() {
@@ -41,8 +46,8 @@ _is_not_valid_option() {
 }
 
 _print_help() {
+	_usage
 	cat <<- EOF
-	usage: $PROGNAME [options]
 	Update dotfiles with any new dependencies
 	OPTIONS:
 		-d --dotfiles      Update repo and copy dotfiles
@@ -63,23 +68,8 @@ _print_help() {
 	EOF
 }
 
-_process() {
-	printf "$(tput setaf 6) %s...$(tput sgr0)\n" "$@"
-}
-
-_success() {
-	local message=$1
-	printf "%s✓ Success:%s\n" "$(tput setaf 2)" "$(tput sgr0) $message"
-}
-
 _usage() {
 	printf "%s: usage: %s [-h|--help] [--prefix] [-v|--version]"  "$PROGNAME" "$PROGNAME"
-}
-
-_dotfiles() {
-	update_repo
-	setup_vim
-	setup_bash
 }
 
 # options
@@ -153,6 +143,17 @@ cmdline() {
 	done
 
 	return 0
+}
+
+_edit() {
+	cd "$PROGDIR" \
+	&& vim
+}
+
+_dotfiles() {
+	update_repo
+	setup_vim
+	setup_bash
 }
 
 setup_vim() {
