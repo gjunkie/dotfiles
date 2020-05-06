@@ -127,7 +127,7 @@ cmdline() {
 
 setup_vim() {
   # Force remove the vim directory if it's already there.
-	exists "${HOME}/.vim" \
+	_exists "${HOME}/.vim" \
 	&& rm -rf "${HOME}/.vim"
 
 	cp -r "${DIR}/configs/vim" "${HOME}/.vim"
@@ -136,7 +136,7 @@ setup_vim() {
 
 setup_bash() {
   # Force remove the bash directory if it's already there.
-	exists "${HOME}/.bash" \
+	_exists "${HOME}/.bash" \
 	&& rm -rf "${HOME}/.bash"
 
 	cp -r "${DIR}/configs/bash" "${HOME}/.bash"
