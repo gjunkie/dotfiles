@@ -140,10 +140,10 @@ update_vim_bundles() {
 		[[ $? ]] && _success "Updated ViM bundles"
 	fi
 }
-
-copy_config_files() {
-
-}
+# 
+# copy_config_files() {
+# 
+# }
 
 install_formulae() {
 	# Updating Homebrew
@@ -153,14 +153,14 @@ install_formulae() {
 	brew upgrade
   brews="${PROGDIR}/opt/homebrew"
 }
-
-upgrade_node() {
-
-}
-
-install_node_packages() {
-
-}
+# 
+# upgrade_node() {
+# 
+# }
+# 
+# install_node_packages() {
+# 
+# }
 
 update_repo() {
 	cd "$PROGDIR"
