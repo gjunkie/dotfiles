@@ -200,9 +200,9 @@ install_node_packages() {
 
 copy_files() {
 	_process "→ Copying vim folder"
-	cp -r "${DIR}/conf/vim" "${HOME}/.vim"
+	cp -r "${DIR}/configs/vim" "${HOME}/.vim"
 	_process "→ Copying bash folder"
-	cp -r "${DIR}/conf/bash" "${HOME}/.bash"
+	cp -r "${DIR}/configs/bash" "${HOME}/.bash"
 
 	# copy over files to the HOME directory. These were
 	# originally symlinks but ran into permissions issues
@@ -334,7 +334,6 @@ main() {
 
 	update_vim_bundles
 
-  _process "Symlinking dotfiles command"
   ln -fs "${DIR}/bin/dotfiles" "/usr/local/bin/dotfiles"
 
 	_process "Sourcing $HOME/.bash_profile"
