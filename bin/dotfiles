@@ -40,17 +40,21 @@ _print_help() {
 	usage: $PROGNAME [options]
 	Update dotfiles with any new dependencies
 	OPTIONS:
-    -h --help              Show this help
-    -t --test              Run unit test to check the program
-    -v --version           Display dotfiles version
-    --prefix               Display dotfiles install path. Default: /usr/local/opt/dotfiles
+		-d --dotfiles          Update repo and copy dotfiles
+		-e --edit			   Launch Vim and edit dotfiles
+		-h --help              Show this help
+		-t --test              Run unit test to check the program
+		-v --version           Display dotfiles version
+		-p --prefix            Display dotfiles install path. Default: /usr/local/opt/dotfiles
+		-s --software		   Update brews, gems, and npm packages
+		-u --update			   Pull the latest from the dotfiles repo
 	Examples:
-    Run all tests:
-    $PROGNAME --test
+		Run all tests:
+		$PROGNAME --test
 	Print current version:
-    $PROGNAME --version
+		$PROGNAME --version
 	Run:
-    $PROGNAME
+		$PROGNAME
 	EOF
 }
 
@@ -67,6 +71,12 @@ _usage() {
 	printf "%s: usage: %s [-h|--help] [--prefix] [-v|--version]"  "$PROGNAME" "$PROGNAME"
 }
 
+_dotfiles() {
+	update_repo
+	setup_vim
+	setup_bash
+}
+
 # options
 cmdline() {
 	# got this idea from here:
@@ -77,10 +87,13 @@ cmdline() {
 		local delim=""
 		case "$arg" in
 			#translate --gnu-long-options to -g (short options)
+			--dotfiles)     args="${args}-d ";;
 			--edit)         args="${args}-e ";;
 			--help)         args="${args}-h ";;
 			--prefix)       args="${args}-p ";;
+			--software)     args="${args}-s ";;
 			--test)         args="${args}-t ";;
+			--update)		args="${args}-u ";;
 			--version)      args="${args}-v ";;
 			#pass through anything else
 			*) [[ "${arg:0:1}" == "-" ]] || delim="\""
@@ -94,6 +107,10 @@ cmdline() {
 	while getopts ":ehptv" OPTION
 	do
 		case $OPTION in
+			d)
+				_dotfiles
+				exit 0
+				;;
 			e)
 				_edit
 				exit 0
@@ -106,8 +123,16 @@ cmdline() {
 				_print_directory
 				exit 0
 				;;
+			s)
+				_software
+				exit 0
+				;;
 			t)
 				_run_tests
+				exit 0
+				;;
+			u)
+				update_repo
 				exit 0
 				;;
 			v)
@@ -116,7 +141,7 @@ cmdline() {
 				;;
 			\?)
 				_is_not_valid_option "-$OPTARG"
-				usage
+				_usage
 				exit 1
 				;;
 		esac
@@ -203,6 +228,8 @@ update_repo() {
 	_process "→ Pulling down latest changes"
 	git pull origin master
 
+	chmod 755 "/usr/local/bin/dotfiles"
+
 	[[ $? ]] && _success "Repository has been updated"
 }
 
@@ -210,19 +237,17 @@ main() {
 	_is_empty "$PROGDIR" \
 	&& error_out
 
-	update_repo
-
-	chmod 755 "/usr/local/bin/dotfiles"
-
 	cmdline "$ARGS"
 
+	update_repo
+	install_formulae
 	setup_vim
 	setup_bash
 	update_vim_bundles
 
 	. "${HOME}/.bash_profile"
 
-	[[ $? ]] && _success "dotfiles updated!"
+	[[ $? ]] && _success "Dotfiles updated."
 }
 
 main
