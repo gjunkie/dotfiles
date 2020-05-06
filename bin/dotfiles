@@ -23,6 +23,11 @@ _exists() {
 	[[ -e $var ]]
 }
 
+_is_empty() {
+	local var=$1
+	[[ -z $var ]]
+}
+
 _print_help() {
 	cat <<- EOF
 	usage: $PROGNAME [options]
@@ -43,7 +48,6 @@ _print_help() {
 }
 
 _process() {
-	echo "$(date) PROCESSING:  $@" >> $LOG
 	printf "$(tput setaf 6) %s...$(tput sgr0)\n" "$@"
 }
 
@@ -119,7 +123,7 @@ setup_vim() {
 	exists "${HOME}/.vim" \
 	&& rm -rf "${HOME}/.vim"
 
-	cp -r "${DIR}/conf/vim" "${HOME}/.vim"
+	cp -r "${DIR}/configs/vim" "${HOME}/.vim"
 	[[ $? ]] && _success "Copied vim folder"
 }
 
@@ -128,7 +132,7 @@ setup_bash() {
 	exists "${HOME}/.bash" \
 	&& rm -rf "${HOME}/.bash"
 
-	cp -r "${DIR}/conf/bash" "${HOME}/.bash"
+	cp -r "${DIR}/configs/bash" "${HOME}/.bash"
 	[[ $? ]] && _success "Copied bash folder"
 }
 
