@@ -214,7 +214,7 @@ main() {
 
 	chmod 755 "/usr/local/bin/dotfiles"
 
-	# cmdline "$ARGS"
+	cmdline "$ARGS"
 
 	setup_vim
 	setup_bash
