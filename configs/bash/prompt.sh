@@ -4,11 +4,11 @@ function branch_color ()
   git_status="$(git status 2> /dev/null)"
     # Set color based on clean/staged/dirty.
     if [[ ${git_status} =~ "nothing to commit, working tree clean" ]]; then
-      color="${GREEN}"
+      color="${SUCCESS_FG}"
     elif [[ ${git_status} =~ "Changes to be committed" ]]; then
-      color="${YELLOW}"
+      color="${WARNING_FG}"
     else
-      color="${RED}"
+      color="${ALERT_FG}"
     fi
     echo -ne $color
 }
@@ -86,5 +86,5 @@ function parse_git_dirty {
 }
 
 # Prompt
-PS1='[\e${LIGHT_BLUE_FG}\u\e${NC}\e${LIGHT_GRAY_FG}:\e${NC}\e${YELLOW_FG}\h\e${NC}] in \e${PURPLE_FG}\w\e${NC}\[${c_sgr0}\] $(print_if_in_repo 'on') \[$(branch_color)\]$(parse_git_branch)\[${c_sgr0}\]\n\$ '
+PS1='[\e${PRIMARY_FG}\u\e${NC}\e${LIGHT_GRAY_FG}:\e${NC}\e${SECONDARY_FG}\h\e${NC}] in \e${TERTIARY_FG}\w\e${NC}\[${c_sgr0}\] $(print_if_in_repo 'on') \[$(branch_color)\]$(parse_git_branch)\[${c_sgr0}\]\n\$ '
 
