@@ -50,6 +50,7 @@ _print_help() {
 	cat <<- EOF
 	Update dotfiles with any new dependencies
 	OPTIONS:
+		-s --color         Choose a color scheme
 		-d --dotfiles      Update repo and copy dotfiles
 		-e --edit          Launch Vim and edit dotfiles
 		-h --help          Show this help
@@ -82,13 +83,14 @@ cmdline() {
 		local delim=""
 		case "$arg" in
 			#translate --gnu-long-options to -g (short options)
+			--color)        args="${args}-c ";;
 			--dotfiles)     args="${args}-d ";;
 			--edit)         args="${args}-e ";;
 			--help)         args="${args}-h ";;
 			--prefix)       args="${args}-p ";;
 			--software)     args="${args}-s ";;
 			--test)         args="${args}-t ";;
-			--update)		args="${args}-u ";;
+			--update)		    args="${args}-u ";;
 			--version)      args="${args}-v ";;
 			#pass through anything else
 			*) [[ "${arg:0:1}" == "-" ]] || delim="\""
@@ -102,6 +104,10 @@ cmdline() {
 	while getopts ":ehptv" OPTION
 	do
 		case $OPTION in
+			c)
+				_color
+				exit 0
+				;;
 			d)
 				_dotfiles
 				exit 0
@@ -143,6 +149,19 @@ cmdline() {
 	done
 
 	return 0
+}
+
+_color() {
+  echo "Install everything, or skip to dotfiles?"
+  select yn in "Everything" "Skip"; do
+    case $yn in
+    Everything ) install_software; break;;
+    Skip ) break;;
+    esac
+  done
+
+	cd "$PROGDIR" \
+	&& vim
 }
 
 _edit() {
