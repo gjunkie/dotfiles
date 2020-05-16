@@ -1,6 +1,6 @@
 source ${HOME}/.bash/prompt/base_colors.sh
 
-PRIMARY_FG=${256_Cyan}
+PRIMARY_FG=${CYAN_256}
 SECONDARY_FG=${IYellow}
 TERTIARY_FG=${White}
 

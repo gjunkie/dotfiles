@@ -16,6 +16,9 @@ LIGHT_GREEN="\033[1;32m"
 YELLOW="\033[1;33m"
 WHITE="\033[1;37m"
 
+# 256
+CYAN_256="\033[38;5;45m"
+
 COLOR_NONE="[0m"
 
 # BASE 16
@@ -89,5 +92,3 @@ On_IPurple="[10;95m"  # Purple
 On_ICyan="[0;106m"    # Cyan
 On_IWhite="[0;107m"   # White
 
-# 256
-256_Cyan="\033[38;5;45m"
