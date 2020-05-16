@@ -90,4 +90,4 @@ On_ICyan="[0;106m"    # Cyan
 On_IWhite="[0;107m"   # White
 
 # 256
-256_Cyan="[38;5;45m"
+256_Cyan="\033[38;5;45m"
