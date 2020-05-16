@@ -1,4 +1,4 @@
-source ${HOME}/.bash/prompt/colorschemes/base_colors.sh
+source ${HOME}/.bash/prompt/base_colors.sh
 
 PRIMARY_FG=${Cyan}
 SECONDARY_FG=${Yellow}
