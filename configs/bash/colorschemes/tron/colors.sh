@@ -1,9 +1,9 @@
 source ${HOME}/.bash/prompt/base_colors.sh
 
-PRIMARY_FG=${256Cyan}
-SECONDARY_FG=${256Orange}
+PRIMARY_FG=${Cyan256}
+SECONDARY_FG=${Orange256}
 TERTIARY_FG=${White}
 
-GIT_CLEAN=${256Cyan}
-GIT_STAGED=${E256Orange}
-GIT_DIRTY=${256Cyan}
+GIT_CLEAN=${ECyan256}
+GIT_STAGED=${EOrange256}
+GIT_DIRTY=${ECyan256}

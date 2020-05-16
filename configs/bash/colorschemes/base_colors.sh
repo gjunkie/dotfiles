@@ -7,12 +7,12 @@ c_sgr0=`tput sgr 0`
 COLOR_NONE="[0m"
 
 # 256 COLORS ESCAPED
-E256Cyan="\033[38;5;051m"   # Cyan
-E256Orange="\033[38;5;214m" # Orange
+ECyan256="\033[38;5;051m"   # Cyan
+EOrange256="\033[38;5;214m" # Orange
 
 # 256 COLORS
-256Cyan="[38;5;051m"        # Cyan
-256Orange="[38;5;214m"      # Orange
+Cyan256="[38;5;051m"        # Cyan
+Orange256="[38;5;214m"      # Orange
 
 
 # BASE 16 ESCAPED
