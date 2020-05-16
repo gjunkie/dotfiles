@@ -1,7 +1,7 @@
 source ${HOME}/.bash/prompt/base_colors.sh
 
 PRIMARY_FG=${CYAN_256}
-SECONDARY_FG=${IYellow}
+SECONDARY_FG=${ORANGE_256}
 TERTIARY_FG=${White}
 
 GIT_CLEAN=${BOLD_CYAN}
