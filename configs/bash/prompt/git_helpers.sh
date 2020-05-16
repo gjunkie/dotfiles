@@ -4,11 +4,11 @@ function branch_color ()
   git_status="$(git status 2> /dev/null)"
     # Set color based on clean/staged/dirty.
     if [[ ${git_status} =~ "nothing to commit, working tree clean" ]]; then
-      color="${SUCCESS_FG}"
+      color=SUCCESS_FG
     elif [[ ${git_status} =~ "Changes to be committed" ]]; then
-      color="${WARNING_FG}"
+      color=WARNING_FG
     else
-      color="${ALERT_FG}"
+      color=ALERT_FG
     fi
     echo -ne $color
 }
