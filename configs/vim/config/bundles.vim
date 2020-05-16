@@ -7,12 +7,15 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 " Auto closing of quotes and such
 Plug 'Raimondi/delimitMate'
+
 " Language Pack for syntax highlighting
 " Plugin 'sheerun/vim-polyglot'
-Plug 'pangloss/vim-javascript'
 Plug 'amadeus/vim-jsx'
 Plug 'amadeus/vim-xml'
+Plug 'pangloss/vim-javascript'
+Plug 'kchmck/vim-coffee-script'
 " Plugin 'MaxMEllon/vim-jsx-pretty'
+"
 " Auto Complete suggestions
 Plug 'lifepillar/vim-mucomplete'
 " Linting

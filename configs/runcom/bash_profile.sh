@@ -1,9 +1,8 @@
 source ${HOME}/.bash/aliases.sh
-source ${HOME}/.bash/colors.sh
 source ${HOME}/.bash/fzf.sh
 source ${HOME}/.bash/git_completion.sh
 source ${HOME}/.bash/paths.sh
-source ${HOME}/.bash/prompt.sh
+source ${HOME}/.bash/prompt/prompt.sh
 
 if [ -f ~/.bash_profile.local ]; then
   source ~/.bash_profile.local

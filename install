@@ -199,8 +199,11 @@ install_node_packages() {
 copy_files() {
 	_process "→ Copying vim folder"
 	cp -r "${DIR}/configs/vim" "${HOME}/.vim"
+
 	_process "→ Copying bash folder"
 	cp -r "${DIR}/configs/bash" "${HOME}/.bash"
+	cp "${DIR}/configs/bash/colorschemes/base_colors.sh" "${HOME}/.bash/prompt/base_colors.sh"
+	cp "${DIR}/configs/bash/colorschemes/tron/colors.sh" "${HOME}/.bash/prompt/prompt_colors.sh"
 
 	# copy over files to the HOME directory. These were
 	# originally symlinks but ran into permissions issues
