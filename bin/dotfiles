@@ -105,7 +105,7 @@ cmdline() {
 	do
 		case $OPTION in
 			c)
-				_color
+				_set_colorscheme
 				exit 0
 				;;
 			d)
@@ -149,19 +149,6 @@ cmdline() {
 	done
 
 	return 0
-}
-
-_color() {
-  echo "Install everything, or skip to dotfiles?"
-  select yn in "Everything" "Skip"; do
-    case $yn in
-    Everything ) install_software; break;;
-    Skip ) break;;
-    esac
-  done
-
-	cd "$PROGDIR" \
-	&& vim
 }
 
 _edit() {
@@ -229,6 +216,50 @@ install_formulae() {
 # install_node_packages() {
 # 
 # }
+
+_set_colorscheme() {
+	# copy over files to the HOME directory. These were
+	# originally symlinks but ran into permissions issues
+	# with Docker containers.
+	if [[ -f "${DIR}/configs/bash/colorschemes" ]]; then
+		_process "→ Changing colorscheme"
+
+		# Set variable for list of files
+		colors="${DIR}/configs/bash/colorschemes"
+
+		# Store IFS within a temp variable
+		OIFS=$IFS
+
+		# Set the separator to a carriage return & a new line break
+		# read in passed-in file and store as an array
+		IFS=$'\r\n'
+		links=($(cat "${colors}"))
+
+    printf "Please select folder:\n"
+    select d in */; do test -n "$d" && break; echo ">>> Invalid Selection"; done
+    cd "$d" && pwd
+		# Loop through array
+		# for index in ${!links[*]}
+		# do
+			# for link in ${links[$index]}
+			# do
+				# set IFS back to space to split string on
+				# IFS=$' '
+				# create an array of line items
+				# file=(${links[$index]})
+				# Create symbolic link
+				# cp "${DIR}/${file[0]}" "${HOME}/${file[1]}"
+			# done
+			# set separater back to carriage return & new line break
+			# IFS=$'\r\n'
+		# done
+
+		# Reset IFS back
+		IFS=$OIFS
+
+		[[ $? ]] && _success "All files have been copied"
+	fi
+}
 
 update_repo() {
 	cd "$PROGDIR"
