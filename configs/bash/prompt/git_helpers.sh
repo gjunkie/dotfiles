@@ -84,7 +84,3 @@ function parse_git_dirty {
 		echo ""
 	fi
 }
-
-# Prompt
-PS1='[\e${PRIMARY_FG}\u\e${NC}\e${LIGHT_GRAY_FG}:\e${NC}\e${SECONDARY_FG}\h\e${NC}] in \e${TERTIARY_FG}\w\e${NC}\[${c_sgr0}\] $(print_if_in_repo 'on') \[$(branch_color)\]$(parse_git_branch)\[${c_sgr0}\]\n\$ '
-
