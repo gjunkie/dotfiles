@@ -2,6 +2,7 @@ eslint
 fzf
 git
 n
+ripgrep
 tig
 tmux
 yarn
