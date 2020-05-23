@@ -17,7 +17,7 @@ $ dotfiles [-h|--help] [--update]
 
 | Options        | Description                          |
 | :------------- | :----------------------------------- |
-| `--color`      | Choose a colorscheme                 |
+| `--color`      | Choose a bash prompt colorscheme     |
 | `--dotfiles`   | Update repo and copy dotfiles        |
 | `--edit`       | Launch Vim and edit dotfiles         |
 | `--help`       | Show help                            |
@@ -34,7 +34,7 @@ When your current working directory is a Git repository, the $PROMPT will displa
 
 #### Bash prompt colorschemes
 
-You can use the default colorscheme shown above or create new ones. To add a new colorscheme, create a directory in `configs/bash/colorschemes/` with the name of your colorscheme. This folder should have a single file named `colors.sh`. There are six color variables you can set; `PRIMARY_FG`, `SECONDARY_FG`, `TERTIARY_FG`, `SUCCESS_FG`, `WARNING_FG`, and `ALERT_FG`. Take a look at `configs/bash/colorschemes/default/colors.sh` for an example.
+You can use the default colorscheme shown above or create new ones. To add a new colorscheme, create a directory in `configs/bash/colorschemes/` with the name of your colorscheme. This folder should have a single file named `colors.sh`. There are six color variables you can set; `PRIMARY_FG`, `SECONDARY_FG`, `TERTIARY_FG`, `SUCCESS_FG`, `WARNING_FG`, and `ALERT_FG`. Take a look at [`configs/bash/colorschemes/default/colors.sh`](https://github.com/gjunkie/dotfiles/blob/master/configs/bash/colorschemes/default/colors.sh) for an example.
 
 To change your bash prompt colorscheme run `$ dotfiles --color your_colorscheme_name`.
 
@@ -44,7 +44,7 @@ Any private and custom Bash commands and configuration should be placed in a ~/.
 
 #### Todo
 
-- Finish bash colorschemes feature.
+- Finish bash c`configs/bash/colorschemes/`olorschemes feature.
 - Add custom options to `dotfiles` update script.
 - Figure out symlink solution to permissions issues with install location and Docker.
 - Figure out snippets solution.
