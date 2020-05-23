@@ -53,8 +53,6 @@ _print_help() {
 		-d --dotfiles      Update repo and copy dotfiles
 		-e --edit          Launch Vim and edit dotfiles
 		-h --help          Show this help
-		-t --test          Run unit test to check the program
-		-v --version       Display dotfiles version
 		-s --software      Update brews, gems, and npm packages
 		-u --update        Pull the latest from the dotfiles repo
 	Examples:
@@ -84,9 +82,9 @@ cmdline() {
 			--edit)         args="${args}-e ";;
 			--help)         args="${args}-h ";;
 			--software)     args="${args}-s ";;
-			--test)         args="${args}-t ";;
+			# --test)         args="${args}-t ";;
 			--update)		    args="${args}-u ";;
-			--version)      args="${args}-v ";;
+			# --version)      args="${args}-v ";;
 			#pass through anything else
 			*) [[ "${arg:0:1}" == "-" ]] || delim="\""
 				args="${args}${delim}${arg}${delim} ";;
@@ -119,16 +117,8 @@ cmdline() {
 				_software
 				exit 0
 				;;
-			t)
-				_run_tests
-				exit 0
-				;;
 			u)
 				update_repo
-				exit 0
-				;;
-			v)
-				_version
 				exit 0
 				;;
 			\?)
