@@ -9,6 +9,8 @@ $ bash -c "$(curl -#fL raw.github.com/gjunkie/dotfiles/master/install)"
 
 ### Updating dotfiles
 
+A `dotfiles` update script will be installed in your `/usr/local/bin/` directory. 
+
 ```
 $ dotfiles [-h|--help] [--update]
 ```
@@ -30,16 +32,25 @@ When your current working directory is a Git repository, the $PROMPT will displa
 
 ![bash prompt](https://raw.githubusercontent.com/gjunkie/dotfiles/master/images/bash_prompt_and_git.png)
 
+#### Bash prompt colorschemes
+
+You can use the default colorscheme shown above or create new ones. To add a new colorscheme, create a directory in `configs/bash/colorschemes/` with the name of your colorscheme. This folder should have a single file named `colors.sh`. There are six color variables you can set; `PRIMARY_FG`, `SECONDARY_FG`, `TERTIARY_FG`, `SUCCESS_FG`, `WARNING_FG`, and `ALERT_FG`. Take a look at `configs/bash/colorschemes/default/colors.sh` for an example.
+
+To change your bash prompt colorscheme run `$ dotfiles --color your_colorscheme_name`.
+
 ### Local/private Bash configuration
 
 Any private and custom Bash commands and configuration should be placed in a ~/.bash_profile.local file. This file will not be under version control or committed to a public repository. If ~/.bash_profile.local exists, it will be sourced for inclusion in bash_profile.
 
 #### Todo
 
+- Finish bash colorschemes feature.
 - Add custom options to `dotfiles` update script.
 - Figure out symlink solution to permissions issues with install location and Docker.
 - Figure out snippets solution.
 - Create a helper prompt to display in quickfix window.
+- Fix "any key" prompt on initial install.
+- Figure out how to re-symlink `dotfiles` script after making changes to it.
 
 ### Acknowledgements 
 
