@@ -14,7 +14,7 @@ $ dotfiles [-h|--help] [--update]
 ```
 
 | Options        | Description                          |
-| :------------- | -----------------------------------: |
+| :------------- | :----------------------------------- |
 | `--color`      | Choose a colorscheme                 |
 | `--dotfiles`   | Update repo and copy dotfiles        |
 | `--edit`       | Launch Vim and edit dotfiles         |
