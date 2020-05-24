@@ -25,6 +25,8 @@ Plug 'kchmck/vim-coffee-script'
 " Auto Complete suggestions
 Plug 'lifepillar/vim-mucomplete'
 
+Plug 'lifepillar/vim-colortemplate'
+
 " Linting
 Plug 'w0rp/ale'
 
