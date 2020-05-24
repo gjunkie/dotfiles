@@ -15,6 +15,8 @@ Plug 'Raimondi/delimitMate'
 
 " Syntax Highlighting
 " Plugin 'sheerun/vim-polyglot'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'amadeus/vim-xml'
 Plug 'pangloss/vim-javascript'
