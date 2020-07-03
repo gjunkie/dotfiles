@@ -7,7 +7,7 @@ set rtp+=/usr/local/bin/fzf
 let g:fzf_layout = { 'down': '~40%' }
 let g:fzf_colors =
     \ { 'fg':      ['fg', 'Normal'],
-      \ 'bg':      ['bg', 'Pmenu'],
+      \ 'bg':      ['bg', 'PmenuSbar'],
       \ 'hl':      ['fg', 'Comment'],
       \ 'fg+':     ['fg', 'Comment', 'Normal'],
       \ 'bg+':     ['bg', 'Pmenu'],
