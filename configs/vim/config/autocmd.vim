@@ -42,7 +42,7 @@ fun! s:highlight()
 
   hi User5 ctermfg=005
 
-  hi User6 ctermfg=006
+  hi User6 ctermfg=195
 
   hi User7 ctermfg=none
 

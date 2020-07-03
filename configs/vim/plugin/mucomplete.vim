@@ -38,12 +38,16 @@ autocmd CompleteDone * call js#expand_snippet()
 " Ccompletion Chains
 " ---------------------------------
 let g:mucomplete#chains = {
-  \'default':  ['keyp', 'keyn', 'c-n'],
-  \'coffee':  ['c-n', 'c-p'],
-  \'javascript.jsx':  ['incl', 'user', 'keyp', 'keyn'],
+  \'default':  ['keyp', 'keyn'],
+  \'coffee':  ['keyp', 'keyn'],
+  \'javascript':  ['user', 'keyp', 'keyn'],
   \'markdown': ['c-n', 'spel', 'dict'],
-  \'rb':  ['c-n'],
+  \'rb':  ['keyp', 'keyn'],
   \}
 
+let g:mucomplete#completion_delay = 250
 let g:mucomplete#enable_auto_at_startup = 1
 let g:mucomplete#popup_direction = { 'keyp' : 1, 'keyn' : 1 }
+let g:mucomplete#reopen_immediately = 1
+set spell spelllang=en
+" let g:mucomplete#spel#max = 15

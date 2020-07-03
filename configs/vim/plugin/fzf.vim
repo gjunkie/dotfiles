@@ -30,15 +30,6 @@ let s:fzf_options = "--multi --tabstop 4 --no-reverse --no-margin
       \ echo {} is a binary file || (head -18 {})' --preview-window up:40%"
 
 " search
-" let s:rg_command = 'rg --ignore-case --hidden --follow --color never
-"       \ --column --line-number --no-heading --fixed-strings
-"       \ --ignore ' .
-"       \ (filereadable('.rgignore') ? '--ignore-file ".rgignore"' : '')
-"
-" command! -bang -nargs=* Rg
-"       \ call fzf#vim#grep(s:rg_command.shellescape(<q-args>), 1,
-"       \ fzf#vim#with_preview({'options': '--delimiter : --nth 4..'},
-"       \ 'up:40%'), <bang>0)
 
 " files
 " Pass an empty option dictionary if the screen is narrow
@@ -47,17 +38,6 @@ command! -bang -nargs=? -complete=dir Files
 
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 0, { 'options': '--color hl:195,hl+:195,fg+:008,fg:250,prompt:195' }, 0)
-
-" let $BAT_THEME = 'TwoDark'
-" command! -bang -nargs=* Rg
-"   \ call fzf#vim#grep('rg --column --no-heading --line-number --color=always '.shellescape(<q-args>),
-"   \ 1,
-"   \ fzf#vim#with_preview(),
-"   \ <bang>0)
-
-
-" let s:files_source = 'fd -HLp -t f -c never'
-" command! -nargs=* -complete=file_in_path Files call     fzf#run(fzf#wrap('files',
-"       \ {'source': s:files_source.shellescape(<q-args>),
-"       \ 'options': s:fzf_options}, 0))
+  \   'rg --column --line-number --no-heading --color=always --colors "match:fg:166" --colors "path:fg:240" --colors "line:fg:195" --colors "column:fg:195" --smart-case '.shellescape(<q-args>),
+  \   0,
+  \   { 'options': '--color hl:195,hl+:195,fg+:195,fg:246,prompt:195' }, 0)
