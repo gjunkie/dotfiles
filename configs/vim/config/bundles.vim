@@ -21,6 +21,8 @@ Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'amadeus/vim-xml'
 Plug 'pangloss/vim-javascript'
 Plug 'kchmck/vim-coffee-script'
+Plug 'leafgarland/typescript-vim'
+Plug 'ianks/vim-tsx'
 
 " Auto Complete suggestions
 Plug 'lifepillar/vim-mucomplete'
