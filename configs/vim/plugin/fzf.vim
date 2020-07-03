@@ -6,17 +6,17 @@
 set rtp+=/usr/local/bin/fzf
 let g:fzf_layout = { 'down': '~40%' }
 let g:fzf_colors =
-    \ { 'fg':      ['fg', 'Normal'],
+    \ { 'fg':      ['fg', 'Comment'],
       \ 'bg':      ['bg', 'PmenuSbar'],
       \ 'hl':      ['fg', 'Comment'],
-      \ 'fg+':     ['fg', 'Comment', 'Normal'],
-      \ 'bg+':     ['bg', 'Pmenu'],
-      \ 'hl+':     ['fg', 'Statement'],
+      \ 'fg+':     ['fg', 'Normal'],
+      \ 'bg+':     ['bg', 'PmenuSbar'],
+      \ 'hl+':     ['fg', 'Keyword'],
       \ 'info':    ['fg', 'Statement'],
-      \ 'border':  ['fg', 'Ignore'],
+      \ 'border':  ['fg', 'VertSplit'],
       \ 'prompt':  ['fg', 'Conditional'],
       \ 'pointer': ['fg', 'Statement'],
-      \ 'marker':  ['fg', 'Keyword'],
+      \ 'marker':  ['fg', 'Special'],
       \ 'spinner': ['fg', 'Label'],
       \ 'header':  ['fg', 'Keyword'] }
 
