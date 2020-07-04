@@ -24,9 +24,6 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'leafgarland/typescript-vim'
 Plug 'ianks/vim-tsx'
 
-" Github links
-Plug 'k0kubun/vim-open-github'
-
 " Auto Complete suggestions
 Plug 'lifepillar/vim-mucomplete'
 
