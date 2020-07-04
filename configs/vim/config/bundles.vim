@@ -25,7 +25,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'ianks/vim-tsx'
 
 " Github links
-Plug 'danishprakash/vim-githubinator'
+Plug 'k0kubun/vim-open-github'
 
 " Auto Complete suggestions
 Plug 'lifepillar/vim-mucomplete'
