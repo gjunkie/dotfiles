@@ -1,31 +1,36 @@
+snippet import-prop-types-snip
+import { ___ } from 'prop-types';
+
+snippet import-react-snip
+import React from 'react';
+
 snippet func-exp-snip
-const ___ = () {
-   const ___;
+const ___ = (___) => {
 };
 
 snippet func-dec-snip
 function ___(___) {
-   const ___ = ___;
 };
 
-snippet func-method-snip
-___(___) {
-   const ___ = ___;
-}
+snippet log-obj-snip
+console.log({___});
 
-snippet log-snip
+snippet log-str-snip
+console.log('___');
+
+snippet log-var-snip
 console.log(___);
 
 snippet log-color-snip
-console.log('%c ___', 'background: #222; color: #bada55');
+console.log('%c___', 'background: #222; color: #bada55');
 
-snippet component-stateless-snip
+snippet component-func-snip
 import React from 'react';
 const ___ = ({
   ___
 }) => {
 };
 ___.propTypes = {
-  workflowValid: bool,
+  ___: ___,
 };
 export default ___;
