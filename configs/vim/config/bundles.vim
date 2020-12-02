@@ -5,7 +5,8 @@ call plug#begin('~/.vim/plugged')
 
 " Colorschemes
 " Plug 'gjunkie/vim-grid-color'
-Plug 'cocopon/iceberg.vim'
+" Plug 'cocopon/iceberg.vim'
+Plug 'sonph/onehalf'
 
 " fuzzy searcher
 Plug 'junegunn/fzf'
