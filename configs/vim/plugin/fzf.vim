@@ -24,6 +24,7 @@ let g:fzf_colors =
 let g:fzf_action = {'ctrl-s': 'split', 'ctrl-v': 'vsplit'}
 let g:fzf_history_dir = '~/.fzf-history'
 let g:fzf_buffers_jump = 1
+let g:fzf_tags_command = 'ctags -R --exclude=.git --exclude=node_modules'
 
 let s:fzf_options = "--multi --tabstop 4 --no-reverse --no-margin
       \ --preview '[[ $(file --mime {}) =~ binary ]] &&

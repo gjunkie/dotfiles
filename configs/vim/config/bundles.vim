@@ -12,6 +12,9 @@ Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 
+" ctags
+Plug 'ludovicchabant/vim-gutentags'
+
 " Auto closing of quotes and such
 Plug 'Raimondi/delimitMate'
 
