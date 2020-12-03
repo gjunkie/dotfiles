@@ -38,7 +38,7 @@ set tabstop=2
 " set termguicolors
 set undoreload=10000
 set undolevels=1000
-set wildignore+=*/node_modules/*
+set wildignore+=node_modules
 
 set diffopt+=iwhiteall
 set diffopt+=hiddenoff
