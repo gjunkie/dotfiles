@@ -41,7 +41,6 @@ let g:mucomplete#chains = {
   \'default':  ['keyp', 'keyn'],
   \'coffee':  ['user', 'keyp', 'keyn'],
   \'javascript':  ['user', 'keyp', 'keyn'],
-  \'markdown': ['c-n', 'spel', 'dict'],
   \'rb':  ['keyp', 'keyn'],
   \}
 
