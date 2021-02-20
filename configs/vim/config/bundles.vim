@@ -21,13 +21,13 @@ Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'amadeus/vim-xml'
 Plug 'pangloss/vim-javascript'
 Plug 'kchmck/vim-coffee-script'
+
 Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 Plug 'ianks/vim-tsx'
 
-" Auto Complete suggestions
-Plug 'lifepillar/vim-mucomplete'
-
-Plug 'lifepillar/vim-colortemplate'
+" Use release branch (recommend)
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Linting
 Plug 'w0rp/ale'
