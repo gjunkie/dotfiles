@@ -4,11 +4,16 @@
 call plug#begin('~/.vim/plugged')
 
 " Colorschemes
-Plug 'gjunkie/vim-grid-color'
+" Plug 'gjunkie/vim-grid-color'
+" Plug 'cocopon/iceberg.vim'
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
 
 " fuzzy searcher
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+
+" ctags
+Plug 'ludovicchabant/vim-gutentags'
 
 " Auto closing of quotes and such
 Plug 'Raimondi/delimitMate'

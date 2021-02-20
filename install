@@ -241,6 +241,7 @@ copy_files() {
 		# Reset IFS back
 		IFS=$OIFS
 
+    git config --global core.excludesFile '~/.gitignore'
 		[[ $? ]] && _success "All files have been copied"
 	fi
 }

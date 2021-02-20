@@ -41,11 +41,10 @@ let g:mucomplete#chains = {
   \'default':  ['keyp', 'keyn'],
   \'coffee':  ['user', 'keyp', 'keyn'],
   \'javascript':  ['user', 'keyp', 'keyn'],
-  \'markdown': ['c-n', 'spel', 'dict'],
   \'rb':  ['keyp', 'keyn'],
   \}
 
-let g:mucomplete#completion_delay = 250
+let g:mucomplete#completion_delay = 350
 let g:mucomplete#enable_auto_at_startup = 1
 let g:mucomplete#popup_direction = { 'keyp' : 1, 'keyn' : 1 }
 let g:mucomplete#reopen_immediately = 1

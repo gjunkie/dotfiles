@@ -38,6 +38,7 @@ set tabstop=2
 " set termguicolors
 set undoreload=10000
 set undolevels=1000
+set wildignore+=node_modules
 
 set diffopt+=iwhiteall
 set diffopt+=hiddenoff
@@ -55,10 +56,16 @@ if has('persistent_undo')
 endif
 
 try
-    colorscheme grid
+    colorscheme onehalfdark
 catch /^Vim\%((\a\+)\)\=:E185/
 endtry
 
 if !has('gui_running')
   set t_Co=256
+endif
+
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
 endif
