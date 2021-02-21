@@ -4,7 +4,7 @@
 call plug#begin('~/.vim/plugged')
 
 " Colorschemes
-" Plug 'gjunkie/vim-grid-color'
+Plug 'gjunkie/vim-grid-color'
 " Plug 'cocopon/iceberg.vim'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 
@@ -36,5 +36,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Linting
 Plug 'w0rp/ale'
+
+Plug 'lifepillar/vim-colortemplate'
 
 call plug#end()
