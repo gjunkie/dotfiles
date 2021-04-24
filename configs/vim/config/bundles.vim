@@ -39,4 +39,7 @@ Plug 'w0rp/ale'
 
 Plug 'lifepillar/vim-colortemplate'
 
+" Colorschemes
+Plug 'cocopon/iceberg.vim'
+
 call plug#end()
