@@ -31,8 +31,8 @@ fun! CompleteLog(findstart, base)
   endif
 endfun
 
-set completeopt+=menu,menuone,noinsert
-set completefunc=CompleteLog
+set completeopt+=menu,menuone
+" set completefunc=CompleteLog
 autocmd CompleteDone * call js#expand_snippet()
 
 " Ccompletion Chains
