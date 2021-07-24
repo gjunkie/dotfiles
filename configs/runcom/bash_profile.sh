@@ -1,6 +1,5 @@
 source ${HOME}/.bash/aliases.sh
 source ${HOME}/.bash/fzf.sh
-source ${HOME}/.bash/git_completion.sh
 source ${HOME}/.bash/paths.sh
 source ${HOME}/.bash/prompt/prompt.sh
 
