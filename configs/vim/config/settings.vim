@@ -34,7 +34,7 @@ set softtabstop=2
 set splitbelow
 set splitright
 set tabstop=2
-set term=xterm-256color
+" set term=xterm-256color
 set termguicolors
 set undoreload=10000
 set undolevels=1000

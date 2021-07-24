@@ -160,7 +160,6 @@ setup_bash() {
 
 	cp -r "${DIR}/configs/bash" "${HOME}/.bash"
 	cp "${DIR}/configs/bash/colorschemes/base_colors.sh" "${HOME}/.bash/prompt/base_colors.sh"
-	cp "${DIR}/configs/bash/colorschemes/tron/colors.sh" "${HOME}/.bash/prompt/prompt_colors.sh"
 	[[ $? ]] && _success "Copied bash folder"
 }
 
