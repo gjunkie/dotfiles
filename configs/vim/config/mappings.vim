@@ -68,6 +68,20 @@ vnoremap <silent>  C :<c-u>call comment#toggle_comment(visualmode(), 1)<cr>
 vmap <Tab> >gv
 vmap <S-Tab> <gv
 
+" Completion list
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <silent><expr> <NUL> coc#refresh()
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
 " Spacing (tabs and spaces)
 nmap <leader>tt :set noet tabstop=4 shiftwidth=4 softtabstop=4<CR>
 nmap <leader>ss :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
