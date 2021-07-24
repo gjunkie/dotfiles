@@ -285,6 +285,7 @@ main() {
 	update_vim_bundles
 
 	. "${HOME}/.bash_profile"
+	. "${HOME}/.bashrc"
 
 	[[ $? ]] && _success "Dotfiles updated."
 }

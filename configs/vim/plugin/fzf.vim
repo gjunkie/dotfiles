@@ -42,3 +42,7 @@ command! -bang -nargs=* Rg
   \   'rg --column --line-number --no-heading --color=always --colors "match:fg:166" --colors "path:fg:240" --colors "line:fg:195" --colors "column:fg:195" --smart-case '.shellescape(<q-args>),
   \   0,
   \   { 'options': '--color hl:195,hl+:195,fg+:195,fg:246,prompt:195' }, 0)
+
+nnoremap <leader>v :FzfFiles<cr>
+nnoremap <leader>u :FzfTags<cr>
+nnoremap <leader>j :call fzf#vim#tags("'".expand('<cword>'))<cr>

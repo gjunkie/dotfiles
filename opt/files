@@ -1,6 +1,4 @@
-configs/git/.gitconfig .gitconfig
-configs/git/.gitignore .gitignore
 configs/tmux/tmux.conf .tmux.conf
-configs/runcom/bash_profile.sh .bash_profile
+configs/runcom/bashrc.sh .bashrc
 configs/runcom/vimrc.vim .vimrc
 configs/runcom/zshrc.zsh .zshrc

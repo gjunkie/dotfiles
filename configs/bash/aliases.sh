@@ -4,6 +4,11 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias play='cd ~/Projects/'
 
+alias vim="nvim"
+alias vi="nvim"
+
+alias ctags="`brew --prefix`/bin/ctags"
+
 alias lsl='ls -lF -G'
 alias lsa='ls -la -G'
 

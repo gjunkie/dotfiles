@@ -1,6 +1,7 @@
 " -------------------------------------
 " General Mappings
 " -------------------------------------
+let mapleader = ","
 
 " Window Management
 " -------------------------------------
@@ -8,11 +9,15 @@ nnoremap fh <C-w>h
 nnoremap fj <C-w>j
 nnoremap fk <C-w>k
 nnoremap fl <C-w>l
+
+" Neovim Terminal Control
+nnoremap tt :terminal<CR>
+
 " Windown resizing
-"nnoremap <C-K> :5wincmd +<CR> " Up
-"nnoremap <C-J> :5wincmd -<CR> " Down
-"nnoremap <C-H> :5wincmd <<CR> " Left
-"nnoremap <C-L> :5wincmd ><CR> " Right
+nnoremap = :vertical resize +5<CR>
+nnoremap - :vertical resize -5<CR>
+" nnoremap <C-H> :5wincmd <<CR> " Left
+" nnoremap <C-L> :5wincmd ><CR> " Right
 " Split windows verticall/horizontally
 nnoremap + :vsp<CR>
 nnoremap _ :sp<CR>
@@ -46,10 +51,10 @@ nnoremap j gj
 nnoremap k gk
 
 " move lines without dd
-nnoremap <S-k> :m-2<CR>
-nnoremap <S-j> :m+<CR>
-vnoremap <S-k> :m '<-2<CR>gv=gv
-vnoremap <S-j> :m '>+1<CR>gv=gv
+nnoremap <C-k> :m-2<CR>
+nnoremap <C-j> :m+<CR>
+vnoremap <C-k> :m '<-2<CR>gv=gv
+vnoremap <C-j> :m '>+1<CR>gv=gv
 
 " toggle commenting
 nnoremap <silent>  C :set opfunc=comment#toggle_comment<cr>g@<Right>
@@ -101,3 +106,106 @@ nnoremap gac :Commits!<CR>
 " ALE Linter
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
+" check the type under cursor w/ leader T
+
+set updatetime=300
+
+" Vim Test Mappings
+nmap <silent> t<C-n> :TestNearest<CR>
+nmap <silent> t<C-f> :TestFile<CR>
+nmap <silent> t<C-s> :TestSuite<CR>
+nmap <silent> t<C-l> :TestLast<CR>
+nmap <silent> t<C-g> :TestVisit<CR>
+
+" Vim Wiki
+nnoremap <Leader>ww :VimwikiIndex<CR>
+
+" " Copy to clipboard
+" vnoremap  <leader>y "+y
+" nnoremap  <leader>Y :"+yg_<CR>
+" nnoremap  <leader>y :"+y<CR>
+" nnoremap  <leader>yy :"+yy<CR>
+
+" " Paste from clipboard
+" nnoremap <leader>p "+p
+" nnoremap <leader>P "+P
+" vnoremap <leader>p "+p
+" vnoremap <leader>P "+P
+
+
+" nnoremap <silent> gd          <cmd>lua vim.lsp.buf.definition()<CR>
+" if exists('fzf')
+"   nnoremap <silent> gD        <cmd>lua vim.lsp.buf.definition { on_locations=metals.fuzzy_select }<CR>
+" endif
+" nnoremap <silent> gr          <cmd>lua vim.lsp.buf.references { includeDeclaration = true }<CR>
+" nnoremap <silent> gp          <cmd>
+"   \lua vim.lsp.buf.definition { on_locations= function(locs) vim.lsp.util.preview_location(locs[1]) end } <CR>
+"=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+" These are example settings to use with nvim-metals and the nvim built in
+" LSP.  Be sure to thoroughly read the the help docs to get an idea of what
+" everything does.
+"
+" The below configuration also makes use of the following plugins besides
+" nvim-metals
+" - https://github.com/nvim-lua/completion-nvim
+"=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+
+"-----------------------------------------------------------------------------
+" nvim-lsp Settings
+"-----------------------------------------------------------------------------
+" If you just use the latest stable version, then setting this isn't necessary
+" let g:metals_server_version = '0.9.8+10-334e402e-SNAPSHOT'
+
+"-----------------------------------------------------------------------------
+" nvim-metals setup with a few additions such as nvim-completions
+"-----------------------------------------------------------------------------
+:lua << EOF
+  metals_config = require'metals'.bare_config
+  metals_config.settings = {
+     showImplicitArguments = true,
+     excludedPackages = {
+       "akka.actor.typed.javadsl",
+       "com.github.swagger.akka.javadsl"
+     }
+  }
+
+  metals_config.on_attach = function()
+    require'completion'.on_attach();
+  end
+
+  metals_config.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics, {
+      virtual_text = {
+        prefix = '',
+      }
+    }
+  )
+EOF
+
+augroup lsp
+  au!
+  au FileType scala,sbt lua require('metals').initialize_or_attach(metals_config)
+augroup end
+
+"-----------------------------------------------------------------------------
+" completion-nvim settings
+"-----------------------------------------------------------------------------
+" Use <Tab> and <S-Tab> to navigate through popup menu
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+"-----------------------------------------------------------------------------
+" Helpful general settings
+"-----------------------------------------------------------------------------
+" Needed for compltions _only_ if you aren't using completion-nvim
+autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc
+
+" Set completeopt to have a better completion experience
+set completeopt=menuone,noinsert,noselect
+
+" Avoid showing message extra message when using completion
+set shortmess+=c
+
+" Ensure autocmd works for Filetype
+set shortmess-=F

@@ -340,6 +340,7 @@ main() {
   chmod 755 "/usr/local/bin/dotfiles"
 
 	. "${HOME}/.bash_profile"
+	. "${HOME}/.bashrc"
 
 	[[ $? ]] && _success "Dotfiles installed."
 
