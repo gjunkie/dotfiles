@@ -53,7 +53,7 @@ setup_dotfiles() {
 		# (-f) fail silently
 		# (-L) follow the headers
 		# (-o) output to a file
-		curl -#fLo /tmp/dotfiles.tar.gz "https://github.com/${GITHUB_USER}/dotfiles/tarball/master"
+		curl -#fLo /tmp/dotfiles.tar.gz "https://github.com/${GITHUB_USER}/dotfiles/tarball/main"
 
 		_process "→ Extracting files to ${DIR}"
 		tar -zxf /tmp/dotfiles.tar.gz --strip-components 1 -C "${DIR}"
@@ -256,7 +256,7 @@ initialize_repo() {
 	git remote add origin "https://github.com/${GITHUB_USER}/dotfiles.git"
 
 	_process "→ Downloading changes from origin"
-	git fetch origin master
+	git fetch origin main
 
 	# Reset the index and working tree to the fetched HEAD
 	# (submodules are cloned in the subsequent sync step)
@@ -269,7 +269,7 @@ initialize_repo() {
 
 	# Pull down the latest changes
 	_process "→ Pulling down latest changes"
-	git pull origin master
+	git pull origin main
 
 	[[ $? ]] && _success "Repository has been initialized"
 }

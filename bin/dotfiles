@@ -246,7 +246,7 @@ update_repo() {
 	cd "$PROGDIR"
 
 	_process "→ Downloading changes from origin"
-	git fetch origin master
+	git fetch origin main
 
 	dirty=`echo -n "${gstatus}" 2> /dev/null | grep "Changes not staged for commit" &> /dev/null; echo "$?"`
 	if [ "${dirty}" == "0" ]; then
@@ -265,7 +265,7 @@ update_repo() {
 
 	# Pull down the latest changes
 	_process "→ Pulling down latest changes"
-	git pull origin master
+	git pull origin main
 
 	chmod 755 "/usr/local/bin/dotfiles"
 
