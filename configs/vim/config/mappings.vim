@@ -147,61 +147,6 @@ nnoremap <Leader>ww :VimwikiIndex<CR>
 " vnoremap <leader>P "+P
 
 
-" nnoremap <silent> gd          <cmd>lua vim.lsp.buf.definition()<CR>
-" if exists('fzf')
-"   nnoremap <silent> gD        <cmd>lua vim.lsp.buf.definition { on_locations=metals.fuzzy_select }<CR>
-" endif
-" nnoremap <silent> gr          <cmd>lua vim.lsp.buf.references { includeDeclaration = true }<CR>
-" nnoremap <silent> gp          <cmd>
-"   \lua vim.lsp.buf.definition { on_locations= function(locs) vim.lsp.util.preview_location(locs[1]) end } <CR>
-"=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-" These are example settings to use with nvim-metals and the nvim built in
-" LSP.  Be sure to thoroughly read the the help docs to get an idea of what
-" everything does.
-"
-" The below configuration also makes use of the following plugins besides
-" nvim-metals
-" - https://github.com/nvim-lua/completion-nvim
-"=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
-
-"-----------------------------------------------------------------------------
-" nvim-lsp Settings
-"-----------------------------------------------------------------------------
-" If you just use the latest stable version, then setting this isn't necessary
-" let g:metals_server_version = '0.9.8+10-334e402e-SNAPSHOT'
-
-"-----------------------------------------------------------------------------
-" nvim-metals setup with a few additions such as nvim-completions
-"-----------------------------------------------------------------------------
-:lua << EOF
-  metals_config = require'metals'.bare_config
-  metals_config.settings = {
-     showImplicitArguments = true,
-     excludedPackages = {
-       "akka.actor.typed.javadsl",
-       "com.github.swagger.akka.javadsl"
-     }
-  }
-
-  metals_config.on_attach = function()
-    require'completion'.on_attach();
-  end
-
-  metals_config.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
-      virtual_text = {
-        prefix = '',
-      }
-    }
-  )
-EOF
-
-augroup lsp
-  au!
-  au FileType scala,sbt lua require('metals').initialize_or_attach(metals_config)
-augroup end
-
 "-----------------------------------------------------------------------------
 " completion-nvim settings
 "-----------------------------------------------------------------------------
