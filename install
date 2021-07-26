@@ -199,7 +199,7 @@ install_node_packages() {
 copy_files() {
 	_process "→ Copying vim folder"
 	cp -r "${DIR}/configs/vim" "${HOME}/.vim"
-	cp -r "${DIR}/configs/nvim" "${HOME}/.config/nvim"
+	cp -r "${DIR}/configs/nvim" "${HOME}/.config"
 
 	_process "→ Copying bash folder"
 	cp -r "${DIR}/configs/bash" "${HOME}/.bash"
