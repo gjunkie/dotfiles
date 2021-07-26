@@ -11,7 +11,7 @@ nnoremap fk <C-w>k
 nnoremap fl <C-w>l
 
 " Neovim Terminal Control
-nnoremap tt :terminal<CR>
+nnoremap tt :terminal
 
 " Windown resizing
 nnoremap = :vertical resize +5<CR>

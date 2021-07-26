@@ -13,11 +13,11 @@ ORANGE="$(tput setaf 179)"
 VIOLET='\[\033[01;35m\]'
 
 function color_my_prompt {
-  local __user_and_host="$RED\u @ \h"
-  local __user="$RED\u @"
+  local __user_and_host="$ORANGE\u @ \h"
+  local __user="$ORANGE\u @"
   if [ $VIM ]; then
-    __user_and_host="${RED}bash @ $GREEN\h"
-    __user="${RED}bash @"
+    __user_and_host="${ORANGE}bash @ $GREEN\h"
+    __user="${ORANGE}bash @"
   fi
 
   local __cur_location="$BLUE\w "
@@ -25,7 +25,6 @@ function color_my_prompt {
   local __user_input_color="$LIGHT_GRAY"
   local __git_status=$(git status 2> /dev/null)
   local __git_branch=$(__git_ps1) 
-  local __prompt_tail="$GREEN\n └─ \$ ▶"
 
   # Branch dirty status represented by symbols. See: git_helpers
   local __dirty_symbols=$(parse_git_dirty "$__git_status")
@@ -44,15 +43,12 @@ function color_my_prompt {
       __git_branch_color="$LIGHT_GRAY"
   fi
    
+  local __prompt_head="╔"
+  local __prompt_tail="\n╚ \$ »"
+
   # Build the PS1 (Prompt String)
-  PS1="$__user $__cur_location$__git_branch_color$__git_branch $__prompt_tail$__user_input_color "
+  PS1="$__git_branch_color$__prompt_head $__user $__cur_location$__git_branch_color$__git_branch $__git_branch_color$__prompt_tail$__user_input_color "
 }
 
 # configure PROMPT_COMMAND which is executed each time before PS1
 export PROMPT_COMMAND=color_my_prompt
-# GIT_PS1_SHOWDIRTYSTATE=true
-# GIT_PS1_SHOWSTASHSTATE=true
-# GIT_PS1_SHOWUNTRACKEDFILES=true
-# GIT_PS1_SHOWUPSTREAM="auto"
-# GIT_PS1_HIDE_IF_PWD_IGNORED=true
-# GIT_PS1_SHOWCOLORHINTS=true

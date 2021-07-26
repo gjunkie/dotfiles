@@ -1,6 +1,8 @@
 set rtp +=~/.vim
 source ~/.vimrc
 
+autocmd TermOpen * startinsert
+
 "-----------------------------------------------------------------------------
 " nvim-metals setup with a few additions such as nvim-completions
 "-----------------------------------------------------------------------------

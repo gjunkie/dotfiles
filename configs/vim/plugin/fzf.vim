@@ -5,20 +5,21 @@
 
 set rtp+=/usr/local/bin/fzf
 let g:fzf_layout = { 'down': '~40%' }
+
 let g:fzf_colors =
-    \ { 'fg':      ['fg', 'Comment'],
-      \ 'bg':      ['bg', 'PmenuSbar'],
+    \ { 'fg':      ['fg', 'Normal'],
+      \ 'bg':      ['bg', 'Normal'],
       \ 'hl':      ['fg', 'Comment'],
-      \ 'fg+':     ['fg', 'Normal'],
-      \ 'bg+':     ['bg', 'PmenuSbar'],
-      \ 'hl+':     ['fg', 'Keyword'],
-      \ 'info':    ['fg', 'Statement'],
-      \ 'border':  ['fg', 'VertSplit'],
+      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'hl+':     ['fg', 'Statement'],
+      \ 'info':    ['fg', 'PreProc'],
+      \ 'border':  ['fg', 'Ignore'],
       \ 'prompt':  ['fg', 'Conditional'],
-      \ 'pointer': ['fg', 'Statement'],
-      \ 'marker':  ['fg', 'Special'],
+      \ 'pointer': ['fg', 'Exception'],
+      \ 'marker':  ['fg', 'Keyword'],
       \ 'spinner': ['fg', 'Label'],
-      \ 'header':  ['fg', 'Keyword'] }
+      \ 'header':  ['fg', 'Comment'] }
 
 " FZF stuff
 let g:fzf_action = {'ctrl-s': 'split', 'ctrl-v': 'vsplit'}
