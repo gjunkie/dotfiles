@@ -34,7 +34,7 @@ set softtabstop=2
 set splitbelow
 set splitright
 set tabstop=2
-set term=xterm-256color
+" set term=xterm-256color
 set termguicolors
 set undoreload=10000
 set undolevels=1000
@@ -69,3 +69,16 @@ if exists('+termguicolors')
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
 endif
+
+" set splitbelow         " Always split below
+" " set mouse=a            " Enable mouse drag on window splits
+" augroup myterm | au!
+"     au TermOpen * if &buftype ==# 'terminal' | resize 20 | vert resize 40 | endif
+" augroup end
+
+" Function to source only if file exists
+function! SourceIfExists(file)
+  if filereadable(expand(a:file))
+    exe 'source' a:file
+  endif
+endfunction
