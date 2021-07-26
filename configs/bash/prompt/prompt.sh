@@ -28,7 +28,7 @@ function color_my_prompt {
   local __prompt_tail="$GREEN\n └─ \$ ▶"
 
   # Branch dirty status represented by symbols. See: git_helpers
-	local __dirty_symbols=`parse_git_dirty`
+  local __dirty_symbols=$(parse_git_dirty "$__git_status")
   if [ "${__dirty_symbols}" != "" ]; then
     __git_branch="$(__git_ps1) [${__dirty_symbols}]"
   fi

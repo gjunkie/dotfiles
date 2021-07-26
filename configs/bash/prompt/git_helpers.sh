@@ -43,15 +43,14 @@ function print_if_in_repo() {
 
 # get current status of git repo
 function parse_git_dirty {
-	gstatus=`git status 2>&1 | tee`
-	dirty=`echo -n "${gstatus}" 2> /dev/null | grep "Changes not staged for commit" &> /dev/null; echo "$?"`
-	untracked=`echo -n "${gstatus}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?"`
-	staged=`echo -n "${gstatus}" 2> /dev/null | grep "Changes to be committed" &> /dev/null; echo "$?"`
-	ahead=`echo -n "${gstatus}" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?"`
-	behind=`echo -n "${gstatus}" 2> /dev/null | grep "commits behind" &> /dev/null; echo "$?"`
-	newfile=`echo -n "${gstatus}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?"`
-	renamed=`echo -n "${gstatus}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?"`
-	deleted=`echo -n "${gstatus}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?"`
+	dirty=`echo -n "$1" 2> /dev/null | grep "Changes not staged for commit" &> /dev/null; echo "$?"`
+	untracked=`echo -n "$1" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?"`
+	staged=`echo -n "$1" 2> /dev/null | grep "Changes to be committed" &> /dev/null; echo "$?"`
+	ahead=`echo -n "$1" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?"`
+	behind=`echo -n "$1" 2> /dev/null | grep "commits behind" &> /dev/null; echo "$?"`
+	newfile=`echo -n "$1" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?"`
+	renamed=`echo -n "$1" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?"`
+	deleted=`echo -n "$1" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?"`
 
 	bits=''
 	if [ "${renamed}" == "0" ]; then
