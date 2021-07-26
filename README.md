@@ -2,7 +2,7 @@
 
 ### One-line Install
 
-**Note**: This will will override your `.vim` folder and your dotfiles. Your user **must** have admin rights if you leave the default install location as `/usr/local/opt/dotfiles`.
+**Note**: This will will override your `.vim` folder, `.bash` folder, and other dotfiles. Your user **must** have admin rights if you leave the default install location as `/usr/local/opt/dotfiles`.
 ```
 $ bash -c "$(curl -#fL raw.github.com/gjunkie/dotfiles/main/install)"
 ```
