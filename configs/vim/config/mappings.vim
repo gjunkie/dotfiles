@@ -11,7 +11,16 @@ nnoremap fk <C-w>k
 nnoremap fl <C-w>l
 
 " Neovim Terminal Control
-nnoremap tt :terminal
+nnoremap tt :terminal<CR>
+
+" Toggle terminal on/off (neovim)
+nnoremap <C-e> :call TermToggle(13)<CR>
+inoremap <C-e> <Esc>:call TermToggle(12)<CR>
+tnoremap <C-e> <C-\><C-n>:call TermToggle(12)<CR>
+
+" Terminal go back to normal mode
+tnoremap <Esc> <C-\><C-n>
+tnoremap :q! <C-\><C-n>:q!<CR>
 
 " Windown resizing
 nnoremap = :vertical resize +5<CR>
