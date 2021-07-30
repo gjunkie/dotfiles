@@ -56,7 +56,7 @@ if has('persistent_undo')
 endif
 
 try
-  colorscheme iceberg
+  colorscheme nord
 catch /^Vim\%((\a\+)\)\=:E185/
 endtry
 
