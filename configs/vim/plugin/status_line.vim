@@ -210,6 +210,12 @@ let g:StslineColorDark   = "#080808"
 let g:StslineColorDark1  = "#181818"
 let g:StslineColorDark2  = "#202020"
 let g:StslineColorDark3  = "#303030"
+
+" Nord color palette
+let g:StslineColorFrostMoss        = "#8FBCBB"
+let g:StslineColorFrostBlue        = "#5E81AC"
+let g:StslineColorAuroraPurple     = "#B48EAD"
+let g:StslineColorAuroraYellow     = "#EBCB8B"
  
  
 " Define colors
@@ -227,7 +233,7 @@ execute 'highlight StslineSecColorBG guifg=' . g:StslineColorLight ' guibg=' . g
 execute 'highlight StslineBackColorBG guifg=' . g:StslineColorLight ' guibg=' . g:StslineBackColor
 execute 'highlight StslineBackColorFGSecColorBG guifg=' . g:StslineBackColor ' guibg=' . g:StslineSecColor
 execute 'highlight StslineSecColorFGBackColorBG guifg=' . g:StslineSecColor ' guibg=' . g:StslineBackColor
-execute 'highlight StslineModColorFG guifg=' . g:StslineColorYellow ' guibg=' . g:StslineBackColor
+execute 'highlight StslineModColorFG guifg=' . g:StslineColorAuroraYellow ' guibg=' . g:StslineBackColor
  
  
  
@@ -287,44 +293,43 @@ function! StslineMode()
     let l:CurrentMode=mode()
 
     if l:CurrentMode==#"n"
-        let g:StslinePriColor     = g:StslineColorGreen
+        let g:StslinePriColor     = g:StslineColorFrostMoss
         let b:CurrentMode = "NORMAL "
 
     elseif l:CurrentMode==#"i"
-        let g:StslinePriColor     = g:StslineColorViolet
+        let g:StslinePriColor     = g:StslineColorAuroraPurple
         let b:CurrentMode = "INSERT "
 
     elseif l:CurrentMode==#"c"
-        let g:StslinePriColor     = g:StslineColorYellow
-
+        let g:StslinePriColor     = g:StslineColorAuroraYellow
         let b:CurrentMode = "COMMAND "
 
     elseif l:CurrentMode==#"v"
-        let g:StslinePriColor     = g:StslineColorBlue
+        let g:StslinePriColor     = g:StslineColorFrostBlue
         let b:CurrentMode = "VISUAL "
 
     elseif l:CurrentMode==#"V"
-        let g:StslinePriColor     = g:StslineColorBlue
+        let g:StslinePriColor     = g:StslineColorFrostBlue
         let b:CurrentMode = "V-LINE "
 
     elseif l:CurrentMode==#"\<C-v>"
-        let g:StslinePriColor     = g:StslineColorBlue
+        let g:StslinePriColor     = g:StslineColorFrostBlue
         let b:CurrentMode = "V-BLOCK "
 
     elseif l:CurrentMode==#"R"
-        let g:StslinePriColor     = g:StslineColorViolet
+        let g:StslinePriColor     = g:StslineColorAuroraPurple
         let b:CurrentMode = "REPLACE "
 
     elseif l:CurrentMode==#"s"
-        let g:StslinePriColor     = g:StslineColorBlue
+        let g:StslinePriColor     = g:StslineColorFrostBlue
         let b:CurrentMode = "SELECT "
 
     elseif l:CurrentMode==#"t"
-        let g:StslinePriColor     =g:StslineColorYellow
+        let g:StslinePriColor     =g:StslineColorAuroraYellow
         let b:CurrentMode = "TERM "
 
     elseif l:CurrentMode==#"!"
-        let g:StslinePriColor     = g:StslineColorYellow
+        let g:StslinePriColor     = g:StslineColorAuroraYellow
         let b:CurrentMode = "SHELL "
 
     endif
@@ -389,7 +394,8 @@ elseif &filetype == 'css'
 let b:FiletypeIcon = ' '
 
 elseif &filetype == 'javascript'
-let b:FiletypeIcon = ' '
+" let b:FiletypeIcon = ' '
+let b:FiletypeIcon = ' '
 
 elseif &filetype == 'javascriptreact'
 let b:FiletypeIcon = ' '

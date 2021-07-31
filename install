@@ -139,6 +139,7 @@ install_formulae() {
 		# Tap some necessary formulae
 		brew tap homebrew/cask-versions
 		brew tap homebrew/cask-drivers
+    brew tap homebrew/cask-fonts
 		brew tap vitorgalvao/tiny-scripts
 
 		# Store IFS within a temp variable
