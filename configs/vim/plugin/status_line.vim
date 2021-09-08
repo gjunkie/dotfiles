@@ -266,9 +266,12 @@ set termguicolors
 " Define active statusline
 " %{expand('%:p:h:t')}
 function! ActivateStatusline()
-if !exists("b:GitBranch") || b:GitBranch == ''
-call GetFileType()
-setlocal statusline=%#StslinePriColorBG#\ %{StslineMode()}%#StslineSecColorBG#%{get(b:,'coc_git_status',b:GitBranch)}%{get(b:,'coc_git_blame','')}%#StslineBackColorFGPriColorBG#%#StslinePriColorFG#\ %{&readonly?\"\ \":\"\"}%{expand('%:p:h:t')}/%<%t%w\ %#StslineModColorFG#%{&modified?\"\ \":\"\"}%=%#StslinePriColorFG#\ %{b:FiletypeIcon}%{&filetype}\ %#StslineSecColorFG#%#StslineSecColorBG#%{&fenc!='utf-8'?\"\ \":''}%{&fenc!='utf-8'?&fenc:''}%{&fenc!='utf-8'?\"\ \":''}%#StslinePriColorFGSecColorBG#%#StslinePriColorBG#\ %p\%%\ %#StslinePriColorBGBold#%l%#StslinePriColorBG#/%L\ :%c\ 
+
+  if !exists("b:GitBranch") || b:GitBranch == ''
+    call GetFileType()
+    setlocal statusline=%#StslinePriColorBG#\ %{StslineMode()}%#StslineSecColorBG#%{get(b:,'coc_git_status',b:GitBranch)}%{get(b:,'coc_git_blame','')}%#StslineBackColorFGPriColorBG#%#StslinePriColorFG#\ %{&readonly?\"\ \":\"\"}%{expand('%:p:h:t')}/%<%t%w\ %#StslineModColorFG#%{&modified?\"\ \":\"\"}%=%#StslinePriColorFG#\ %{b:FiletypeIcon}%{&filetype}\ %#StslineSecColorFG#%#StslineSecColorBG#%{&fenc!='utf-8'?\"\ \":''}%{&fenc!='utf-8'?&fenc:''}%{&fenc!='utf-8'?\"\ \":''}%#StslinePriColorFGSecColorBG#%#StslinePriColorBG#\ %p\%%\ %#StslinePriColorBGBold#%l%#StslinePriColorBG#/%L\ :%c\ 
+  endif
+
 endfunction
 
 
@@ -277,12 +280,14 @@ endfunction
 
 function! DeactivateStatusline()
 
-if !exists("b:GitBranch") || b:GitBranch == ''
-setlocal statusline=%#StslineSecColorBG#\ INACTIVE\ %#StslineSecColorBG#%{get(b:,'coc_git_statusline',b:GitBranch)}%{get(b:,'coc_git_blame','')}%#StslineBackColorFGSecColorBG#%#StslineBackColorBG#\ %{&readonly?\"\ \":\"\"}%{expand('%:p:h:t')}/%<%t%w\ %#StslineModColorFG#%{&modified?\"\ \":\"\"}%=%#StslineBackColorBG#\ %{b:FiletypeIcon}%{&filetype}\ %#StslineSecColorFGBackColorBG#%#StslineSecColorBG#\ %p\%%\ %l/%L\ :%c\ 
+  if !exists("b:GitBranch") || b:GitBranch == ''
+    call GetFileType()
+    setlocal statusline=%#StslineSecColorBG#\ INACTIVE\ %#StslineSecColorBG#%{get(b:,'coc_git_statusline',b:GitBranch)}%{get(b:,'coc_git_blame','')}%#StslineBackColorFGSecColorBG#%#StslineBackColorBG#\ %{&readonly?\"\ \":\"\"}%{expand('%:p:h:t')}/%<%t%w\ %#StslineModColorFG#%{&modified?\"\ \":\"\"}%=%#StslineBackColorBG#\ %{b:FiletypeIcon}%{&filetype}\ %#StslineSecColorFGBackColorBG#%#StslineSecColorBG#\ %p\%%\ %l/%L\ :%c\ 
 
-else
-setlocal statusline=%#StslineSecColorBG#%{get(b:,'coc_git_statusline',b:GitBranch)}%{get(b:,'coc_git_blame','')}%#StslineBackColorFGSecColorBG#%#StslineBackColorBG#\ %{&readonly?\"\ \":\"\"}%{expand('%:p:h:t')}/%<%t%w\ %#StslineModColorFG#%{&modified?\"\ \":\"\"}%=%#StslineBackColorBG#\ %{b:FiletypeIcon}%{&filetype}\ %#StslineSecColorFGBackColorBG#%#StslineSecColorBG#\ %p\%%\ %l/%L\ :%c\ 
-endif
+  else
+    call GetFileType()
+    setlocal statusline=%#StslineSecColorBG#%{get(b:,'coc_git_statusline',b:GitBranch)}%{get(b:,'coc_git_blame','')}%#StslineBackColorFGSecColorBG#%#StslineBackColorBG#\ %{&readonly?\"\ \":\"\"}%{expand('%:p:h:t')}/%<%t%w\ %#StslineModColorFG#%{&modified?\"\ \":\"\"}%=%#StslineBackColorBG#\ %{b:FiletypeIcon}%{&filetype}\ %#StslineSecColorFGBackColorBG#%#StslineSecColorBG#\ %p\%%\ %l/%L\ :%c\ 
+  endif
 
 endfunction
 
@@ -381,63 +386,62 @@ endfunction
 " Get filetype & custom icon. Put your most used file types first for optimized performance.
 
 function! GetFileType()
+  if &filetype == 'typescript'
+  let b:FiletypeIcon = ' '
 
-if &filetype == 'typescript'
-let b:FiletypeIcon = ' '
+  elseif &filetype == 'html'
+  let b:FiletypeIcon = ' '
 
-elseif &filetype == 'html'
-let b:FiletypeIcon = ' '
+  elseif &filetype == 'scss'
+  let b:FiletypeIcon = ' '
 
-elseif &filetype == 'scss'
-let b:FiletypeIcon = ' '
+  elseif &filetype == 'css'
+  let b:FiletypeIcon = ' '
 
-elseif &filetype == 'css'
-let b:FiletypeIcon = ' '
+  elseif &filetype == 'javascript'
+  " let b:FiletypeIcon = ' '
+  let b:FiletypeIcon = ' '
 
-elseif &filetype == 'javascript'
-" let b:FiletypeIcon = ' '
-let b:FiletypeIcon = ' '
+  elseif &filetype == 'javascriptreact'
+  let b:FiletypeIcon = ' '
 
-elseif &filetype == 'javascriptreact'
-let b:FiletypeIcon = ' '
+  elseif &filetype == 'markdown'
+  let b:FiletypeIcon = ' '
 
-elseif &filetype == 'markdown'
-let b:FiletypeIcon = ' '
+  elseif &filetype == 'sh' || &filetype == 'zsh'
+  let b:FiletypeIcon = ' '
 
-elseif &filetype == 'sh' || &filetype == 'zsh'
-let b:FiletypeIcon = ' '
+  elseif &filetype == 'vim'
+  let b:FiletypeIcon = ' '
 
-elseif &filetype == 'vim'
-let b:FiletypeIcon = ' '
+  elseif &filetype == ''
+  let b:FiletypeIcon = ''
 
-elseif &filetype == ''
-let b:FiletypeIcon = ''
+  elseif &filetype == 'rust'
+  let b:FiletypeIcon = ' '
 
-elseif &filetype == 'rust'
-let b:FiletypeIcon = ' '
+  elseif &filetype == 'ruby'
+  let b:FiletypeIcon = ' '
 
-elseif &filetype == 'ruby'
-let b:FiletypeIcon = ' '
+  elseif &filetype == 'cpp'
+  let b:FiletypeIcon = ' '
 
-elseif &filetype == 'cpp'
-let b:FiletypeIcon = ' '
+  elseif &filetype == 'c'
+  let b:FiletypeIcon = ' '
 
-elseif &filetype == 'c'
-let b:FiletypeIcon = ' '
+  elseif &filetype == 'go'
+  let b:FiletypeIcon = ' '
 
-elseif &filetype == 'go'
-let b:FiletypeIcon = ' '
+  elseif &filetype == 'lua'
+  let b:FiletypeIcon = ' '
 
-elseif &filetype == 'lua'
-let b:FiletypeIcon = ' '
+  elseif &filetype == 'haskel'
+  let b:FiletypeIcon = ' '
 
-elseif &filetype == 'haskel'
-let b:FiletypeIcon = ' '
+  else
+  let b:FiletypeIcon = ' '
 
-else
-let b:FiletypeIcon = ' '
-
-endif
+  endif
 endfunction
 
 
