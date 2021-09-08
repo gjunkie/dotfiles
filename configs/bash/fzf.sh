@@ -10,24 +10,6 @@ export FZF_DEFAULT_OPTS="
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-local base00="241"
-local base01="240"
-local base02="235"
-local base03="234"
-local base0="244"
-local base1="245"
-local base2="254"
-local base3="230"
-local gray="238"
-local yellow="226"
-local orange="166"
-local red="160"
-local magenta="125"
-local violet="61"
-local blue="33"
-local cyan="195"
-local green="64"
-
 ### PROCESS
 # mnemonic: [K]ill [P]rocess
 # show output of "ps -ef", use [tab] to select one or multiple entries
@@ -53,6 +35,9 @@ pkill() {
 # ctrl-d shows a diff of the stash against your current HEAD
 # ctrl-b checks the stash out as a branch, for easier merging
 fstash() {
+  local blue="33"
+  local green="64"
+  local yellow="226"
   local out q k sha
   while out=$(
     git stash list --pretty="%C(yellow)%h %>(14)%Cgreen%cr %C(blue)%gs" |
