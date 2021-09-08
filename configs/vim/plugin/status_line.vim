@@ -266,9 +266,7 @@ set termguicolors
 " Define active statusline
 " %{expand('%:p:h:t')}
 function! ActivateStatusline()
-
   if !exists("b:GitBranch") || b:GitBranch == ''
-    call GetFileType()
     setlocal statusline=%#StslinePriColorBG#\ %{StslineMode()}%#StslineSecColorBG#%{get(b:,'coc_git_status',b:GitBranch)}%{get(b:,'coc_git_blame','')}%#StslineBackColorFGPriColorBG#%#StslinePriColorFG#\ %{&readonly?\"\ \":\"\"}%{expand('%:p:h:t')}/%<%t%w\ %#StslineModColorFG#%{&modified?\"\ \":\"\"}%=%#StslinePriColorFG#\ %{b:FiletypeIcon}%{&filetype}\ %#StslineSecColorFG#%#StslineSecColorBG#%{&fenc!='utf-8'?\"\ \":''}%{&fenc!='utf-8'?&fenc:''}%{&fenc!='utf-8'?\"\ \":''}%#StslinePriColorFGSecColorBG#%#StslinePriColorBG#\ %p\%%\ %#StslinePriColorBGBold#%l%#StslinePriColorBG#/%L\ :%c\ 
   endif
 
@@ -279,13 +277,10 @@ endfunction
 " Define Inactive statusline
 
 function! DeactivateStatusline()
-
   if !exists("b:GitBranch") || b:GitBranch == ''
-    call GetFileType()
     setlocal statusline=%#StslineSecColorBG#\ INACTIVE\ %#StslineSecColorBG#%{get(b:,'coc_git_statusline',b:GitBranch)}%{get(b:,'coc_git_blame','')}%#StslineBackColorFGSecColorBG#%#StslineBackColorBG#\ %{&readonly?\"\ \":\"\"}%{expand('%:p:h:t')}/%<%t%w\ %#StslineModColorFG#%{&modified?\"\ \":\"\"}%=%#StslineBackColorBG#\ %{b:FiletypeIcon}%{&filetype}\ %#StslineSecColorFGBackColorBG#%#StslineSecColorBG#\ %p\%%\ %l/%L\ :%c\ 
 
   else
-    call GetFileType()
     setlocal statusline=%#StslineSecColorBG#%{get(b:,'coc_git_statusline',b:GitBranch)}%{get(b:,'coc_git_blame','')}%#StslineBackColorFGSecColorBG#%#StslineBackColorBG#\ %{&readonly?\"\ \":\"\"}%{expand('%:p:h:t')}/%<%t%w\ %#StslineModColorFG#%{&modified?\"\ \":\"\"}%=%#StslineBackColorBG#\ %{b:FiletypeIcon}%{&filetype}\ %#StslineSecColorFGBackColorBG#%#StslineSecColorBG#\ %p\%%\ %l/%L\ :%c\ 
   endif
 
@@ -450,6 +445,12 @@ endfunction
 augroup GetGitBranch
     autocmd!
     autocmd BufEnter * call GetGitBranch()
+augroup END
+
+" Get file types and their icons after entering a buffer
+augroup GetFileType
+    autocmd!
+    autocmd BufEnter * call GetFileType()
 augroup END
 
 
