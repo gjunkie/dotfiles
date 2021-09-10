@@ -1,46 +1,14 @@
+export BAT_THEME="Nord"
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export TERM=xterm-256color
+export FZF_DEFAULT_OPTS="
+  --ansi
+  --preview-window 'right:60%'
+  --layout reverse
+  --margin=1,2
+  --preview 'bat --color=always --style=header,grid --line-range :300 {}'"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-_gen_fzf_default_opts() {
-  local base00="241"
-  local base01="240"
-  local base02="235"
-  local base03="234"
-  local base0="244"
-  local base1="245"
-  local base2="254"
-  local base3="230"
-  local gray="238"
-  local yellow="226"
-  local orange="166"
-  local red="160"
-  local magenta="125"
-  local violet="61"
-  local blue="33"
-  local cyan="195"
-  local green="64"
-
-  # Comment and uncomment below for the light theme.
-
-  # Solarized Dark color scheme for fzf
-  # export FZF_DEFAULT_OPTS="
-  #   --color fg:-1,bg:-1,hl:$blue,fg+:$base2,bg+:$base02,hl+:$blue
-  #   --color info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow
-  # "
-  ## Solarized Light color scheme for fzf
-  #export FZF_DEFAULT_OPTS="
-  #  --color fg:-1,bg:-1,hl:$blue,fg+:$base02,bg+:$base2,hl+:$blue
-  #  --color info:$yellow,prompt:$yellow,pointer:$base03,marker:$base03,spinner:$yellow
-  #"
-  ## Tron Grid color scheme for fzf
-  export FZF_DEFAULT_OPTS="
-    --color fg:-1,bg:$gray,hl:$blue,fg+:$base2,bg+:$base02,hl+:$blue
-    --color info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow
-  "
-}
-_gen_fzf_default_opts
 
 ### PROCESS
 # mnemonic: [K]ill [P]rocess
@@ -67,6 +35,9 @@ pkill() {
 # ctrl-d shows a diff of the stash against your current HEAD
 # ctrl-b checks the stash out as a branch, for easier merging
 fstash() {
+  local blue="33"
+  local green="64"
+  local yellow="226"
   local out q k sha
   while out=$(
     git stash list --pretty="%C(yellow)%h %>(14)%Cgreen%cr %C(blue)%gs" |

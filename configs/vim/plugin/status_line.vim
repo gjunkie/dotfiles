@@ -210,6 +210,12 @@ let g:StslineColorDark   = "#080808"
 let g:StslineColorDark1  = "#181818"
 let g:StslineColorDark2  = "#202020"
 let g:StslineColorDark3  = "#303030"
+
+" Nord color palette
+let g:StslineColorFrostMoss        = "#8FBCBB"
+let g:StslineColorFrostBlue        = "#5E81AC"
+let g:StslineColorAuroraPurple     = "#B48EAD"
+let g:StslineColorAuroraYellow     = "#EBCB8B"
  
  
 " Define colors
@@ -227,7 +233,7 @@ execute 'highlight StslineSecColorBG guifg=' . g:StslineColorLight ' guibg=' . g
 execute 'highlight StslineBackColorBG guifg=' . g:StslineColorLight ' guibg=' . g:StslineBackColor
 execute 'highlight StslineBackColorFGSecColorBG guifg=' . g:StslineBackColor ' guibg=' . g:StslineSecColor
 execute 'highlight StslineSecColorFGBackColorBG guifg=' . g:StslineSecColor ' guibg=' . g:StslineBackColor
-execute 'highlight StslineModColorFG guifg=' . g:StslineColorYellow ' guibg=' . g:StslineBackColor
+execute 'highlight StslineModColorFG guifg=' . g:StslineColorAuroraYellow ' guibg=' . g:StslineBackColor
  
  
  
@@ -260,8 +266,10 @@ set termguicolors
 " Define active statusline
 " %{expand('%:p:h:t')}
 function! ActivateStatusline()
-call GetFileType()
-setlocal statusline=%#StslinePriColorBG#\ %{StslineMode()}%#StslineSecColorBG#%{get(b:,'coc_git_status',b:GitBranch)}%{get(b:,'coc_git_blame','')}%#StslineBackColorFGPriColorBG#%#StslinePriColorFG#\ %{&readonly?\"\ \":\"\"}%{expand('%:p:h:t')}/%<%t%w\ %#StslineModColorFG#%{&modified?\"\ \":\"\"}%=%#StslinePriColorFG#\ %{b:FiletypeIcon}%{&filetype}\ %#StslineSecColorFG#%#StslineSecColorBG#%{&fenc!='utf-8'?\"\ \":''}%{&fenc!='utf-8'?&fenc:''}%{&fenc!='utf-8'?\"\ \":''}%#StslinePriColorFGSecColorBG#%#StslinePriColorBG#\ %p\%%\ %#StslinePriColorBGBold#%l%#StslinePriColorBG#/%L\ :%c\ 
+  if !exists("b:GitBranch") || b:GitBranch == ''
+    setlocal statusline=%#StslinePriColorBG#\ %{StslineMode()}%#StslineSecColorBG#%{get(b:,'coc_git_status',b:GitBranch)}%{get(b:,'coc_git_blame','')}%#StslineBackColorFGPriColorBG#%#StslinePriColorFG#\ %{&readonly?\"\ \":\"\"}%{expand('%:p:h:t')}/%<%t%w\ %#StslineModColorFG#%{&modified?\"\ \":\"\"}%=%#StslinePriColorFG#\ %{b:FiletypeIcon}%{&filetype}\ %#StslineSecColorFG#%#StslineSecColorBG#%{&fenc!='utf-8'?\"\ \":''}%{&fenc!='utf-8'?&fenc:''}%{&fenc!='utf-8'?\"\ \":''}%#StslinePriColorFGSecColorBG#%#StslinePriColorBG#\ %p\%%\ %#StslinePriColorBGBold#%l%#StslinePriColorBG#/%L\ :%c\ 
+  endif
+
 endfunction
 
 
@@ -269,13 +277,12 @@ endfunction
 " Define Inactive statusline
 
 function! DeactivateStatusline()
+  if !exists("b:GitBranch") || b:GitBranch == ''
+    setlocal statusline=%#StslineSecColorBG#\ INACTIVE\ %#StslineSecColorBG#%{get(b:,'coc_git_statusline',b:GitBranch)}%{get(b:,'coc_git_blame','')}%#StslineBackColorFGSecColorBG#%#StslineBackColorBG#\ %{&readonly?\"\ \":\"\"}%{expand('%:p:h:t')}/%<%t%w\ %#StslineModColorFG#%{&modified?\"\ \":\"\"}%=%#StslineBackColorBG#\ %{b:FiletypeIcon}%{&filetype}\ %#StslineSecColorFGBackColorBG#%#StslineSecColorBG#\ %p\%%\ %l/%L\ :%c\ 
 
-if !exists("b:GitBranch") || b:GitBranch == ''
-setlocal statusline=%#StslineSecColorBG#\ INACTIVE\ %#StslineSecColorBG#%{get(b:,'coc_git_statusline',b:GitBranch)}%{get(b:,'coc_git_blame','')}%#StslineBackColorFGSecColorBG#%#StslineBackColorBG#\ %{&readonly?\"\ \":\"\"}%{expand('%:p:h:t')}/%<%t%w\ %#StslineModColorFG#%{&modified?\"\ \":\"\"}%=%#StslineBackColorBG#\ %{b:FiletypeIcon}%{&filetype}\ %#StslineSecColorFGBackColorBG#%#StslineSecColorBG#\ %p\%%\ %l/%L\ :%c\ 
-
-else
-setlocal statusline=%#StslineSecColorBG#%{get(b:,'coc_git_statusline',b:GitBranch)}%{get(b:,'coc_git_blame','')}%#StslineBackColorFGSecColorBG#%#StslineBackColorBG#\ %{&readonly?\"\ \":\"\"}%{expand('%:p:h:t')}/%<%t%w\ %#StslineModColorFG#%{&modified?\"\ \":\"\"}%=%#StslineBackColorBG#\ %{b:FiletypeIcon}%{&filetype}\ %#StslineSecColorFGBackColorBG#%#StslineSecColorBG#\ %p\%%\ %l/%L\ :%c\ 
-endif
+  else
+    setlocal statusline=%#StslineSecColorBG#%{get(b:,'coc_git_statusline',b:GitBranch)}%{get(b:,'coc_git_blame','')}%#StslineBackColorFGSecColorBG#%#StslineBackColorBG#\ %{&readonly?\"\ \":\"\"}%{expand('%:p:h:t')}/%<%t%w\ %#StslineModColorFG#%{&modified?\"\ \":\"\"}%=%#StslineBackColorBG#\ %{b:FiletypeIcon}%{&filetype}\ %#StslineSecColorFGBackColorBG#%#StslineSecColorBG#\ %p\%%\ %l/%L\ :%c\ 
+  endif
 
 endfunction
 
@@ -287,44 +294,43 @@ function! StslineMode()
     let l:CurrentMode=mode()
 
     if l:CurrentMode==#"n"
-        let g:StslinePriColor     = g:StslineColorGreen
+        let g:StslinePriColor     = g:StslineColorFrostMoss
         let b:CurrentMode = "NORMAL "
 
     elseif l:CurrentMode==#"i"
-        let g:StslinePriColor     = g:StslineColorViolet
+        let g:StslinePriColor     = g:StslineColorAuroraPurple
         let b:CurrentMode = "INSERT "
 
     elseif l:CurrentMode==#"c"
-        let g:StslinePriColor     = g:StslineColorYellow
-
+        let g:StslinePriColor     = g:StslineColorAuroraYellow
         let b:CurrentMode = "COMMAND "
 
     elseif l:CurrentMode==#"v"
-        let g:StslinePriColor     = g:StslineColorBlue
+        let g:StslinePriColor     = g:StslineColorFrostBlue
         let b:CurrentMode = "VISUAL "
 
     elseif l:CurrentMode==#"V"
-        let g:StslinePriColor     = g:StslineColorBlue
+        let g:StslinePriColor     = g:StslineColorFrostBlue
         let b:CurrentMode = "V-LINE "
 
     elseif l:CurrentMode==#"\<C-v>"
-        let g:StslinePriColor     = g:StslineColorBlue
+        let g:StslinePriColor     = g:StslineColorFrostBlue
         let b:CurrentMode = "V-BLOCK "
 
     elseif l:CurrentMode==#"R"
-        let g:StslinePriColor     = g:StslineColorViolet
+        let g:StslinePriColor     = g:StslineColorAuroraPurple
         let b:CurrentMode = "REPLACE "
 
     elseif l:CurrentMode==#"s"
-        let g:StslinePriColor     = g:StslineColorBlue
+        let g:StslinePriColor     = g:StslineColorFrostBlue
         let b:CurrentMode = "SELECT "
 
     elseif l:CurrentMode==#"t"
-        let g:StslinePriColor     =g:StslineColorYellow
+        let g:StslinePriColor     =g:StslineColorAuroraYellow
         let b:CurrentMode = "TERM "
 
     elseif l:CurrentMode==#"!"
-        let g:StslinePriColor     = g:StslineColorYellow
+        let g:StslinePriColor     = g:StslineColorAuroraYellow
         let b:CurrentMode = "SHELL "
 
     endif
@@ -375,62 +381,62 @@ endfunction
 " Get filetype & custom icon. Put your most used file types first for optimized performance.
 
 function! GetFileType()
+  if &filetype == 'typescript'
+  let b:FiletypeIcon = ' '
 
-if &filetype == 'typescript'
-let b:FiletypeIcon = ' '
+  elseif &filetype == 'html'
+  let b:FiletypeIcon = ' '
 
-elseif &filetype == 'html'
-let b:FiletypeIcon = ' '
+  elseif &filetype == 'scss'
+  let b:FiletypeIcon = ' '
 
-elseif &filetype == 'scss'
-let b:FiletypeIcon = ' '
+  elseif &filetype == 'css'
+  let b:FiletypeIcon = ' '
 
-elseif &filetype == 'css'
-let b:FiletypeIcon = ' '
+  elseif &filetype == 'javascript'
+  " let b:FiletypeIcon = ' '
+  let b:FiletypeIcon = ' '
 
-elseif &filetype == 'javascript'
-let b:FiletypeIcon = ' '
+  elseif &filetype == 'javascriptreact'
+  let b:FiletypeIcon = ' '
 
-elseif &filetype == 'javascriptreact'
-let b:FiletypeIcon = ' '
+  elseif &filetype == 'markdown'
+  let b:FiletypeIcon = ' '
 
-elseif &filetype == 'markdown'
-let b:FiletypeIcon = ' '
+  elseif &filetype == 'sh' || &filetype == 'zsh'
+  let b:FiletypeIcon = ' '
 
-elseif &filetype == 'sh' || &filetype == 'zsh'
-let b:FiletypeIcon = ' '
+  elseif &filetype == 'vim'
+  let b:FiletypeIcon = ' '
 
-elseif &filetype == 'vim'
-let b:FiletypeIcon = ' '
+  elseif &filetype == ''
+  let b:FiletypeIcon = ''
 
-elseif &filetype == ''
-let b:FiletypeIcon = ''
+  elseif &filetype == 'rust'
+  let b:FiletypeIcon = ' '
 
-elseif &filetype == 'rust'
-let b:FiletypeIcon = ' '
+  elseif &filetype == 'ruby'
+  let b:FiletypeIcon = ' '
 
-elseif &filetype == 'ruby'
-let b:FiletypeIcon = ' '
+  elseif &filetype == 'cpp'
+  let b:FiletypeIcon = ' '
 
-elseif &filetype == 'cpp'
-let b:FiletypeIcon = ' '
+  elseif &filetype == 'c'
+  let b:FiletypeIcon = ' '
 
-elseif &filetype == 'c'
-let b:FiletypeIcon = ' '
+  elseif &filetype == 'go'
+  let b:FiletypeIcon = ' '
 
-elseif &filetype == 'go'
-let b:FiletypeIcon = ' '
+  elseif &filetype == 'lua'
+  let b:FiletypeIcon = ' '
 
-elseif &filetype == 'lua'
-let b:FiletypeIcon = ' '
+  elseif &filetype == 'haskel'
+  let b:FiletypeIcon = ' '
 
-elseif &filetype == 'haskel'
-let b:FiletypeIcon = ' '
+  else
+  let b:FiletypeIcon = ' '
 
-else
-let b:FiletypeIcon = ' '
-
-endif
+  endif
 endfunction
 
 
@@ -439,6 +445,12 @@ endfunction
 augroup GetGitBranch
     autocmd!
     autocmd BufEnter * call GetGitBranch()
+augroup END
+
+" Get file types and their icons after entering a buffer
+augroup GetFileType
+    autocmd!
+    autocmd BufEnter * call GetFileType()
 augroup END
 
 

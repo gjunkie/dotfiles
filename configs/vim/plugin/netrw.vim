@@ -14,7 +14,7 @@ fun! NetrwToggle(dir)
 endf
 
 fun! NetrwOpen(dir)
-  let vex_width = 35
+  let vex_width = 45
   execute "Vexplore" . a:dir
   let t:vex_buf_nr = bufnr("%")
   wincmd H
