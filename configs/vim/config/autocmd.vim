@@ -60,7 +60,7 @@ augroup end
 
 call s:highlight()
 
-augroup CleanBuffers
-  autocmd!
-  autocmd BufLeave * execute CleanNoNameEmptyBuffers()
-augroup END
+" augroup CleanBuffers
+"   autocmd!
+"   autocmd BufLeave * execute CleanNoNameEmptyBuffers()
+" augroup END
