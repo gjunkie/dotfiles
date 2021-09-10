@@ -4,7 +4,8 @@
 " Pass an empty option dictionary if the screen is narrow
 
 set rtp+=/usr/local/bin/fzf
-let g:fzf_layout = { 'down': '~40%' }
+let g:fzf_layout = { 'up': '100%' }
+let g:fzf_preview_window = ['up:40%', 'ctrl-/']
 
 let g:fzf_colors =
     \ { 'fg':      ['fg', 'Normal'],
