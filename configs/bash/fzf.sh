@@ -5,8 +5,7 @@ export FZF_DEFAULT_OPTS="
   --ansi
   --preview-window 'right:60%'
   --layout reverse
-  --margin=1,2
-  --preview 'bat --color=always --style=header,grid --line-range :300 {}'"
+  --margin=1,2"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
