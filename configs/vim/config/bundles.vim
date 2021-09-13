@@ -34,6 +34,8 @@ Plug 'ianks/vim-tsx'
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': 'yarn install --frozen-lockfile'}
 Plug 'scalameta/nvim-metals'
 
+Plug 'antoinemadec/coc-fzf'
+
 " Plug 'janko/vim-test'
 
 " Linting
