@@ -7,8 +7,7 @@ autocmd BufNewFile,BufRead *.hbs setfiletype html
 autocmd BufNewFile,BufRead *.haml setfiletype html
 autocmd BufNewFile,BufRead *.jst setfiletype html
 autocmd BufNewFile,BufRead *.master setfiletype html
-autocmd BufNewFile,BufRead *.aspx setfiletype html
-autocmd BufNewFile,BufRead *.ascx setfiletype html
+autocmd BufNewFile,BufRead *.aspx setfiletype html autocmd BufNewFile,BufRead *.ascx setfiletype html
 autocmd BufNewFile,BufRead *.ejs setfiletype html
 autocmd BufNewFile,BufRead *.json setlocal ft=json
 autocmd BufNewFile,BufRead *.less setlocal ft=less
@@ -64,3 +63,9 @@ call s:highlight()
 "   autocmd!
 "   autocmd BufLeave * execute CleanNoNameEmptyBuffers()
 " augroup END
+
+augroup ReactFiletypes
+  autocmd!
+  autocmd BufRead,BufNewFile *.jsx set filetype=javascriptreact
+  autocmd BufRead,BufNewFile *.tsx set filetype=typescriptreact
+augroup END
