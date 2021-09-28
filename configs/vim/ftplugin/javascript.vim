@@ -2,7 +2,7 @@
 " nnoremap gh :ALEHover<CR>
 " nnoremap gd :ALEGoToDefinition<CR>
 
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+nmap <silent> fd <Plug>(coc-definition)
+nmap <silent> fy <Plug>(coc-type-definition)
+nmap <silent> fi <Plug>(coc-implementation)
+nmap <silent> fr <Plug>(coc-references)
