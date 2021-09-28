@@ -112,9 +112,9 @@ imap <C-l> <C-G>g
 
 " FZF
 " nnoremap fd :execute 'Files ' . expand('%:p:h')<CR>
-nnoremap fs :Rg<SPACE>
-nnoremap fw :Rg <C-R><C-W><CR>
-vnoremap fw y:Rg <c-r>"<CR>
+nnoremap fs :Ag<SPACE>
+nnoremap fw :Ag <C-R><C-W><CR>
+vnoremap fw y:Ag <c-r>"<CR>
 nnoremap ff :Files<CR>
 nnoremap FF :call fzf#run(fzf#wrap({'source': 'git ls-files --exclude-standard --others --cached'}))<CR>
 nnoremap FL :Lines<CR>
