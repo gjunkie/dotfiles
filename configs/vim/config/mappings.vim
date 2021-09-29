@@ -9,6 +9,7 @@ nnoremap fh <C-w>h
 nnoremap fj <C-w>j
 nnoremap fk <C-w>k
 nnoremap fl <C-w>l
+nnoremap fp <C-w><C-p>
 
 " Neovim Terminal Control
 nnoremap tt :terminal<CR>

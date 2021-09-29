@@ -5,7 +5,7 @@
 
 set rtp+=/usr/local/bin/fzf
 let g:fzf_layout = { 'up': '100%' }
-let g:fzf_preview_window = ['up:40%', 'ctrl-/']
+let g:fzf_preview_window = ['up:60%', 'ctrl-/']
 
 let g:fzf_colors =
     \ { 'fg':      ['fg', 'Normal'],
@@ -38,6 +38,13 @@ let s:fzf_options = "--multi --tabstop 4 --no-reverse --no-margin
 " Pass an empty option dictionary if the screen is narrow
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, &columns > 80 ? fzf#vim#with_preview() : {}, <bang>0)
+
+
+" command! -bang -nargs=* Ag
+"   \ call fzf#vim#grep(
+"   \   'rg --column --line-number --no-heading --color=always --colors "match:fg:166" --colors "path:fg:240" --colors "line:fg:195" --colors "column:fg:195" --smart-case '.shellescape(<q-args>),
+"   \   0,
+"   \   { 'options': '--color hl:195,hl+:195,fg+:195,fg:246,prompt:195' }, 0)
 
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
