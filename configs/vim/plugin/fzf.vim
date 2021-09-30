@@ -44,8 +44,7 @@ command! -bang -nargs=* Ag
   \ call fzf#vim#grep(
   \   'ag --depth -1 --column --path-to-ignore ~/.fzf.ignore --smart-case '.shellescape(<q-args>),
   \   0,
-  \   { 'options': '--color hl:195,hl+:195,fg+:195,fg:246,prompt:195' },
-  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
+  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0], 'options': '--color hl:195,hl+:195,fg+:195,fg:246,prompt:195' }), <bang>0)
 
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
