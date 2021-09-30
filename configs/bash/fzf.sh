@@ -1,6 +1,6 @@
 export BAT_THEME="Nord"
 # export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
-export FZF_DEFAULT_COMMAND='ag --path-to-ignore ~/.fzf.ignore --files --hidden --follow --glob "!.git/*"'
+export FZF_DEFAULT_COMMAND='ag --files --hidden --follow --glob "!.git/*"'
 export TERM=xterm-256color
 export FZF_DEFAULT_OPTS="
   --ansi
