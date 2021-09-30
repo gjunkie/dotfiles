@@ -40,11 +40,11 @@ command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, &columns > 80 ? fzf#vim#with_preview() : {}, <bang>0)
 
 
-" command! -bang -nargs=* Ag
-"   \ call fzf#vim#grep(
-"   \   'rg --column --line-number --no-heading --color=always --colors "match:fg:166" --colors "path:fg:240" --colors "line:fg:195" --colors "column:fg:195" --smart-case '.shellescape(<q-args>),
-"   \   0,
-"   \   { 'options': '--color hl:195,hl+:195,fg+:195,fg:246,prompt:195' }, 0)
+command! -bang -nargs=* Ag
+  \ call fzf#vim#grep(
+  \   'ag --column --line-number --no-heading --path-to-ignore ~/.fzf.ignore --color=always --colors "match:fg:166" --colors "path:fg:240" --colors "line:fg:195" --colors "column:fg:195" --smart-case '.shellescape(<q-args>),
+  \   0,
+  \   { 'options': '--color hl:195,hl+:195,fg+:195,fg:246,prompt:195' }, 0)
 
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
