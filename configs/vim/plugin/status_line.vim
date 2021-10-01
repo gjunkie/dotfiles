@@ -458,5 +458,5 @@ augroup END
 augroup SetStslineline
     autocmd!
     autocmd BufEnter,WinEnter * call ActivateStatusline()
-    " autocmd BufLeave,WinLeave * call DeactivateStatusline()
+    autocmd BufLeave,WinLeave * call DeactivateStatusline()
 augroup END

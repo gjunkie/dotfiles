@@ -37,14 +37,14 @@ let s:fzf_options = "--multi --tabstop 4 --no-reverse --no-margin
 " files
 " Pass an empty option dictionary if the screen is narrow
 command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, &columns > 80 ? fzf#vim#with_preview() : {}, <bang>0)
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 
 command! -bang -nargs=* Ag
   \ call fzf#vim#grep(
   \   'ag --depth -1 --column --path-to-ignore ~/.fzf.ignore --smart-case '.shellescape(<q-args>),
   \   0,
-  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0], 'options': '--color hl:195,hl+:195,fg+:195,fg:246,prompt:195' }), <bang>0)
+  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0], 'options': '--color hl:167,hl+:167,fg+:110,fg:253,prompt:150' }), <bang>0)
 
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
