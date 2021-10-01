@@ -170,7 +170,6 @@
 " au InsertLeave * call ChangeStatuslineColor()
 " au InsertLeave * hi statusline guibg=green
 
-
 "" This was made by Reddit user u/SamLovesNotion. Also with the help of - https://tdaly.co.uk/projects/vim-statusline-generator/ for learning the syntax. Sorry for English & grammar, this post was made in hurry.
 
 " Images - https://www.reddit.com/r/vim/comments/ld8h2j/i_made_a_status_line_from_scratch_no_plugins_used/
@@ -249,12 +248,10 @@ execute 'highlight StslineModColorFG guifg=' . g:StslineColorAuroraYellow ' guib
 
 
 " Define active statusline
-" %{expand('%:p:h:t')}
+
 function! ActivateStatusline()
-  if !exists("b:GitBranch") || b:GitBranch == ''
-    call GetFileType()
-    setlocal statusline=%#StslinePriColorBG#\ %{StslineMode()}%#StslineSecColorBG#%{get(b:,'coc_git_status',b:GitBranch)}%{get(b:,'coc_git_blame','')}%#StslineBackColorFGPriColorBG#%#StslinePriColorFG#\ %{&readonly?\"\ \":\"\"}%{expand('%:p:h:t')}/%<%t%w\ %#StslineModColorFG#%{&modified?\"\ \":\"\"}%=%#StslinePriColorFG#\ %{b:FiletypeIcon}%{&filetype}\ %#StslineSecColorFG#%#StslineSecColorBG#%{&fenc!='utf-8'?\"\ \":''}%{&fenc!='utf-8'?&fenc:''}%{&fenc!='utf-8'?\"\ \":''}%#StslinePriColorFGSecColorBG#%#StslinePriColorBG#\ %p\%%\ %#StslinePriColorBGBold#%l%#StslinePriColorBG#/%L\ :%c\
-  endif
+call GetFileType()
+setlocal statusline=%#StslinePriColorBG#\ %{StslineMode()}%#StslineSecColorBG#%{get(b:,'coc_git_status',b:GitBranch)}%{get(b:,'coc_git_blame','')}%#StslineBackColorFGPriColorBG#%#StslinePriColorFG#\ %{&readonly?\"\ \":\"\"}%F\ %#StslineModColorFG#%{&modified?\"\ \":\"\"}%=%#StslinePriColorFG#\ %{b:FiletypeIcon}%{&filetype}\ %#StslineSecColorFG#%#StslineSecColorBG#%{&fenc!='utf-8'?\"\ \":''}%{&fenc!='utf-8'?&fenc:''}%{&fenc!='utf-8'?\"\ \":''}%#StslinePriColorFGSecColorBG#%#StslinePriColorBG#\ %p\%%\ %#StslinePriColorBGBold#%l%#StslinePriColorBG#/%L\ :%c\ 
 endfunction
 
 
@@ -262,11 +259,12 @@ endfunction
 " Define Inactive statusline
 
 function! DeactivateStatusline()
-  if !exists("b:GitBranch") || b:GitBranch == ''
-    setlocal statusline=%#StslineSecColorBG#\ INACTIVE\ %#StslineSecColorBG#%{get(b:,'coc_git_statusline',b:GitBranch)}%{get(b:,'coc_git_blame','')}%#StslineBackColorFGSecColorBG#%#StslineBackColorBG#\ %{&readonly?\"\ \":\"\"}%{expand('%:p:h:t')}/%<%t%w\ %#StslineModColorFG#%{&modified?\"\ \":\"\"}%=%#StslineBackColorBG#\ %{b:FiletypeIcon}%{&filetype}\ %#StslineSecColorFGBackColorBG#%#StslineSecColorBG#\ %p\%%\ %l/%L\ :%c\
 
-  else
-    setlocal statusline=%#StslineSecColorBG#%{get(b:,'coc_git_statusline',b:GitBranch)}%{get(b:,'coc_git_blame','')}%#StslineBackColorFGSecColorBG#%#StslineBackColorBG#\ %{&readonly?\"\ \":\"\"}%{expand('%:p:h:t')}/%<%t%w\ %#StslineModColorFG#%{&modified?\"\ \":\"\"}%=%#StslineBackColorBG#\ %{b:FiletypeIcon}%{&filetype}\ %#StslineSecColorFGBackColorBG#%#StslineSecColorBG#\ %p\%%\ %l/%L\ :%c\ 
+if !exists("b:GitBranch") || b:GitBranch == ''
+setlocal statusline=%#StslineSecColorBG#\ INACTIVE\ %#StslineSecColorBG#%{get(b:,'coc_git_statusline',b:GitBranch)}%{get(b:,'coc_git_blame','')}%#StslineBackColorFGSecColorBG#%#StslineBackColorBG#\ %{&readonly?\"\ \":\"\"}%F\ %#StslineModColorFG#%{&modified?\"\ \":\"\"}%=%#StslineBackColorBG#\ %{b:FiletypeIcon}%{&filetype}\ %#StslineSecColorFGBackColorBG#%#StslineSecColorBG#\ %p\%%\ %l/%L\ :%c\ 
+
+else
+setlocal statusline=%#StslineSecColorBG#%{get(b:,'coc_git_statusline',b:GitBranch)}%{get(b:,'coc_git_blame','')}%#StslineBackColorFGSecColorBG#%#StslineBackColorBG#\ %{&readonly?\"\ \":\"\"}%F\ %#StslineModColorFG#%{&modified?\"\ \":\"\"}%=%#StslineBackColorBG#\ %{b:FiletypeIcon}%{&filetype}\ %#StslineSecColorFGBackColorBG#%#StslineSecColorBG#\ %p\%%\ %l/%L\ :%c\ 
 endif
 
 endfunction
@@ -379,8 +377,7 @@ function! GetFileType()
   let b:FiletypeIcon = ' '
 
   elseif &filetype == 'javascript'
-  " let b:FiletypeIcon = ' '
-  let b:FiletypeIcon = ' '
+  let b:FiletypeIcon = ' '
 
   elseif &filetype == 'javascriptreact'
   let b:FiletypeIcon = ' '
@@ -432,12 +429,6 @@ augroup GetGitBranch
     autocmd BufEnter * call GetGitBranch()
 augroup END
 
-" Get file types and their icons after entering a buffer
-augroup GetFileType
-    autocmd!
-    autocmd BufEnter * call GetFileType()
-augroup END
-
 
 " Set active / inactive statusline after entering, leaving buffer
 augroup SetStslineline
@@ -445,3 +436,4 @@ augroup SetStslineline
     autocmd BufEnter,WinEnter * call ActivateStatusline()
     autocmd BufLeave,WinLeave * call DeactivateStatusline()
 augroup END
+
