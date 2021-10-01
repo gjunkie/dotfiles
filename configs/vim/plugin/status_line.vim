@@ -253,7 +253,7 @@ function! ActivateStatusline()
 
   call GetFileType()
   if &filetype == 'netrw'
-    setlocal statusline=%#StslineBackColorFGPriColorBG''
+    setlocal statusline=%#StslinePriColorFGSecColorBG''
   else
     setlocal statusline=%#StslinePriColorBG#\ %{StslineMode()}%#StslineSecColorBG#%{get(b:,'coc_git_status',b:GitBranch)}%{get(b:,'coc_git_blame','')}%#StslineBackColorFGPriColorBG#%#StslinePriColorFG#\ %{&readonly?\"\ \":\"\"}%<%t%w\ %#StslineModColorFG#%{&modified?\"\ \":\"\"}%=%#StslinePriColorFG#\ %{b:FiletypeIcon}%{&filetype}\ %#StslineSecColorFG#%#StslineSecColorBG#%{&fenc!='utf-8'?\"\ \":''}%{&fenc!='utf-8'?&fenc:''}%{&fenc!='utf-8'?\"\ \":''}%#StslinePriColorFGSecColorBG#%#StslinePriColorBG#\ %p\%%\ %#StslinePriColorBGBold#%l%#StslinePriColorBG#/%L\ :%c\ 
   endif
@@ -267,7 +267,7 @@ endfunction
 function! DeactivateStatusline()
 
   if &filetype == 'netrw'
-    setlocal statusline=&filetype
+    setlocal statusline=%#StslinePriColorFGSecColorBG''
   else
     if !exists("b:GitBranch") || b:GitBranch == ''
       setlocal statusline=%#StslineSecColorBG#\ INACTIVE\ %{get(b:,'coc_git_blame','')}%#StslineBackColorFGSecColorBG#%#StslineBackColorBG#\ %{&readonly?\"\ \":\"\"}%<%t%w\ %#StslineModColorFG#%{&modified?\"\ \":\"\"}%=%#StslineBackColorBG#\ %{b:FiletypeIcon}%{&filetype}\ %#StslineSecColorFGBackColorBG#%#StslineSecColorBG#\ %p\%%\ %l/%L\ :%c\
