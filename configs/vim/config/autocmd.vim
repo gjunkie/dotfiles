@@ -69,3 +69,9 @@ augroup ReactFiletypes
   autocmd!
   autocmd BufRead,BufNewFile *.tsx set filetype=typescript.tsx
 augroup END
+
+"-----------------------------------------------------------------------------
+" Helpful general settings
+"-----------------------------------------------------------------------------
+" Needed for compltions _only_ if you aren't using completion-nvim
+autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc
