@@ -49,6 +49,14 @@ nnoremap RR :%s:
 " replace cursor word
 nnoremap RW :%s:<C-R><C-W>:
 
+" move lines
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '>-2<CR>gv=gv
+nnoremap J :m .+1<CR>==
+nnoremap K :m .-2<CR>==
+inoremap <C-j> :m .+1<CR>==
+inoremap <C-k> :m .-2<CR>==
+
 " search cursor word in buffer
 nnoremap ? /<C-R><C-W><CR>
 " next search result in buffer
@@ -117,7 +125,8 @@ nnoremap fs :Ag<SPACE>
 nnoremap fw :Ag <C-R><C-W><CR>
 vnoremap fw y:Ag <c-r>"<CR>
 nnoremap ff :Files<CR>
-nnoremap FF :call fzf#run(fzf#wrap({'source': 'git ls-files --exclude-standard --others --cached'}))<CR>
+nnoremap FF :Files %:p:h<CR>
+" nnoremap FF :call fzf#run(fzf#wrap({'source': 'git ls-files --exclude-standard --others --cached'}))<CR>
 nnoremap FL :Lines<CR>
 nnoremap FB :BLines<CR>
 nnoremap fb :Buffers<CR>
