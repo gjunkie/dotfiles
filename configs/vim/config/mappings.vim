@@ -163,18 +163,3 @@ nnoremap <Leader>ww :VimwikiIndex<CR>
 " Use <Tab> and <S-Tab> to navigate through popup menu
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-"-----------------------------------------------------------------------------
-" Helpful general settings
-"-----------------------------------------------------------------------------
-" Needed for compltions _only_ if you aren't using completion-nvim
-autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc
-
-" Set completeopt to have a better completion experience
-set completeopt=menuone,noinsert,noselect
-
-" Avoid showing message extra message when using completion
-set shortmess+=c
-
-" Ensure autocmd works for Filetype
-set shortmess-=F

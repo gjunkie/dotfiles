@@ -41,6 +41,15 @@ set undoreload=10000
 set undolevels=1000
 set wildignore+=node_modules
 
+" Set completeopt to have a better completion experience
+set completeopt=menuone,noinsert,noselect
+
+" Avoid showing message extra message when using completion
+" set shortmess+=c
+
+" Ensure autocmd works for Filetype
+set shortmess-=F
+
 set diffopt+=iwhiteall
 set diffopt+=hiddenoff
 set diffopt+=internal,algorithm:patience
@@ -113,3 +122,5 @@ function! CleanNoNameEmptyBuffers()
         exe 'bd '.join(buffers, ' ')
     endif
 endfunction
+
+let g:omni_sql_no_default_maps = 1
