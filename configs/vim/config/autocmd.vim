@@ -12,9 +12,15 @@ autocmd BufNewFile,BufRead *.ejs setfiletype html
 autocmd BufNewFile,BufRead *.json setlocal ft=json
 autocmd BufNewFile,BufRead *.less setlocal ft=less
 autocmd BufNewFile,BufRead *.txt setlocal ft=rst
-autocmd BufNewFile,BufRead *.jsx setlocal ft=javascript
+" autocmd BufNewFile,BufRead *.jsx setlocal ft=javascript
 autocmd BufNewFile,BufRead *.thrift setlocal ft=java
 autocmd BufNewFile,BufRead *.strato setlocal ft=graphql
+
+" Javascript
+autocmd bufnewfile,bufread *.tsx set filetype=typescript.tsx
+autocmd bufnewfile,bufread *.jsx set filetype=javascript.jsx
+autocmd bufnewfile,bufread *.js set filetype=javascript.jsx
+augroup filetype javascript syntax=javascript
 
 autocmd filetype netrw call Netrw_mappings()
 " Overwrites netrw's new file mapping
