@@ -127,6 +127,12 @@ nnoremap gb :Blame<CR>
 nnoremap gc :BCommits<CR>
 nnoremap gac :Commits!<CR>
 
+" Code navigation
+nmap <silent> fd <Plug>(coc-definition)
+nmap <silent> fy <Plug>(coc-type-definition)
+nmap <silent> fi <Plug>(coc-implementation)
+nmap <silent> fr <Plug>(coc-references)
+
 " ALE Linter
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)

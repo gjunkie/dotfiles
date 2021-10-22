@@ -1,7 +1,7 @@
 "-----------------------------------------------------------------------------
 " nvim-lsp Mappings
 "-----------------------------------------------------------------------------
-nnoremap <silent> gd          <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> fd          <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> K           <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> gi          <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> gr          <cmd>lua vim.lsp.buf.references()<CR>

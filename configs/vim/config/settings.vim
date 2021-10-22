@@ -124,3 +124,4 @@ function! CleanNoNameEmptyBuffers()
 endfunction
 
 let g:omni_sql_no_default_maps = 1
+let g:coc_global_extensions = [ 'coc-tsserver' ]
