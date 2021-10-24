@@ -149,7 +149,15 @@ setup_vim() {
 	&& rm -rf "${HOME}/.vim"
 
 	ln -s "${DIR}/configs/vim" "${HOME}/.vim"
-	ln -s "${DIR}/configs/nvim" "${HOME}/.config"
+
+	if [[ -d "${DIR}/configs/nvim" ]]; then
+    rm "${DIR}/configs/nvim/init.vim"
+    ln -s "${DIR}/configs/nvim/init.vim" "${HOME}/.config/nvim/init.vim"
+  else
+    mkdir "${DIR}/configs/nvim"
+    ln -s "${DIR}/configs/nvim/init.vim" "${HOME}/.config/nvim/init.vim"
+  fi
+
 
 	[[ $? ]] && _success "Copied vim folder"
 }

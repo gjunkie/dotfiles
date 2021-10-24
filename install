@@ -200,15 +200,17 @@ install_node_packages() {
 copy_files() {
 	_process "→ Symlinking vim folder"
   ln -s "${DIR}/configs/vim" "${HOME}/.vim"
-	ln -s "${DIR}/configs/nvim" "${HOME}/.config"
-	# cp -r "${DIR}/configs/vim" "${HOME}/.vim"
-	# cp -r "${DIR}/configs/nvim" "${HOME}/.config"
+
+	if [[ -d "${DIR}/configs/nvim" ]]; then
+    rm "${DIR}/configs/nvim/init.vim"
+    ln -s "${DIR}/configs/nvim/init.vim" "${HOME}/.config/nvim/init.vim"
+  else
+    mkdir "${DIR}/configs/nvim"
+    ln -s "${DIR}/configs/nvim/init.vim" "${HOME}/.config/nvim/init.vim"
+  fi
 
 	_process "→ Symlinking bash folder"
-	# cp -r "${DIR}/configs/bash" "${HOME}/.bash"
 	ln -s "${DIR}/configs/bash" "${HOME}/.bash"
-	# cp "${DIR}/configs/bash/colorschemes/base_colors.sh" "${HOME}/.bash/prompt/base_colors.sh"
-	# cp "${DIR}/configs/bash/colorschemes/tron/colors.sh" "${HOME}/.bash/prompt/prompt_colors.sh"
 
 	# Symlink files to the HOME directory.
 	if [[ -f "${DIR}/opt/files" ]]; then
