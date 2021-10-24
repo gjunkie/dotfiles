@@ -6,7 +6,7 @@ readonly ARGS="$@"
 if [[ ! -z ${DOTFILES_DIRECTORY} ]]; then
 	DIR="${DOTFILES_DIRECTORY}"
 else
-	DIR="/usr/local/opt/dotfiles"
+	DIR="${HOME}/code/dotfiles"
 fi
 
 # Status methods
@@ -150,11 +150,11 @@ setup_vim() {
 
 	ln -s "${DIR}/configs/vim" "${HOME}/.vim"
 
-	if [[ -d "${DIR}/configs/nvim" ]]; then
-    rm "${DIR}/configs/nvim/init.vim"
+	if [[ -d "${HOME}/.configs/nvim" ]]; then
+    rm "${HOME}/.configs/nvim/init.vim"
     ln -s "${DIR}/configs/nvim/init.vim" "${HOME}/.config/nvim/init.vim"
   else
-    mkdir "${DIR}/configs/nvim"
+    mkdir "${HOME}/.configs/nvim"
     ln -s "${DIR}/configs/nvim/init.vim" "${HOME}/.config/nvim/init.vim"
   fi
 
@@ -168,7 +168,6 @@ setup_bash() {
 	&& rm -rf "${HOME}/.bash"
 
 	ln -s "${DIR}/configs/bash" "${HOME}/.bash"
-	# cp "${DIR}/configs/bash/colorschemes/base_colors.sh" "${HOME}/.bash/prompt/base_colors.sh"
 	[[ $? ]] && _success "Copied bash folder"
 }
 
