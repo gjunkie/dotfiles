@@ -43,6 +43,8 @@ setup_dotfiles() {
 	# If missing, download and extract the dotfiles repository
 	if [[ -d "${DIR}" ]]; then
 		_process "→ Dotfiles already installed.  Upgrading dotfiles"
+    ln -fs "${DIR}/bin/dotfiles" "/usr/local/bin/dotfiles"
+    chmod 755 "/usr/local/bin/dotfiles"
 		dotfiles
 	else
 		_process "→ Creating directory at ${DIR} and setting permissions"
