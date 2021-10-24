@@ -2,4 +2,6 @@
 vim/undodir
 vim/.netrwhist
 vim/bundle
+plugged
+undodir
 tags
