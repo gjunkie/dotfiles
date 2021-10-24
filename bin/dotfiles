@@ -148,8 +148,8 @@ setup_vim() {
 	_exists "${HOME}/.vim" \
 	&& rm -rf "${HOME}/.vim"
 
-	cp -r "${DIR}/configs/vim" "${HOME}/.vim"
-	cp -r "${DIR}/configs/nvim" "${HOME}/.config"
+	ln -s "${DIR}/configs/vim" "${HOME}/.vim"
+	ln -s "${DIR}/configs/nvim" "${HOME}/.config"
 
 	[[ $? ]] && _success "Copied vim folder"
 }
@@ -159,8 +159,8 @@ setup_bash() {
 	_exists "${HOME}/.bash" \
 	&& rm -rf "${HOME}/.bash"
 
-	cp -r "${DIR}/configs/bash" "${HOME}/.bash"
-	cp "${DIR}/configs/bash/colorschemes/base_colors.sh" "${HOME}/.bash/prompt/base_colors.sh"
+	ln -s "${DIR}/configs/bash" "${HOME}/.bash"
+	# cp "${DIR}/configs/bash/colorschemes/base_colors.sh" "${HOME}/.bash/prompt/base_colors.sh"
 	[[ $? ]] && _success "Copied bash folder"
 }
 

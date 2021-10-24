@@ -198,18 +198,19 @@ install_node_packages() {
 }
 
 copy_files() {
-	_process "→ Copying vim folder"
-	cp -r "${DIR}/configs/vim" "${HOME}/.vim"
-	cp -r "${DIR}/configs/nvim" "${HOME}/.config"
+	_process "→ Symlinking vim folder"
+  ln -s "${DIR}/configs/vim" "${HOME}/.vim"
+	ln -s "${DIR}/configs/nvim" "${HOME}/.config"
+	# cp -r "${DIR}/configs/vim" "${HOME}/.vim"
+	# cp -r "${DIR}/configs/nvim" "${HOME}/.config"
 
-	_process "→ Copying bash folder"
-	cp -r "${DIR}/configs/bash" "${HOME}/.bash"
-	cp "${DIR}/configs/bash/colorschemes/base_colors.sh" "${HOME}/.bash/prompt/base_colors.sh"
-	cp "${DIR}/configs/bash/colorschemes/tron/colors.sh" "${HOME}/.bash/prompt/prompt_colors.sh"
+	_process "→ Symlinking bash folder"
+	# cp -r "${DIR}/configs/bash" "${HOME}/.bash"
+	ln -s "${DIR}/configs/bash" "${HOME}/.bash"
+	# cp "${DIR}/configs/bash/colorschemes/base_colors.sh" "${HOME}/.bash/prompt/base_colors.sh"
+	# cp "${DIR}/configs/bash/colorschemes/tron/colors.sh" "${HOME}/.bash/prompt/prompt_colors.sh"
 
-	# copy over files to the HOME directory. These were
-	# originally symlinks but ran into permissions issues
-	# with Docker containers.
+	# Symlink files to the HOME directory.
 	if [[ -f "${DIR}/opt/files" ]]; then
 		_process "→ Copying files"
 
@@ -234,7 +235,7 @@ copy_files() {
 				# create an array of line items
 				file=(${links[$index]})
 				# Create symbolic link
-				cp "${DIR}/${file[0]}" "${HOME}/${file[1]}"
+				ln -s "${DIR}/${file[0]}" "${HOME}/${file[1]}"
 			done
 			# set separater back to carriage return & new line break
 			IFS=$'\r\n'
@@ -244,7 +245,7 @@ copy_files() {
 		IFS=$OIFS
 
     git config --global core.excludesFile '~/.gitignore'
-		[[ $? ]] && _success "All files have been copied"
+		[[ $? ]] && _success "All files have been linked"
 	fi
 }
 
