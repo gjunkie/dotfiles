@@ -12,9 +12,6 @@ Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 
-" File tree
-Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
-
 " ctags
 " Plug 'ludovicchabant/vim-gutentags'
 " Plug 'zackhsi/fzf-tags'
