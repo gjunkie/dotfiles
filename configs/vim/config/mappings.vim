@@ -121,9 +121,9 @@ imap <C-l> <C-G>g
 
 " FZF
 " nnoremap fd :execute 'Files ' . expand('%:p:h')<CR>
-nnoremap fs :Ag<SPACE>
-nnoremap fw :Ag <C-R><C-W><CR>
-vnoremap fw y:Ag <c-r>"<CR>
+nnoremap fs :Rg<SPACE>
+nnoremap fw :Rg <C-R><C-W><CR>
+vnoremap fw y:Rg <c-r>"<CR>
 nnoremap ff :Files<CR>
 nnoremap FF :Files %:p:h<CR>
 " nnoremap FF :call fzf#run(fzf#wrap({'source': 'git ls-files --exclude-standard --others --cached'}))<CR>
@@ -160,10 +160,10 @@ nmap <silent> t<C-g> :TestVisit<CR>
 nnoremap <Leader>ww :VimwikiIndex<CR>
 
 " " Copy to clipboard
-" vnoremap  <leader>y "+y
-" nnoremap  <leader>Y :"+yg_<CR>
-" nnoremap  <leader>y :"+y<CR>
-" nnoremap  <leader>yy :"+yy<CR>
+vnoremap  <leader>y "+y
+nnoremap  <leader>Y :"+yg_<CR>
+nnoremap  <leader>y :"+y<CR>
+nnoremap  <leader>yy :"+yy<CR>
 
 " " Paste from clipboard
 " nnoremap <leader>p "+p
