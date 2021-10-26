@@ -25,7 +25,7 @@ set nobackup
 set noerrorbells
 set nofoldenable
 set nostartofline
-" set nonumber
+set nonumber
 set noshowmode
 set noswapfile
 set scrolloff=20

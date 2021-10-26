@@ -36,35 +36,35 @@ endfunction
 "   autocmd BufWritePost *.js silent make! <afile> | silent redraw!
 "   autocmd QuickFixCmdPost * cwindow
 " augroup END
-
-fun! s:highlight()
-  hi User1 ctermfg=16
-
-  hi User2 ctermfg=16
-  hi User2 ctermbg=195
-
-  hi User3 ctermfg=195
-
-  hi User4 ctermfg=004
-
-  hi User5 ctermfg=005
-
-  hi User6 ctermfg=195
-
-  hi User7 ctermfg=none
-
-  hi User8 ctermfg=214
-
-  hi User9 ctermfg=202
-endfun
 " 
-" ColorScheme runs after the colorscheme has been loaded
-augroup run_highlight
-  autocmd!
-  autocmd ColorScheme * call s:highlight()
-augroup end
-
-call s:highlight()
+" fun! s:highlight()
+"   hi User1 ctermfg=16
+" 
+"   hi User2 ctermfg=16
+"   hi User2 ctermbg=195
+" 
+"   hi User3 ctermfg=195
+" 
+"   hi User4 ctermfg=004
+" 
+"   hi User5 ctermfg=005
+" 
+"   hi User6 ctermfg=195
+" 
+"   hi User7 ctermfg=none
+" 
+"   hi User8 ctermfg=214
+" 
+"   hi User9 ctermfg=202
+" endfun
+" " 
+" " ColorScheme runs after the colorscheme has been loaded
+" augroup run_highlight
+"   autocmd!
+"   autocmd ColorScheme * call s:highlight()
+" augroup end
+" 
+" call s:highlight()
 
 " augroup CleanBuffers
 "   autocmd!
