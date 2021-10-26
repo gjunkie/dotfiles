@@ -44,13 +44,13 @@ command! -bang -nargs=* Ag
   \ call fzf#vim#grep(
   \   'ag --depth -1 --column --path-to-ignore ~/.fzf.ignore --smart-case '.shellescape(<q-args>),
   \   0,
-  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0], 'options': '--color hl:167,hl+:167,fg+:110,fg:253,prompt:150' }), <bang>0)
+  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0] }), <bang>0)
 
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --colors "match:fg:166" --colors "path:fg:240" --colors "line:fg:195" --colors "column:fg:195" --smart-case '.shellescape(<q-args>),
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>),
   \   0,
-  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0], 'options': '--color hl:167,hl+:167,fg+:110,fg:253,prompt:150' }), <bang>0)
+  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0] }), <bang>0)
 
 nnoremap <leader>v :FzfFiles<cr>
 nnoremap <leader>u :FzfTags<cr>
