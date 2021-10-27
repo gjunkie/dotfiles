@@ -11,6 +11,7 @@ GREEN="\[\033[00;32m\]"
 RED="\[\033[0;31m\]"
 ORANGE="$(tput setaf 179)"
 VIOLET='\[\033[01;35m\]'
+NONE='\[\e[0m\]'
 
 function color_my_prompt {
   local __user_and_host="$ORANGE\u @ \h"
@@ -43,11 +44,11 @@ function color_my_prompt {
       __git_branch_color="$LIGHT_GRAY"
   fi
    
-  local __prompt_head="╔"
-  local __prompt_tail="\n╚ \$ »"
+  local __prompt_head="┌"
+  local __prompt_tail="\n└ \$ »"
 
   # Build the PS1 (Prompt String)
-  PS1="$__git_branch_color$__prompt_head $__user $__cur_location$__git_branch_color$__git_branch $__git_branch_color$__prompt_tail$__user_input_color "
+  PS1="$__prompt_head $__user $__cur_location$__git_branch_color$__git_branch $NONE$__prompt_tail$__user_input_color "
 }
 
 # configure PROMPT_COMMAND which is executed each time before PS1
