@@ -5,28 +5,30 @@ let vimDir = '$HOME/.vim'
 let &runtimepath.=','.vimDir
 
 set tags=./tags,tags;$HOME
-" set tags=tags;/
 
+" set term=xterm-256color
 set autoread
 set backspace=indent,eol,start
 set cmdheight=1
 set enc=utf-8
 set expandtab
+set foldlevel=2
 set foldmethod=indent
 set foldnestmax=10
-set foldlevel=2
+set guicursor=i:block
 set hidden
 set history=10000
 set hlsearch
-set incsearch
 set ignorecase
+set incsearch
 set laststatus=2
+" set mouse=a
 set nobackup
 set noerrorbells
 set nofoldenable
-set nostartofline
 set nonumber
 set noshowmode
+set nostartofline
 set noswapfile
 set scrolloff=20
 set shiftwidth=2
@@ -35,16 +37,15 @@ set softtabstop=2
 set splitbelow
 set splitright
 set tabstop=2
-" set term=xterm-256color
 set termguicolors
-set undoreload=10000
 set undolevels=1000
+set undoreload=10000
 set wildignore+=node_modules
 
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
 
-" Avoid showing message extra message when using completion
+" Avoid showing extra message when using completion
 " set shortmess+=c
 
 " Ensure autocmd works for Filetype
@@ -80,8 +81,6 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
-" set splitbelow         " Always split below
-" " set mouse=a            " Enable mouse drag on window splits
 " augroup myterm | au!
 "     au TermOpen * if &buftype ==# 'terminal' | resize 20 | vert resize 40 | endif
 " augroup end
