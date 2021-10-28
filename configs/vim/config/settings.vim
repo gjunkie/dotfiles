@@ -29,6 +29,7 @@ set nofoldenable
 set noshowmode
 set nostartofline
 set noswapfile
+set number
 set scrolloff=20
 set shiftwidth=2
 set smartcase
