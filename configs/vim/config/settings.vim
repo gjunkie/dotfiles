@@ -26,7 +26,6 @@ set laststatus=2
 set nobackup
 set noerrorbells
 set nofoldenable
-set nonumber
 set noshowmode
 set nostartofline
 set noswapfile
