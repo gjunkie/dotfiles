@@ -13,7 +13,7 @@ ORANGE="$(tput setaf 179)"
 VIOLET='\[\033[01;35m\]'
 WHITE='\[\e[0m\]'
 
-function color_my_prompt {
+function build_prompt {
   local __user_and_host="$ORANGE\u @ \h"
   local __user="$ORANGE\u @"
   if [ $VIM ]; then
@@ -52,4 +52,4 @@ function color_my_prompt {
 }
 
 # configure PROMPT_COMMAND which is executed each time before PS1
-export PROMPT_COMMAND=color_my_prompt
+export PROMPT_COMMAND=build_prompt
