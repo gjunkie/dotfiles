@@ -32,6 +32,7 @@
   # (better for interactive use)
   stat = !git diff --stat $(git merge-base HEAD \"$REVIEW_BASE\")
   depgraph = !git madge image --webpack-config webpack.config.js --basedir . --style solarized-dark src
+  prompt = !"prompt_git() { local s=''; local branchName=''; if [ \"$(git rev-parse --is-inside-work-tree &>/dev/null; echo \"${?}\")\" == '0' ]; then if [ \"$(git rev-parse --is-inside-git-dir 2> /dev/null)\" == 'false' ]; then if [[ -O \"$(git rev-parse --show-toplevel)/.git/index\" ]]; then git update-index --really-refresh -q &> /dev/null; fi; fi; branchName=\"$(git symbolic-ref --quiet --short HEAD 2> /dev/null || git rev-parse --short HEAD 2> /dev/null || echo '(unknown)')\"; echo \"${1} ${branchName}\"; else echo \"fcarthy\"; fi; }; prompt_git"
 
 [color]
   diff = auto
@@ -59,7 +60,7 @@
 
 [core]
   autocrlf = input
-  excludesfile = /Users/admin/.gitignore_global
+  excludesFile = ~/.gitignore
   editor = vim
 
 [merge]
@@ -87,3 +88,7 @@
   pushDefault=origin
 [credential]
 	helper = store
+[init]
+  defaultBranch = main
+[http]
+  postBuffer = 524288000

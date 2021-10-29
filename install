@@ -213,6 +213,9 @@ copy_files() {
 	_process "→ Symlinking bash folder"
 	ln -s "${DIR}/configs/bash" "${HOME}/.bash"
 
+	_process "→ Symlinking tmux conf"
+	ln -s "${DIR}/configs/tmux/tmux.conf" "${HOME}/.tmux.conf"
+
 	# Symlink files to the HOME directory.
 	if [[ -f "${DIR}/opt/files" ]]; then
 		_process "→ Copying files"

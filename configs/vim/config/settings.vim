@@ -15,14 +15,12 @@ set expandtab
 set foldlevel=2
 set foldmethod=indent
 set foldnestmax=10
-set guicursor=i:block
 set hidden
 set history=10000
 set hlsearch
 set ignorecase
 set incsearch
 set laststatus=2
-" set mouse=a
 set nobackup
 set noerrorbells
 set nofoldenable
