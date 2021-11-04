@@ -16,7 +16,7 @@ ORANGE="$(tput setaf 179)"
 VIOLET='\[\033[01;35m\]'
 WHITE='\[\e[0m\]'
 
-function color_my_prompt {
+function build_prompt {
   local __user_and_host="$DARK_GRAY[$BLUE\u @ \h$DARK_GRAY]"
   local __user="$DARK_GRAY[$BLUE\D{%H:%M:%S}$DARK_GRAY]"
   if [ $VIM ]; then
@@ -74,8 +74,8 @@ function color_my_prompt {
   # PS1="$__prompt_head $__user $__cur_location$__git_branch_color$__git_branch $__prompt_tail$__user_input_color "
 }
 
+export PROMPT_COMMAND=build_prompt
 # configure PROMPT_COMMAND which is executed each time before PS1
-export PROMPT_COMMAND=color_my_prompt
 
 # 
 # # +-----------------+
