@@ -24,34 +24,54 @@ function color_my_prompt {
     __user="${BLUE}bash @"
   fi
 
-  local __cur_location="$CYAN\w "
-  local __git_branch_color="$CYAN"
+  local __cur_location="$CYAN\w"
+  # local __git_branch_color="$CYAN"
   local __user_input_color="$LIGHT_GRAY"
-  local __git_status=$(git status 2> /dev/null)
-  local __git_branch=$(__git_ps1)
+  # local __git_status=$(git status 2> /dev/null)
+  # local __git_branch=$(__git_ps1)
 
   # Branch dirty status represented by symbols. See: git_helpers
-  local __dirty_symbols=$(parse_git_dirty "$__git_status")
-  if [ "${__dirty_symbols}" != "" ]; then
-    __git_branch="$(__git_ps1) ${__dirty_symbols}"
-  fi
+  # local __dirty_symbols=$(parse_git_dirty "$__git_status")
+  # if [ "${__dirty_symbols}" != "" ]; then
+  #   __git_branch="$(__git_ps1) ${__dirty_symbols}"
+  # fi
   
   # Branch color based on git status
-  if [[ "${__git_status}" =~ "Changes not staged" ]]; then          # if repository is dirty
-      __git_branch_color="$GREEN"
-  elif [[ "${__git_status}" =~ "Untracked files" ]]; then           # if there are only untracked files
-      __git_branch_color="$CYAN"
-  elif [[ "${__git_status}" =~ "Changes to be committed" ]]; then   # if there are staged files
-      __git_branch_color="$ORANGE"
-  else
-      __git_branch_color="$LIGHT_GRAY"
-  fi
-   
+  # if [[ "${__git_status}" =~ "Changes not staged" ]]; then          # if repository is dirty
+  #     __git_branch_color="$GREEN"
+  # elif [[ "${__git_status}" =~ "Untracked files" ]]; then           # if there are only untracked files
+  #     __git_branch_color="$CYAN"
+  # elif [[ "${__git_status}" =~ "Changes to be committed" ]]; then   # if there are staged files
+  #     __git_branch_color="$ORANGE"
+  # else
+  #     __git_branch_color="$LIGHT_GRAY"
+  # fi
+
   local __prompt_head="${DARK_GRAY}┌"
   local __prompt_tail="\n${DARK_GRAY}└ \$ »"
 
+  # > Bracket Open
+  # Format:
+  #   (bracket open)
+  PS1="$__prompt_head"
+
+  PS1+="$__user "
+
+  # > Current Directory
+  # Format:
+  #   ()
+  PS1+="$__cur_location"
+
+  # PS1+="$__git_branch_color$__git_branch"
+
+  PS1+= "$(__git_ps1 " %s $(git rev-parse --short HEAD 2> /dev/null)")"
+  # > Bracket Open
+  # Format:
+  #   (bracket open)
+  PS1+="$__prompt_tail$__user_input_color "
+
   # Build the PS1 (Prompt String)
-  PS1="$__prompt_head $__user $__cur_location$__git_branch_color$__git_branch $WHITE$__prompt_tail$__user_input_color "
+  # PS1="$__prompt_head $__user $__cur_location$__git_branch_color$__git_branch $__prompt_tail$__user_input_color "
 }
 
 # configure PROMPT_COMMAND which is executed each time before PS1

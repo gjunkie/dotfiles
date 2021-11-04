@@ -211,7 +211,8 @@ let g:StslineColorDark2  = "#202020"
 let g:StslineColorDark3  = "#303030"
 
 " Nord color palette
-let g:StslineColorFrostMoss        = "#8FBCBB"
+" let g:StslineColorFrostMoss        = "#8FBCBB"
+let g:StslineColorFrostMoss        = "#88C0D0"
 let g:StslineColorFrostBlue        = "#5E81AC"
 let g:StslineColorAuroraPurple     = "#B48EAD"
 let g:StslineColorAuroraYellow     = "#EBCB8B"
