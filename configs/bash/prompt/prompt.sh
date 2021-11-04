@@ -1,5 +1,6 @@
 source ${HOME}/.bash/prompt/git_helpers.sh
-source /usr/local/etc/bash_completion.d/git-prompt.sh
+source ${HOME}/.bash/git-completion.bash
+source ${HOME}/.bash/git-prompt.bash
 
 # store colors
 MAGENTA="\[\033[0;35m\]"

@@ -74,6 +74,7 @@ install_git() {
 
   brew install git
   ln -s "${DIR}/configs/git/.gitconfig" "${HOME}/.gitconfig"
+  ln -s "${DIR}/configs/git/.gitignore" "${HOME}/.gitignore"
 
   [[ $? ]] \
   && _success "Installed git"
@@ -202,6 +203,7 @@ install_node_packages() {
 copy_files() {
 	_process "→ Symlinking vim folder"
   ln -s "${DIR}/configs/vim" "${HOME}/.vim"
+  ln -s "${DIR}/configs/runcom/vimrc.vim" "${HOME}/.vimrc"
 
 	if [[ -d "${HOME}/.configs/nvim" ]]; then
     rm "${HOME}/.configs/nvim/init.vim"
@@ -213,6 +215,7 @@ copy_files() {
 
 	_process "→ Symlinking bash folder"
 	ln -s "${DIR}/configs/bash" "${HOME}/.bash"
+  ln -s "${DIR}/configs/runcom/bashrc.sh" "${HOME}/.bashrc"
 
 	_process "→ Symlinking tmux conf"
 	ln -s "${DIR}/configs/tmux/tmux.conf" "${HOME}/.tmux.conf"

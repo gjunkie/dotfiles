@@ -1,6 +1,6 @@
 *.DS_Store
 vim/undodir
-vim/.netrwhist
+.netrwhist
 vim/bundle
 plugged
 undodir
