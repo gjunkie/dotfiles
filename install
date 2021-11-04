@@ -73,6 +73,7 @@ install_git() {
   _process "→ Installing git"
 
   brew install git
+  ln -s "${DIR}/configs/git/.gitconfig" "${HOME}/.gitconfig"
 
   [[ $? ]] \
   && _success "Installed git"
@@ -204,11 +205,11 @@ copy_files() {
 
 	if [[ -d "${HOME}/.configs/nvim" ]]; then
     rm "${HOME}/.configs/nvim/init.vim"
-    ln -s "${DIR}/configs/nvim/init.vim" "${HOME}/.config/nvim/init.vim"
   else
     mkdir "${HOME}/.configs/nvim"
-    ln -s "${DIR}/configs/nvim/init.vim" "${HOME}/.config/nvim/init.vim"
   fi
+
+  ln -s "${DIR}/configs/nvim/init.vim" "${HOME}/.config/nvim/init.vim"
 
 	_process "→ Symlinking bash folder"
 	ln -s "${DIR}/configs/bash" "${HOME}/.bash"
