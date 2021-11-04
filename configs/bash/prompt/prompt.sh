@@ -18,8 +18,8 @@ VIOLET='\[\033[01;35m\]'
 WHITE='\[\e[0m\]'
 
 function build_prompt {
-  local __user_and_host="$DARK_GRAY[$BLUE\u @ \h$DARK_GRAY]"
-  local __user="$DARK_GRAY[$BLUE\D{%H:%M:%S}$DARK_GRAY]"
+  local __user_and_host="$DARK_GRAY[$BLUE\u @ \h$DARK_GRAY]╾──╼"
+  local __user="$DARK_GRAY[$BLUE\D{%H:%M:%S}$DARK_GRAY]╾──╼"
   if [ $VIM ]; then
     __user_and_host="${BLUE}bash @ $GREEN\h"
     __user="${BLUE}bash @"
@@ -48,28 +48,35 @@ function build_prompt {
   #     __git_branch_color="$LIGHT_GRAY"
   # fi
 
-  local __prompt_head="${DARK_GRAY}┌"
-  local __prompt_tail="\n${DARK_GRAY}└ \$ »"
+  local __prompt_head="${DARK_GRAY}┌─╼"
+  local __prompt_tail="${DARK_GRAY}└─╼ ${WHITE}»"
 
   # > Bracket Open
   # Format:
   #   (bracket open)
   PS1="$__prompt_head"
 
-  PS1+="$__user "
+  PS1+="$__user"
 
   # > Current Directory
   # Format:
   #   ()
-  PS1+="$__cur_location"
+  PS1+="$DARK_GRAY[$__cur_location$DARK_GRAY]"
 
   # PS1+="$__git_branch_color$__git_branch"
 
-  PS1+= "$(__git_ps1 " %s $(git rev-parse --short HEAD 2> /dev/null)")"
+  # > Git info
+  # Format:
+  #   (branch)(commit)
+  if [[ ! -z $(__git_ps1) ]]; then
+    PS1+='\n'
+    PS1+="${DARK_GRAY}└─╼$(__git_ps1 "$DARK_GRAY[$CYAN%s$DARK_GRAY] $(git rev-parse --short HEAD 2> /dev/null)")"
+  fi
+
   # > Bracket Open
   # Format:
   #   (bracket open)
-  PS1+="$__prompt_tail$__user_input_color "
+  PS1+="\n  $__prompt_tail$__user_input_color "
 
   # Build the PS1 (Prompt String)
   # PS1="$__prompt_head $__user $__cur_location$__git_branch_color$__git_branch $__prompt_tail$__user_input_color "
