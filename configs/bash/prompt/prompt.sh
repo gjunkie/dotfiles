@@ -49,12 +49,12 @@ function build_prompt {
   # fi
 
   local __prompt_head="${DARK_GRAY}┌─╼"
-  local __prompt_tail="${DARK_GRAY}└─╼ ${WHITE}»"
+  local __prompt_tail="└─╼ ${WHITE}»"
 
   # > Bracket Open
   # Format:
   #   (bracket open)
-  PS1="$__prompt_head"
+  PS1="${DARK_GRAY}┌─╼"
 
   PS1+="$__user"
 
@@ -71,18 +71,17 @@ function build_prompt {
   if [[ ! -z $(__git_ps1) ]]; then
     PS1+='\n'
     PS1+="${DARK_GRAY}└─╼$(__git_ps1 "$DARK_GRAY[$CYAN%s$DARK_GRAY] $(git rev-parse --short HEAD 2> /dev/null)")"
+    # PS1+="${DARK_GRAY}└─╼$(__git_ps1 "$DARK_GRAY[$CYAN%s$DARK_GRAY] $(git rev-parse --short HEAD 2> /dev/null)")"
   fi
 
-  # > Bracket Open
+  # > Tail and user input
   # Format:
-  #   (bracket open)
-  PS1+="\n  $__prompt_tail$__user_input_color "
+  #   ()
+  PS1+="\n  └─╼ ${WHITE}»$__user_input_color "
 
   # Build the PS1 (Prompt String)
   # PS1="$__prompt_head $__user $__cur_location$__git_branch_color$__git_branch $__prompt_tail$__user_input_color "
 }
-
-export PROMPT_COMMAND=build_prompt
 # configure PROMPT_COMMAND which is executed each time before PS1
 
 # 
@@ -209,3 +208,5 @@ export PROMPT_COMMAND=build_prompt
 # # }
 # # 
 # # PROMPT_COMMAND='compile_prompt'
+
+export PROMPT_COMMAND=build_prompt
