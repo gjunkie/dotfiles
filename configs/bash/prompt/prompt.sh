@@ -77,7 +77,11 @@ function build_prompt {
   # > Tail and user input
   # Format:
   #   ()
-  PS1+="\n  └─╼ ${WHITE}»$__user_input_color "
+  if [[ ! -z $(__git_ps1) ]]; then
+    PS1+="\n   └─╼${WHITE}»$__user_input_color "
+  else
+    PS1+="\n└─╼${WHITE}»$__user_input_color "
+  fi
 
   # Build the PS1 (Prompt String)
   # PS1="$__prompt_head $__user $__cur_location$__git_branch_color$__git_branch $__prompt_tail$__user_input_color "
@@ -91,7 +95,7 @@ function build_prompt {
 # # +--- Dirty State ---+
 # # Show unstaged (*) and staged (+) changes.
 # # Also configurable per repository via "bash.showDirtyState".
-# GIT_PS1_SHOWDIRTYSTATE=true
+GIT_PS1_SHOWDIRTYSTATE=true
 # 
 # # +--- Stash State ---+
 # # Show currently stashed ($) changes.
@@ -120,7 +124,7 @@ function build_prompt {
 # #
 # # By default, __git_ps1 will compare HEAD to SVN upstream ('@{upstream}' if not available).
 # # Also configurable per repository via "bash.showUpstream".
-# GIT_PS1_SHOWUPSTREAM="auto verbose name"
+GIT_PS1_SHOWUPSTREAM="auto verbose name"
 # 
 # # +--- Describe Style ---+
 # # Show more information about the identity of commits checked out as a detached HEAD.
