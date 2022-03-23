@@ -36,8 +36,8 @@ let s:fzf_options = "--multi --tabstop 4 --no-reverse --no-margin
 
 " files
 " Pass an empty option dictionary if the screen is narrow
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+" command! -bang -nargs=? -complete=dir Files
+  " \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 
 command! -bang -nargs=* Ag

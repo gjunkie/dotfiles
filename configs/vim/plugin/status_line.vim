@@ -263,6 +263,7 @@ endfunction
 
 function! DeactivateStatusline()
 
+  call GetFileType()
   if !exists("b:GitBranch") || b:GitBranch == ''
     setlocal statusline=%#StslineSecColorBG#\ INACTIVE\ %{get(b:,'coc_git_blame','')}%#StslineBackColorFGSecColorBG#%#StslineBackColorBG#\ %{&readonly?\"\ \":\"\"}%<%t%w\ %#StslineModColorFG#%{&modified?\"\ \":\"\"}%=%#StslineBackColorBG#\ %{b:FiletypeIcon}%{&filetype}\ %#StslineSecColorFGBackColorBG#%#StslineSecColorBG#\ %p\%%\ %l/%L\ :%c\ 
 

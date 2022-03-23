@@ -31,6 +31,7 @@ Plug 'jparise/vim-graphql'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'ianks/vim-tsx'
+Plug 'yuezk/vim-js'
 
 " Use release branch (recommend)
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': 'yarn install --frozen-lockfile'}

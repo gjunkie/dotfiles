@@ -68,11 +68,11 @@ function build_prompt {
   # > Git info
   # Format:
   #   (branch)(commit)
-  if [[ ! -z $(__git_ps1) ]]; then
-    PS1+='\n'
-    PS1+="${DARK_GRAY}└─╼$(__git_ps1 "$DARK_GRAY[$CYAN%s$DARK_GRAY] $(git rev-parse --short HEAD 2> /dev/null)")"
+  # if [[ ! -z $(__git_ps1) ]]; then
+    # PS1+='\n'
     # PS1+="${DARK_GRAY}└─╼$(__git_ps1 "$DARK_GRAY[$CYAN%s$DARK_GRAY] $(git rev-parse --short HEAD 2> /dev/null)")"
-  fi
+    # PS1+="${DARK_GRAY}└─╼$(__git_ps1 "$DARK_GRAY[$CYAN%s$DARK_GRAY] $(git rev-parse --short HEAD 2> /dev/null)")"
+  # fi
 
   # > Tail and user input
   # Format:
@@ -95,7 +95,7 @@ function build_prompt {
 # # +--- Dirty State ---+
 # # Show unstaged (*) and staged (+) changes.
 # # Also configurable per repository via "bash.showDirtyState".
-GIT_PS1_SHOWDIRTYSTATE=true
+# GIT_PS1_SHOWDIRTYSTATE=true
 # 
 # # +--- Stash State ---+
 # # Show currently stashed ($) changes.
@@ -124,7 +124,7 @@ GIT_PS1_SHOWDIRTYSTATE=true
 # #
 # # By default, __git_ps1 will compare HEAD to SVN upstream ('@{upstream}' if not available).
 # # Also configurable per repository via "bash.showUpstream".
-GIT_PS1_SHOWUPSTREAM="auto verbose name"
+# GIT_PS1_SHOWUPSTREAM="auto verbose name"
 # 
 # # +--- Describe Style ---+
 # # Show more information about the identity of commits checked out as a detached HEAD.
