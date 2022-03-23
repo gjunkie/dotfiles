@@ -33,11 +33,12 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'ianks/vim-tsx'
 
 " Use release branch (recommend)
-Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': 'yarn install --frozen-lockfile'}
 Plug 'scalameta/nvim-metals'
 Plug 'nvim-lua/plenary.nvim'
+Plug 'neovim/nvim-lsp'
 
-Plug 'antoinemadec/coc-fzf'
+" Plug 'antoinemadec/coc-fzf'
 
 " Plug 'janko/vim-test'
 
