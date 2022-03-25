@@ -121,5 +121,19 @@ function! CleanNoNameEmptyBuffers()
 endfunction
 
 let g:omni_sql_no_default_maps = 1
-let g:coc_global_extensions = [ 'coc-tsserver' ]
-let g:coc_disable_transparent_cursor = 1
+" let g:coc_global_extensions = [ 'coc-tsserver' ]
+" let g:coc_disable_transparent_cursor = 1
+
+
+let g:LanguageClient_serverCommands = {
+    \ 'javascript': ['flow-language-server', '--stdio'],
+    \ }
+
+let g:LanguageClient_rootMarkers = {
+\   'javascript': ['.flowconfig', 'package.json']
+\ }
+
+let g:LanguageClient_serverCommands={
+\   'javascript': ['flow', 'lsp'],
+\   'javascript.jsx': ['flow', 'lsp']
+\}

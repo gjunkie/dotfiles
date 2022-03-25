@@ -20,12 +20,12 @@ Plug 'Raimondi/delimitMate'
 
 " Syntax Highlighting
 " Plugin 'sheerun/vim-polyglot'
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
-Plug 'MaxMEllon/vim-jsx-pretty'
-Plug 'amadeus/vim-xml'
-Plug 'pangloss/vim-javascript'
-Plug 'jparise/vim-graphql'
+" Plug 'godlygeek/tabular'
+" Plug 'plasticboy/vim-markdown'
+" Plug 'MaxMEllon/vim-jsx-pretty'
+" Plug 'amadeus/vim-xml'
+" Plug 'pangloss/vim-javascript'
+" Plug 'jparise/vim-graphql'
 
 
 Plug 'leafgarland/typescript-vim'
@@ -38,7 +38,12 @@ Plug 'yuezk/vim-js'
 Plug 'scalameta/nvim-metals'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'neovim/nvim-lsp'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " Plug 'antoinemadec/coc-fzf'
 
 " Plug 'janko/vim-test'

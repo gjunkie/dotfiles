@@ -135,11 +135,30 @@ nnoremap gc :BCommits<CR>
 nnoremap gac :Commits!<CR>
 
 " Code navigation
-nmap <silent> fd <Plug>(coc-definition)
-nmap <silent> fy <Plug>(coc-type-definition)
-nmap <silent> fi <Plug>(coc-implementation)
-nmap <silent> fr <Plug>(coc-references)
+" nmap <silent> fd <Plug>(coc-definition)
+" nmap <silent> fy <Plug>(coc-type-definition)
+" nmap <silent> fi <Plug>(coc-implementation)
+" nmap <silent> fr <Plug>(coc-references)
 
+" nmap <silent> fd <Plug>(lcn-definition)
+
+" check the type under cursor w/ leader T
+nnoremap <leader>h :call LanguageClient_textDocument_hover()<CR>
+nnoremap <leader>y :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> fd          <cmd>lua vim.lsp.buf.definition()<CR>
+" nnoremap <silent> fh           <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> fi          <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> fr          <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> gds         <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> gws         <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <silent> <leader>rn  <cmd>lua vim.lsp.buf.rename()<CR>
+nnoremap <silent> <leader>f   <cmd>lua vim.lsp.buf.formatting()<CR>
+nnoremap <silent> <leader>ca  <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> <leader>ws  <cmd>lua require'metals'.worksheet_hover()<CR>
+nnoremap <silent> <leader>a   <cmd>lua require'metals'.open_all_diagnostics()<CR>
+nnoremap <silent> <space>d    <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
+nnoremap <silent> [c          <cmd>lua vim.lsp.diagnostic.goto_prev { wrap = true }<CR>
+nnoremap <silent> ]c          <cmd>lua vim.lsp.diagnostic.goto_next { wrap = true }<CR>
 " ALE Linter
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
