@@ -1,1 +1,8 @@
 tags
+*.DS_Store
+vim/undodir
+.netrwhist
+vim/bundle
+plugged
+undodir
+tags

@@ -1,0 +1,17 @@
+{
+  "javascript": {
+    "snippets": {
+      "cl": "console.log('${1}');",
+      "id": "import ${1} from '${2}';|",
+      "in": "import { ${1} } from '${2}';|",
+      "fun": "const ${1} = (${2}) => {\n\t${3}\n}",
+      "afun": "const ${1} = asyn (${2}) => {\n\t${3}\n}"
+    }
+  },
+  "javascript.jsx": {
+    "extends": "javascript"
+  },
+  "typescript": {
+    "extends": "javascript"
+  }
+}
