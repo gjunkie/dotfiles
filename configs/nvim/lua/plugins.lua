@@ -12,12 +12,12 @@ return require('packer').startup(function(use)
   use 'junegunn/fzf.vim'
 
   use({'neovim/nvim-lspconfig',  -- Collection of configurations for the built-in LSP client
-    config = require('configs.nvim-lspconfig-config')
+    config = require('configs.nvim-lspconfig-config'),
   })
 
   use({'scalameta/nvim-metals',
     requires = { "nvim-lua/plenary.nvim" },
-    config = require('configs.metals-config')
+    config = require('configs.metals-config'),
   })
 
   -- use({
@@ -27,7 +27,7 @@ return require('packer').startup(function(use)
   -- })
 
   use({'nvim-lualine/lualine.nvim',
-    config = require('configs.lualine-config')
+    config = require('configs.lualine-config'),
   })
 
   -- Nvim Tree file explorer
@@ -89,26 +89,3 @@ return require('packer').startup(function(use)
     require('packer').sync()
   end
 end)
-
--- Colorschemes
--- Plug {'cocopon/iceberg.vim'}
--- Plug 'gjunkie/vim-grid-color'}
--- Plug 'sonph/onehalf', { 'rtp': 'vim' }
-
---Plug 'Raimondi/delimitMate'}
-
--- Syntax Highlighting
--- Plug 'godlygeek/tabular'}
--- Plug 'plasticboy/vim-markdown'}
--- Plug 'MaxMEllon/vim-jsx-pretty'}
--- Plug 'amadeus/vim-xml'}
--- Plug 'pangloss/vim-javascript'}
--- Plug 'jparise/vim-graphql'}
-
-
--- Plug {'leafgarland/typescript-vim'}
--- Plug {'peitalin/vim-jsx-typescript'}
--- Plug {'ianks/vim-tsx'}
--- Plug {'yuezk/vim-js'}
-
--- Plug {'janko/vim-test'}

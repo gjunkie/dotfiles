@@ -22,10 +22,37 @@ return function()
     end
   end
 
+  vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]]
+  vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]]
+
+  local border = {
+    {"╔", "FloatBorder"},
+    {"═", "FloatBorder"},
+    {"╗", "FloatBorder"},
+    {"║", "FloatBorder"},
+    {"╝", "FloatBorder"},
+    {"═", "FloatBorder"},
+    {"╚", "FloatBorder"},
+    {"║", "FloatBorder"},
+  }
+
+  -- LSP settings (for overriding per client)
+  local handlers =  {
+    ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
+    ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border }),
+    ["textDocument/diagnostic"] =  vim.lsp.with(vim.lsp.handlers.diagnostic, {border = border}),
+  }
+
   nvim_lsp.flow.setup{
-    on_attach = on_attach,
+    handlers = handlers,
     capabilities = capabilities,
-	}
+    on_attach = on_attach,
+  }
+
+  nvim_lsp.tsserver.setup {
+    handlers = handlers,
+    on_attach = on_attach,
+  }
 
   nvim_lsp.diagnosticls.setup {
     on_attach = on_attach,
@@ -111,4 +138,12 @@ return function()
       }
     }
   }
+
+  vim.diagnostic.config({
+    virtual_text = false,
+    signs = true,
+    underline = true,
+    update_in_insert = false,
+    severity_sort = false,
+  })
 end
