@@ -4,7 +4,7 @@ return function()
   vim.g.ale_linters = {
     javascript = {'eslint'}
   }
-  vim.g.ale_linters['javascript.jsx'] = 'eslint'
+  vim.g.ale_linters['javascript.jsx'] = 'eslint_d'
   --vim.g.ale_linters['typescript'] = 'eslint'
   vim.g.ale_linters_explicit = 1
 
@@ -14,9 +14,7 @@ return function()
   vim.g.ale_lint_on_insert_leave = 1
 
 
-  vim.g.ale_fixers = {
-    javascript = {'eslint'}
-  }
+  vim.g.ale_fixers['javascript.jsx'] = 'eslint_d'
   --vim.g.ale_fixers['javascript.jsx'] = 'eslint'
   --vim.g.ale_fixers['typescript'] = 'eslint'
   vim.g.ale_fix_on_save = 1

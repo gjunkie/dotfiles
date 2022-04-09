@@ -1,10 +1,16 @@
 return function()
 
-
   -- Setup nvim-cmp.
   local cmp = require'cmp'
 
   cmp.setup({
+    -- disables autocomplete in comments
+    enabled = function()
+      local context = require("cmp.config.context")
+      return not (
+        context.in_treesitter_capture("comment") or context.in_syntax_group("Comment")
+      )
+    end,
     snippet = {
       -- REQUIRED - you must specify a snippet engine
       expand = function(args)
@@ -45,10 +51,21 @@ return function()
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
       { name = 'vsnip' }, -- For vsnip users.
-    }, {
       { name = 'buffer' },
+      { name = 'path' },
     })
   })
+
+  -- cmp.setup({
+  --   sources = {
+  --     {
+  --       name = 'path',
+  --       option = {
+  --         -- Options go into this table
+  --       },
+  --     },
+  --   },
+  -- })
 
   -- Set configuration for specific filetype.
   cmp.setup.filetype('gitcommit', {
@@ -74,13 +91,4 @@ return function()
       { name = 'cmdline' }
     })
   })
-
-  -- Setup lspconfig.
-  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-  require('lspconfig')['tsserver'].setup {
-    capabilities = capabilities
-  }
-  require'lspconfig'.flow.setup{
-    capabilities = capabilities
-	}
 end

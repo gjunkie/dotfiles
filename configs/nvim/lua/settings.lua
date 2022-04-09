@@ -18,11 +18,12 @@ cmd 'colorscheme nord'
 -- o.autoread
 o.backspace = 'indent,eol,start'
 o.cmdheight = 1
+o.cursorline = true
 o.enc = 'utf-8'
 o.expandtab = true
-o.foldlevel = 2
-o.foldmethod = 'indent'
-o.foldnestmax = 10
+-- o.foldlevel = 2
+-- o.foldmethod = 'indent'
+-- o.foldnestmax = 10
 -- o.hidden
 o.history = 10000
 -- o.hlsearch
@@ -50,16 +51,16 @@ o.undolevels = 1000
 o.undoreload = 10000
 o.wildignore = o.wildignore + 'node_modules'
 
-o.updatetime=300
+o.updatetime = 500
 
 -- o.completeopt to have a better completion experience
 o.completeopt='menuone,noinsert,noselect'
 
 -- Avoid showing extra message when using completion
-o.shortmess = o.shortmess + 'c'
+-- o.shortmess:append({'c'})
 
 -- Ensure autocmd works for Filetype
-o.shortmess = o.shortmess - 'F'
+o.shortmess:remove({'F'})
 
 o.diffopt = o.diffopt + 'iwhiteall'
 o.diffopt = o.diffopt + 'hiddenoff'
@@ -73,3 +74,23 @@ g.omni_sql_no_default_maps = 1
 
 -- g.LanguageClient_serverCommands={ javascript: ['flow', 'lsp'], 'javascript.jsx': ['flow', 'lsp'] }
 vim.cmd('source ~/.vim/config/autocmd.vim')
+vim.cmd('source ~/.vim/autoload/comment.vim')
+
+cmd [[augroup lsp]]
+cmd [[au!]]
+cmd [[au FileType java,scala,sbt lua require("metals").initialize_or_attach({})]]
+cmd [[augroup end]]
+
+g.user_emmet_leader_key = '<C-f>'
+
+o.updatetime = 250
+vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+-- vim.cmd [[autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif]]
+
+vim.diagnostic.config({
+  virtual_text = false,
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = false,
+})

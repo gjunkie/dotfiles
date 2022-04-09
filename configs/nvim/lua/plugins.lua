@@ -11,76 +11,77 @@ return require('packer').startup(function(use)
   use 'junegunn/fzf'
   use 'junegunn/fzf.vim'
 
-  use 'neovim/nvim-lspconfig' -- Collection of configurations for the built-in LSP client
+  use({'neovim/nvim-lspconfig',  -- Collection of configurations for the built-in LSP client
+    config = require('configs.nvim-lspconfig-config')
+  })
 
   use({'scalameta/nvim-metals',
-    config = function()
-      require('configs.metals-config')
-    end,
+    requires = { "nvim-lua/plenary.nvim" },
+    config = require('configs.metals-config')
+  })
+
+  -- use({
+  --   "lewis6991/gitsigns.nvim",
+  --   requires = { "nvim-lua/plenary.nvim" },
+  --   config = require("configs.gitsigns-config"),
+  -- })
+
+  use({'nvim-lualine/lualine.nvim',
+    config = require('configs.lualine-config')
   })
 
   -- Nvim Tree file explorer
-  use({
-    "kyazdani42/nvim-tree.lua",
-    requires = { "kyazdani42/nvim-web-devicons" },
-    config = function()
-      require('configs.nvim-tree-config')
-    end,
-  })
-
-  use({
-    "lewis6991/gitsigns.nvim",
-    requires = { "nvim-lua/plenary.nvim" },
-    config = require("configs.gitsigns-config"),
-  })
-
-  use({'nvim-lualine/lualine.nvim',
-    config = function()
-      require('configs.lualine-config')
-    end,
-  })
-
   use({'nvim-treesitter/nvim-treesitter',
-	  requires = { "p00f/nvim-ts-rainbow" },
+    requires = { "p00f/nvim-ts-rainbow" },
     config = require("configs.treesitter-config"),
-	})
+   })
 
-	use({
-        "hrsh7th/nvim-cmp",
-        requires = {
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-path",
-            "hrsh7th/cmp-cmdline",
-            "onsails/lspkind-nvim", -- Adds icons to autocompletion menu
-            -- cmp requires a snippet engine
-            "hrsh7th/cmp-vsnip",
-            "hrsh7th/vim-vsnip",
-        },
-        config = require("configs.nvim-cmp-config"),
-	})
+  use({
+    "hrsh7th/nvim-cmp",
+    requires = {
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-cmdline",
+      "onsails/lspkind-nvim", -- Adds icons to autocompletion menu
+      -- cmp requires a snippet engine
+      "hrsh7th/cmp-vsnip",
+      "hrsh7th/vim-vsnip",
+    },
+    config = require("configs.nvim-cmp-config"),
+  })
 
   -- use { 'autozimu/LanguageClient-neovim', branch = 'next', run = 'bash install.sh'}
 
   -- Linting
-  use({'w0rp/ale',
-    config = require('configs.ale-config'),
-  })
+  -- use({'dense-analysis/ale',
+  --   config = require('configs.ale-config'),
+  -- })
 
   use 'vimwiki/vimwiki'
 
   use 'arcticicestudio/nord-vim'
 
-    -- Emmet/Snippets
   use({
-    "mattn/emmet-vim",
-    requires = { "mattn/webapi-vim" },
-    config = function()
-        vim.cmd([[
-    let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/.config/nvim/snippets.json')), "\n"))
-  ]])
-    end,
+    "kyazdani42/nvim-tree.lua",
+    requires = { "kyazdani42/nvim-web-devicons" },
+    config = require('configs.nvim-tree-config'),
   })
+
+  use({'prettier/vim-prettier',
+    run = 'yarn install --frozen-lockfile --production'
+  })
+
+  -- Emmet/Snippets
+  -- use({
+  --   "mattn/emmet-vim",
+  --   requires = { "mattn/webapi-vim" },
+  --   config = function()
+  --     vim.cmd([[
+  --       let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/.config/nvim/snippets.json')), "\n"))
+  --     ]])
+  --   end,
+  -- })
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
@@ -110,9 +111,4 @@ end)
 -- Plug {'ianks/vim-tsx'}
 -- Plug {'yuezk/vim-js'}
 
--- Use release branch (recommend)
--- Plug {'nvim-lua/plenary.nvim'}
--- Plug {'neovim/nvim-lsp'}
-
--- Plug {'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}}
 -- Plug {'janko/vim-test'}

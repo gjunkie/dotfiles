@@ -135,10 +135,10 @@ map('n', 'gc', ':BCommits<CR>', {noremap = true})
 map('n', 'gac', ':Commits!<CR>', {noremap = true})
 
 -- Language Server
-map('n', 'fd', '<cmd>lua vim.lsp.buf.definition()<CR>', {noremap = true, silent = true})
-map('n', 'fh', '<cmd>lua vim.lsp.buf.hover()<CR>', {noremap = true, silent = true})
-map('n', 'fi', '<cmd>lua vim.lsp.buf.implementation()<CR>', {noremap = true, silent = true})
-map('n', 'fr', '<cmd>lua vim.lsp.buf.references()<CR>', {noremap = true, silent = true})
+map('n', '<Space>d', '<cmd>lua vim.lsp.buf.definition()<CR>', {noremap = true, silent = true})
+map('n', '<Space>h', '<cmd>lua vim.lsp.buf.hover()<CR>', {noremap = true, silent = true})
+map('n', '<Space>i', '<cmd>lua vim.lsp.buf.implementation()<CR>', {noremap = true, silent = true})
+map('n', '<Space>r', '<cmd>lua vim.lsp.buf.references()<CR>', {noremap = true, silent = true})
 map('n', 'gds', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', {noremap = true, silent = true})
 map('n', 'gws', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>', {noremap = true, silent = true})
 map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', {noremap = true, silent = true})
@@ -161,6 +161,15 @@ map('n', '<C-j>', '<Plug>(ale_next_wrap)', {silent = true})
 -- Vim Wiki
 map('n', '<Leader>ww', ':VimwikiIndex<CR>', {noremap = true})
 
+-- " pmenu and vim-vsnip
+-- imap <expr> <Tab>   pumvisible() ? "<C-n>" : vsnip#jumpable(1)   ? "<Plug>(vsnip-jump-next)" : "<Tab>"
+-- imap <expr> <S-Tab> pumvisible() ? "<C-p>" : vsnip#jumpable(-1)  ? "<Plug>(vsnip-jump-prev)" : "<S-Tab>"
+map('i', '<Tab>', 'pumvisible() ? "<C-n>" : vsnip#jumpable(1)   ? "<Plug>(vsnip-jump-next)" : "<Tab>"', {expr = true})
+map('i', '<S-Tab>', 'pumvisible() ? "<C-p>" : vsnip#jumpable(-1)  ? "<Plug>(vsnip-jump-prev)" : "<S-Tab>"', {expr = true})
+
+-- " vim-vsnip
+-- smap <expr> <Tab>   vsnip#jumpable(1)  ? "<Plug>(vsnip-jump-next)" : "<Tab>"
+-- smap <expr> <S-Tab> vsnip#jumpable(-1) ? "<Plug>(vsnip-jump-prev)" : "<S-Tab>"
 -- Copy to clipboard
 -- vnoremap  <leader>y "+y
 -- nnoremap  <leader>Y :"+yg_<CR>
