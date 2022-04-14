@@ -15,10 +15,9 @@ return require('packer').startup(function(use)
     config = require('configs.nvim-lspconfig-config'),
   })
 
-  use({
-    'nvim-telescope/telescope.nvim',
-    config = require('configs.telescope-config'),
-    requires = { {'nvim-lua/plenary.nvim'} },
+  use({'scalameta/nvim-metals',
+    requires = { "nvim-lua/plenary.nvim" },
+    config = require('configs.metals-config'),
   })
 
   -- use({
@@ -50,11 +49,6 @@ return require('packer').startup(function(use)
       "hrsh7th/vim-vsnip",
     },
     config = require("configs.nvim-cmp-config"),
-  })
-
-  use({'scalameta/nvim-metals',
-    requires = { "nvim-lua/plenary.nvim" },
-    config = require('configs.metals-config'),
   })
 
   -- use { 'autozimu/LanguageClient-neovim', branch = 'next', run = 'bash install.sh'}
