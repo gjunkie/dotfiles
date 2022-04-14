@@ -75,6 +75,8 @@ g.omni_sql_no_default_maps = 1
 -- g.LanguageClient_serverCommands={ javascript: ['flow', 'lsp'], 'javascript.jsx': ['flow', 'lsp'] }
 vim.cmd('source ~/.vim/config/autocmd.vim')
 vim.cmd('source ~/.vim/autoload/comment.vim')
+vim.cmd('source ~/.vim/autoload/git.vim')
+vim.cmd('source ~/.vim/plugin/git.vim')
 
 cmd [[augroup lsp]]
 cmd [[au!]]

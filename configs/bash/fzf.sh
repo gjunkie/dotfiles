@@ -3,9 +3,31 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow'
 export TERM=xterm-256color
 export FZF_DEFAULT_OPTS="
   --ansi
-  --preview-window 'right:60%'
+  --preview-window 'right:50%'
   --layout reverse
-  --margin=1,2"
+  --info=inline
+  --prompt='∼ ' --pointer='▶' --marker='✓'
+  --bind '?:toggle-preview'
+  --bind 'ctrl-y:execute-silent(echo {+} | pbcopy)'
+  --bind 'ctrl-v:execute(code {+})'
+  --bind up:preview-up,down:preview-down
+  --border"
+
+#   export FZF_DEFAULT_OPTS="
+# --layout=reverse
+# --info=inline
+# --height=80%
+# --multi
+# --preview-window=:hidden
+# --preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'
+# --color='hl:148,hl+:154,pointer:032,marker:010,bg+:237,gutter:008'
+# --prompt='∼ ' --pointer='▶' --marker='✓'
+# --bind '?:toggle-preview'
+# --bind 'ctrl-a:select-all'
+# --bind 'ctrl-y:execute-silent(echo {+} | pbcopy)'
+# --bind 'ctrl-e:execute(echo {+} | xargs -o vim)'
+# --bind 'ctrl-v:execute(code {+})'
+# "
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 

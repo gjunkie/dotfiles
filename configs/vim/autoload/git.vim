@@ -17,5 +17,5 @@ function git#OpenCurrentFileInGithub()
 endfunction
 
 function git#BlameCurrentFile(bufnr, filename, ...)
-  execute "terminal tig blame +" . line(".") . " -- " . a:filename
+  execute "terminal tig blame --since=36.month +" . line(".") . " -- " . a:filename
 endfunction
