@@ -48,10 +48,9 @@ map('n', 'HT', ':call CheatTmux()<CR>', {noremap = true})
 
 map('n', 'r', ':redo<CR>', {noremap = true})
 
--- replace word
-map('n', 'RR', ':%s:', {noremap = true})
--- replace cursor word
-map('n', 'RW', ':%s:<C-R><C-W>:', {noremap = true})
+-- replace
+map('n', 'RR', ':%s:', {noremap = true}) -- replace word
+map('n', 'RW', ':%s:<C-R><C-W>:', {noremap = true}) -- replace cursor word
 
 -- move lines
 map('v', 'J', ":m '>+1<CR>gv=gv", { noremap = true })
@@ -104,11 +103,6 @@ map('v', '<S-Tab>', '<gv', {noremap = true})
 -- nmap <leader>tt :set noet tabstop=4 shiftwidth=4 softtabstop=4<CR>
 -- nmap <leader>ss :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
 
--- Vim Tabs
-map('n', '<S-t>', ':tabnew<CR>', {})
--- nmap <leader>[ :tabp<CR>
--- nmap <leader>] :tabn<CR>
-
 -- Git helpers
 -- xnoremap g\ :<c-u>call git#OpenCurrentFileInGithub()<CR>
 -- noremap g\ V:<c-u>call git#OpenCurrentFileInGithub()<CR>
@@ -134,6 +128,17 @@ map('n', 'gb', ':Blame<CR>', {noremap = true})
 map('n', 'gc', ':BCommits<CR>', {noremap = true})
 map('n', 'gac', ':Commits!<CR>', {noremap = true})
 
+-- Telescope
+map('n', '<leader>ff', '<cmd>lua require("telescope.builtin").find_files()<cr>', {noremap = true})
+map('n', '<leader>nc', '<cmd>lua require"user.telescope".nvim_config()<cr>', {noremap = true})
+map('n', '<leader>fw', '<cmd>lua require("telescope.builtin").grep_string()<cr>', {noremap = true})
+map('n', '<leader>fs', '<cmd>lua require("telescope.builtin").live_grep()<cr>', {noremap = true})
+map('n', '<leader>b', '<cmd>lua require("telescope.builtin").buffers()<cr>', {noremap = true})
+-- map('n', '<leader>fh', '<cmd>lua require("telescope.builtin").help_tags()<cr>', {noremap = true})
+-- map('n', '<leader>d', '<cmd>lua require("telescope.builtin").lsp_definitions()<cr>', {noremap = true})
+-- map('n', '<leader>r', '<cmd>lua require("telescope.builtin").lsp_references()<cr>', {noremap = true})
+-- map('n', 'nc', '<cmd>lua require("telescope").nvim_config()<cr>', {noremap = true})
+
 -- Language Server
 map('n', '<Space>d', '<cmd>lua vim.lsp.buf.definition()<CR>', {noremap = true, silent = true})
 map('n', '<Space>h', '<cmd>lua vim.lsp.buf.hover()<CR>', {noremap = true, silent = true})
@@ -142,7 +147,6 @@ map('n', '<Space>r', '<cmd>lua vim.lsp.buf.references()<CR>', {noremap = true, s
 map('n', 'gds', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', {noremap = true, silent = true})
 map('n', 'gws', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>', {noremap = true, silent = true})
 map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', {noremap = true, silent = true})
-map('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', {noremap = true, silent = true})
 map('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', {noremap = true, silent = true})
 map('n', '[c', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', {noremap = true, silent = true})
 map('n', ']c', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', {noremap = true, silent = true})
@@ -150,13 +154,6 @@ map('n', ']c', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', {noremap = true, s
 -- ALE Linter
 map('n', '<C-k>', '<Plug>(ale_previous_wrap)', {silent = true})
 map('n', '<C-j>', '<Plug>(ale_next_wrap)', {silent = true})
-
--- Vim Test Mappings
--- nmap <silent> t<C-n> :TestNearest<CR>
--- nmap <silent> t<C-f> :TestFile<CR>
--- nmap <silent> t<C-s> :TestSuite<CR>
--- nmap <silent> t<C-l> :TestLast<CR>
--- nmap <silent> t<C-g> :TestVisit<CR>
 
 -- Vim Wiki
 map('n', '<Leader>ww', ':VimwikiIndex<CR>', {noremap = true})
