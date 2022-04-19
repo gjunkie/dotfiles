@@ -1,5 +1,5 @@
 return function()
-  metals_config = require'metals'.bare_config()
+  local metals_config = require'metals'.bare_config()
 
   metals_config.init_options.statusBarProvider = "on"
 
@@ -10,6 +10,7 @@ return function()
       "com.github.swagger.akka.javadsl"
     }
   }
+
   metals_config.on_attach = function()
     require'completion'.on_attach();
   end

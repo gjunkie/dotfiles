@@ -140,10 +140,10 @@ map('n', '<leader>b', '<cmd>lua require("telescope.builtin").buffers()<cr>', {no
 -- map('n', 'nc', '<cmd>lua require("telescope").nvim_config()<cr>', {noremap = true})
 
 -- Language Server
-map('n', '<Space>d', '<cmd>lua vim.lsp.buf.definition()<CR>', {noremap = true, silent = true})
-map('n', '<Space>h', '<cmd>lua vim.lsp.buf.hover()<CR>', {noremap = true, silent = true})
-map('n', '<Space>i', '<cmd>lua vim.lsp.buf.implementation()<CR>', {noremap = true, silent = true})
-map('n', '<Space>r', '<cmd>lua vim.lsp.buf.references()<CR>', {noremap = true, silent = true})
+map('n', '<leader>d', '<cmd>lua vim.lsp.buf.definition()<CR>', {noremap = true, silent = true})
+map('n', '<leader>h', '<cmd>lua vim.lsp.buf.hover()<CR>', {noremap = true, silent = true})
+map('n', '<leader>i', '<cmd>lua vim.lsp.buf.implementation()<CR>', {noremap = true, silent = true})
+map('n', '<leader>r', '<cmd>lua vim.lsp.buf.references()<CR>', {noremap = true, silent = true})
 map('n', 'gds', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', {noremap = true, silent = true})
 map('n', 'gws', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>', {noremap = true, silent = true})
 map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', {noremap = true, silent = true})

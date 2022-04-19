@@ -1,3 +1,3 @@
 return function()
-  require('jiangmiao/auto-pairs').setup{}
+  require('nvim-autopairs').setup{}
 end

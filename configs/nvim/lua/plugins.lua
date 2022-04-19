@@ -6,44 +6,24 @@ end
 
 return require('packer').startup(function(use)
   -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
+  use({'wbthomason/packer.nvim'})
 
-  use 'junegunn/fzf'
-  use 'junegunn/fzf.vim'
+  -- Collection of configurations for the built-in LSP client
+  use({'neovim/nvim-lspconfig', config = require('configs.nvim-lspconfig-config')})
 
-  use({'neovim/nvim-lspconfig',  -- Collection of configurations for the built-in LSP client
-    config = require('configs.nvim-lspconfig-config'),
-  })
+  -- Fuzzy searcher
+  use({'junegunn/fzf'})
+  use({'junegunn/fzf.vim'})
 
-  use({
-    'nvim-telescope/telescope.nvim',
-    config = require('configs.telescope-config'),
-    requires = { {'nvim-lua/plenary.nvim'} },
-  })
+  -- Fuzzy searcher
+  use({'nvim-telescope/telescope.nvim', requires = { {'nvim-lua/plenary.nvim'} }})
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
-  -- use({
-  --   "lewis6991/gitsigns.nvim",
-  --   requires = { "nvim-lua/plenary.nvim" },
-  --   config = require("configs.gitsigns-config"),
-  -- })
+  -- Custom status line
+  use({'nvim-lualine/lualine.nvim', config = require('configs.lualine-config')})
 
-  use({'nvim-lualine/lualine.nvim',
-    config = require('configs.lualine-config'),
-  })
-
-  -- Nvim Tree file explorer
-  use({'nvim-treesitter/nvim-treesitter',
-    requires = { "p00f/nvim-ts-rainbow" },
-    config = require("configs.treesitter-config"),
-   })
-
-  use({
-    'jiangmiao/auto-pairs',
-    config = require('configs.autopairs-config')
-  })
-
-  use({
-    "hrsh7th/nvim-cmp",
+  -- Completion
+  use({"hrsh7th/nvim-cmp",
     requires = {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
@@ -57,31 +37,30 @@ return require('packer').startup(function(use)
     config = require("configs.nvim-cmp-config"),
   })
 
-  use({'scalameta/nvim-metals',
-    requires = { "nvim-lua/plenary.nvim" },
-    config = require('configs.metals-config'),
-  })
+  -- Auto pairs for brackets, parenthesis, etc
+  use({'windwp/nvim-autopairs', config = require('configs.autopairs-config')})
 
-  -- use { 'autozimu/LanguageClient-neovim', branch = 'next', run = 'bash install.sh'}
+  -- Syntax highlighting
+  use({'nvim-treesitter/nvim-treesitter', requires = { "p00f/nvim-ts-rainbow" }, config = require("configs.treesitter-config")})
 
-  -- Linting
-  -- use({'dense-analysis/ale',
-  --   config = require('configs.ale-config'),
-  -- })
+  -- Nvim Tree file explorer
+  use({"kyazdani42/nvim-tree.lua", requires = { "kyazdani42/nvim-web-devicons" }, config = require('configs.nvim-tree-config')})
 
-  use 'vimwiki/vimwiki'
+  -- Code formatting
+  use({'prettier/vim-prettier', run = 'yarn install --frozen-lockfile --production'})
 
-  use 'arcticicestudio/nord-vim'
+  use({'scalameta/nvim-metals', requires = { "nvim-lua/plenary.nvim" }, config = require('configs.metals-config')})
 
-  use({
-    "kyazdani42/nvim-tree.lua",
-    requires = { "kyazdani42/nvim-web-devicons" },
-    config = require('configs.nvim-tree-config'),
-  })
+  -- Personal Wiki
+  use({'vimwiki/vimwiki'})
 
-  use({'prettier/vim-prettier',
-    run = 'yarn install --frozen-lockfile --production'
-  })
+  -- Git status in gutter
+  use({"lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" }, config = require("configs.gitsigns-config")})
+
+  -- Nord colorscheme
+  use({'arcticicestudio/nord-vim'})
+
+  -- use({'dense-analysis/ale', config = require('configs.ale-config')})
 
   -- Emmet/Snippets
   -- use({

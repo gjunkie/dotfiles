@@ -2,24 +2,18 @@ return function()
   local nvim_lsp = require('lspconfig')
 
   -- Setup lspconfig.
-  local capabilities = require('cmp_nvim_lsp').update_capabilities(
-    vim.lsp.protocol.make_client_capabilities()
-  )
-
-  -- nvim_lsp.tsserver.setup {
-   -- capabilities = capabilities
-  -- }
-
-  -- nvim_lsp.metals.setup{}
+  -- local capabilities = require('cmp_nvim_lsp').update_capabilities(
+  --   vim.lsp.protocol.make_client_capabilities()
+  -- )
 
   local on_attach = function(client)
     vim.api.nvim_command [[command! Format execute 'lua vim.lsp.buf.formatting()']]
-    if client.resolved_capabilities.document_formatting then
-      vim.api.nvim_command [[augroup Format]]
-      vim.api.nvim_command [[autocmd! * <buffer>]]
-      vim.api.nvim_command [[autocmd BufWritePre <buffer> Prettier]]
-      vim.api.nvim_command [[augroup END]]
-    end
+    -- if client.resolved_capabilities.document_formatting then
+    --   vim.api.nvim_command [[augroup Format]]
+    --   vim.api.nvim_command [[autocmd! * <buffer>]]
+    --   vim.api.nvim_command [[autocmd BufWritePre <buffer> Prettier]]
+    --   vim.api.nvim_command [[augroup END]]
+    -- end
   end
 
   vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]]
@@ -40,19 +34,27 @@ return function()
   local handlers =  {
     ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
     ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border }),
-    ["textDocument/diagnostic"] =  vim.lsp.with(vim.lsp.handlers.diagnostic, {border = border}),
+    -- ["textDocument/diagnostic"] =  vim.lsp.with(vim.lsp.handlers.diagnostic, {border = border}),
   }
+
+  -- using nvim-metals instead
+  -- nvim_lsp.metals.setup{
+  --   handlers = handlers,
+  --   -- capabilities = capabilities,
+  --   on_attach = on_attach,
+  -- }
 
   nvim_lsp.flow.setup{
     handlers = handlers,
-    capabilities = capabilities,
+    -- capabilities = capabilities,
     on_attach = on_attach,
   }
 
-  nvim_lsp.tsserver.setup {
-    handlers = handlers,
-    on_attach = on_attach,
-  }
+  -- nvim_lsp.tsserver.setup {
+  --   handlers = handlers,
+  --   capabilities = capabilities,
+  --   on_attach = on_attach,
+  -- }
 
   nvim_lsp.diagnosticls.setup {
     on_attach = on_attach,
