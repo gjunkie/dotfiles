@@ -55,7 +55,7 @@ return require('packer').startup(function(use)
   use({'vimwiki/vimwiki'})
 
   -- Git status in gutter
-  use({"lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" }, config = require("configs.gitsigns-config")})
+  -- use({"lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" }, config = require("configs.gitsigns-config")})
 
   -- Nord colorscheme
   use({'arcticicestudio/nord-vim'})
