@@ -43,6 +43,8 @@ return require('packer').startup(function(use)
   -- Syntax highlighting
   use({'nvim-treesitter/nvim-treesitter', requires = { "p00f/nvim-ts-rainbow" }, config = require("configs.treesitter-config")})
 
+  local ft_to_parser = require"nvim-treesitter.parsers".filetype_to_parsername
+  ft_to_parser.javascriptreact = "typescript" -- the someft filetype will use the python parser and queries.
   -- Nvim Tree file explorer
   use({"kyazdani42/nvim-tree.lua", requires = { "kyazdani42/nvim-web-devicons" }, config = require('configs.nvim-tree-config')})
 
