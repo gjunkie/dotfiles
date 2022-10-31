@@ -48,3 +48,6 @@ fun! s:minindent(first, last)
   endwhile
   return l:min
 endf
+
+let g:prettier#autoformat = 1
+let g:prettier#autoformat_require_pragma = 0

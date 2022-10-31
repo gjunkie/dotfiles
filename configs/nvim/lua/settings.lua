@@ -77,6 +77,7 @@ vim.cmd('source ~/.vim/config/autocmd.vim')
 vim.cmd('source ~/.vim/autoload/comment.vim')
 vim.cmd('source ~/.vim/autoload/git.vim')
 vim.cmd('source ~/.vim/plugin/git.vim')
+vim.cmd('source ~/.vim/plugin/fzf.vim')
 
 cmd [[augroup lsp]]
 cmd [[au!]]

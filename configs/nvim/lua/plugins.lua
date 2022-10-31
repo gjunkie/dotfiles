@@ -16,8 +16,8 @@ return require('packer').startup(function(use)
   use({'junegunn/fzf.vim'})
 
   -- Fuzzy searcher
-  use({'nvim-telescope/telescope.nvim', requires = { {'nvim-lua/plenary.nvim'} }})
-  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  -- use({'nvim-telescope/telescope.nvim', requires = { {'nvim-lua/plenary.nvim'} }})
+  -- use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
   -- Custom status line
   use({'nvim-lualine/lualine.nvim', config = require('configs.lualine-config')})
@@ -43,8 +43,6 @@ return require('packer').startup(function(use)
   -- Syntax highlighting
   use({'nvim-treesitter/nvim-treesitter', requires = { "p00f/nvim-ts-rainbow" }, config = require("configs.treesitter-config")})
 
-  local ft_to_parser = require"nvim-treesitter.parsers".filetype_to_parsername
-  ft_to_parser.javascriptreact = "typescript" -- the someft filetype will use the python parser and queries.
   -- Nvim Tree file explorer
   use({"kyazdani42/nvim-tree.lua", requires = { "kyazdani42/nvim-web-devicons" }, config = require('configs.nvim-tree-config')})
 
@@ -62,6 +60,8 @@ return require('packer').startup(function(use)
   -- Nord colorscheme
   use({'arcticicestudio/nord-vim'})
 
+  use({'codeindulgence/vim-tig'})
+
   -- use({'dense-analysis/ale', config = require('configs.ale-config')})
 
   -- Emmet/Snippets
@@ -69,9 +69,9 @@ return require('packer').startup(function(use)
   --   "mattn/emmet-vim",
   --   requires = { "mattn/webapi-vim" },
   --   config = function()
-  --     vim.cmd([[
-  --       let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/.config/nvim/snippets.json')), "\n"))
-  --     ]])
+  --     vim.cmd(
+  --       [[let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/.config/nvim/snippets.json')), "\n"))]]
+  --     )
   --   end,
   -- })
 

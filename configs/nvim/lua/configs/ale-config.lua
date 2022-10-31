@@ -9,7 +9,7 @@ return function()
   vim.g.ale_linters_explicit = 1
 
   vim.g.ale_lint_on_enter = 1
-  vim.g.ale_lint_on_save = 1
+  -- vim.g.ale_lint_on_save = 1
   vim.g.ale_lint_on_text_changed = "always"
   vim.g.ale_lint_on_insert_leave = 1
 

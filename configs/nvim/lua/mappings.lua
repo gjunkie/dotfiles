@@ -124,7 +124,7 @@ map('n', 'FB', ':BLines<CR>', {noremap = true})
 map('n', 'fb', ':Buffers<CR>', {noremap = true})
 map('n', 'f<Space>', ':b#<CR>', {noremap = true})
 map('n', 'gs', ':GFiles?<CR>', {noremap = true})
-map('n', 'gb', ':Blame<CR>', {noremap = true})
+map('n', 'gb', ':TigBlame<CR>', {noremap = true})
 map('n', 'gc', ':BCommits<CR>', {noremap = true})
 map('n', 'gac', ':Commits!<CR>', {noremap = true})
 
