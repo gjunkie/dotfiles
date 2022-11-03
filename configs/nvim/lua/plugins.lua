@@ -43,6 +43,10 @@ return require('packer').startup(function(use)
   -- Syntax highlighting
   use({'nvim-treesitter/nvim-treesitter', requires = { "p00f/nvim-ts-rainbow" }, config = require("configs.treesitter-config")})
 
+  local ft_to_parser = require"nvim-treesitter.parsers".filetype_to_parsername
+  ft_to_parser['javascript.jsx'] = "typescript" -- the someft filetype will use the python parser and queries.
+  ft_to_parser['strato'] = "scala" -- the someft filetype will use the python parser and queries.
+
   -- Nvim Tree file explorer
   use({"kyazdani42/nvim-tree.lua", requires = { "kyazdani42/nvim-web-devicons" }, config = require('configs.nvim-tree-config')})
 
@@ -59,21 +63,22 @@ return require('packer').startup(function(use)
 
   -- Nord colorscheme
   use({'arcticicestudio/nord-vim'})
+  use({'EdenEast/nightfox.nvim'})
 
   use({'codeindulgence/vim-tig'})
 
   -- use({'dense-analysis/ale', config = require('configs.ale-config')})
 
   -- Emmet/Snippets
-  -- use({
-  --   "mattn/emmet-vim",
-  --   requires = { "mattn/webapi-vim" },
-  --   config = function()
-  --     vim.cmd(
-  --       [[let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/.config/nvim/snippets.json')), "\n"))]]
-  --     )
-  --   end,
-  -- })
+  use({
+    "mattn/emmet-vim",
+    requires = { "mattn/webapi-vim" },
+    config = function()
+      vim.cmd(
+        [[let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/.config/nvim/snippets.json')), "\n"))]]
+      )
+    end,
+  })
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

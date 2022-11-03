@@ -8,9 +8,6 @@
       "afun": "const ${1} = asyn (${2}) => {\n\t${3}\n}"
     }
   },
-  "javascript.jsx": {
-    "extends": "javascript"
-  },
   "typescript": {
     "extends": "javascript"
   }

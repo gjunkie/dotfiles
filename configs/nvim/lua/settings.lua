@@ -9,7 +9,7 @@ local g = vim.g
 local map = vim.api.nvim_set_keymap
 local o = vim.opt
 
-cmd 'colorscheme nord'
+cmd 'colorscheme nordfox'
 
 -- let vimDir = '$HOME/.vim'
 -- let &runtimepath.=','.vimDir
