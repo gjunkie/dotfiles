@@ -26,7 +26,6 @@ contains() {
 
 # Echoes information about Git repository status when inside a Git repository
 git_info() {
-
   # Exit if not inside a Git repository
   ! git rev-parse --is-inside-work-tree > /dev/null 2>&1 && return
 
@@ -55,10 +54,10 @@ git_info() {
   #   DIVERGENCES+=( "${BEHIND//NUM/$NUM_BEHIND}" )
   # fi
 
-  # local GIT_DIR="$(git rev-parse --git-dir 2> /dev/null)"
-  # if [ -n $GIT_DIR ] && test -r $GIT_DIR/MERGE_HEAD; then
-  #   FLAGS+=( "$MERGING" )
-  # fi
+  local GIT_DIR="$(git rev-parse --git-dir 2> /dev/null)"
+  if [ -n $GIT_DIR ] && test -r $GIT_DIR/MERGE_HEAD; then
+    FLAGS+=( "$MERGING" )
+  fi
 
 #   if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
 #     FLAGS+=( "$UNTRACKED" )
@@ -93,6 +92,14 @@ git_info() {
 
 }
 
-PS1='
+PROMPT='
 ┌─╼$(ssh_info)%{$fg[cyan]%}[%~%u]%{$reset_color%} $(git_info)
 └─╼%(?.%{$fg[gray]%}.%{$fg[red]%})%(!.#.→)%{$reset_color%} '
+
+# PROMPT='┏${date} ${computer_and_login_name} ${full_folder} $(git_prompt_info)
+# ┗${ret_status} %{$reset_color%}'
+ 
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[blue]%}(%{$fg[red]%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%}) %{$fg[yellow]%}✗"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"

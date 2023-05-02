@@ -12,7 +12,7 @@ let g:ale_lint_on_text_changed="always"
 let g:ale_lint_on_insert_leave=1
 
 
-let g:ale_fixers = {'javascript': ['eslint'], 'javascript.jsx': ['eslint']}
+" let g:ale_fixers = {'javascript': ['eslint'], 'javascript.jsx': ['eslint']}
 let g:ale_fix_on_save = 1
 
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'

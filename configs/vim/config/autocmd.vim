@@ -17,7 +17,7 @@ autocmd BufNewFile,BufRead *.thrift setlocal ft=java
 autocmd BufNewFile,BufRead *.strato setlocal ft=strato
 
 " Javascript
-autocmd bufnewfile,bufread *.tsx set filetype=typescript.tsx
+autocmd bufnewfile,bufread *.tsx set filetype=typescriptreact
 autocmd bufnewfile,bufread *.jsx set filetype=javascript.jsx
 autocmd bufnewfile,bufread *.js set filetype=javascript.jsx
 augroup filetype javascript syntax=javascript

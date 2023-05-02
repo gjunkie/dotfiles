@@ -1,8 +1,8 @@
 " General Settings
 " -------------------------------------
 
-let vimDir = '$HOME/.vim'
-let &runtimepath.=','.vimDir
+" let vimDir = '$HOME/.vim'
+" let &runtimepath.=','.vimDir
 
 set tags=./tags,tags;$HOME
 

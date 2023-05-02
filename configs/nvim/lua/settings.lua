@@ -1,4 +1,3 @@
-
 -------------
 -- Aliases --
 -------------
@@ -9,7 +8,7 @@ local g = vim.g
 local map = vim.api.nvim_set_keymap
 local o = vim.opt
 
-cmd 'colorscheme nordfox'
+cmd 'colorscheme onenord'
 
 -- let vimDir = '$HOME/.vim'
 -- let &runtimepath.=','.vimDir
@@ -45,7 +44,7 @@ o.splitbelow = true
 o.splitright = true
 o.tabstop = 2
 o.termguicolors = true
-o.undodir = '~/.vim/undodir'
+-- o.undodir = '~/.vim/undodir'
 o.undofile = true
 o.undolevels = 1000
 o.undoreload = 10000
@@ -54,13 +53,13 @@ o.wildignore = o.wildignore + 'node_modules'
 o.updatetime = 500
 
 -- o.completeopt to have a better completion experience
-o.completeopt='menuone,noinsert,noselect'
+o.completeopt = 'menuone,noinsert,noselect'
 
 -- Avoid showing extra message when using completion
 -- o.shortmess:append({'c'})
 
 -- Ensure autocmd works for Filetype
-o.shortmess:remove({'F'})
+o.shortmess:remove({ 'F' })
 
 o.diffopt = o.diffopt + 'iwhiteall'
 o.diffopt = o.diffopt + 'hiddenoff'
@@ -87,5 +86,5 @@ cmd [[augroup end]]
 g.user_emmet_leader_key = '<C-f>'
 
 o.updatetime = 250
-vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+-- vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 -- vim.cmd [[autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif]]

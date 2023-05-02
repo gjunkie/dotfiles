@@ -8,4 +8,6 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH=$PATH:$HOME/Library/Python/2.7/bin
 export PATH=/opt/homebrew/bin:$PATH
 export PATH="$PATH:/Users/fcarthy/Library/Application Support/Coursier/bin"
+export PATH=$PATH:/usr/local/mongodb/bin
+export PATH=$N_PREFIX/bin:$PATH
 eval "$(/opt/homebrew/bin/brew shellenv)"

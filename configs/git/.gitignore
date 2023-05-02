@@ -1,6 +1,7 @@
 tags
 *.DS_Store
 vim/undodir
+.git
 .netrwhist
 vim/bundle
 plugged

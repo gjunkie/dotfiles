@@ -114,14 +114,14 @@ map('v', '<S-Tab>', '<gv', {noremap = true})
 -- imap <C-l> <C-G>g
 
 -- FZF
-map('n', 'fs', ':Rg<SPACE>', {noremap = true})
-map('n', 'fw', ':Rg <C-R><C-W><CR>', {noremap = true})
-map('v', 'fw', 'y:Rg <c-r>"<CR>', {noremap = true})
-map('n', 'ff', ':Files<CR>', {noremap = true})
+-- map('n', 'fs', ':Rg<SPACE>', {noremap = true})
+-- map('n', 'fw', ':Rg <C-R><C-W><CR>', {noremap = true})
+-- map('v', 'fw', 'y:Rg <c-r>"<CR>', {noremap = true})
+-- map('n', 'ff', ':Files<CR>', {noremap = true})
 map('n', 'FF', ':Files %:p:h<CR>', {noremap = true})
 map('n', 'FL', ':Lines<CR>', {noremap = true})
 map('n', 'FB', ':BLines<CR>', {noremap = true})
-map('n', 'fb', ':Buffers<CR>', {noremap = true})
+-- map('n', 'fb', ':Buffers<CR>', {noremap = true})
 map('n', 'f<Space>', ':b#<CR>', {noremap = true})
 map('n', 'gs', ':GFiles?<CR>', {noremap = true})
 map('n', 'gb', ':TigBlame<CR>', {noremap = true})
@@ -134,6 +134,11 @@ map('n', '<leader>nc', '<cmd>lua require"user.telescope".nvim_config()<cr>', {no
 map('n', '<leader>fw', '<cmd>lua require("telescope.builtin").grep_string()<cr>', {noremap = true})
 map('n', '<leader>fs', '<cmd>lua require("telescope.builtin").live_grep()<cr>', {noremap = true})
 map('n', '<leader>b', '<cmd>lua require("telescope.builtin").buffers()<cr>', {noremap = true})
+local builtin = require('telescope.builtin')
+-- vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+-- vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+-- vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+-- vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 -- map('n', '<leader>fh', '<cmd>lua require("telescope.builtin").help_tags()<cr>', {noremap = true})
 -- map('n', '<leader>d', '<cmd>lua require("telescope.builtin").lsp_definitions()<cr>', {noremap = true})
 -- map('n', '<leader>r', '<cmd>lua require("telescope.builtin").lsp_references()<cr>', {noremap = true})
@@ -158,11 +163,14 @@ map('n', '<C-j>', '<Plug>(ale_next_wrap)', {silent = true})
 -- Vim Wiki
 map('n', '<Leader>ww', ':VimwikiIndex<CR>', {noremap = true})
 
+map("n", "<S-Tab>", ":NvimTreeToggle<CR>", {noremap = true, silent = true})
+map("n", "<Tab>", ":NvimTreeFindFileToggle<CR>", {noremap = true, silent = true})
+map("n", "<C-c>", ":NvimTreeClose<CR>", {noremap = true, silent = true})
 -- " pmenu and vim-vsnip
 -- imap <expr> <Tab>   pumvisible() ? "<C-n>" : vsnip#jumpable(1)   ? "<Plug>(vsnip-jump-next)" : "<Tab>"
 -- imap <expr> <S-Tab> pumvisible() ? "<C-p>" : vsnip#jumpable(-1)  ? "<Plug>(vsnip-jump-prev)" : "<S-Tab>"
-map('i', '<Tab>', 'pumvisible() ? "<C-n>" : vsnip#jumpable(1)   ? "<Plug>(vsnip-jump-next)" : "<Tab>"', {expr = true})
-map('i', '<S-Tab>', 'pumvisible() ? "<C-p>" : vsnip#jumpable(-1)  ? "<Plug>(vsnip-jump-prev)" : "<S-Tab>"', {expr = true})
+-- map('i', '<Tab>', 'pumvisible() ? "<C-n>" : vsnip#jumpable(1)   ? "<Plug>(vsnip-jump-next)" : "<Tab>"', {expr = true})
+-- map('i', '<S-Tab>', 'pumvisible() ? "<C-p>" : vsnip#jumpable(-1)  ? "<Plug>(vsnip-jump-prev)" : "<S-Tab>"', {expr = true})
 
 -- " vim-vsnip
 -- smap <expr> <Tab>   vsnip#jumpable(1)  ? "<Plug>(vsnip-jump-next)" : "<Tab>"
