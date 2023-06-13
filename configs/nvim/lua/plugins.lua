@@ -6,28 +6,23 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 return require('packer').startup(function(use)
-  -- Packer can manage itself
-  use({ 'wbthomason/packer.nvim' })
-
-  -- Fuzzy searcher
-  -- use({'junegunn/fzf'})
-  -- use({'junegunn/fzf.vim'})
+  use({ 'wbthomason/packer.nvim' }) -- Packer can manage itself
 
   -- Fuzzy searcher
   use 'kyazdani42/nvim-web-devicons' -- File icons
   use 'glepnir/lspsaga.nvim'         -- LSP UIs
   use 'nvim-lua/plenary.nvim'        -- Common utilities
   use 'nvim-telescope/telescope.nvim'
-  -- use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  use { 'nvim-telescope/telescope-fzf-native.nvim',
+    run = 'make'
+  }
+  use 'nvim-lualine/lualine.nvim' -- Custom status line
 
-  -- Custom status line
-  use 'nvim-lualine/lualine.nvim'
-
-  use 'onsails/lspkind-nvim'  -- vscode-like pictograms
-  use 'hrsh7th/cmp-buffer'    -- nvim-cmp source for buffer words
-  use 'hrsh7th/cmp-nvim-lsp'  -- nvim-cmp source for neovim's built-in LSP
-  use 'hrsh7th/nvim-cmp'      -- Completion
-  use 'neovim/nvim-lspconfig' -- LSP
+  use 'onsails/lspkind-nvim'      -- vscode-like pictograms
+  use 'hrsh7th/cmp-buffer'        -- nvim-cmp source for buffer words
+  use 'hrsh7th/cmp-nvim-lsp'      -- nvim-cmp source for neovim's built-in LSP
+  use 'hrsh7th/nvim-cmp'          -- Completion
+  use 'neovim/nvim-lspconfig'     -- LSP
   use 'L3MON4D3/LuaSnip'
 
   -- Auto pairs for brackets, parenthesis, etc
@@ -42,16 +37,13 @@ return require('packer').startup(function(use)
   use 'MunifTanjim/prettier.nvim'       -- Prettier plugin for Neovim's built-in LSP client
 
   use 'lewis6991/gitsigns.nvim'
-  use 'dinhhuy258/git.nvim' -- For git blame and browser
+  use 'dinhhuy258/git.nvim'      -- For git blame and browser
 
-  -- local ft_to_parser = require"nvim-treesitter.parsers".filetype_to_parsername
-  -- ft_to_parser['javascript.jsx'] = "typescriptreact" -- the someft filetype will use the python parser and queries.
+  use "kyazdani42/nvim-tree.lua" -- Nvim Tree file explorer
 
-  -- Nvim Tree file explorer
-  use "kyazdani42/nvim-tree.lua"
-
-  -- Code formatting
-  -- use({'prettier/vim-prettier', run = 'yarn install --frozen-lockfile --production'})
+  use { 'akinsho/toggleterm.nvim',
+    tag = '*'
+  }
 
   -- Personal Wiki
   -- use({'vimwiki/vimwiki'})
@@ -62,10 +54,6 @@ return require('packer').startup(function(use)
   use 'rmehri01/onenord.nvim'
 
   -- use({'codeindulgence/vim-tig'})
-
-  -- use({'dense-analysis/ale', config = require('configs.ale-config')})
-
-  -- use({'mhartington/formatter.nvim', config = require('configs.formatter-config')})
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
