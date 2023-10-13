@@ -41,8 +41,8 @@ telescope.setup {
       ["<C-n>"] = actions.cycle_history_next,
       ["<C-p>"] = actions.cycle_history_prev,
       --
-      --           ["<C-j>"] = actions.move_selection_next,
-      --           ["<C-k>"] = actions.move_selection_previous,
+      ["<C-j>"] = actions.move_selection_next,
+      ["<C-k>"] = actions.move_selection_previous,
       --
       --           ["<C-c>"] = actions.close,
       --
@@ -112,13 +112,16 @@ telescope.setup {
       --         },
     },
     pickers = {
-      buffers = {
+      live_grep = {
         fuzzy_with_index_bias = true,
+      },
+      buffers = {
+        get_fuzzy_file = true,
         mappings = {
           -- i = {
           --     ["<c-d>"] = actions.delete_buffer,
-          --     ["<C-j>"] = actions.move_selection_next,
-          --     ["<C-k>"] = actions.move_selection_previous,
+          ["<C-j>"] = actions.move_selection_next,
+          ["<C-k>"] = actions.move_selection_previous,
           -- },
           -- n = {
           --     ["<c-d>"] = actions.delete_buffer,
@@ -137,8 +140,7 @@ telescope.setup {
     -- --             }
     -- --           }
     -- --         }
-    --       },
-    --     },
+    -- },
   },
 }
 
@@ -160,7 +162,9 @@ vim.keymap.set('n', 'fw', function()
   builtin.grep_string()
 end)
 vim.keymap.set('n', 'fb', function()
-  builtin.buffers()
+  builtin.buffers({
+    sort_mru = true
+  })
 end)
 vim.keymap.set('n', 'ft', function()
   builtin.help_tags()

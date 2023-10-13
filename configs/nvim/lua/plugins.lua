@@ -16,14 +16,18 @@ return require('packer').startup(function(use)
   use { 'nvim-telescope/telescope-fzf-native.nvim',
     run = 'make'
   }
-  use 'nvim-lualine/lualine.nvim' -- Custom status line
+  -- this seems to have a weird effect on startup. maybe due to the plugin after?
+  -- use 'nvim-lualine/lualine.nvim' -- Custom status line
 
-  use 'onsails/lspkind-nvim'      -- vscode-like pictograms
-  use 'hrsh7th/cmp-buffer'        -- nvim-cmp source for buffer words
-  use 'hrsh7th/cmp-nvim-lsp'      -- nvim-cmp source for neovim's built-in LSP
-  use 'hrsh7th/nvim-cmp'          -- Completion
-  use 'neovim/nvim-lspconfig'     -- LSP
+  use 'onsails/lspkind-nvim'               -- vscode-like pictograms
+  use 'hrsh7th/cmp-buffer'                 -- nvim-cmp source for buffer words
+  use 'hrsh7th/cmp-nvim-lsp'               -- nvim-cmp source for neovim's built-in LSP
+  use 'hrsh7th/nvim-cmp'                   -- Completion
+  use 'neovim/nvim-lspconfig'              -- LSP
+  use 'jose-elias-alvarez/typescript.nvim' -- convenience commands
   use 'L3MON4D3/LuaSnip'
+
+  use 'mfussenegger/nvim-jdtls'
 
   -- Auto pairs for brackets, parenthesis, etc
   use 'windwp/nvim-autopairs'
@@ -33,8 +37,9 @@ return require('packer').startup(function(use)
     run = ':TSUpdate'
   }
 
-  use 'jose-elias-alvarez/null-ls.nvim' -- Use Neovim as a language server toinject LSP diagnostics, code actions, and more via Lua
-  use 'MunifTanjim/prettier.nvim'       -- Prettier plugin for Neovim's built-in LSP client
+  use 'yioneko/nvim-vtsls'
+  use { 'jose-elias-alvarez/null-ls.nvim' } -- Use Neovim as a language server toinject LSP diagnostics, code actions, and more via Lua
+  use 'MunifTanjim/prettier.nvim'           -- Prettier plugin for Neovim's built-in LSP client
 
   use 'lewis6991/gitsigns.nvim'
   use 'dinhhuy258/git.nvim'      -- For git blame and browser
@@ -53,7 +58,7 @@ return require('packer').startup(function(use)
   use 'nordtheme/vim'
   use 'rmehri01/onenord.nvim'
 
-  -- use({'codeindulgence/vim-tig'})
+  use({ 'codeindulgence/vim-tig' })
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

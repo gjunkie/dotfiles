@@ -22,6 +22,16 @@ return function()
             }
           end
       },
+      ["typescript.tsx"] = {
+          -- prettierd
+         function()
+            return {
+              exe = "prettier",
+              args = {vim.api.nvim_buf_get_name(0)},
+              stdin = true
+            }
+          end
+      },
       ["javascript.tsx"] = {
           -- prettierd
          function()

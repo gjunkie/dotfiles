@@ -109,11 +109,6 @@ _G.packer_plugins = {
     path = "/Users/fcarthy/.local/share/nvim/site/pack/packer/start/lspsaga.nvim",
     url = "https://github.com/glepnir/lspsaga.nvim"
   },
-  ["lualine.nvim"] = {
-    loaded = true,
-    path = "/Users/fcarthy/.local/share/nvim/site/pack/packer/start/lualine.nvim",
-    url = "https://github.com/nvim-lualine/lualine.nvim"
-  },
   ["nightfox.nvim"] = {
     loaded = true,
     path = "/Users/fcarthy/.local/share/nvim/site/pack/packer/start/nightfox.nvim",
@@ -138,6 +133,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/fcarthy/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
+  },
+  ["nvim-jdtls"] = {
+    loaded = true,
+    path = "/Users/fcarthy/.local/share/nvim/site/pack/packer/start/nvim-jdtls",
+    url = "https://github.com/mfussenegger/nvim-jdtls"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -184,15 +184,35 @@ _G.packer_plugins = {
     path = "/Users/fcarthy/.local/share/nvim/site/pack/packer/start/prettier.nvim",
     url = "https://github.com/MunifTanjim/prettier.nvim"
   },
+  ["telescope-fzf-native.nvim"] = {
+    loaded = true,
+    path = "/Users/fcarthy/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim",
+    url = "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/Users/fcarthy/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
+  ["toggleterm.nvim"] = {
+    loaded = true,
+    path = "/Users/fcarthy/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
+    url = "https://github.com/akinsho/toggleterm.nvim"
+  },
+  ["typescript.nvim"] = {
+    loaded = true,
+    path = "/Users/fcarthy/.local/share/nvim/site/pack/packer/start/typescript.nvim",
+    url = "https://github.com/jose-elias-alvarez/typescript.nvim"
+  },
   vim = {
     loaded = true,
     path = "/Users/fcarthy/.local/share/nvim/site/pack/packer/start/vim",
     url = "https://github.com/nordtheme/vim"
+  },
+  ["vim-tig"] = {
+    loaded = true,
+    path = "/Users/fcarthy/.local/share/nvim/site/pack/packer/start/vim-tig",
+    url = "https://github.com/codeindulgence/vim-tig"
   }
 }
 
