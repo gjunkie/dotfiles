@@ -6,8 +6,9 @@ saga.setup({
     winblend = 10,
     border = 'rounded',
     colors = {
-      normal_bg = '#002b36'
-    }
+      normal_bg = '#002b36',
+    },
+    devicon = false
   }
 })
 

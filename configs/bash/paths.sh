@@ -10,4 +10,6 @@ export PATH=/opt/homebrew/bin:$PATH
 export PATH="$PATH:/Users/fcarthy/Library/Application Support/Coursier/bin"
 export PATH=$PATH:/usr/local/mongodb/bin
 export PATH=$N_PREFIX/bin:$PATH
+export PATH=$JAVA_HOME/bin:$PATH
+
 eval "$(/opt/homebrew/bin/brew shellenv)"

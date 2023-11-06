@@ -38,23 +38,23 @@ end
 
 protocol.CompletionItemKind = {
   '', -- Text
-  '', -- Method
-  '', -- Function
-  '', -- Constructor
+  'µ', -- Method
+  'ƒ', -- Function
+  '©', -- Constructor
   '', -- Field
   '', -- Variable
   '', -- Class
-  'ﰮ', -- Interface
-  '', -- Module
+  '¡', -- Interface
+  '', -- Module
   '', -- Property
   '', -- Unit
-  '', -- Value
+  '√', -- Value
   '', -- Enum
   '', -- Keyword
-  '﬌', -- Snippet
+  '≠', -- Snippet
   '', -- Color
   '', -- File
-  '', -- Reference
+  '®', -- Reference
   '', -- Folder
   '', -- EnumMember
   '', -- Constant
@@ -74,29 +74,32 @@ nvim_lsp.flow.setup {
 
 local function organize_imports()
   local params = {
-    command = "_typescript.organizeImports",
+    command = "_typescript.removeUnusedImports",
     arguments = { vim.api.nvim_buf_get_name(0) },
     title = ""
   }
   vim.lsp.buf.execute_command(params)
 end
 
-nvim_lsp.configs.vtsls = require("vtsls").lspconfig
-nvim_lsp.vtsls.setup({
-  -- customize handlers for commands
-  handlers = {
-    source_definition = function(err, locations) end,
-    file_references = function(err, locations) end,
-    code_action = function(err, actions) end,
-  },
-  -- automatically trigger renaming of extracted symbol
-  refactor_auto_rename = true,
-})
+nvim_lsp.vtsls.setup{}
+
+-- nvim_lsp.configs.vtsls = require("vtsls").lspconfig
+-- nvim_lsp.vtsls.setup({
+--   -- customize handlers for commands
+--   handlers = {
+--     source_definition = function(err, locations) end,
+--     file_references = function(err, locations) end,
+--     code_action = function(err, actions) end,
+--   },
+--   -- automatically trigger renaming of extracted symbol
+--   refactor_auto_rename = true,
+-- })
 
 -- nvim_lsp.tsserver.setup {
 --   on_attach = on_attach,
 --   filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
---   cmd = { "typescript-language-server", "--stdio" },
+--   cmd = { "vtsls", "--stdio" },
+--   -- cmd = { "typescript-language-server", "--stdio" },
 --   capabilities = capabilities,
 --   commands = {
 --     OrganizeImports = {
@@ -143,9 +146,15 @@ nvim_lsp.lua_ls.setup {
 nvim_lsp.jdtls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  cmd = { "jdtls", "--stdio" },
+  cmd = {"~/code/servers/launch_jdtls.sh"},
   filetypes = { "java" },
 }
+
+-- local config = {
+--     cmd = {'/path/to/jdt-language-server/bin/jdtls'},
+--     root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1]),
+-- }
+-- require('jdtls').start_or_attach(config)
 
 -- nvim_lsp.tailwindcss.setup {
 --   on_attach = on_attach,
@@ -172,7 +181,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 )
 
 -- Diagnostic symbols in the sign column (gutter)
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+local signs = { Error = " ", Warn = " ", Hint = "h", Info = " " }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })

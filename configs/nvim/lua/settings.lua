@@ -78,11 +78,6 @@ vim.cmd('source ~/.vim/autoload/git.vim')
 vim.cmd('source ~/.vim/plugin/git.vim')
 vim.cmd('source ~/.vim/plugin/fzf.vim')
 
--- cmd [[augroup lsp]]
--- cmd [[au!]]
--- cmd [[au FileType java,scala,sbt lua require("metals").initialize_or_attach({})]]
--- cmd [[augroup end]]
-
 g.user_emmet_leader_key = '<C-f>'
 
 o.updatetime = 250

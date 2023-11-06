@@ -27,8 +27,6 @@ return require('packer').startup(function(use)
   use 'jose-elias-alvarez/typescript.nvim' -- convenience commands
   use 'L3MON4D3/LuaSnip'
 
-  use 'mfussenegger/nvim-jdtls'
-
   -- Auto pairs for brackets, parenthesis, etc
   use 'windwp/nvim-autopairs'
   use 'windwp/nvim-ts-autotag'
@@ -38,7 +36,9 @@ return require('packer').startup(function(use)
   }
 
   use 'yioneko/nvim-vtsls'
-  use { 'jose-elias-alvarez/null-ls.nvim' } -- Use Neovim as a language server toinject LSP diagnostics, code actions, and more via Lua
+  use 'mfussenegger/nvim-jdtls'
+
+  -- use { 'jose-elias-alvarez/null-ls.nvim' } -- Use Neovim as a language server toinject LSP diagnostics, code actions, and more via Lua
   use 'MunifTanjim/prettier.nvim'           -- Prettier plugin for Neovim's built-in LSP client
 
   use 'lewis6991/gitsigns.nvim'

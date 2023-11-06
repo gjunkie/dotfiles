@@ -159,6 +159,11 @@ _G.packer_plugins = {
     path = "/Users/fcarthy/.local/share/nvim/site/pack/packer/start/nvim-ts-autotag",
     url = "https://github.com/windwp/nvim-ts-autotag"
   },
+  ["nvim-vtsls"] = {
+    loaded = true,
+    path = "/Users/fcarthy/.local/share/nvim/site/pack/packer/start/nvim-vtsls",
+    url = "https://github.com/yioneko/nvim-vtsls"
+  },
   ["nvim-web-devicons"] = {
     loaded = true,
     path = "/Users/fcarthy/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
