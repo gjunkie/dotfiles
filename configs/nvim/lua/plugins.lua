@@ -10,7 +10,6 @@ return require('packer').startup(function(use)
 
   -- Fuzzy searcher
   use 'kyazdani42/nvim-web-devicons' -- File icons
-  use 'glepnir/lspsaga.nvim'         -- LSP UIs
   use 'nvim-lua/plenary.nvim'        -- Common utilities
   use 'nvim-telescope/telescope.nvim'
   use { 'nvim-telescope/telescope-fzf-native.nvim',
@@ -39,7 +38,7 @@ return require('packer').startup(function(use)
   use 'mfussenegger/nvim-jdtls'
 
   -- use { 'jose-elias-alvarez/null-ls.nvim' } -- Use Neovim as a language server toinject LSP diagnostics, code actions, and more via Lua
-  use 'MunifTanjim/prettier.nvim'           -- Prettier plugin for Neovim's built-in LSP client
+  use 'MunifTanjim/prettier.nvim' -- Prettier plugin for Neovim's built-in LSP client
 
   use 'lewis6991/gitsigns.nvim'
   use 'dinhhuy258/git.nvim'      -- For git blame and browser
