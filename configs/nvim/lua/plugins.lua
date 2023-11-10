@@ -16,8 +16,6 @@ return require('packer').startup(function(use)
   use { 'nvim-telescope/telescope-fzf-native.nvim',
     run = 'make'
   }
-  -- this seems to have a weird effect on startup. maybe due to the plugin after?
-  -- use 'nvim-lualine/lualine.nvim' -- Custom status line
 
   use 'onsails/lspkind-nvim'               -- vscode-like pictograms
   use 'hrsh7th/cmp-buffer'                 -- nvim-cmp source for buffer words
@@ -48,9 +46,6 @@ return require('packer').startup(function(use)
   use { 'akinsho/toggleterm.nvim',
     tag = '*'
   }
-
-  -- Personal Wiki
-  -- use({'vimwiki/vimwiki'})
 
   use 'EdenEast/nightfox.nvim'
   use 'AlexvZyl/nordic.nvim'

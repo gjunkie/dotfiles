@@ -1,4 +1,5 @@
 local map = vim.api.nvim_set_keymap
+local utils = require("utils")
 
 map('n', '<Space>', '<NOP>', { noremap = true, silent = true })
 vim.g.mapleader = ' '
@@ -38,17 +39,11 @@ map('n', '_', ':sp<CR>', { noremap = true })
 -- Close current window
 map('n', 'qq', ':q<CR>', { noremap = true })
 
--- Invoke help QuickFix windows
-map('n', 'HV', ':call CheatVim()<CR>', { noremap = true })
-map('n', 'HT', ':call CheatTmux()<CR>', { noremap = true })
+-- Toggle to most recent buffer
+map('n', 'f<Space>', ':b#<CR>', { noremap = true })
 
--- Toggle Filetree (netrw)
---map('n', '<Tab>', ':call NetrwToggle("%:p:h")<CR>', {noremap = true})
---map('n', '<S-Tab>', ':call NetrwToggle(getcwd())<CR>', {noremap = true})
-
+-- replace and redo
 map('n', 'r', ':redo<CR>', { noremap = true })
-
--- replace
 map('n', 'RR', ':%s:', { noremap = true })            -- replace word
 map('n', 'RW', ':%s:<C-R><C-W>:', { noremap = true }) -- replace cursor word
 
@@ -58,8 +53,6 @@ map('v', 'J', ":m '>+1<CR>gv=gv", { noremap = true })
 map('v', 'K', ":m '>-2<CR>gv=gv", { noremap = true })
 map('n', 'J', ":m .+1<CR>==", { noremap = true })
 map('n', 'K', ":m .-2<CR>==", { noremap = true })
--- inoremap <C-j> :m .+1<CR>==
--- inoremap <C-k> :m .-2<CR>==
 
 -- search cursor word in buffer
 map('n', '?', '/<C-R><C-W><CR>', { noremap = true })
@@ -84,49 +77,12 @@ map('v', 'C', ':<c-u>call comment#toggle_comment(visualmode(), 1)<cr>', { norema
 map('v', '<Tab>', '>gv', { noremap = true })
 map('v', '<S-Tab>', '<gv', { noremap = true })
 
--- Completion list
--- function! s:check_back_space() abort
---   let col = col('.') - 1
---   return !col || getline('.')[col - 1]  =~ '\s'
--- endfunction
-
--- -----------------------------------------------------------------------------
--- completion-nvim settings
--- -----------------------------------------------------------------------------
--- Use <Tab> and <S-Tab> to navigate through popup menu
--- inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
--- inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
--- map('i', '<C-j>', "'>+1<CR>gv=gv", {noremap = true, expr = true})
--- map('i, '<C-j>', "'>+1<CR>gv=gv", {noremap = true})
-
--- Spacing (tabs and spaces)
--- nmap <leader>tt :set noet tabstop=4 shiftwidth=4 softtabstop=4<CR>
--- nmap <leader>ss :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
-
 -- Git helpers
--- xnoremap g\ :<c-u>call git#OpenCurrentFileInGithub()<CR>
--- noremap g\ V:<c-u>call git#OpenCurrentFileInGithub()<CR>
+map('n', '<leader>go', '<cmd>lua utils.open_current_file_in_github()<CR>', { noremap = true, silent = true })
+map('n', 'gb', ':GitBlame<CR>', { noremap = true })
 
 -- Plugins
 -- -------------------------------------
-
--- DelimitMate
--- imap <C-l> <C-G>g
-
--- FZF
--- map('n', 'fs', ':Rg<SPACE>', {noremap = true})
--- map('n', 'fw', ':Rg <C-R><C-W><CR>', {noremap = true})
--- map('v', 'fw', 'y:Rg <c-r>"<CR>', {noremap = true})
--- map('n', 'ff', ':Files<CR>', {noremap = true})
--- map('n', 'FF', ':Files %:p:h<CR>', { noremap = true })
--- map('n', 'FL', ':Lines<CR>', { noremap = true })
--- map('n', 'FB', ':BLines<CR>', { noremap = true })
--- map('n', 'fb', ':Buffers<CR>', {noremap = true})
-map('n', 'f<Space>', ':b#<CR>', { noremap = true })
--- map('n', 'gs', ':GFiles?<CR>', { noremap = true })
-map('n', 'gb', ':GitBlame<CR>', { noremap = true })
--- map('n', 'gc', ':BCommits<CR>', { noremap = true })
--- map('n', 'gac', ':Commits!<CR>', { noremap = true })
 
 -- Telescope
 map('n', '<leader>ff', '<cmd>lua require("telescope.builtin").find_files()<cr>', { noremap = true })
@@ -134,15 +90,6 @@ map('n', '<leader>nc', '<cmd>lua require"user.telescope".nvim_config()<cr>', { n
 map('n', '<leader>fw', '<cmd>lua require("telescope.builtin").grep_string()<cr>', { noremap = true })
 map('n', '<leader>fs', '<cmd>lua require("telescope.builtin").live_grep()<cr>', { noremap = true })
 map('n', '<leader>b', '<cmd>lua require("telescope.builtin").buffers()<cr>', { noremap = true })
-local builtin = require('telescope.builtin')
--- vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
--- vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
--- vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
--- vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
--- map('n', '<leader>fh', '<cmd>lua require("telescope.builtin").help_tags()<cr>', {noremap = true})
--- map('n', '<leader>d', '<cmd>lua require("telescope.builtin").lsp_definitions()<cr>', {noremap = true})
--- map('n', '<leader>r', '<cmd>lua require("telescope.builtin").lsp_references()<cr>', {noremap = true})
--- map('n', 'nc', '<cmd>lua require("telescope").nvim_config()<cr>', {noremap = true})
 
 -- Language Server
 map('n', '<leader>d', '<cmd>lua vim.lsp.buf.definition()<CR>', { noremap = true, silent = true })
@@ -155,13 +102,6 @@ map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', { noremap = true, si
 map('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', { noremap = true, silent = true })
 map('n', '<C-k>', '<cmd>lua vim.diagnostic.goto_prev()<CR>', { noremap = true, silent = true })
 map('n', '<C-j>', '<cmd>lua vim.diagnostic.goto_next()<CR>', { noremap = true, silent = true })
-
--- ALE Linter
--- map('n', '<C-k>', '<Plug>(ale_previous_wrap)', { silent = true })
--- map('n', '<C-j>', '<Plug>(ale_next_wrap)', { silent = true })
-
--- Vim Wiki
-map('n', '<Leader>ww', ':VimwikiIndex<CR>', { noremap = true })
 
 map("n", "<S-Tab>", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
 map("n", "<Tab>", ":NvimTreeFindFileToggle<CR>", { noremap = true, silent = true })
@@ -180,9 +120,3 @@ map("n", "<C-c>", ":NvimTreeClose<CR>", { noremap = true, silent = true })
 -- nnoremap  <leader>Y :"+yg_<CR>
 -- nnoremap  <leader>y :"+y<CR>
 -- nnoremap  <leader>yy :"+yy<CR>
-
--- Paste from clipboard
--- nnoremap <leader>p "+p
--- nnoremap <leader>P "+P
--- vnoremap <leader>p "+p
--- vnoremap <leader>P "+P
