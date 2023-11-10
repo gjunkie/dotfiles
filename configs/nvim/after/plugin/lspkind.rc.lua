@@ -5,7 +5,7 @@ lspkind.init({
   -- enables text annotations
   --
   -- default: true
-  mode = 'symbol',
+  mode = 'symbol_text',
 
   -- default symbol map
   -- can be either 'default' (requires nerd-fonts font) or
@@ -18,30 +18,30 @@ lspkind.init({
   --
   -- default: {}
   symbol_map = {
-    Text = "",
-    Method = "",
-    Function = "",
+    Text = "󰊄",
+    Method = "µ",
+    Function = "ƒ",
     Constructor = "",
-    Field = "ﰠ",
-    Variable = "",
-    Class = "ﴯ",
-    Interface = "",
+    Field = "",
+    Variable = "󰫧",
+    Class = "",
+    Interface = "¡",
     Module = "",
-    Property = "ﰠ",
-    Unit = "塞",
-    Value = "",
+    Property = "",
+    Unit = "",
+    Value = "",
     Enum = "",
-    Keyword = "",
-    Snippet = "",
-    Color = "",
-    File = "",
-    Reference = "",
-    Folder = "",
+    Keyword = "󰌆",
+    Snippet = "≠",
+    Color = "",
+    File = "",
+    Reference = "®",
+    Folder = "󰉋",
     EnumMember = "",
-    Constant = "",
-    Struct = "פּ",
+    Constant = "",
+    Struct = "",
     Event = "",
-    Operator = "",
+    Operator = "%",
     TypeParameter = ""
   },
 })

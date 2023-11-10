@@ -153,12 +153,12 @@ map('n', 'gds', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', { noremap = true, 
 map('n', 'gws', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>', { noremap = true, silent = true })
 map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', { noremap = true, silent = true })
 map('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', { noremap = true, silent = true })
-map('n', '[c', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', { noremap = true, silent = true })
-map('n', ']c', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', { noremap = true, silent = true })
+map('n', '<C-k>', '<cmd>lua vim.diagnostic.goto_prev()<CR>', { noremap = true, silent = true })
+map('n', '<C-j>', '<cmd>lua vim.diagnostic.goto_next()<CR>', { noremap = true, silent = true })
 
 -- ALE Linter
-map('n', '<C-k>', '<Plug>(ale_previous_wrap)', { silent = true })
-map('n', '<C-j>', '<Plug>(ale_next_wrap)', { silent = true })
+-- map('n', '<C-k>', '<Plug>(ale_previous_wrap)', { silent = true })
+-- map('n', '<C-j>', '<Plug>(ale_next_wrap)', { silent = true })
 
 -- Vim Wiki
 map('n', '<Leader>ww', ':VimwikiIndex<CR>', { noremap = true })

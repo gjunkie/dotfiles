@@ -6,11 +6,12 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 return require('packer').startup(function(use)
-  use({ 'wbthomason/packer.nvim' }) -- Packer can manage itself
+  use 'wbthomason/packer.nvim'       -- Packer can manage itself
+
+  use 'kyazdani42/nvim-web-devicons' -- File icons
 
   -- Fuzzy searcher
-  use 'kyazdani42/nvim-web-devicons' -- File icons
-  use 'nvim-lua/plenary.nvim'        -- Common utilities
+  use 'nvim-lua/plenary.nvim' -- Common utilities
   use 'nvim-telescope/telescope.nvim'
   use { 'nvim-telescope/telescope-fzf-native.nvim',
     run = 'make'

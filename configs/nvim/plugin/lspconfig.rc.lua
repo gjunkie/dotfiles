@@ -67,11 +67,6 @@ protocol.CompletionItemKind = {
 -- Set up completion using nvim_cmp with LSP source
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-nvim_lsp.flow.setup {
-  on_attach = on_attach,
-  capabilities = capabilities
-}
-
 local function organize_imports()
   local params = {
     command = "_typescript.removeUnusedImports",
@@ -95,14 +90,14 @@ nvim_lsp.tsserver.setup {
 }
 
 nvim_lsp.lua_ls.setup {
-  on_attach = on_attach,
+  -- on_attach = on_attach,
   filetypes = { "lua" },
   cmd = { "lua-language-server", "--stdio" },
   capabilities = capabilities
 }
 
 nvim_lsp.sourcekit.setup {
-  on_attach = on_attach,
+  -- on_attach = on_attach,
   capabilities = capabilities,
 }
 
@@ -135,17 +130,6 @@ nvim_lsp.jdtls.setup {
   filetypes = { "java" },
 }
 
--- local config = {
---     cmd = {'/path/to/jdt-language-server/bin/jdtls'},
---     root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1]),
--- }
--- require('jdtls').start_or_attach(config)
-
--- nvim_lsp.tailwindcss.setup {
---   on_attach = on_attach,
---   capabilities = capabilities
--- }
-
 nvim_lsp.cssls.setup {
   on_attach = on_attach,
   capabilities = capabilities
@@ -166,7 +150,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 )
 
 -- Diagnostic symbols in the sign column (gutter)
-local signs = { Error = " ", Warn = " ", Hint = "h", Info = " " }
+local signs = { Error = "", Warn = "", Hint = "", Info = " " }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
