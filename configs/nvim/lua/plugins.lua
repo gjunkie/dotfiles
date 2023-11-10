@@ -34,6 +34,7 @@ return require('packer').startup(function(use)
     run = ':TSUpdate'
   }
 
+  use 'jose-elias-alvarez/null-ls.nvim' -- Use Neovim as a language server toinject LSP diagnostics, code actions, and more via Lua
   use 'mfussenegger/nvim-jdtls'
 
   use 'MunifTanjim/prettier.nvim' -- Prettier plugin for Neovim's built-in LSP client
