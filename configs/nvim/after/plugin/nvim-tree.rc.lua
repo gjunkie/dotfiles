@@ -29,7 +29,7 @@ tree.setup {
   },
 }
 
-local keymap = require("utils").keymap
-keymap("n", "<S-Tab>", ":NvimTreeToggle<CR>")
-keymap("n", "<Tab>", ":NvimTreeFindFileToggle<CR>")
-keymap("n", "<C-c>", ":NvimTreeClose<CR>")
+-- local keymap = require("utils").keymap
+-- keymap("n", "<S-Tab>", ":NvimTreeToggle<CR>")
+-- keymap("n", "<Tab>", ":NvimTreeFindFileToggle<CR>")
+-- keymap("n", "<C-c>", ":NvimTreeClose<CR>")

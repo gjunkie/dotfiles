@@ -74,8 +74,8 @@ map('n', 'C', ':set opfunc=comment#toggle_comment<cr>g@<Right>', { noremap = tru
 map('v', 'C', ':<c-u>call comment#toggle_comment(visualmode(), 1)<cr>', { noremap = true, silent = true })
 
 -- indentation
-map('v', '<Tab>', '>gv', { noremap = true })
-map('v', '<S-Tab>', '<gv', { noremap = true })
+-- map('v', '<Tab>', '>gv', { noremap = true })
+-- map('v', '<S-Tab>', '<gv', { noremap = true })
 
 -- Git helpers
 map('n', '<leader>go', '<cmd>lua utils.open_current_file_in_github()<CR>', { noremap = true, silent = true })
@@ -103,8 +103,8 @@ map('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', { noremap = tru
 map('n', '<C-k>', '<cmd>lua vim.diagnostic.goto_prev()<CR>', { noremap = true, silent = true })
 map('n', '<C-j>', '<cmd>lua vim.diagnostic.goto_next()<CR>', { noremap = true, silent = true })
 
-map("n", "<S-Tab>", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
-map("n", "<Tab>", ":NvimTreeFindFileToggle<CR>", { noremap = true, silent = true })
+-- map("n", "<S-Tab>", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
+map("n", "<leader><Tab>", ":NvimTreeFindFileToggle<CR>", { noremap = true, silent = true })
 map("n", "<C-c>", ":NvimTreeClose<CR>", { noremap = true, silent = true })
 -- " pmenu and vim-vsnip
 -- imap <expr> <Tab>   pumvisible() ? "<C-n>" : vsnip#jumpable(1)   ? "<Plug>(vsnip-jump-next)" : "<Tab>"

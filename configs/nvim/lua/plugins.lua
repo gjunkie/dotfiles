@@ -47,6 +47,8 @@ return require('packer').startup(function(use)
     tag = '*'
   }
 
+  use 'github/copilot.vim'
+
   use 'EdenEast/nightfox.nvim'
   use 'AlexvZyl/nordic.nvim'
   use 'nordtheme/vim'
