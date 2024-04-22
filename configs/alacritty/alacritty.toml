@@ -1,0 +1,51 @@
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 18 
+
+[font.normal]
+family = "UbuntuMono Nerd Font"
+
+# [window]
+# decorations = "none"
+
+[window.padding]
+x = 6
+y = 6
+
+[[colors.indexed_colors]]
+color = "0xc9826b"
+index = 16
+
+[[colors.indexed_colors]]
+color = "0xbf88bc"
+index = 17
+
+[colors.bright]
+black = "0x465780"
+blue = "0x8cafd2"
+cyan = "0x93ccdc"
+green = "0xb1d196"
+magenta = "0xc895bf"
+red = "0xd06f79"
+white = "0xe7ecf4"
+yellow = "0xf0d399"
+
+[colors.cursor]
+cursor = "#abb1bb"
+text = "#2e3440"
+
+[colors.normal]
+black = "0x3b4252"
+blue = "0x81a1c1"
+cyan = "0x88c0d0"
+green = "0xa3be8c"
+magenta = "0xb48ead"
+red = "0xbf616a"
+white = "0xe5e9f0"
+yellow = "0xebcb8b"
+
+[colors.primary]
+background = "0x2e3440"
+foreground = "0xcdcecf"

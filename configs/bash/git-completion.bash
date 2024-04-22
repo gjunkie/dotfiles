@@ -2639,7 +2639,6 @@ __git_complete_config_variable_value ()
 __git_complete_config_variable_name ()
 {
 	local cur_="$cur" sfx
-
 	while test $# != 0; do
 		case "$1" in
 		--cur=*)	cur_="${1##--cur=}" ;;

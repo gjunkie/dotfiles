@@ -1,5 +1,2 @@
-require('plugins')
-require('mappings')
-require('settings')
-
-require('user.telescope')
+-- bootstrap lazy.nvim, LazyVim and your plugins
+require("config.lazy")

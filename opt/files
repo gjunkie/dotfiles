@@ -1,4 +1,0 @@
-configs/tmux/tmux.conf .tmux.conf
-configs/runcom/bashrc.sh .bashrc
-configs/runcom/vimrc.vim .vimrc
-configs/runcom/zshrc.zsh .zshrc
