@@ -89,7 +89,7 @@ return {
           grouped = true,
           previewer = false,
           initial_mode = "insert",
-          layout_config = { height = 40 },
+          layout_config = { height = 50 },
           desc = "Current Dir Files",
         })
       end,
