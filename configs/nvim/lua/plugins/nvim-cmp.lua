@@ -1,11 +1,10 @@
 return {
-  --   "hrsh7th/nvim-cmp",
-  --   enabled = true,
-  --   dependencies = {
-  --     "hrsh7th/cmp-emoji",
-  --   },
-  --   ---@param opts cmp.ConfigSchema
-  --   opts = function()
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      "mlaursen/vim-react-snippets",
+    },
+    opts = function()
+      require("vim-react-snippets").lazy_load()
   --     vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
   --     local cmp = require("cmp")
   --     local defaults = require("cmp.config.default")()
@@ -69,5 +68,5 @@ return {
   --       },
   --       sorting = defaults.sorting,
   --     }
-  --   end,
+    end,
 }
