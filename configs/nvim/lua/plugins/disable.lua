@@ -5,4 +5,6 @@ return {
   -- { "folke/noice.nvim", enabled = false },
   { "lukas-reineke/indent-blankline.nvim", enabled = false },
   { "rcarriga/nvim-notify", enabled = false },
+  { "rcarriga/nvim-notify", enabled = false },
+  { "Saghen/blink.cmp", enabled = true },
 }

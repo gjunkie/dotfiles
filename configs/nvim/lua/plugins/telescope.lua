@@ -15,12 +15,12 @@ return {
       desc = "Find Plugin File",
     },
     {
-      "<leader>fa",
+      "<leader>ff",
       function()
         local builtin = require("telescope.builtin")
         builtin.find_files({
-          no_ignore = true,
-          hidden = true,
+          --no_ignore = true,
+          --hidden = true,
         })
       end,
     },
@@ -180,6 +180,12 @@ return {
         initial_mode = "normal",
         layout_config = {
           preview_cutoff = 9999,
+        },
+      },
+      find_files = {
+        find_command = { "rg", "--files", "--hidden", "-g", "!.git" },
+        layout_config = {
+          height = 0.70,
         },
       },
     }
