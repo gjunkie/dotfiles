@@ -1,8 +1,7 @@
-local comment = require("config.modules.comment")
+local github = require("config.modules.github")
+
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
-
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
@@ -39,13 +38,6 @@ map("n", "r", ":redo<CR>", { noremap = true })
 map("n", "RR", ":%s:", { noremap = true }) -- replace word
 map("n", "RW", ":%s:<C-R><C-W>:", { noremap = true }) -- replace cursor word
 
--- move lines
--- map("v", "W", ":%s:<C-R><C-W>:", { noremap = true })
--- map("v", "D", ":m '>+1<CR>gv=gv", { noremap = true })
--- map("v", "U", ":m '>-2<CR>gv=gv", { noremap = true })
-map("n", "D", ":m .+1<CR>==", { noremap = true })
-map("n", "U", ":m .-2<CR>==", { noremap = true })
-
 -- search cursor word in buffer
 map("n", "?", "/<C-R><C-W><CR>", { noremap = true })
 map("n", "n", "nzz", { noremap = true })
@@ -56,18 +48,19 @@ map("n", "j", "gj", { noremap = true })
 map("n", "k", "gk", { noremap = true })
 
 -- move lines without dd
---map("n", "<C-k>", ":m-2<CR>", { noremap = true })
---map("n", "<C-j>", ":m+<CR>", { noremap = true })
---map("v", "<C-k>", "'<-2<CR>gv=gv", { noremap = true })
---map("v", "<C-j>", "'>+1<CR>gv=gv", { noremap = true })
+map("n", "<S-d>", ":m .+1<CR>==", { noremap = true })
+map("n", "<S-u>", ":m .-2<CR>==", { noremap = true })
+map("v", "<S-d>", ":m'>+1<CR>gv=gv", { noremap = true })
+map("v", "<S-u>", ":m'<-2<CR>gv=gv", { noremap = true })
 
 -- indentation
 map("v", "<Tab>", ">gv", { noremap = true })
 map("v", "<S-Tab>", "<gv", { noremap = true })
 
 -- Git helpers
-map("n", "<leader>go", "<cmd>lua utils.open_current_file_in_github()<CR>", { noremap = true, silent = true })
-map("n", "gb", ":GitBlame<CR>", { noremap = true })
+map("n", "<leader>go", function()
+  github.open_in_github()
+end, { noremap = true, silent = true })
 
 -- Plugins
 -- -------------------------------------
@@ -85,19 +78,5 @@ map("n", "<C-k>", "<cmd>lua vim.diagnostic.goto_prev()<CR>", { noremap = true, s
 map("n", "<C-j>", "<cmd>lua vim.diagnostic.goto_next()<CR>", { noremap = true, silent = true })
 
 -- map("n", "<S-Tab>", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
-map("n", "<Tab>", ":NvimTreeFindFileToggle<CR>", { noremap = true, silent = true })
-map("n", "<C-c>", ":NvimTreeClose<CR>", { noremap = true, silent = true })
--- " pmenu and vim-vsnip
--- imap <expr> <Tab>   pumvisible() ? "<C-n>" : vsnip#jumpable(1)   ? "<Plug>(vsnip-jump-next)" : "<Tab>"
--- imap <expr> <S-Tab> pumvisible() ? "<C-p>" : vsnip#jumpable(-1)  ? "<Plug>(vsnip-jump-prev)" : "<S-Tab>"
--- map('i', '<Tab>', 'pumvisible() ? "<C-n>" : vsnip#jumpable(1)   ? "<Plug>(vsnip-jump-next)" : "<Tab>"', {expr = true})
--- map('i', '<S-Tab>', 'pumvisible() ? "<C-p>" : vsnip#jumpable(-1)  ? "<Plug>(vsnip-jump-prev)" : "<S-Tab>"', {expr = true})
-
--- " vim-vsnip
--- smap <expr> <Tab>   vsnip#jumpable(1)  ? "<Plug>(vsnip-jump-next)" : "<Tab>"
--- smap <expr> <S-Tab> vsnip#jumpable(-1) ? "<Plug>(vsnip-jump-prev)" : "<S-Tab>"
--- Copy to clipboard
--- vnoremap  <leader>y "+y
--- nnoremap  <leader>Y :"+yg_<CR>
--- nnoremap  <leader>y :"+y<CR>
--- nnoremap  <leader>yy :"+yy<CR>
+map("n", "<Tab>", ":Neotree<CR>", { noremap = true, silent = true })
+map("n", "<C-c>", ":Neotree action=close<CR>", { noremap = true, silent = true })

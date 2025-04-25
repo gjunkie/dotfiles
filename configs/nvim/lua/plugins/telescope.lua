@@ -23,6 +23,7 @@ return {
           --hidden = true,
         })
       end,
+      desc = "Find Files",
     },
     {
       "<leader>of",
@@ -30,13 +31,25 @@ return {
         local builtin = require("telescope.builtin")
         builtin.oldfiles()
       end,
+      desc = "Old Files",
     },
+    -- {
+    --   "<leader>fr",
+    --   function()
+    --     local builtin = require("telescope.builtin")
+    --     builtin.resume()
+    --   end,
+    --   desc = "Resume Previous",
+    -- },
     {
-      "<leader>fr",
+      "<leader>cs",
       function()
         local builtin = require("telescope.builtin")
-        builtin.resume()
+        builtin.colorscheme({
+          enable_preview = true,
+        })
       end,
+      desc = "Telescope: Choose Colorscheme",
     },
     {
       "<leader>fs",
@@ -44,6 +57,7 @@ return {
         local builtin = require("telescope.builtin")
         builtin.live_grep()
       end,
+      desc = "Fuzzy Search",
     },
     {
       "<leader>fb",
@@ -51,6 +65,7 @@ return {
         local builtin = require("telescope.builtin")
         builtin.buffers()
       end,
+      desc = "Buffers",
     },
     {
       "<leader>fw",
@@ -58,6 +73,7 @@ return {
         local builtin = require("telescope.builtin")
         builtin.grep_string()
       end,
+      desc = "Search Current Word",
     },
     {
       "<leader>dd",
@@ -65,6 +81,7 @@ return {
         local builtin = require("telescope.builtin")
         builtin.diagnostics()
       end,
+      desc = "Project Diags",
     },
     {
       "<leader>t",
@@ -72,6 +89,7 @@ return {
         local builtin = require("telescope.builtin")
         builtin.treesitter()
       end,
+      desc = "Treesitter",
     },
     {
       "<leader>sf",
@@ -93,6 +111,7 @@ return {
           desc = "Current Dir Files",
         })
       end,
+      desc = "Current Dir",
     },
   },
   config = function(_, opts)
