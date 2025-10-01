@@ -26,6 +26,14 @@ return {
       desc = "Find Files",
     },
     {
+      "<leader>r",
+      function()
+        local builtin = require("telescope.builtin")
+        builtin.lsp_references()
+      end,
+      desc = "Lsp References",
+    },
+    {
       "<leader>of",
       function()
         local builtin = require("telescope.builtin")
