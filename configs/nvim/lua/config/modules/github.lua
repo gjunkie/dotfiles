@@ -40,10 +40,8 @@ function M.open_in_github()
   -- Add the file's relative path and the blob/main/ part to the URL
   local github_url = repo_url .. "/blob/main/" .. relative_path
 
-  -- Open the GitHub URL in the default web browser
-  -- vim.fn.system("xdg-open " .. github_url) -- For Linux
-  vim.fn.system("open " .. github_url) -- For macOS
-  -- vim.fn.system("start " .. github_url)  -- For Windows
+  -- Open the GitHub URL in the default web browser (vim.ui.open handles escaping safely)
+  vim.ui.open(github_url)
 end
 
 return M

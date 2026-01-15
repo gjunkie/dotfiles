@@ -67,7 +67,7 @@ end, { noremap = true, silent = true })
 
 -- Language Server
 map("n", "<leader>d", "<cmd>lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
-map("n", "<leader>h", "<cmd>lua vim.lsp.buf.hover()<CR>", { noremap = true, silent = true })
+map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { noremap = true, silent = true })
 map("n", "<leader>i", "<cmd>lua vim.lsp.buf.implementation()<CR>", { noremap = true, silent = true })
 map("n", "<leader>r", "<cmd>lua vim.lsp.buf.references()<CR>", { noremap = true, silent = true })
 map("n", "gds", "<cmd>lua vim.lsp.buf.document_symbol()<CR>", { noremap = true, silent = true })
