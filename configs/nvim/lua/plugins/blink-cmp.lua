@@ -1,21 +1,3 @@
--- return {
---   "Saghen/blink.cmp",
---   enabled = true,
---   -- keymap = {
---   --   -- set to 'none' to disable the 'default' preset
---   --   preset = "none",
---   --   ["<Tab>"] = {
---   --     function(cmp)
---   --       cmp.mapping.select_next()
---   --     end,
---   --   },
---   --   ["<S-Tab>"] = {
---   --     function(cmp)
---   --       cmp.mapping.select_prev()
---   --     end,
---   --   },
---   -- },
--- }
 return {
   "saghen/blink.cmp",
   -- optional: provides snippets for the snippet source
